@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261105-3">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261105-4">
 </head>
 <body>
   <header class="site-header">
@@ -74,7 +74,7 @@
                 </div>
                 <div>
                   <div>海纳百川</div>
-                  <div class="text-data">2026年03月18日 · 155次阅读 · <span class="comments-count">0</span>条评论</div>
+                  <div class="text-data">2026年03月18日 · 155次阅读 · <span class="comments-count">2</span>条评论</div>
                 </div>
             </div>
           </div>
@@ -990,36 +990,9 @@
 
   // 👇 区分“点击”和“滑动”
   lightbox.on('beforeOpen', () => {
-    
-    // 👇 核心魔法：打开图片时，强行解除网页的缩放限制
+    // 解除网页缩放限制，允许图片放大
     document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
-
-    let startX = 0;
-    let startY = 0;
-
-    lightbox.pswp.on('pointerDown', (e) => {
-      startX = e.originalEvent.clientX || e.originalEvent.touches[0].clientX;
-      startY = e.originalEvent.clientY || e.originalEvent.touches[0].clientY;
-    });
-
-    lightbox.pswp.on('pointerUp', (e) => {
-      if (lightbox.pswp.currSlide.currZoomLevel > 1) return;
-
-      const endX = e.originalEvent.clientX || e.originalEvent.changedTouches[0].clientX;
-      const endY = e.originalEvent.clientY || e.originalEvent.changedTouches[0].clientY;
-      
-      const diffX = Math.abs(endX - startX);
-      const diffY = Math.abs(endY - startY);
-
-      if (diffX < 10 && diffY < 10) {
-        const target = e.originalEvent.target;
-        if (target.classList.contains('pswp__img') || target.classList.contains('pswp__bg')) {
-          setTimeout(() => { lightbox.pswp.close(); }, 10);
-        }
-      }
-    });
-
-    // 👇 核心魔法：当图片查看器关闭时，重新把网页的缩放锁死
+    // 关闭时，重新把网页缩放锁死
     lightbox.pswp.on('destroy', () => {
       document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
     });
