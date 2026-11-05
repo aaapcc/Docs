@@ -190,60 +190,6 @@ blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border
 .steps blockquote ul li ul li ul > li { list-style-type: square; }
 
 
-
-/* =========================================
-   全屏图片查看器 (Lightbox)
-   ========================================= */
-.img-viewer-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(5px);
-  z-index: 99999; /* 保证在所有元素最上层 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  cursor: zoom-out;
-}
-
-.img-viewer-overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.img-viewer-overlay img {
-  max-width: 95%;
-  max-height: 95%;
-  object-fit: contain;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  transform: scale(0.95);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  
-  /* 允许用户双指放大 */
-  touch-action: pinch-zoom; 
-}
-
-.img-viewer-overlay.show img {
-  transform: scale(1);
-}
-
-/* 让文章里的图片有一个“可以点击”的暗示 */
-.article-section img, 
-.article-quote-card img {
-  cursor: zoom-in;
-  transition: opacity 0.2s;
-}
-.article-section img:active, 
-.article-quote-card img:active {
-  opacity: 0.8;
-}
-
-
-
 /*+++++++++++++++++++++++++++++++++*/
 /*--------------------------------------------------------------
 /* 分割线标题
