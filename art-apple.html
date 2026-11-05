@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="">
   <title>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</title>
   <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
@@ -990,6 +990,10 @@
 
   // 👇 区分“点击”和“滑动”
   lightbox.on('beforeOpen', () => {
+    
+    // 👇 核心魔法：打开图片时，强行解除网页的缩放限制
+    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
+
     let startX = 0;
     let startY = 0;
 
@@ -1013,6 +1017,11 @@
           setTimeout(() => { lightbox.pswp.close(); }, 10);
         }
       }
+    });
+
+    // 👇 核心魔法：当图片查看器关闭时，重新把网页的缩放锁死
+    lightbox.pswp.on('destroy', () => {
+      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
     });
   });
 

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="">
   <title>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</title>
   <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
@@ -69,7 +69,7 @@
           <div class="article-meta">
             <span>2026年03月18日</span>
             <span>149次阅读</span>
-            <span>0条评论</span>
+            <span>2条评论</span>
           </div>
         </header>
 
@@ -1070,6 +1070,10 @@ database_id = "这里填你的D1数据库ID"
 
   // 👇 区分“点击”和“滑动”
   lightbox.on('beforeOpen', () => {
+    
+    // 👇 核心魔法：打开图片时，强行解除网页的缩放限制
+    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
+
     let startX = 0;
     let startY = 0;
 
@@ -1093,6 +1097,11 @@ database_id = "这里填你的D1数据库ID"
           setTimeout(() => { lightbox.pswp.close(); }, 10);
         }
       }
+    });
+
+    // 👇 核心魔法：当图片查看器关闭时，重新把网页的缩放锁死
+    lightbox.pswp.on('destroy', () => {
+      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
     });
   });
 
