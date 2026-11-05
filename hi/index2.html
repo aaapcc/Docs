@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+  <title>ALISDGL</title>
+  <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261103-1">
+</head>
+<body>
+  <main class="article-layout" id="article-content">
+      <article class="article">
+          <header class="article-hero">
+            <p class="eyebrow">密码库 · NodeWarden · Cloudflare · D1</p>
+            <h1>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</h1>
+            <div class="post-header d-flex align-items-center mt-3 pb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                  <div class="flex-avatar w-40 me-2">
+                    <img alt="" src="assests/img/author.jpg" class="avatar avatar-40 photo nc-no-lazy" height="40" width="40" decoding="async">
+                    <div class="avatar-badge" flow="up"></div>
+                  </div>
+                  <div>
+                    <div>Admin</div>
+                    <div class="text-xs text-muted">2026年03月18日 · <i class="iconfont icon-eye"></i>155次阅读 · <i class="iconfont icon-wodepinglun"></i><span class="comments-count">0</span>条评论</div>
+                  </div>
+              </div>
+            </div>
+          </header>
+
+          
+          <section style="margin: 10px auto; visibility: visible;">
+            <section class="article-section-steps-maohao-up visible">
+              <section style="width: 20px; margin:0px auto -8px; box-sizing: border-box;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2" style="visibility: visible;"><g data-name="图层 1" style="visibility: visible;"><path d="M12.91,0C6,3.2,0,9.52,0,18.78,0,24.48,3.47,29,8.28,29c4.63,0,7.48-3.12,7.48-7S13.08,15,9.17,15a5.19,5.19,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88ZM31.6,0C24.66,3.2,18.69,9.52,18.69,18.78,18.69,24.48,22.16,29,27,29c4.63,0,7.48-3.12,7.48-7S31.78,15,27.86,15a5.25,5.25,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88Z" style="fill: var(--section-steps-dianzhui); fill-rule: evenodd;"></path></g></g></svg>
+              </section>
+              <section class="liub visible"><span leaf=""><br></span></section>
+            </section>
+
+            <section style="border: 1px solid rgb(173, 225, 246); border-radius: 0px 15px; background-color: rgb(255, 255, 255); padding: 20px 15px 0px; box-sizing: border-box; visibility: visible;" class="js_darkmode__9">
+              <section data-autoskip="1" style="text-align: justify; line-height: 1.75em; letter-spacing: 1.5px; font-size: 14px; color: rgb(51, 51, 51); background-color: transparent; visibility: visible;" class="js_darkmode__10">
+                <p style="line-height: 2; visibility: visible;">
+                  <span style="font-weight: 400; color: rgb(89, 89, 89); text-shadow: none; letter-spacing: 1px; font-size: 15px; font-family: system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif; visibility: visible;" class="js_darkmode__11">
+                    <span leaf="" style="visibility: visible;">✅</span>
+                    <strong style="visibility: visible;">
+                      <span leaf="" style="visibility: visible;">招聘岗位及人数</span></strong>
+                  </span>
+                </p>
+                <p>报名登记表 ：可以在通过“湖南演艺”公众号下载，或扫描下方二维码，关注并进入【 #长沙本地宝 】，在公众号后台对话框发送【 国企 】即可获取 报名登记表、招聘完整公告及更多国企招聘 信息。</p>
+              </section>
+
+              <section class="article-section-steps-bottom-daosanjiao">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.9 30.19" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M48.14.65l-23.69,28L.76.65" style="fill:#fff;stroke:#b3e9ff;stroke-width:2px;fill-rule:evenodd;"></path></g></g></svg>
+              </section>
+
+            </section>
+
+            <section class="article-section-steps-maohao-down">
+              <section class="liub"><span leaf=""><br></span></section>
+              <section style="width: 20px;margin:-8px auto 0;box-sizing:border-box;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M21.63,29c6.94-3.21,12.91-9.53,12.91-18.78C34.54,4.54,31.07,0,26.26,0c-4.63,0-7.48,3.12-7.48,7S21.45,14,25.37,14a5.32,5.32,0,0,0,1.6-.26c0,2.13-2.58,7.3-8.28,9.88ZM2.94,29c6.94-3.21,12.9-9.53,12.9-18.78C15.84,4.54,12.37,0,7.57,0,2.94,0,.09,3.12.09,7S2.76,14,6.68,14a5.32,5.32,0,0,0,1.6-.26C8.28,15.84,5.7,21,0,23.59Z" style="fill: var(--section-steps-dianzhui);fill-rule:evenodd;"></path></g></g></svg>
+              </section>
+            </section>
+          </section>
+
+          <section class="article-section">
+            <!-- title -->
+            <section class="article-section-title-rom">
+              <div class="article-section-timestamp">
+                <span class="article-section-title-part"></span>
+                <h2 class="article-section-title-text">在 GitHub 创建一个新仓库</h2>
+              </div>
+            </section>
+            <!-- steps -->
+            <!-- <div class="article-section-steps">
+              <section class="article-section-steps-maohao-up visible">
+                <section style="width: 20px; margin:0px auto -8px; box-sizing: border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2" style="visibility: visible;"><g data-name="图层 1" style="visibility: visible;"><path d="M12.91,0C6,3.2,0,9.52,0,18.78,0,24.48,3.47,29,8.28,29c4.63,0,7.48-3.12,7.48-7S13.08,15,9.17,15a5.19,5.19,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88ZM31.6,0C24.66,3.2,18.69,9.52,18.69,18.78,18.69,24.48,22.16,29,27,29c4.63,0,7.48-3.12,7.48-7S31.78,15,27.86,15a5.25,5.25,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88Z" style="fill: var(--section-steps-dianzhui); fill-rule: evenodd;"></path></g></g></svg>
+                </section>
+                <section class="liub visible"><span leaf=""><br></span></section>
+              </section>
+              <section class="article-section-steps-box visible">
+                <section class="article-section-steps-box-cont">
+                  <ol class="steps">
+                    <li>
+                      <h3>注册登录 GitHub 账号</h3>
+                      <p>打开 <a href="https://github.com/" target="_blank" rel="noopener noreferrer">github.com</a>，登录自己的账户。</p>
+                    </li>
+                    <li>
+                      <h3>Fork “NodeWarden” 开源项目</h3>
+                      <ol>
+                        <li>点击前往 <a href="https://github.com/shuaiplus/NodeWarden" target="_blank" rel="noopener noreferrer">NodeWarden</a> 的官方仓库 。</li>
+                        <li>点击页面右上角的 <span class="ui-label">Fork</span> 按钮，将该项目完整复制到你自己的 GitHub 账号下。</li>
+                      </ol>
+                    </li>
+                    <li>
+                      <h3>修改 wrangler.toml 配置文件</h3>
+                      <ol>
+                        <li>把 wrangler.toml 重新命名为其他名称。</li>
+                        <li>把 wrangler.kv.toml 更名为 wrangler.toml。</li>
+                      </ol>
+                    </li>
+                  </ol>
+                </section>
+                <section class="article-section-steps-bottom-daosanjiao">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.9 30.19" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M48.14.65l-23.69,28L.76.65" style="fill:#fff;stroke:#b3e9ff;stroke-width:2px;fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+              <section class="article-section-steps-maohao-down">
+                <section class="liub"><span leaf=""><br></span></section>
+                <section style="width: 20px;margin:-8px auto 0;box-sizing:border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M21.63,29c6.94-3.21,12.91-9.53,12.91-18.78C34.54,4.54,31.07,0,26.26,0c-4.63,0-7.48,3.12-7.48,7S21.45,14,25.37,14a5.32,5.32,0,0,0,1.6-.26c0,2.13-2.58,7.3-8.28,9.88ZM2.94,29c6.94-3.21,12.9-9.53,12.9-18.78C15.84,4.54,12.37,0,7.57,0,2.94,0,.09,3.12.09,7S2.76,14,6.68,14a5.32,5.32,0,0,0,1.6-.26C8.28,15.84,5.7,21,0,23.59Z" style="fill: var(--section-steps-dianzhui);fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+            </div> -->
+            <div class="article-section-steps">
+              <!-- 上引号 -->
+              <div class="article-section-steps-quote top-quote"></div>
+              <!-- 步骤内容主框 -->
+              <section class="article-section-steps-box">
+                <section class="article-section-steps-box-cont">
+                  <ol class="steps">
+                    <li>
+                      <h3>注册登录 GitHub 账号</h3>
+                      <p>打开 <a href="https://github.com/" target="_blank" rel="noopener noreferrer">github.com</a>，登录自己的账户。</p>
+                    </li>
+                    <li>
+                      <h3>Fork “NodeWarden” 开源项目</h3>
+                      <ol>
+                        <li>点击前往 <a href="https://github.com/shuaiplus/NodeWarden" target="_blank" rel="noopener noreferrer">NodeWarden</a> 的官方仓库 。</li>
+                        <li>点击页面右上角的 <span class="ui-label">Fork</span> 按钮，将该项目完整复制到你自己的 GitHub 账号下。</li>
+                      </ol>
+                    </li>
+                    <li>
+                      <h3>修改 wrangler.toml 配置文件</h3>
+                      <ol>
+                        <li>把 wrangler.toml 重新命名为其他名称。</li>
+                        <li>把 wrangler.kv.toml 更名为 wrangler.toml。</li>
+                      </ol>
+                    </li>
+                  </ol>
+                </section>
+                <!-- 底部倒三角 -->
+                <div class="article-section-steps-triangle"></div>
+              </section>
+              <!-- 下引号 -->
+              <div class="article-section-steps-quote bottom-quote"></div>
+            </div>
+
+
+          </section>
+
+          <section class="article-section">
+            <!-- title -->
+            <section class="article-section-title-rom">
+              <section class="visible">
+                <section class="article-section-timestamp">
+                  <section class="visible">
+                    <section class="article-section-timestamp-box">
+                      <span class="article-section-timestamp-box-txt"></span>
+                    </section>
+                    <section class="article-section-timestamp-daosanjiao"><span><br></span></section>
+                  </section>
+                </section>
+                <section class="article-section-title-box-cont mt-2">进行部署</section>
+                <section class="article-section-title-txt-huabian">
+                  <section class="article-section-title-huabian-left"><span><br></span></section>
+                  <section class="article-section-title-huabian-right"><span><br></span></section>
+                </section>
+              </section>
+            </section>
+            <!-- steps -->
+            <div class="article-section-steps">
+              <section class="article-section-steps-maohao-up visible">
+                <section style="width: 20px; margin:0px auto -8px; box-sizing: border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2" style="visibility: visible;"><g data-name="图层 1" style="visibility: visible;"><path d="M12.91,0C6,3.2,0,9.52,0,18.78,0,24.48,3.47,29,8.28,29c4.63,0,7.48-3.12,7.48-7S13.08,15,9.17,15a5.19,5.19,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88ZM31.6,0C24.66,3.2,18.69,9.52,18.69,18.78,18.69,24.48,22.16,29,27,29c4.63,0,7.48-3.12,7.48-7S31.78,15,27.86,15a5.25,5.25,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88Z" style="fill: rgb(162, 242, 194); fill-rule: evenodd;"></path></g></g></svg>
+                </section>
+                <section class="liub visible"><span leaf=""><br></span></section>
+              </section>
+              <section class="article-section-steps-box visible">
+                <section class="article-section-steps-box-cont">
+                  <ol class="steps">
+                    <li>
+                      <h3>注册登录 Cloudflare 账号</h3>
+                      <p>打开 <a href="https://dash.cloudflare.com" target="_blank" rel="noopener noreferrer">https://dash.cloudflare.com</a>，登录自己的账户。</p>
+                    </li>
+                    <li>
+                      <h3>部署到Cloudflare</h3>
+                      <ol>
+                        <li>打开 <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create" target="_blank" rel="noopener noreferrer">Workers</a> 。</li>
+                        <li>Continue with GitHub 。</li>
+                        <li>选择你 Fork 后的仓库 <span class="ui-label">NodeWarden</span>，下一步 。</li>
+                        <li>部署 。
+                          <figure class="article-figure">
+                            <img src="https://cdn.jsdelivr.net/gh/aaapcc/upload/blog/archives/2026/01/cfblog-plus-01.png" alt="" loading="lazy">
+                            <figcaption>根据需求填写图片的文字说明</figcaption>
+                          </figure>
+                        </li>
+                        <li>打开生成的链接 。</li>
+                      </ol>
+                    </li>
+                    <li>
+                      <h3>再次修改 wrangler.toml 配置文件</h3>
+                      <p>确保里面只有 <span class="ui-label">KV</span> 配置，没有 <span class="ui-label">R2</span> 相关内容。</p>
+                      <ol>
+                        <li>在 kv_namespaces 中增加 KV空间ID。
+                          <pre><code class="hljs ini"><span class="hljs-section">[[kv_namespaces]]</span>
+<span class="hljs-attr">binding</span> = <span class="hljs-string">"ATTACHMENTS_KV"</span> 
+<span class="hljs-attr">id</span> = <span class="hljs-string">"你的KV命名空间ID"</span> 
+<span class="hljs-attr">preview_id</span> = <span class="hljs-string">"你的KV空间ID"</span>
+</code></pre>
+                          <blockquote>
+                            <p>打开 <a href="https://dash.cloudflare.com/" title="CloudFlare主页">CloudFlare主页</a>，点击左侧的 “<strong>存储和数据库</strong>”，然后点击 “<strong>Workers KV</strong>”，找到 “<strong>xxx-attachments-kv</strong>” 复制ID。</p>
+                          </blockquote>
+                        </li>
+                        <li>在 d1_databases 中增加 D1数据库ID。
+                          <pre><code class="hljs ini"><span class="hljs-section">[[d1_databases]]</span>
+<span class="hljs-attr">binding</span> = <span class="hljs-string">"DB"</span>
+<span class="hljs-attr">database_name</span> = <span class="hljs-string">"nodewarden-db"</span>
+<span class="hljs-attr">database_id</span> = <span class="hljs-string">"这里填你的D1数据库ID"</span>
+</code></pre>
+                          <blockquote>
+                            <p>进入 <strong>D1 SQL Database</strong>（D1 SQL 数据库），找到你的数据库，点击去就可以找到你的 <strong>D1数据库UUID</strong>。</p>
+                          </blockquote>
+                        </li>
+                      </ol>
+                    </li>
+                    <li>
+                      <h3>部署完成</h3>
+                      <p>到此部署完成，绑定自定义域名即可访问。</p>
+                    </li>
+                  </ol>
+                </section>
+                <section class="article-section-steps-bottom-daosanjiao">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.9 30.19" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M48.14.65l-23.69,28L.76.65" style="fill:#fff;stroke:#b3e9ff;stroke-width:2px;fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+              <section class="article-section-steps-maohao-down">
+                <section class="liub"><span leaf=""><br></span></section>
+                <section style="width: 20px;margin:-8px auto 0;box-sizing:border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M21.63,29c6.94-3.21,12.91-9.53,12.91-18.78C34.54,4.54,31.07,0,26.26,0c-4.63,0-7.48,3.12-7.48,7S21.45,14,25.37,14a5.32,5.32,0,0,0,1.6-.26c0,2.13-2.58,7.3-8.28,9.88ZM2.94,29c6.94-3.21,12.9-9.53,12.9-18.78C15.84,4.54,12.37,0,7.57,0,2.94,0,.09,3.12.09,7S2.76,14,6.68,14a5.32,5.32,0,0,0,1.6-.26C8.28,15.84,5.7,21,0,23.59Z" style="fill:#a2f2c2;fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <!-- title -->
+            <section class="article-section-title-rom">
+              <section class="visible">
+                <section class="article-section-timestamp">
+                  <section class="visible">
+                    <section class="article-section-timestamp-box">
+                      <span class="article-section-timestamp-box-txt"></span>
+                    </section>
+                    <section class="article-section-timestamp-daosanjiao"><span><br></span></section>
+                  </section>
+                </section>
+                <section class="article-section-title-box-cont mt-2">基本配置</section>
+                <section class="article-section-title-txt-huabian">
+                  <section class="article-section-title-huabian-left"><span><br></span></section>
+                  <section class="article-section-title-huabian-right"><span><br></span></section>
+                </section>
+              </section>
+            </section>
+            <!-- steps -->
+            <div class="article-section-steps">
+              <section class="article-section-steps-maohao-up visible">
+                <section style="width: 20px; margin:0px auto -8px; box-sizing: border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2" style="visibility: visible;"><g data-name="图层 1" style="visibility: visible;"><path d="M12.91,0C6,3.2,0,9.52,0,18.78,0,24.48,3.47,29,8.28,29c4.63,0,7.48-3.12,7.48-7S13.08,15,9.17,15a5.19,5.19,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88ZM31.6,0C24.66,3.2,18.69,9.52,18.69,18.78,18.69,24.48,22.16,29,27,29c4.63,0,7.48-3.12,7.48-7S31.78,15,27.86,15a5.25,5.25,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88Z" style="fill: var(--section-steps-dianzhui); fill-rule: evenodd;"></path></g></g></svg>
+                </section>
+                <section class="liub visible"><span leaf=""><br></span></section>
+              </section>
+              <section class="article-section-steps-box visible">
+                <section class="article-section-steps-box-cont">
+                  <p>打开自定义域名，首次打开时，需进行基础配置</p>
+                  <ol class="steps">
+                    <li>
+                      <h3>配置 JWT_SECRET</h3>
+                      <p>进入 Cloudflare 控制台 -> Workers 和 Pages -> 你的项目 -> 设置 -> 变量和机密 -> 添加。</p>
+                      <blockquote>
+                        <ul>
+                          <li>类型：<strong>秘钥</strong></li>
+                          <li>变量名称：<strong>JWT_SECRET</strong></li>
+                          <li>值：在基本配置页面里可以获取的到</li>
+                        </ul>
+                      </blockquote>
+                    </li>
+                    <li>
+                      <h3>创建账号&主密码</h3>
+                      <p>按照界面中指示来即可。</p>
+                      <blockquote>
+                        <p>主密码一定要记住，非常重要。</p>
+                      </blockquote>
+                    </li>
+                  </ol>
+                </section>
+                <section class="article-section-steps-bottom-daosanjiao">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.9 30.19" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M48.14.65l-23.69,28L.76.65" style="fill:#fff;stroke:#b3e9ff;stroke-width:2px;fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+              <section class="article-section-steps-maohao-down">
+                <section class="liub"><span leaf=""><br></span></section>
+                <section style="width: 20px;margin:-8px auto 0;box-sizing:border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M21.63,29c6.94-3.21,12.91-9.53,12.91-18.78C34.54,4.54,31.07,0,26.26,0c-4.63,0-7.48,3.12-7.48,7S21.45,14,25.37,14a5.32,5.32,0,0,0,1.6-.26c0,2.13-2.58,7.3-8.28,9.88ZM2.94,29c6.94-3.21,12.9-9.53,12.9-18.78C15.84,4.54,12.37,0,7.57,0,2.94,0,.09,3.12.09,7S2.76,14,6.68,14a5.32,5.32,0,0,0,1.6-.26C8.28,15.84,5.7,21,0,23.59Z" style="fill: var(--section-steps-dianzhui);fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <!-- title -->
+            <section class="article-section-title-rom">
+              <section class="visible">
+                <section class="article-section-timestamp">
+                  <section class="visible">
+                    <section class="article-section-timestamp-box">
+                      <span class="article-section-timestamp-box-txt"></span>
+                    </section>
+                    <section class="article-section-timestamp-daosanjiao"><span><br></span></section>
+                  </section>
+                </section>
+                <section class="article-section-title-box-cont mt-2">到 Bitwarden 中使用</section>
+                <section class="article-section-title-txt-huabian">
+                  <section class="article-section-title-huabian-left"><span><br></span></section>
+                  <section class="article-section-title-huabian-right"><span><br></span></section>
+                </section>
+              </section>
+            </section>
+            <!-- steps -->
+            <div class="article-section-steps">
+              <section class="article-section-steps-maohao-up visible">
+                <section style="width: 20px; margin:0px auto -8px; box-sizing: border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2" style="visibility: visible;"><g data-name="图层 1" style="visibility: visible;"><path d="M12.91,0C6,3.2,0,9.52,0,18.78,0,24.48,3.47,29,8.28,29c4.63,0,7.48-3.12,7.48-7S13.08,15,9.17,15a5.19,5.19,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88ZM31.6,0C24.66,3.2,18.69,9.52,18.69,18.78,18.69,24.48,22.16,29,27,29c4.63,0,7.48-3.12,7.48-7S31.78,15,27.86,15a5.25,5.25,0,0,0-1.6.27c0-2.14,2.58-7.3,8.28-9.88Z" style="fill: var(--section-steps-dianzhui); fill-rule: evenodd;"></path></g></g></svg>
+                </section>
+                <section class="liub visible"><span leaf=""><br></span></section>
+              </section>
+              <section class="article-section-steps-box visible">
+                <section class="article-section-steps-box-cont">
+                  <ol class="steps">
+                    <li>
+                      <h3>在 Bitwarden 项中，选择自托管</h3>
+                      <p>指定您的本地托管 Bitwarden 安装的基础 URL。例如：<strong><a href="https://xxx.domain.com">https://xxx.domain.com</a></strong></p>
+                      <blockquote>
+                        <p>注意，域名后面不要带 / 斜杠</p>
+                      </blockquote>
+                    </li>
+                  </ol>
+                </section>
+                <section class="article-section-steps-bottom-daosanjiao">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.9 30.19" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M48.14.65l-23.69,28L.76.65" style="fill:#fff;stroke:#b3e9ff;stroke-width:2px;fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+              <section class="article-section-steps-maohao-down">
+                <section class="liub"><span leaf=""><br></span></section>
+                <section style="width: 20px;margin:-8px auto 0;box-sizing:border-box;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 29.02" style="display: block;" role="img" aria-label="插图"><g data-name="图层 2"><g data-name="图层 1"><path d="M21.63,29c6.94-3.21,12.91-9.53,12.91-18.78C34.54,4.54,31.07,0,26.26,0c-4.63,0-7.48,3.12-7.48,7S21.45,14,25.37,14a5.32,5.32,0,0,0,1.6-.26c0,2.13-2.58,7.3-8.28,9.88ZM2.94,29c6.94-3.21,12.9-9.53,12.9-18.78C15.84,4.54,12.37,0,7.57,0,2.94,0,.09,3.12.09,7S2.76,14,6.68,14a5.32,5.32,0,0,0,1.6-.26C8.28,15.84,5.7,21,0,23.59Z" style="fill: var(--section-steps-dianzhui);fill-rule:evenodd;"></path></g></g></svg>
+                </section>
+              </section>
+            </div>
+          </section>
+
+      </article>
+  </main>
+</body>
+</html>
