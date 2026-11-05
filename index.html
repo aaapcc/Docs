@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css">
-  <link rel="stylesheet" href="assests/css/style.css?v=20261104-2">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261105-1">
 </head>
 <body>
   <header class="site-header">
@@ -62,9 +62,6 @@
     </div>
   </header>
   <main>
-    <form role="search" action="/search" method="GET" class="search-popup-form">
-  <input type="text" name="q" placeholder="请输入搜索关键词" value="" minlength="2" class="search-popup-input form-control">
-</form>
     <article class="layout article">
         <header class="article-header">
           <h1>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）2</h1>
@@ -273,6 +270,12 @@
                       </figure>
                     </li>
                     <li>部署完成后，打开生成的链接。</li>
+                    <li>点下一步，进行部署。
+                      <figure class="article-figure">
+                        <img src="https://api.dicebear.com/10.x/planets/svg?seed=说明" alt="" loading="lazy">
+                        <figcaption>根据需求填写图片的文字说明</figcaption>
+                      </figure>
+                    </li>
                   </ol>
                 </li>
                 <li>
@@ -1027,6 +1030,44 @@ database_id = "这里填你的D1数据库ID"
     }
     document.querySelectorAll(".toc-item").forEach(item => {
       item.addEventListener("click", closeTocModal);
+    });
+
+    // ==========================================
+    // 7. 自动为所有 Markdown 表格包裹滚动容器
+    // ==========================================
+    document.querySelectorAll('.article-section table').forEach(table => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+
+    // ==========================================
+    // 8. 全屏图片查看器
+    // ==========================================
+    // 创建弹窗容器
+    const imgViewer = document.createElement('div');
+    imgViewer.className = 'img-viewer-overlay';
+    const imgViewerImg = document.createElement('img');
+    imgViewer.appendChild(imgViewerImg);
+    document.body.appendChild(imgViewer);
+
+    // 给文章内的所有图片绑定点击事件
+    document.querySelectorAll('.article-section img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.stopPropagation(); // 阻止冒泡
+        imgViewerImg.src = img.src; // 把点击的图片塞进弹窗
+        imgViewer.classList.add('show');
+        document.body.classList.add('modal-open'); // 禁止背景滚动
+      });
+    });
+
+    // 点击弹窗关闭
+    imgViewer.addEventListener('click', () => {
+      imgViewer.classList.remove('show');
+      // 等动画播完清空 src
+      setTimeout(() => { imgViewerImg.src = ''; }, 300);
+      document.body.classList.remove('modal-open');
     });
 
   });

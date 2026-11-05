@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css">
-  <link rel="stylesheet" href="assests/css/style.css?v=20261104-2">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261105-1">
 </head>
 <body>
   <header class="site-header">
@@ -111,33 +111,57 @@
             <h2>选择客户端</h2>
             <!-- Content -->
             <div class="article-quote-card">
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>客户端</th>
-                      <th>价格</th>
-                      <th>适合人群</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <strong>Shadowrocket（小火箭）</strong>⭐ 推荐</td>
-                      <td>付费</td>
-                      <td>长期使用，追求稳定和易用</td></tr>
-                    <tr>
-                      <td>
-                        <strong>Clash Mi</strong></td>
-                      <td>免费</td>
-                      <td>暂不想付费，习惯 Clash 配置</td></tr>
-                    <tr>
-                      <td>
-                        <strong>Karing</strong></td>
-                      <td>免费</td>
-                      <td>暂不想付费，希望界面简洁</td></tr>
-                  </tbody>
-                </table>
-              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>客户端</th>
+                    <th>价格</th>
+                    <th>适合人群</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Shadowrocket（小火箭）</strong>⭐ 推荐</td>
+                    <td>付费</td>
+                    <td>长期使用，追求稳定和易用</td></tr>
+                  <tr>
+                    <td>
+                      <strong>Clash Mi</strong></td>
+                    <td>免费</td>
+                    <td>暂不想付费，习惯 Clash 配置</td></tr>
+                  <tr>
+                    <td>
+                      <strong>Karing</strong></td>
+                    <td>免费</td>
+                    <td>暂不想付费，希望界面简洁</td></tr>
+                </tbody>
+              </table>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>客户端</th>
+                    <th>价格</th>
+                    <th>适合人群</th>
+                    <th>都快读课文</th>
+                    <th>断空我</th>
+                    <th>文凭</th>
+                    <th>阿斯顿发上岛咖啡结算单咖啡机上课了戴假发</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Shadowrocket（小火箭）</strong>⭐ 推荐</td>
+                    <td>付费</td>
+                    <td>长期使用，追求稳定和易用</td>
+                    <td>打开射流风机以服务</td>
+                    <td>我诶算了</td>
+                    <td>i哦为快捷键发卡方</td>
+                    <td>键发卡方</td>
+                  </tr>
+                </tbody>
+              </table>
+
               <h3>Shadowrocket（小火箭）⭐</h3>
               <ul>
                 <li><strong>价格：</strong> 付费，需自行在 App Store 购买</li>
@@ -186,26 +210,24 @@
             <!-- Content -->
             <div class="article-quote-card">
               <p>如果你暂时没有外区 Apple ID，可以使用本站提供的共享账号，<strong>仅用于临时下载客户端</strong>。</p>
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>项目</th>
-                      <th>内容</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>账号地址</td>
-                      <td><a href="https://id.mimy.cc/">共享Apple ID</a></td>
-                    </tr>
-                    <tr>
-                      <td>访问密码</td>
-                      <td><code>fh41</code></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>项目</th>
+                    <th>内容</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>账号地址</td>
+                    <td><a href="https://id.mimy.cc/">共享Apple ID</a></td>
+                  </tr>
+                  <tr>
+                    <td>访问密码</td>
+                    <td><code>fh41</code></td>
+                  </tr>
+                </tbody>
+              </table>
               <p>打开上述地址，输入访问密码，即可查看共享 Apple ID 账号和密码。</p>
               <blockquote>
                 <p>⚠️ <strong>共享账号使用规则</strong></p>
@@ -929,6 +951,16 @@
     }
     document.querySelectorAll(".toc-item").forEach(item => {
       item.addEventListener("click", closeTocModal);
+    });
+
+    // ==========================================
+    // 7. 自动为所有 Markdown 表格包裹滚动容器
+    // ==========================================
+    document.querySelectorAll('.article-section table').forEach(table => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
     });
 
   });
