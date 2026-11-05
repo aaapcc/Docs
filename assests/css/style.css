@@ -349,7 +349,7 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
 .site-footer { border-top: 8px solid #f2f2f2; margin: 10px auto; padding: 20px 0px 20px; max-width: 848px; font-size: 13px; }
 .footer-logo { display: flex; align-items: center; justify-content: center; margin: 0 auto; min-width: 0; }
 .footer-logo a { padding: 10px 0px; }
-.footer-logo img{ width: 110px; height: auto; filter: grayscale(100%); opacity: 0.6; transition: filter 0.3s ease, opacity 0.3s ease; }
+.footer-logo img{ max-width: 110px; height: auto; filter: grayscale(100%); opacity: 0.6; transition: filter 0.3s ease, opacity 0.3s ease; }
 .footer-logo:hover img { filter: grayscale(0%); opacity: 1; }
 
 

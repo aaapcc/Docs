@@ -2,13 +2,14 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes">
   <meta name="description" content="">
   <title>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</title>
   <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css">
-  <link rel="stylesheet" href="assests/css/style.css?v=20261105-1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.min.css" />
+  <link rel="stylesheet" href="assests/css/style.css?v=20261105-3">
 </head>
 <body>
   <header class="site-header">
@@ -576,8 +577,8 @@
     </div>
     
     <div class="toc-list">
-      <a href="index.html"><span>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span></a>
-      <a href="art-apple.html" class="active"><span>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span></a>
+      <a href="index.html" class="active"><span>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span></a>
+      <a href="art-apple.html"><span>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span></a>
       <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
       <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
       <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
@@ -636,14 +637,13 @@
   <!-- 搜索面板 -->
   <div id="searchPanel" class="search-panel">
     <div class="search-container">
-      <!-- 搜索框 -->
-      <div class="search-input-group">
+      <form class="search-input-group" id="searchForm" action="/search" method="GET">
         <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="text" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off">
-        <button class="search-close-btn" id="closeSearchBtn" aria-label="关闭搜索">
+        <input type="search" name="q" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off" enterkeyhint="search">
+        <button class="search-close-btn" type="button" id="closeSearchBtn" aria-label="关闭搜索">
           <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-      </div>
+      </form>
       
       <!-- 搜索提示区 (搜索历史) -->
       <div class="search-hints" id="searchHistoryBox" style="display: none;">
@@ -964,6 +964,92 @@
     });
 
   });
+</script>
+<!-- 引入 PhotoSwipe 核心库 -->
+<script type="module">
+  const style = document.createElement('style');
+  style.textContent = `
+    .pswp { backdrop-filter: blur(5px) !important; -webkit-backdrop-filter: blur(5px) !important; }
+    .pswp__bg { background: rgba(0, 0, 0, 0.85) !important; opacity: 1 !important; }
+    .pswp__button--zoom { display: none !important; }
+  `;
+  document.head.appendChild(style);
+
+  import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe-lightbox.esm.min.js';
+  import PhotoSwipe from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.esm.min.js';
+
+  const lightbox = new PhotoSwipeLightbox({
+    pswpModule: PhotoSwipe,
+    bgOpacity: 0.9,
+    showHideAnimationType: 'none', // 👈 核心：直接禁用淡入动画，秒出纯黑底！
+    wheelToZoom: true,
+    loop: true,
+    clickToClose: false, 
+  });
+  lightbox.init();
+
+  // 👇 区分“点击”和“滑动”
+  lightbox.on('beforeOpen', () => {
+    let startX = 0;
+    let startY = 0;
+
+    lightbox.pswp.on('pointerDown', (e) => {
+      startX = e.originalEvent.clientX || e.originalEvent.touches[0].clientX;
+      startY = e.originalEvent.clientY || e.originalEvent.touches[0].clientY;
+    });
+
+    lightbox.pswp.on('pointerUp', (e) => {
+      if (lightbox.pswp.currSlide.currZoomLevel > 1) return;
+
+      const endX = e.originalEvent.clientX || e.originalEvent.changedTouches[0].clientX;
+      const endY = e.originalEvent.clientY || e.originalEvent.changedTouches[0].clientY;
+      
+      const diffX = Math.abs(endX - startX);
+      const diffY = Math.abs(endY - startY);
+
+      if (diffX < 10 && diffY < 10) {
+        const target = e.originalEvent.target;
+        if (target.classList.contains('pswp__img') || target.classList.contains('pswp__bg')) {
+          setTimeout(() => { lightbox.pswp.close(); }, 10);
+        }
+      }
+    });
+  });
+
+  // 抓图逻辑
+  const bindImages = () => {
+    const allImgs = Array.from(document.querySelectorAll('main img'));
+    const realImages = allImgs.filter(img => {
+      if (img.closest('.comments') || img.closest('.site-header')) return false;
+      return img.clientWidth > 50;
+    });
+
+    if (realImages.length === 0 || realImages[0].dataset.pswpBound) return;
+
+    realImages.forEach((img, index) => {
+      img.style.cursor = 'zoom-in';
+      img.dataset.pswpBound = 'true';
+      
+      img.addEventListener('click', (e) => {
+        e.preventDefault();
+        const items = realImages.map(image => {
+          return { 
+            src: image.src,
+            width: 2000, 
+            height: 2000
+          };
+        });
+        lightbox.loadAndOpen(index, items);
+      });
+    });
+  };
+
+  bindImages();
+  
+  const observer = new MutationObserver(() => {
+    bindImages();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 </script>
 
 </body>
