@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+  <title>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</title>
+  <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261104-2">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <!-- 左侧：Logo + 导航 -->
+      <div class="header-left">
+        <a href="/" class="header-logo">
+          <!-- 建议给个默认高度，防止图片加载前乱跳 -->
+          <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="海纳百川" style="height: 32px; width: auto;">
+        </a>
+
+        <nav class="header-nav" id="headerNav">
+          <!-- 存放所有菜单的容器 -->
+          <div class="nav-main" id="navMain">
+            <a href="#" class="active">首页</a>
+            <a href="#">技术类</a>
+            <a href="#">MySQL</a>
+            <a href="#">Excel</a>
+            <a href="#">DEDE</a>
+            <a href="#">Linux</a>
+            <a href="#">MacCMS</a>
+            <a href="#">文献类</a>
+            <a href="#">MENU9</a>
+            <a href="#">MENU10</a>
+            <a href="#">MENU11</a>
+            <a href="#">MENU12</a>
+            <a href="#">MENU13</a>
+          </div>
+          
+          <!-- 折叠下拉框 -->
+          <div class="nav-more" id="navMore">
+            <button class="nav-more-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="nav-more-dropdown" id="navMoreDropdown"></div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- 右侧：操作按钮 -->
+      <div class="header-actions">
+        <button class="action-btn" id="openSearchBtn" aria-label="搜索">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <button class="action-btn menu-btn" id="openMenuBtn" aria-label="菜单">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="layout article">
+        <header class="article-header">
+          <h1>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</h1>
+          <div class="article-author-header d-flex align-items-center mt-3 pb-3">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="flex-avatar">
+                  <img alt="" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=author" class="" height="40" width="40" decoding="async">
+                </div>
+                <div>
+                  <div>海纳百川</div>
+                  <div class="text-data">2026年03月18日 · 155次阅读 · <span class="comments-count">0</span>条评论</div>
+                </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="mian-body">
+          <!-- 开始前准备卡片 -->
+          <section class="article-section">
+            <div class="article-before-start-card">
+              <h3>开始前要准备什么</h3>
+              <ul>
+                <li>一个可以正常登录的 <span class="ui-label">Cloudflare</span> 账号。</li>
+                <li>一个可以正常登录的 <span class="ui-label">Github</span> 账号。</li>
+                <li>Fork <span class="ui-label">NodeWarden</span> 开源项目。</li>
+              </ul>
+              <h3>本期会用到的项目与网址 </h3>
+              <ul>
+                <li><a href="#" rel="noopener noreferrer">Cloudflare 官网</a></li>
+                <li><a href="#" rel="noopener noreferrer">GitHub 官网</a></li>
+                <li><a href="#" rel="noopener noreferrer">NodeWarden 开源项目</a></li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- 文章提醒点卡片 -->
+          <section class="article-section">
+            <div class="article-remind-dots-card">
+              ⚠️ <strong>发布前先清理敏感信息。</strong>GitHub Pages 网站可以被公网访问。不要上传密码、API密钥、Cookie、私人照片原件、数据库文件或包含个人隐私的配置。GitHub Free 用户通常还需要使用公开仓库来部署 Pages。
+            </div>
+          </section>
+
+          <!-- 引号主题卡片模块 -->
+          <section class="article-section">
+            <!-- title -->
+            <h2>选择客户端</h2>
+            <!-- Content -->
+            <div class="article-quote-card">
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>客户端</th>
+                      <th>价格</th>
+                      <th>适合人群</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Shadowrocket（小火箭）</strong>⭐ 推荐</td>
+                      <td>付费</td>
+                      <td>长期使用，追求稳定和易用</td></tr>
+                    <tr>
+                      <td>
+                        <strong>Clash Mi</strong></td>
+                      <td>免费</td>
+                      <td>暂不想付费，习惯 Clash 配置</td></tr>
+                    <tr>
+                      <td>
+                        <strong>Karing</strong></td>
+                      <td>免费</td>
+                      <td>暂不想付费，希望界面简洁</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Shadowrocket（小火箭）⭐</h3>
+              <ul>
+                <li><strong>价格：</strong> 付费，需自行在 App Store 购买</li>
+                <li><strong>版本要求：</strong> v2.2.8 或更高（打开「小火箭」→「设置」→「关于」查看）</li>
+                <li><strong>下载：</strong> <a href="https://apps.apple.com/us/app/shadowrocket/id932747118">App Store 下载</a></li>
+                <li><strong>教程：</strong> <a href="https://help.xhyjs.de/tutorial/Shadowrocket.html">Shadowrocket 详细教程</a></li>
+              </ul>
+              <blockquote>
+                <p>💡 长期使用建议准备<strong>自己的外区 Apple ID + Shadowrocket</strong>，购买记录归自己所有，更新和重装都更方便。</p>
+              </blockquote>
+              <h3>Clash Mi（免费）</h3>
+              <ul>
+                <li><strong>下载：</strong> <a href="https://apps.apple.com/app/id6744321968">App Store 下载</a></li>
+                <li><strong>教程：</strong> <a href="https://help.xhyjs.de/tutorial/clash-mi.html">Clash Mi 详细教程</a></li>
+              </ul>
+              <h3>Karing（免费）</h3>
+              <ul>
+                <li><strong>下载：</strong> <a href="https://apps.apple.com/us/app/karing/id6472431552">App Store 下载</a></li>
+                <li><strong>教程：</strong> <a href="https://help.xhyjs.de/tutorial/karing.html">Karing 详细教程</a></li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- 引号主题卡片模块 -->
+          <section class="article-section">
+            <!-- title -->
+            <h2>为什么需要外区 Apple ID？</h2>
+            <!-- Content -->
+            <div class="article-quote-card">
+              <p>使用中国大陆区账号时，你可能会遇到：</p>
+              <ul>
+                <li>搜索不到客户端</li>
+                <li>提示「当前地区不可用」</li>
+                <li>需要切换到外区账号才能下载</li>
+                <li>部分客户端需要付费购买</li>
+              </ul>
+              <p><strong>如果你不想折腾 Apple ID，也不希望额外支付客户端费用，可以考虑使用 Windows 或 Android 设备。</strong> 这两个平台通常有更多可直接下载安装的客户端选择。</p>
+              <p>本站也可为你提供免费的 Windows / Android 客户端安装包，具体请前往对应的下载中心或使用文档查看。</p>
+            </div>
+          </section>
+
+          <!-- 引号主题卡片模块 -->
+          <section class="article-section">
+            <!-- title -->
+            <h2>共享 Apple ID</h2>
+            <!-- Content -->
+            <div class="article-quote-card">
+              <p>如果你暂时没有外区 Apple ID，可以使用本站提供的共享账号，<strong>仅用于临时下载客户端</strong>。</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>项目</th>
+                      <th>内容</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>账号地址</td>
+                      <td><a href="https://id.mimy.cc/">共享Apple ID</a></td>
+                    </tr>
+                    <tr>
+                      <td>访问密码</td>
+                      <td><code>fh41</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>打开上述地址，输入访问密码，即可查看共享 Apple ID 账号和密码。</p>
+              <blockquote>
+                <p>⚠️ <strong>共享账号使用规则</strong></p>
+                <ul>
+                  <li><strong>仅用于 App Store 下载应用</strong>。</li>
+                  <li><strong>请勿</strong>在「设置」中登录 iCloud，也不要开启任何数据同步。</li>
+                  <li><strong>请勿</strong>修改账号密码、绑定信息，或开启「查找」功能，以免影响其他用户。</li>
+                  <li>如弹出「Apple ID 安全」或系统升级提示，请选择<strong>其他选项————不升级</strong>。</li>
+                  <li>共享账号不保证长期可用。已下载的应用可正常使用，但后续更新可能需要重新登录该账号。长期使用请准备自己的外区 Apple ID。</li>
+                </ul>
+              </blockquote>
+            </div>
+          </section>
+
+          <!-- 引号主题卡片模块 -->
+          <section class="article-section">
+            <!-- title -->
+            <h2>下载步骤</h2>
+            <!-- Content -->
+            <div class="article-quote-card">
+              <h3>iPhone / iPad</h3>
+              <ol>
+                <li>打开 <strong>App Store</strong>，点击右上角头像，滑到底部点击<strong>退出登录</strong>。</li>
+                <li>使用共享账号（或你自己的外区 Apple ID）登录 App Store。</li>
+                <li>搜索并下载所需客户端，或直接打开上文的下载链接。</li>
+                <li>下载完成后，<strong>退出共享账号</strong>，换回自己的 Apple ID。</li>
+              </ol>
+              <h3>Mac（Apple 芯片）</h3>
+              <ol>
+                <li>打开 <strong>App Store</strong>，点击左下角账户名，退出当前账号。</li>
+                <li>使用共享账号（或你自己的外区 Apple ID）登录。</li>
+                <li>搜索客户端。如果没有 Mac 版，请在搜索结果顶部切换到「<strong>iPhone 和 iPad 应用</strong>」。</li>
+                <li>下载完成后，退出共享账号，换回自己的 Apple ID。</li>
+              </ol>
+              <blockquote>
+                <p>💡 <strong>如何查看 Mac 的芯片类型？</strong></p>
+                <p>点击屏幕左上角的 Apple 标志 →「关于本机」。</p>
+                <ul>
+                <li>显示「芯片：Apple M1 / M2 / M3 / M4……」：属于 Apple 芯片 Mac。</li>
+                <li>显示「处理器：Intel……」：属于 Intel 芯片 Mac。</li>
+                </ul>
+                <p>如果你使用的是 Intel 芯片 Mac，请前往<a href="https://doc.xhyjs.top/">下载中心</a>，获取对应版本的客户端及使用教程。</p>
+              </blockquote>
+            </div>
+          </section>
+
+          <!-- 引号主题卡片模块 -->
+          <section class="article-section">
+            <!-- title -->
+            <h2>遇到问题？</h2>
+            <!-- Content -->
+            <div class="article-quote-card">
+              <p>请先查看对应客户端的教程，大部分问题都能在里面找到答案。</p>
+              <p><strong>教程文档合集：</strong> <a href="https://help.xhyjs.de">新华云帮助文档</a></p>
+            </div>
+          </section>
+        </div>
+
+        <div class="article-ending">─── • / END / • ───</div>
+
+        <!-- Tags + 上一篇/下一篇 -->
+        <div class="article-tags-read">
+          <!-- Tags -->
+          <div class="article-tags-wrap">
+            <a href="#" rel="tag">密码库</a>
+            <a href="#" rel="tag">NodeWarden</a>
+            <a href="#" rel="tag">Cloudflare</a>
+            <a href="#" rel="tag">D1</a>
+          </div>
+          <!-- 上一篇/下一篇 -->
+          <div class="album-read-nav-wrap">
+            <div class="album-read-source" id="openTocBtn">文章·目录</div>
+            <section class="album-read-nav-cont">
+              <a href="#" class="album-read-nav-cont-prev">
+                <div class="nav-label">上一篇</div>
+                <span class="album-read-nav-title">用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span>
+              </a>
+              <a href="index.html" class="album-read-nav-cont-next">
+                <div class="nav-label">下一篇</div>
+                <div class="album-read-nav-title">Apple系统很多软件都要付费下载，都是所谓的“苹果税”</div>
+              </a>
+            </section>
+          </div>
+        </div>
+    </article>
+
+    <!-- 评论区 -->
+    <div class="comments" id="comments">
+      <div class="comments-body">
+        <!-- 评论头部 -->
+        <section class="comments-header">
+          <h2 class="d-flex align-items-center">评论 (<span class="comments-count">2</span>)</h2>
+        </section>
+        <section class="comments-card-body">
+          <!-- 评论表单 -->
+          <div id="respond" class="comment-respond">
+            <form id="commentForm" class="comment-form" onsubmit="return submitComment(event)">
+              <input type="hidden" id="parentId" value="1772037659596">
+              
+              <div class="comment-avatar flex-avatar">
+                <img src="https://api.dicebear.com/10.x/voxel-art/svg?seed=author" alt="头像">
+              </div>
+              
+              <div class="comment-body">
+                <div class="comment-input mb-2">
+                  <div class="mb-2">
+                    <input class="form-control" id="author" placeholder="昵称" name="author" type="text" required>
+                  </div>
+                  <div>
+                    <input id="email" class="form-control" name="mail" placeholder="邮箱（用于回复通知）" type="email">
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <textarea class="form-control" id="content" rows="3" placeholder="说点什么..." required></textarea>
+                  <div class="mt-2" style="font-size: 13px;">
+                    <span class="text-muted" id="commentMsg">正在回复 <strong>阿克苏</strong> 的评论</span>
+                    <a href="javascript:;" id="cancelReply" class="text-danger ms-1" onclick="cancelReply()">[取消回复]</a>
+                  </div>
+                </div>
+                
+                <div class="form-submit d-flex align-items-center">
+                  <button type="submit" id="submit" class="btn btn-primary ms-auto">提交评论</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- 评论列表 -->
+          <div class="comment-list">
+            <ul class="comment-list-body">
+              <li id="comment-1772037659596" class="comment">
+                <article class="comment-body">
+                  <div class="comment-avatar flex-avatar disabled">
+                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
+                  </div>
+                  <div class="comment-content">
+                    <div class="comment-chat">
+                      <div class="comment-info d-flex justify-content-between align-items-center">
+                        <div class="comment-left d-flex">
+                          <span class="comment-author">啥菜要放葱</span>
+                          <span class="comment-date">2026/2/25</span>
+                        </div>
+                        <span class="comment-reply">回复</span>
+                      </div>
+                      <div class="comment-text">
+                        <p>无语😑你标题能不能取的严谨一点，我一下子就发给我好朋友了，以为我在表白，然后就回了句好，搞得两个人现在很尴尬</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- 子评论 -->
+                <ul class="children">
+                  <li id="comment-1772078159987" class="comment">
+                    <article class="comment-body">
+                      <div class="comment-avatar flex-avatar disabled">
+                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-chat">
+                          <div class="comment-info d-flex justify-content-between align-items-center">
+                            <div class="comment-left d-flex">
+                              <span class="comment-author">啥菜要放葱</span>
+                              <span class="comment-date">2026/2/26</span>
+                            </div>
+                            <span class="comment-reply">回复</span>
+                          </div>
+                          <div class="comment-text">
+                            <p>你标题能不能也带上情侣两个字</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                  <li id="comment-1772078159980" class="comment">
+                    <article class="comment-body">
+                      <div class="comment-avatar flex-avatar disabled">
+                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-chat">
+                          <div class="comment-info d-flex justify-content-between align-items-center">
+                            <div class="comment-left d-flex">
+                              <span class="comment-author">长沙本地宝</span>
+                              <span class="comment-date">2026/2/26</span>
+                            </div>
+                            <span class="comment-reply">回复</span>
+                          </div>
+                          <div class="comment-text">
+                            <p>啊啊啊啊sorry</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="comment-list-body">
+              <li id="comment-1772032319596" class="comment">
+                <article class="comment-body">
+                  <div class="comment-avatar flex-avatar disabled">
+                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=背过手" alt="头像">
+                  </div>
+                  <div class="comment-content">
+                    <div class="comment-chat">
+                      <div class="comment-info d-flex justify-content-between align-items-center">
+                        <div class="comment-left d-flex">
+                          <span class="comment-author">背过手</span>
+                          <span class="comment-date">2026/2/25</span>
+                        </div>
+                        <span class="comment-reply">回复</span>
+                      </div>
+                      <div class="comment-text">
+                        <p>浏阳河婚庆公园是薛之谦迟迟mv取景地，很漂亮</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- 子评论 -->
+                <ul class="children">
+                  <li id="comment-1772078159987" class="comment">
+                    <article class="comment-body">
+                      <div class="comment-avatar flex-avatar disabled">
+                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-chat">
+                          <div class="comment-info d-flex justify-content-between align-items-center">
+                            <div class="comment-left d-flex">
+                              <span class="comment-author">长沙本地宝</span>
+                              <span class="comment-date">2026/2/26</span>
+                            </div>
+                            <span class="comment-reply">回复</span>
+                          </div>
+                          <div class="comment-text">
+                            <p>好美~</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="comment-list-body">
+              <li id="comment-xxxx112" class="comment">
+                <article class="comment-body">
+                  <div class="comment-avatar flex-avatar disabled">
+                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=AA-徐先生8" alt="头像">
+                  </div>
+                  <div class="comment-content">
+                    <div class="comment-chat">
+                      <div class="comment-info d-flex justify-content-between align-items-center">
+                        <div class="comment-left d-flex">
+                          <span class="comment-author">AA-徐先生8</span>
+                          <span class="comment-date">2026/2/25</span>
+                        </div>
+                        <span class="comment-reply">回复</span>
+                      </div>
+                      <div class="comment-text">
+                        <p>天气还是热，适合秋高气爽的时候去。</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+            </ul>
+            <ul class="comment-list-body">
+              <li id="comment-1772037659596" class="comment">
+                <article class="comment-body">
+                  <div class="comment-avatar flex-avatar disabled">
+                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=友爱 湖南" alt="头像">
+                  </div>
+                  <div class="comment-content">
+                    <div class="comment-chat">
+                      <div class="comment-info d-flex justify-content-between align-items-center">
+                        <div class="comment-left d-flex">
+                          <span class="comment-author">友爱 湖南</span>
+                          <span class="comment-date">2026/2/25</span>
+                        </div>
+                        <span class="comment-reply">回复</span>
+                      </div>
+                      <div class="comment-text">
+                        <p>长沙真有情侣的爱心，太好了</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- 子评论 -->
+                <ul class="children">
+                  <li id="comment-1772078159987" class="comment">
+                    <article class="comment-body">
+                      <div class="comment-avatar flex-avatar disabled">
+                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-chat">
+                          <div class="comment-info d-flex justify-content-between align-items-center">
+                            <div class="comment-left d-flex">
+                              <span class="comment-author">长沙本地宝</span>
+                              <span class="comment-date">2026/2/26</span>
+                            </div>
+                            <span class="comment-reply">回复</span>
+                          </div>
+                          <div class="comment-text">
+                            <p>❤️哈哈</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页面底部 -->
+  <footer class="site-footer">
+      <div class="container">
+        <div class="footer-logo">
+          <a href="#"><img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt=""></a>
+        </div>
+        <div class="footer-copyright text-center d-md-block text-xs text-muted">
+          Copyright © <span class="dqnianfen"><script>window.onload=function(){var currentYear=new Date().getFullYear();var yearElement=document.querySelector('.dqnianfen');if(yearElement){yearElement.textContent=currentYear}};</script></span> Powered by 海纳百川
+        </div>
+    </div>
+  </footer>
+
+  <!-- 弹窗结构 (放在 body 底部) -->
+  <dialog id="tocModal" class="toc-modal">
+    <div class="toc-modal-header">
+      <!-- 关闭按钮（向下的箭头） -->
+      <button class="toc-close" id="closeTocBtn">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      <h3>文章·目录 </h3>
+      <a href="#" class="toc-detail-link">详情</a>
+    </div>
+    
+    <div class="toc-list">
+      <a href="index.html"><span>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span></a>
+      <a href="art-apple.html" class="active"><span>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span></a>
+      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
+      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
+      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
+      <a href="#section1"><span>【辅警招聘】高中/大专可报名！湖南临澧县公安局招聘辅警！</span></a>
+      <a href="#section2"><span>【国企招聘】湖南省演艺集团、机械院等3家国企最新招聘汇总！附报名方式→</span></a>
+      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
+      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
+      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
+    </div>
+  </dialog>
+
+  <!-- 在 header 下面新增侧边栏 -->
+  <!-- 遮罩层 -->
+  <div id="menuOverlay" class="menu-overlay"></div>
+  <!-- 侧边栏 -->
+  <div id="sideMenu" class="side-menu-drawer">
+    <div class="side-menu-topbar">
+      <!-- 左上角只放 Logo -->
+      <a href="/" class="side-menu-brand">
+        <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="Logo">
+      </a>
+      <!-- 右侧放关闭按钮 -->
+      <button class="side-close" id="closeMenuBtn">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <!-- 👇 新增：沉浸式搜索大卡片 -->
+    <div class="side-menu-search">
+      <div class="side-search-box" id="sideSearchTrigger">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>搜索文章 / 关键词</span>
+      </div>
+    </div>
+    
+    <div class="side-menu-body">
+      <ul class="mobile-menu-inner">
+        <li class="menu-item"><a href="#">首页</a></li>
+        <li class="menu-item"><a href="#">技术类</a></li>
+        <li class="menu-item active"><a href="#">MySQL</a></li>
+        <li class="menu-item"><a href="#">Excel</a></li>
+        <li class="menu-item"><a href="#">DEDE</a></li>
+        <li class="menu-item"><a href="#">Linux</a></li>
+        <li class="menu-item"><a href="#">MacCMS</a></li>
+        <li class="menu-item"><a href="#">MENU9</a></li>
+        <li class="menu-item"><a href="#">MENU10</a></li>
+        <li class="menu-item"><a href="#">MENU11</a></li>
+        <li class="menu-item"><a href="#">MENU12</a></li>
+        <li class="menu-item"><a href="#">MENU13</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 搜索遮罩层 -->
+  <div id="searchOverlay" class="search-overlay"></div>
+  <!-- 搜索面板 -->
+  <div id="searchPanel" class="search-panel">
+    <div class="search-container">
+      <!-- 搜索框 -->
+      <div class="search-input-group">
+        <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off">
+        <button class="search-close-btn" id="closeSearchBtn" aria-label="关闭搜索">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      
+      <!-- 搜索提示区 (搜索历史) -->
+      <div class="search-hints" id="searchHistoryBox" style="display: none;">
+        <div class="hint-header">
+          <div class="hint-title">搜索历史</div>
+          <button class="clear-history-btn" id="clearHistoryBtn">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: -2px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>清空
+          </button>
+        </div>
+        <div class="hint-tags" id="historyTags">
+          <!-- 历史记录标签会由 JS 动态生成到这里 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    
+    // ==========================================
+    // 0. 公共 DOM 变量获取
+    // ==========================================
+    const openMenuBtn = document.getElementById("openMenuBtn");
+    const closeMenuBtn = document.getElementById("closeMenuBtn");
+    const sideMenu = document.getElementById("sideMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const sideSearchTrigger = document.getElementById("sideSearchTrigger");
+    
+    const openSearchBtn = document.getElementById("openSearchBtn");
+    const closeSearchBtn = document.getElementById("closeSearchBtn");
+    const searchOverlay = document.getElementById("searchOverlay");
+    const searchPanel = document.getElementById("searchPanel");
+    const searchInput = document.getElementById("searchInput");
+    const searchHistoryBox = document.getElementById("searchHistoryBox");
+    const historyTags = document.getElementById("historyTags");
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+    const searchForm = document.getElementById("searchForm"); // 👈 新增的获取表单
+
+    const headerNav = document.getElementById("headerNav");
+    const navMain = document.getElementById("navMain");
+    const navMore = document.getElementById("navMore");
+    const dropdown = document.getElementById("navMoreDropdown");
+    const navLinks = Array.from(navMain.querySelectorAll("a"));
+
+    const openTocBtn = document.getElementById("openTocBtn");
+    const closeTocBtn = document.getElementById("closeTocBtn");
+    const tocModal = document.getElementById("tocModal");
+
+
+    // ==========================================
+    // 1. 全局/通用功能 (代码高亮 & 复制)
+    // ==========================================
+    if (typeof hljs !== 'undefined') {
+      hljs.highlightAll();
+    }
+
+    // 1. 全局/通用功能 (代码高亮 & 复制 & 行号)
+    if (typeof hljs !== 'undefined') {
+      hljs.highlightAll();
+    }
+
+    document.querySelectorAll("pre").forEach((pre) => {
+      const code = pre.querySelector("code");
+      if (!code) return;
+
+          // --- 👇 终结版：按行拆分，彻底解决错位 ---
+      const codeText = code.textContent || "";
+      const lines = codeText.split('\n');
+      if (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
+
+      // 获取高亮后的 HTML，按行拆分
+      const highlightedLines = code.innerHTML.split('\n');
+      
+      let newHtml = '';
+      lines.forEach((_, index) => {
+        newHtml += `<div class="code-line">`;
+        newHtml += `<span class="line-num">${index + 1}</span>`;
+        // 如果高亮插件那一行有内容，就放进去，否则给个空格占位
+        newHtml += `<span class="line-text">${highlightedLines[index] || ' '}</span>`;
+        newHtml += `</div>`;
+      });
+
+      code.innerHTML = newHtml;
+      pre.classList.add("has-line-numbers");
+      // --- 👆 替换结束 ---
+
+      // 原有的语言识别逻辑
+      let lang = "code";
+      const classList = Array.from(code.classList);
+      const langClass = classList.find(c => c.startsWith("language-") || c.startsWith("lang-")) || classList.find(c => c !== "hljs");
+
+      if (langClass) {
+        lang = langClass.replace("language-", "").replace("lang-", "");
+      }
+      pre.setAttribute("data-lang", lang);
+      
+      // 👇 终极复制逻辑：完美避开行号
+      pre.addEventListener("click", (e) => {
+        const rect = pre.getBoundingClientRect();
+        if (e.clientY - rect.top < 40 && e.clientX > rect.right - 100) {
+          const contentToCopy = Array.from(code.querySelectorAll('.line-text'))
+                                     .map(el => el.textContent)
+                                     .join('\n');
+          
+          navigator.clipboard.writeText(contentToCopy).then(() => {
+            pre.classList.add("copied");
+            setTimeout(() => pre.classList.remove("copied"), 1500);
+          }).catch((err) => console.error("复制失败: ", err));
+        }
+      });
+    });
+
+
+    // ==========================================
+    // 2. 顶部导航折叠加算
+    // ==========================================
+    const checkNavOverflow = () => {
+      if (window.innerWidth <= 820) return;
+      navMore.classList.remove("show");
+      dropdown.innerHTML = "";
+      navLinks.forEach(link => link.style.display = "");
+      const moreBtnWidth = navMore.querySelector('.nav-more-btn').offsetWidth || 40;
+      const availableWidth = headerNav.offsetWidth - moreBtnWidth - 20;
+      if (navMain.scrollWidth > availableWidth) {
+        navMore.classList.add("show");
+        for (let i = navLinks.length - 1; i >= 0; i--) {
+          const link = navLinks[i];
+          link.style.display = "none"; 
+          const clone = link.cloneNode(true);
+          clone.style.display = "block";
+          dropdown.prepend(clone);
+          if (navMain.scrollWidth <= availableWidth) break;
+        }
+      }
+    };
+    requestAnimationFrame(checkNavOverflow);
+    let navTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(navTimeout);
+      navTimeout = setTimeout(checkNavOverflow, 100);
+    });
+
+
+    // ==========================================
+    // 3. 左侧侧边栏逻辑
+    // ==========================================
+    if (openMenuBtn) {
+      openMenuBtn.addEventListener("click", () => {
+        sideMenu.classList.add("show");
+        menuOverlay.classList.add("show");
+        document.body.classList.add("modal-open");
+      });
+    }
+    const closeMenu = () => {
+      sideMenu.classList.remove("show");
+      menuOverlay.classList.remove("show");
+      document.body.classList.remove("modal-open");
+    };
+    if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
+    if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+    document.querySelectorAll(".menu-link").forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
+
+
+    // ==========================================
+    // 4. 搜索弹窗核心逻辑 (历史记录 & 开关)
+    // ==========================================
+    const getHistory = () => {
+      try { return JSON.parse(localStorage.getItem("myBlogSearchHistory")) || []; } 
+      catch (e) { return []; }
+    };
+
+    const renderHistory = () => {
+      const history = getHistory();
+      if (history.length === 0) {
+        searchHistoryBox.style.display = "none";
+        return;
+      }
+      searchHistoryBox.style.display = "block";
+      historyTags.innerHTML = history.map(tag => `<span class="hint-tag">${tag}</span>`).join("");
+
+      document.querySelectorAll("#historyTags .hint-tag").forEach(tag => {
+        tag.addEventListener("click", () => {
+          searchInput.value = tag.innerText;
+          saveHistory(tag.innerText);
+          if (searchForm) {
+            searchForm.requestSubmit();
+          }
+        });
+      });
+    };
+
+    const saveHistory = (keyword) => {
+      let history = getHistory().filter(item => item !== keyword);
+      history.unshift(keyword);
+      if (history.length > 5) history = history.slice(0, 5);
+      localStorage.setItem("myBlogSearchHistory", JSON.stringify(history));
+      renderHistory();
+    };
+
+    if (clearHistoryBtn) {
+      clearHistoryBtn.addEventListener("click", () => {
+        localStorage.removeItem("myBlogSearchHistory");
+        renderHistory();
+      });
+    }
+
+    const openSearchPanel = () => {
+      searchOverlay.classList.remove("no-overlay-bg");
+      searchOverlay.classList.add("show");
+      searchPanel.classList.add("show");
+      document.body.classList.add("modal-open");
+      renderHistory(); 
+      searchInput.focus(); 
+      searchInput.click(); 
+    };
+
+    const closeSearch = () => {
+      searchOverlay.classList.remove("show");
+      searchPanel.classList.remove("show");
+      searchInput.value = ""; 
+      searchOverlay.classList.remove("no-overlay-bg");
+      if (menuOverlay && menuOverlay.classList.contains("show")) {
+        menuOverlay.classList.remove("show");
+      }
+      document.body.classList.remove("modal-open");
+    };
+
+    if (openSearchBtn) {
+      openSearchBtn.addEventListener("click", openSearchPanel);
+    }
+    if (closeSearchBtn) closeSearchBtn.addEventListener("click", closeSearch);
+    if (searchOverlay) searchOverlay.addEventListener("click", closeSearch);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && searchPanel.classList.contains("show")) closeSearch();
+    });
+
+    if (searchForm) {
+      searchForm.addEventListener("submit", (e) => {
+        const keyword = searchInput.value.trim();
+        if (keyword !== "") {
+          saveHistory(keyword);
+        } else {
+          e.preventDefault(); 
+        }
+      });
+    }
+
+    // ==========================================
+    // 5. 侧边栏搜索联动 (完美共用遮罩)
+    // ==========================================
+    if (sideSearchTrigger) {
+      sideSearchTrigger.addEventListener("click", () => {
+        sideMenu.classList.add("no-transition");
+        sideMenu.classList.remove("show");
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            sideMenu.classList.remove("no-transition");
+          });
+        });
+        
+        if (searchOverlay && searchPanel) {
+          searchOverlay.classList.add("no-overlay-bg");
+          searchOverlay.classList.add("show"); 
+          searchPanel.classList.add("show"); 
+          document.body.classList.add("modal-open");
+          if (typeof renderHistory === 'function') renderHistory();
+          searchInput.focus(); // 瞬间弹出键盘
+          searchInput.click(); // 手机端保险
+        }
+      });
+    }
+
+
+    // ==========================================
+    // 6. 文章目录弹窗 (TOC)
+    // ==========================================
+    if (openTocBtn) {
+      openTocBtn.addEventListener("click", () => {
+        tocModal.showModal();
+        document.body.classList.add("modal-open");
+      });
+    }
+    const closeTocModal = () => {
+      tocModal.classList.add("closing");
+      setTimeout(() => {
+        tocModal.close();
+        tocModal.classList.remove("closing");
+        document.body.classList.remove("modal-open");
+      }, 300); 
+    };
+    if (closeTocBtn) closeTocBtn.addEventListener("click", closeTocModal);
+    if (tocModal) {
+      tocModal.addEventListener("click", (e) => {
+        const rect = tocModal.getBoundingClientRect();
+        const isInDialog = (
+          e.clientX >= rect.left && e.clientX <= rect.right &&
+          e.clientY >= rect.top && e.clientY <= rect.bottom
+        );
+        if (!isInDialog) closeTocModal();
+      });
+    }
+    document.querySelectorAll(".toc-item").forEach(item => {
+      item.addEventListener("click", closeTocModal);
+    });
+
+  });
+</script>
+
+</body>
+</html>
