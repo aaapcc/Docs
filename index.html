@@ -69,7 +69,7 @@
           <div class="article-meta">
             <span>2026年03月18日</span>
             <span>149次阅读</span>
-            <span>2条评论</span>
+            <span>4条评论</span>
           </div>
         </header>
 
@@ -1071,35 +1071,44 @@ database_id = "这里填你的D1数据库ID"
   // 👇 区分“点击”和“滑动”
   lightbox.on('beforeOpen', () => {
     
-    // 👇 核心魔法：打开图片时，强行解除网页的缩放限制
+    // 解除网页缩放限制，允许图片放大
     document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
 
     let startX = 0;
     let startY = 0;
+    let isClosing = false; // 👈 核心魔法：增加一个防抖锁，防止 iOS 闪回
 
     lightbox.pswp.on('pointerDown', (e) => {
-      startX = e.originalEvent.clientX || e.originalEvent.touches[0].clientX;
-      startY = e.originalEvent.clientY || e.originalEvent.touches[0].clientY;
+      startX = e.originalEvent.clientX || (e.originalEvent.touches && e.originalEvent.touches[0].clientX) || 0;
+      startY = e.originalEvent.clientY || (e.originalEvent.touches && e.originalEvent.touches[0].clientY) || 0;
     });
 
     lightbox.pswp.on('pointerUp', (e) => {
+      if (isClosing) return; // 如果正在关闭中，直接无视
       if (lightbox.pswp.currSlide.currZoomLevel > 1) return;
 
-      const endX = e.originalEvent.clientX || e.originalEvent.changedTouches[0].clientX;
-      const endY = e.originalEvent.clientY || e.originalEvent.changedTouches[0].clientY;
+      const endX = e.originalEvent.clientX || (e.originalEvent.changedTouches && e.originalEvent.changedTouches[0].clientX) || 0;
+      const endY = e.originalEvent.clientY || (e.originalEvent.changedTouches && e.originalEvent.changedTouches[0].clientY) || 0;
       
       const diffX = Math.abs(endX - startX);
       const diffY = Math.abs(endY - startY);
 
+      // 判断是点击（移动距离极小）
       if (diffX < 10 && diffY < 10) {
         const target = e.originalEvent.target;
         if (target.classList.contains('pswp__img') || target.classList.contains('pswp__bg')) {
-          setTimeout(() => { lightbox.pswp.close(); }, 10);
+          
+          isClosing = true; // 上锁
+          
+          setTimeout(() => { 
+            lightbox.pswp.close(); 
+            isClosing = false; // 解锁
+          }, 10);
         }
       }
     });
 
-    // 👇 核心魔法：当图片查看器关闭时，重新把网页的缩放锁死
+    // 关闭时，重新把网页缩放锁死
     lightbox.pswp.on('destroy', () => {
       document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
     });
