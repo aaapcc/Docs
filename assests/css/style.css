@@ -117,51 +117,18 @@ h1 , h2 , h3 { font-family: var(--display); }
 
 
 /*+++++++++++++++++++++++++++++++++*/
-
-/* =========================================
-   面包屑导航 (纯 CSS 自动生成箭头)
-   ========================================= */
-.breadcrumb-nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px; /* 元素之间的间距 */
-  font-size: 13px;
-  margin-bottom: 15px;
-  color: var(--text-q-gray);
-}
-
-/* 所有的链接样式（包括最后一个如果是链接的情况） */
-.breadcrumb-nav a {
-  color: var(--text-q-gray);
-  text-decoration: none;
-  transition: color 0.2s;
-  position: relative;
-}
-
-.breadcrumb-nav a:hover {
-  color: var(--accent);
-}
-
-/* 👇 核心魔法：自动生成 > 箭头 */
-/* 只要不是最后一个元素，就在它的右边生成箭头 */
-.breadcrumb-nav > *:not(:last-child)::after {
-  content: "›"; /* 这里可以换成 > 或者 任何符号 */
-  margin-left: 8px; /* 箭头和文字的间距 */
-  color: var(--text-q-gray);
-  opacity: 0.5;
-  pointer-events: none;
-  /* 微调箭头的垂直位置，让它完美居中 */
-  display: inline-block;
-  transform: translateY(1px); 
-  font-size: 14px;
-  font-weight: 500;
-}
+/*--------------------------------------------------------------
+/* 面包屑导航
+--------------------------------------------------------------*/
+.breadcrumb-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 13px; margin-bottom: 15px; color: var(--text-q-gray); }
+.breadcrumb-nav a { color: var(--text-q-gray); text-decoration: none; transition: color 0.2s; position: relative; }
+.breadcrumb-nav a:hover { color: var(--accent); }
+.breadcrumb-nav > *:not(:last-child)::after { content: "›"; margin-left: 6px; color: var(--text-q-gray); opacity: 0.5; pointer-events: none; display: inline-block; transform: translateY(1px); font-size: 14px; font-weight: 500; }
 
 /*--------------------------------------------------------------
 /* 文章头部作者模块
 --------------------------------------------------------------*/
-.article-header h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; box-sizing: border-box; min-width: 0; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
+.article-header h1 { margin: 0; font-size: 25px; line-height: 1.2; font-weight: 700; letter-spacing: -0.35px; box-sizing: border-box; min-width: 0; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
 .article-meta { display: flex; flex-wrap: wrap; gap: 8px 12px; color: #6c757d; font-family: var(--mono); font-size: 12px; margin-top: 10px; }
 /*--------------------------------------------------------------
 /* 文章头部作者模块
@@ -190,8 +157,8 @@ h1 , h2 , h3 { font-family: var(--display); }
 .article-section th ,.article-section td { min-width: 80px; padding: 8px 10px; border: 1px solid var(--border-color-gray); }
 .article-section th { background: var(--bg-gray-color); font-weight: bold; white-space: nowrap; }
 .article-section td { word-wrap: break-word; }
-.article-section h3 { font-size: 18px; margin: 25px 0px 10px; padding-left: 14px; position: relative; }
-.article-section h3::before { content: "\e601"; font-family: "iconfont" !important; font-size: 12px; position: absolute; left: 0px; top: 3px; color: #338eba; }
+.article-section h3 { font-size: 20px; margin: 25px 0px 10px; padding-left: 14px; position: relative; }
+.article-section h3::before { content: "\e601"; font-family: "iconfont" !important; font-size: 12px; position: absolute; left: 0px; top: 5px; color: #338eba; }
 .article-section h3:first-child { margin-top: 10px; }
 .article-section ul li h3,.article-section ol li h3 { padding-left: 0px; }
 .article-section ul li h3::before, .article-section ol li h3::before { content: ""; }
@@ -211,7 +178,7 @@ blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border
 .steps > li { position: relative; padding: 0 0 10px 26px; counter-increment: step-main; }
 .steps > li:last-child { padding-bottom: 0px; }
 .steps > li::before { position: absolute; top: 0px; left: 0px; display: grid; width: 20px; height: 20px; place-items: center; line-height: 1; background: linear-gradient(to bottom, #c9d8e5 0%, #7192b0 35%, #5e7a92 65%, #5e7a92 100%); border: 1px solid #566f86; border-radius: 4px; color: var(--white); content: counter(step-main); font-family: var(--mono); font-size: 12px; font-weight: 700; box-sizing: border-box; text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3); } 
-.steps li h3 { margin: 0; font-size: 17px; padding-left: 0px; position: relative; }
+.steps li h3 { margin: 0; font-size: 18px; padding-left: 0px; position: relative; }
 .steps li h3::before{ content: ""; width: 5px; height: 100%; border-radius: 3px; background: none;  position: absolute; left: 0px; top: 0px; }
 .steps ul { padding-left: 18px; }
 .steps ul li { margin: 4px 0; }
@@ -352,6 +319,74 @@ body.modal-open { overflow: hidden !important; touch-action: none; }
 /*  文章结尾
 --------------------------------------------------------------*/
 .article-ending { text-align: center; color: #d1d1d1; font-size: 13px; padding: 8px 0px 25px; }
+
+
+
+/* 生成海报按钮样式 */
+.poster-btn-wrap {
+  text-align: center;
+  margin: 20px 0 30px;
+}
+.poster-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.poster-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+}
+
+/* 预览弹窗 */
+.poster-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+.poster-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+.poster-modal img {
+  max-width: 85%;
+  max-height: 70vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.poster-tips {
+  color: #fff;
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* 隐藏的渲染容器 */
+#poster-render-area {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  width: 375px;
+  background: #fff;
+}
 
 /*+++++++++++++++++++++++++++++++++*/
 /*--------------------------------------------------------------
