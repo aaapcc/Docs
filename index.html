@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261108-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261108-2">
 </head>
 <body>
   <header class="site-header">
@@ -65,7 +65,7 @@
   <main>
     <article class="layout article">
         <header class="article-header">
-          <!-- 👇 新增的面包屑导航 -->
+          <!-- 面包屑导航 -->
           <nav class="breadcrumb-nav" aria-label="面包屑导航">
             <a href="index.html">首页</a>
             <a href="index.html">技术类</a>
@@ -272,7 +272,7 @@
                     <li>选择你 Fork 后的 <span class="ui-label">NodeWarden</span> 项目。</li>
                     <li>点下一步，进行部署。
                       <figure class="article-figure">
-                        <img src="https://api.dicebear.com/10.x/planets/svg?seed=Felix" alt="" loading="lazy">
+                        <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="" loading="lazy">
                         <figcaption>根据需求填写图片的文字说明</figcaption>
                       </figure>
                     </li>
@@ -398,6 +398,63 @@ database_id = "这里填你的D1数据库ID"
             </section>
           </div>
         </div>
+
+<!-- 1. 触发按钮 (放在上一篇/下一篇下方) -->
+<div class="poster-btn-wrap">
+  <button id="generatePosterBtn" class="poster-btn">
+    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+    生成分享海报
+  </button>
+</div>
+
+<!-- 2. 海报预览弹窗 -->
+<div class="poster-modal" id="posterModal">
+  <img id="posterImage" src="" alt="海报">
+  <div class="poster-tips">长按图片保存到手机</div>
+</div>
+
+<!-- 3. 隐藏在后台的渲染模板 (完美居中版) -->
+<div id="poster-render-area">
+  <div style="width: 375px; background: #fff; position: relative; font-family: -apple-system, sans-serif;">
+    
+    <!-- 顶部封面区 -->
+    <div id="poster-bg" style="height: 220px; background: #1a202c; position: relative; overflow: hidden;">
+      
+      <!-- 核心：用绝对居中的 Flex 壳子包裹图片，强行让它完整显示 -->
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 1;">
+        <!-- 图片本体 -->
+        <img id="poster-cover" src="" style="max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0;">
+      </div>
+      
+      <!-- 黑色渐变遮罩（确保文字清晰） -->
+      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8) 100%); z-index: 2;"></div>
+
+      <!-- 日期 -->
+      <div style="position: absolute; bottom: 20px; left: 25px; color: white; z-index: 3;">
+        <div id="poster-day" style="font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -1px;">01</div>
+        <div id="poster-month" style="font-size: 16px; margin-top: 5px; font-weight: 500; color: #a0aec0;">2025/01</div>
+      </div>
+    </div>
+
+    <!-- 文章标题 -->
+    <div style="padding: 25px 20px 10px; text-align: center;">
+      <h2 id="poster-title" style="margin: 0; font-size: 22px; font-weight: 800; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; line-height: 1.4; color: #1a1a1a; word-break: break-all; letter-spacing: -0.5px;">这里会自动填入文章标题</h2>
+    </div>
+
+    <!-- 文章摘要 -->
+    <div style="padding: 0 20px 30px; text-align: center;">
+      <p id="poster-desc" style="margin: 0; font-size: 14px; color: #666; line-height: 1.7; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; padding-bottom: 2px;"> <!-- 👈 行高从 1.6 加大到 1.7，并加了一点 padding-bottom 兜底 -->
+        这里会自动填入文章摘要内容。
+      </p>
+    </div>
+
+    <!-- 底部区域 -->
+    <div style="border-top: 1px dashed #eee; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="font-size: 16px; font-weight: bold; color: #333;">海纳百川</div>
+      <div id="poster-qrcode" style="width: 60px; height: 60px;"></div>
+    </div>
+  </div>
+</div>
 
     </article>
   
@@ -1152,6 +1209,143 @@ database_id = "这里填你的D1数据库ID"
     bindImages();
   });
   observer.observe(document.body, { childList: true, subtree: true });
+</script>
+
+
+<!-- 引入生成图片和二维码所需的库 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("generatePosterBtn");
+  const modal = document.getElementById("posterModal");
+  const imgEl = document.getElementById("posterImage");
+  
+  if (!btn) return; // 如果页面上没有这个按钮（比如非文章页），直接跳过
+
+  btn.addEventListener("click", async () => {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "⏳ 正在生成...";
+    btn.disabled = true;
+
+    try {
+      // 1. 抓取标题和摘要
+      const title = document.querySelector(".article-header h1")?.innerText || "未命名文章";
+      const contentText = document.querySelector(".mian-body")?.innerText || "";
+      const desc = contentText.replace(/\s+/g, ' ').trim().substring(0, 80) + "...";
+      
+      document.getElementById("poster-title").innerText = title;
+      document.getElementById("poster-desc").innerText = desc;
+      
+      // 2. 抓取日期
+      const date = new Date();
+      document.getElementById("poster-day").innerText = String(date.getDate()).padStart(2, '0');
+      document.getElementById("poster-month").innerText = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`;
+
+      // 3. 安全处理封面图
+      // 2. 处理封面图（终极方案：用 Canvas 重新绘制图片，彻底杜绝裁切）
+      const firstImg = document.querySelector(".mian-body img");
+      const coverEl = document.getElementById("poster-cover");
+      
+      if (firstImg && firstImg.src) {
+        try {
+          // 1. 先抓取图片并转成 Base64
+          const response = await fetch(firstImg.src);
+          const blob = await response.blob();
+          const base64Url = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
+          });
+
+          // 2. 创建一个隐藏的 Canvas，手动绘制图片
+          const imgObj = new Image();
+          imgObj.src = base64Url;
+          await new Promise((resolve) => { imgObj.onload = resolve; });
+
+          const canvas = document.createElement('canvas');
+          // 设置我们海报顶部框的宽高比例
+          const targetWidth = 375;
+          const targetHeight = 220;
+          canvas.width = targetWidth * 2; // 2倍图更清晰
+          canvas.height = targetHeight * 2;
+
+          const ctx = canvas.getContext('2d');
+          
+          // 计算等比例缩放（核心：相当于 object-fit: contain）
+          const hRatio = canvas.width / imgObj.width;
+          const vRatio = canvas.height / imgObj.height;
+          const ratio = Math.min(hRatio, vRatio);
+          
+          const centerShift_x = (canvas.width - imgObj.width * ratio) / 2;
+          const centerShift_y = (canvas.height - imgObj.height * ratio) / 2;
+
+          // 填满底色（深色），防止图片四周有透明边
+          ctx.fillStyle = "#1a202c"; 
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          // 把图片完美居中画上去
+          ctx.drawImage(imgObj, 0, 0, imgObj.width, imgObj.height, 
+                        centerShift_x, centerShift_y, imgObj.width * ratio, imgObj.height * ratio);
+
+          // 把画好的 Canvas 转换成可以直接用的图片地址
+          const finalImgUrl = canvas.toDataURL('image/png');
+          
+          // 塞进海报模板里
+          coverEl.src = finalImgUrl;
+          coverEl.style.opacity = "1";
+
+        } catch (e) {
+          console.error("图片绘制失败", e);
+          coverEl.style.opacity = "0";
+        }
+      } else {
+        coverEl.style.opacity = "0";
+      }
+
+      // 4. 生成二维码
+      const qrContainer = document.getElementById("poster-qrcode");
+      qrContainer.innerHTML = ""; 
+      new QRCode(qrContainer, {
+        text: window.location.href,
+        width: 60,
+        height: 60,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+
+      // 5. 延时等待渲染并截图
+      setTimeout(async () => {
+        const renderArea = document.getElementById("poster-render-area");
+        const canvas = await html2canvas(renderArea, {
+          scale: 2, 
+          useCORS: true, 
+          backgroundColor: "#fff",
+          allowTaint: false 
+        });
+        
+        imgEl.src = canvas.toDataURL("image/png");
+        modal.classList.add("show");
+        
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 500);
+
+    } catch (error) {
+      console.error("生成失败", error);
+      alert("生成失败，请重试！");
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // 点击背景关闭预览
+  modal.addEventListener("click", () => {
+    modal.classList.remove("show");
+  });
+});
 </script>
 
 </body>
