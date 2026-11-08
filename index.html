@@ -7,9 +7,9 @@
   <title>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</title>
   <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.min.css">
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261105-4">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261108-1">
 </head>
 <body>
   <header class="site-header">
@@ -65,6 +65,12 @@
   <main>
     <article class="layout article">
         <header class="article-header">
+          <!-- 👇 新增的面包屑导航 -->
+          <nav class="breadcrumb-nav" aria-label="面包屑导航">
+            <a href="index.html">首页</a>
+            <a href="index.html">技术类</a>
+            <span class="breadcrumb-current">个人密码库</span>
+          </nav>
           <h1>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</h1>
           <div class="article-meta">
             <span>2026年03月18日</span>
@@ -366,16 +372,16 @@ database_id = "这里填你的D1数据库ID"
           </section>
         </div>
 
-        <div class="article-ending">─── • / END / • ───</div>
+        <div class="article-ending">─── • / THE END / • ───</div>
 
         <!-- Tags + 上一篇/下一篇 -->
         <div class="article-tags-read">
           <!-- Tags -->
           <div class="article-tags-wrap">
-            <a href="#" rel="tag">密码库</a>
-            <a href="#" rel="tag">NodeWarden</a>
-            <a href="#" rel="tag">Cloudflare</a>
-            <a href="#" rel="tag">D1</a>
+            <a href="tags.html" rel="tag">密码库</a>
+            <a href="tags.html" rel="tag">NodeWarden</a>
+            <a href="tags.html" rel="tag">Cloudflare</a>
+            <a href="tags.html" rel="tag">D1</a>
           </div>
           <!-- 上一篇/下一篇 -->
           <div class="album-read-nav-wrap">
@@ -638,11 +644,18 @@ database_id = "这里填你的D1数据库ID"
         <div class="footer-logo">
           <a href="#"><img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt=""></a>
         </div>
-        <div class="footer-copyright text-center d-md-block text-xs text-muted">
-          Copyright © <span class="dqnianfen"><script>window.onload=function(){var currentYear=new Date().getFullYear();var yearElement=document.querySelector('.dqnianfen');if(yearElement){yearElement.textContent=currentYear}};</script></span> Powered by 海纳百川
+        <div class="footer-copyright text-center d-md-block">
+          © <span class="dqnianfen"><script>window.onload=function(){var currentYear=new Date().getFullYear();var yearElement=document.querySelector('.dqnianfen');if(yearElement){yearElement.textContent=currentYear}};</script></span> 海纳百川. All Rights Reserved
         </div>
     </div>
   </footer>
+
+  <!-- 返回顶部按钮 -->
+  <button id="backToTop" class="back-to-top" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 
   <!-- 弹窗结构 (放在 body 底部) -->
   <dialog id="tocModal" class="toc-modal">
@@ -717,7 +730,7 @@ database_id = "这里填你的D1数据库ID"
   <!-- 搜索面板 -->
   <div id="searchPanel" class="search-panel">
     <div class="search-container">
-      <form class="search-input-group" id="searchForm" action="/search" method="GET">
+      <form class="search-input-group" id="searchForm" action="search.html" method="GET">
         <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="search" name="q" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off" enterkeyhint="search">
         <button class="search-close-btn" type="button" id="closeSearchBtn" aria-label="关闭搜索">
@@ -740,7 +753,7 @@ database_id = "这里填你的D1数据库ID"
     </div>
   </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     
@@ -1043,14 +1056,41 @@ database_id = "这里填你的D1数据库ID"
       wrapper.appendChild(table);
     });
 
+    // ==========================================
+    // 8. 返回顶部按钮
+    // ==========================================
+    const backToTopBtn = document.getElementById("backToTop");
+    
+    if (backToTopBtn) {
+      // 监听页面滚动
+      window.addEventListener("scroll", () => {
+        // 动态计算触发距离：比如手机端，滑动超过 1.5 个屏幕高度才出现
+        const triggerDistance = window.innerHeight * 1.5; 
+        
+        if (window.scrollY > triggerDistance) {
+          backToTopBtn.classList.add("show");
+        } else {
+          backToTopBtn.classList.remove("show");
+        }
+      });
+
+      // 点击回到顶部
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth" // 平滑滚动
+        });
+      });
+    }
+
   });
 </script>
 <!-- 引入 PhotoSwipe 核心库 -->
 <script type="module">
   const style = document.createElement('style');
   style.textContent = `
-    .pswp { backdrop-filter: blur(5px) !important; -webkit-backdrop-filter: blur(5px) !important; }
-    .pswp__bg { background: rgba(0, 0, 0, 0.85) !important; opacity: 1 !important; }
+    .pswp { backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; }
+    .pswp__bg { background: rgba(0, 0, 0, 0.95) !important; opacity: 1 !important; }
     .pswp__button--zoom { display: none !important; }
   `;
   document.head.appendChild(style);
