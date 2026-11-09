@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261109-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261109-2">
 </head>
 <body>
   <header class="site-header">
@@ -348,6 +348,10 @@
               <div class="poster-cover-body">
                 <img id="poster-cover" src="">
               </div>
+              <div class="poster-cover-text">
+                <div>© 海纳百川</div>
+                <div class="poster-cover-art-url">https://cf.blog.aaqq.site/article/000014.html</div>
+              </div>
               <!-- 黑色渐变遮罩 -->
               <div class="poster-black-mask"></div>
             </div>
@@ -362,7 +366,7 @@
             <div class="poster-footer">
               <div style="font-size: 16px; font-weight: bold; color: #333;">
                 <span class="poster-footer-sitename">© 海纳百川</span>
-                <span class="poster-footer-url" id="poster-site-url"></span>
+                <span class="poster-footer-url poster-site-url" id="poster-site-url"></span>
                 <span class="poster-footer-tips">扫描〔二维码〕查看详情</span>
               </div>
               <div id="poster-qrcode"></div>
@@ -1144,7 +1148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btn.addEventListener("click", async () => {
     const originalText = btnTextEl.innerText;
-    btnTextEl.innerText = "正在生成...";
+    btnTextEl.innerText = "正在生成中…";
     btn.disabled = true;
 
     try {
@@ -1165,10 +1169,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // 自动获取当前域名（自动包含 http 或 https）
-      const siteUrlEl = document.getElementById("poster-site-url");
-      if (siteUrlEl) {
-        siteUrlEl.innerText = window.location.origin; 
-      }
+      const urlElements = document.querySelectorAll(".poster-site-url");
+      urlElements.forEach(el => {
+        el.innerText = window.location.origin;
+      });
+
+      // 处理文章具体地址（与二维码一致）
+      const articleUrlElements = document.querySelectorAll(".poster-cover-art-url");
+      articleUrlElements.forEach(el => {
+        el.innerText = window.location.href; 
+      });
       
       // 赋值给海报模板
       const dayEl = document.getElementById("poster-day");
@@ -1209,8 +1219,8 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const qrImg = qrContainer.querySelector('img');
       if (qrImg) {
-        qrImg.style.width = '75px';
-        qrImg.style.height = '75px';
+        qrImg.style.width = '80px';
+        qrImg.style.height = '80px';
         qrImg.style.display = 'block';
       }
 
@@ -1230,7 +1240,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const tipsEl = document.getElementById("poster-tips");
         if (tipsEl) {
           if (window.matchMedia("(hover: hover)").matches) {
-            tipsEl.innerText = "右键保存图片";
+            tipsEl.innerText = "右键保存海报图片";
           } else {
             tipsEl.innerText = "长按图片保存到手机";
           }

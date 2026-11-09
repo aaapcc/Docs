@@ -322,28 +322,30 @@ body.modal-open { overflow: hidden !important; touch-action: none; }
 /*  生成文章分享海报
 --------------------------------------------------------------*/
 .poster-btn-wrap { text-align: center; margin: 20px 0 30px; }
-.poster-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 25px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3); transition: transform 0.2s, box-shadow 0.2s; }
-.poster-btn:hover { transform: translateY(-2px); }
+.poster-btn { width: 180px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background-color: var(--accent); color: white; border: none; border-radius: 25px; font-size: 15px; font-weight: bold; cursor: pointer; }
+/*.poster-btn:hover { transform: translateY(-2px); }*/
 /* 预览弹窗 */
 .poster-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
 .poster-modal.show { opacity: 1; visibility: visible; }
 .poster-modal img { max-width: 85%; max-height: 70vh; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.poster-tips { color: #fff; margin-top: 20px; font-size: 16px; opacity: 0.8; }
+.poster-tips { color: rgba(255, 255, 255, 0.65); margin-top: 20px; font-size: 15px; opacity: 0.8; }
 #poster-render-area { position: fixed; top: -9999px; left: -9999px; width: 375px; background: #fff; }
-#poster-qrcode { width: 75px; height: 75px; }
+#poster-qrcode { width: 80px; height: 80px; }
 
 .poster-render-area-body { width: 375px; background: #fff; font-family: -apple-system, sans-serif; color: #333; text-align: left; line-height: normal; }
 #poster-bg { height: 220px; background: #fff; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .poster-cover-body { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 #poster-cover { width: 100%; height: auto; display: block; opacity: 0; z-index: 1; }
-.poster-black-mask { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%); z-index: 2; }
+.poster-black-mask { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 100%); z-index: 2; }
+.poster-cover-text { position: absolute; bottom: 54px; left: 15px; z-index: 3; color: rgba(255,255,255,0.25); text-shadow: 0 2px 6px rgba(0,0,0,0.5); font-weight: 300; height: 22px; line-height: 22px; font-size: 16px; margin-right: 10px; }
+.poster-cover-art-url { font-size: 14.5px; word-break: break-all; overflow-wrap: anywhere; width: 100%; line-height: 14px; margin-top: 5px; letter-spacing: 0.4px; }
 .poster-title-body { padding: 15px 20px 10px; }
-#poster-title { margin: 0; font-size: 20px; font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; line-height: 1.4; color: #1a1a1a; word-break: break-all; }
+#poster-title { margin: 0; font-size: 23px; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; line-height: 1.25; color: #1a1a1a; word-break: break-all; }
 .poster-date-body { padding: 0 20px 30px;color: #999; }
-.poster-footer { border-top: 1px dashed #eee; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
+.poster-footer { border-top: 2px dashed #eaeaea; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
 .poster-footer-text {  }
 .poster-footer span { display: block; }
-.poster-footer-sitename { font-size: 17px; font-weight: bold; color: #333; }
+.poster-footer-sitename { font-size: 18px; font-weight: 500; color: #333; }
 .poster-footer-url { font-size: 12px;font-weight: normal; color: #21556a; margin-left: 18px; }
 .poster-footer-tips { font-size: 14px;font-weight: normal; color: #666; margin: 6px 0px 15px; }
 
