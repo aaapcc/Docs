@@ -151,8 +151,8 @@ h1 , h2 , h3 { font-family: var(--display); }
 .article-section a:hover , .article-toc a:hover { color: var(--accent); box-shadow: inset 0 -1.2px 0 var(--accent); }
 .ui-label{ border: 1px solid #dae1eb;; border-radius: 3px; background: #f7f6f3; padding: 0px 4px; color: #555; display: inline-block; line-height: 1.25; letter-spacing: -0.25px; white-space: nowrap; }
 .article-figure { margin: 10px 0 8px; }
-.article-figure img { width: 100%; border: 1px solid var(--soft-line); border-radius: 6px; background: #171614; }
-.article-figure figcaption { margin-top: 8px; color: var(--text-q-gray); font-size: 12px; }
+.article-section img { width: 100%; border: 1px solid var(--soft-line); border-radius: 6px; background: #fcfcfc; }
+.article-section figcaption { margin-top: 8px; color: var(--text-q-gray); font-size: 12px; }
 .article-section table { border-spacing: 0; border-collapse: collapse; width: 100%; max-width: 100%; margin: 12px 0px 15px; display: inline-block; overflow-x: auto; -webkit-overflow-scrolling: touch; vertical-align: top; }
 .article-section th ,.article-section td { min-width: 80px; padding: 8px 10px; border: 1px solid var(--border-color-gray); }
 .article-section th { background: var(--bg-gray-color); font-weight: bold; white-space: nowrap; }
@@ -291,7 +291,10 @@ blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border
 .album-read-nav-cont-prev .nav-label::before { border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; margin-right: 6px; }
 .album-read-nav-cont-next .nav-label::after { border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; margin-left: 6px; }
 .album-read-nav-title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis; margin-top: 6px; line-height: 1.4; word-break: break-all; color: var(--ink); }
-/*.album-read-nav-cont a:hover .album-read-nav-title { text-decoration: underline; }*/
+/*--------------------------------------------------------------
+/*  文章结尾
+--------------------------------------------------------------*/
+.article-ending { text-align: center; color: #d1d1d1; font-size: 13px; padding: 8px 0px 25px; }
 /*--------------------------------------------------------------
 /*  上一篇/下一篇：弹窗样式
 --------------------------------------------------------------*/
@@ -316,77 +319,34 @@ body.modal-open { overflow: hidden !important; touch-action: none; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 /*--------------------------------------------------------------
-/*  文章结尾
+/*  生成文章分享海报
 --------------------------------------------------------------*/
-.article-ending { text-align: center; color: #d1d1d1; font-size: 13px; padding: 8px 0px 25px; }
-
-
-
-/* 生成海报按钮样式 */
-.poster-btn-wrap {
-  text-align: center;
-  margin: 20px 0 30px;
-}
-.poster-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.poster-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
-}
-
+.poster-btn-wrap { text-align: center; margin: 20px 0 30px; }
+.poster-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 25px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3); transition: transform 0.2s, box-shadow 0.2s; }
+.poster-btn:hover { transform: translateY(-2px); }
 /* 预览弹窗 */
-.poster-modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(5px);
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s;
-}
-.poster-modal.show {
-  opacity: 1;
-  visibility: visible;
-}
-.poster-modal img {
-  max-width: 85%;
-  max-height: 70vh;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-.poster-tips {
-  color: #fff;
-  margin-top: 20px;
-  font-size: 14px;
-  opacity: 0.8;
-}
+.poster-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
+.poster-modal.show { opacity: 1; visibility: visible; }
+.poster-modal img { max-width: 85%; max-height: 70vh; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.poster-tips { color: #fff; margin-top: 20px; font-size: 16px; opacity: 0.8; }
+#poster-render-area { position: fixed; top: -9999px; left: -9999px; width: 375px; background: #fff; }
+#poster-qrcode { width: 75px; height: 75px; }
 
-/* 隐藏的渲染容器 */
-#poster-render-area {
-  position: fixed;
-  top: -9999px;
-  left: -9999px;
-  width: 375px;
-  background: #fff;
-}
+.poster-render-area-body { width: 375px; background: #fff; font-family: -apple-system, sans-serif; color: #333; text-align: left; line-height: normal; }
+#poster-bg { height: 220px; background: #fff; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.poster-cover-body { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+#poster-cover { width: 100%; height: auto; display: block; opacity: 0; z-index: 1; }
+.poster-black-mask { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%); z-index: 2; }
+.poster-title-body { padding: 15px 20px 10px; }
+#poster-title { margin: 0; font-size: 20px; font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; line-height: 1.4; color: #1a1a1a; word-break: break-all; }
+.poster-date-body { padding: 0 20px 30px;color: #999; }
+.poster-footer { border-top: 1px dashed #eee; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
+.poster-footer-text {  }
+.poster-footer span { display: block; }
+.poster-footer-sitename { font-size: 17px; font-weight: bold; color: #333; }
+.poster-footer-url { font-size: 12px;font-weight: normal; color: #21556a; margin-left: 18px; }
+.poster-footer-tips { font-size: 14px;font-weight: normal; color: #666; margin: 6px 0px 15px; }
+
 
 /*+++++++++++++++++++++++++++++++++*/
 /*--------------------------------------------------------------
@@ -438,7 +398,7 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   .back-to-top:hover { background-color: rgba(0, 0, 0, 0.5); }
 }
 
-
+.ddd{ background:url() no-repeat 0px 0px; }
 
 
 
@@ -449,12 +409,12 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
     --accent: #7894d2;
     --bgcolor:  #191919;
     --ink: #989898;
-    --soft-line: #343434;
+    --soft-line: #2c2b2b;
     --section-timestamp: #3c97c2;
     --section-title-color: #60a4c0;;
     --section-steps-dianzhui: #74ae8b;
-    --section-steps-border: #536e79;
-    --border-color-pink: #90595e;
+    --section-steps-border: #547886;
+    --border-color-pink: #82444a;
     --border-color-gray: #545557;
     --text-q-gray: #676767;
     --bg-gray-color: #2a2a2a;
@@ -506,7 +466,7 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   .article-section th { background-color: #2b2b2b; }
   .article-section table th, .article-section table td { border-color: var(--border-color-gray); }
   .ui-label { background-color: #212121; border-color: #404040; color: #9e9e9e; }
-  .article-figure img { border: 1px solid var(--soft-line); background: #171614; }
+  .article-section img { border: 1px solid var(--soft-line); background: #1c1c1c; }
   blockquote { background-color: #212121; border-color: #404040; }
   .steps > li::before { background: linear-gradient(to bottom, #31363a 0%, #486176 35%, #4b6275 65%, #4b6275 100%); border: 1px solid #868d97; color: #e1e1e1; text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.4); } 
 
@@ -536,7 +496,7 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   /*--------------------------------------------------------------
   /* 文章提醒点 - 卡片
   --------------------------------------------------------------*/
-  .article-remind-dots-card { border: 1px solid var(--border-color-pink); background-color: #261f1f; }
+  .article-remind-dots-card { border: 1px solid var(--border-color-pink); background-color: #1d1717; }
   .article-remind-dots-card::before, .article-remind-dots-card::after { background-image: radial-gradient(circle at center, #ffda75 0 4.9px, var(--bgcolor) 5px 7px, transparent 7.1px), radial-gradient(circle at center, #ff9f6a 0 4.9px, var(--bgcolor) 5px 7px, transparent 7.1px), radial-gradient(circle at center, #ffda75 0 4.9px, var(--bgcolor) 5px 7px, transparent 7.1px); }
   /*--------------------------------------------------------------
   /* 星星 - 卡片
@@ -562,6 +522,10 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   .album-read-nav-cont-next::before { background-color: #313131; }
   .album-read-source { color: var(--ink); }
   /*--------------------------------------------------------------
+  /*  文章结尾
+  --------------------------------------------------------------*/
+  .article-ending { color: #555; }
+  /*--------------------------------------------------------------
   /*  上一篇/下一篇：弹窗样式
   --------------------------------------------------------------*/
   .toc-modal { background: var(--bgcolor); }
@@ -570,10 +534,6 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   .toc-close { background: #333; color: #ccc; }
   .toc-list a.active { background: var(--bg-gray-color); }
   .toc-list::after { color: #555; }
-  /*--------------------------------------------------------------
-  /*  文章结尾
-  --------------------------------------------------------------*/
-  .article-ending { color: #555; }
 
   /*+++++++++++++++++++++++++++++++++*/
   /*--------------------------------------------------------------

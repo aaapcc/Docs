@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="darkreader-lock" content="true">
   <meta name="description" content="">
   <title>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</title>
-  <link rel="stylesheet" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/plugins/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261108-1">
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
+  <link rel="stylesheet" href="assests/css/style.css?v=20261109-1">
 </head>
 <body>
   <header class="site-header">
@@ -319,6 +320,57 @@
             </section>
           </div>
         </div>
+
+        <!-- 1. 生成分享海报按钮 -->
+        <div class="poster-btn-wrap">
+          <button id="generatePosterBtn" class="poster-btn">
+            <!-- 👇 分享专属图标：三个点连线的经典图标 -->
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span id="posterBtnText">生成分享海报</span></button>
+        </div>
+        <!-- 2. 生成分享海报预览弹窗 -->
+        <div class="poster-modal" id="posterModal">
+          <img id="posterImage" src="" alt="海报">
+          <div class="poster-tips" id="poster-tips">长按图片保存到手机</div>
+        </div>
+        <!-- 3. 生成分享海报主框架 -->
+        <div id="poster-render-area">
+          <div class="poster-render-area-body">
+            <!-- 顶部封面区 -->
+            <div id="poster-bg">
+              <!-- 顶层：原图完整居中显示（你目前的代码） -->
+              <div class="poster-cover-body">
+                <img id="poster-cover" src="">
+              </div>
+              <!-- 黑色渐变遮罩 -->
+              <div class="poster-black-mask"></div>
+            </div>
+            <!-- 2. 文章标题 (锁定字体大小) -->
+            <div class="poster-title-body">
+              <h2 id="poster-title"></h2>
+            </div>
+            <div class="poster-date-body">
+              <span id="poster-day">2025/01/01</span>
+            </div>
+            <!-- 底部区域 -->
+            <div class="poster-footer">
+              <div style="font-size: 16px; font-weight: bold; color: #333;">
+                <span class="poster-footer-sitename">© 海纳百川</span>
+                <span class="poster-footer-url" id="poster-site-url"></span>
+                <span class="poster-footer-tips">扫描〔二维码〕查看详情</span>
+              </div>
+              <div id="poster-qrcode"></div>
+            </div>
+            </div>
+          </div>
+        </div>
+
     </article>
 
     <!-- 评论区 -->
@@ -1043,6 +1095,7 @@
     const allImgs = Array.from(document.querySelectorAll('main img'));
     const realImages = allImgs.filter(img => {
       if (img.closest('.comments') || img.closest('.site-header')) return false;
+      if (img.closest('#poster-render-area')) return false;
       return img.clientWidth > 50;
     });
 
@@ -1054,13 +1107,17 @@
       
       img.addEventListener('click', (e) => {
         e.preventDefault();
+        
         const items = realImages.map(image => {
+          let realW = image.naturalWidth || 1920;
+          let realH = image.naturalHeight || 1080;
           return { 
             src: image.src,
-            width: 2000, 
-            height: 2000
+            width: realW * 10,  
+            height: realH * 10
           };
         });
+        
         lightbox.loadAndOpen(index, items);
       });
     });
@@ -1072,6 +1129,138 @@
     bindImages();
   });
   observer.observe(document.body, { childList: true, subtree: true });
+</script>
+<!-- 引入生成图片和二维码所需的库 -->
+<script src="https://gh.lib.aaqq.site/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://gh.lib.aaqq.site/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("generatePosterBtn");
+  const btnTextEl = document.getElementById("posterBtnText");
+  const modal = document.getElementById("posterModal");
+  const imgEl = document.getElementById("posterImage");
+  
+  if (!btn) return;
+
+  btn.addEventListener("click", async () => {
+    const originalText = btnTextEl.innerText;
+    btnTextEl.innerText = "正在生成...";
+    btn.disabled = true;
+
+    try {
+      // 1. 抓取标题
+      const title = document.querySelector(".article-header h1")?.innerText || "未命名文章";
+      document.getElementById("poster-title").innerText = title;
+      
+      // 2. 抓取文章的发布日期，并转换为 xxxx/xx/xx 格式
+      let pDate = new Date().toLocaleDateString('zh-CN').replace(/\//g, '/'); 
+      
+      const dateText = document.querySelector(".article-meta span")?.innerText;
+      if (dateText) {
+        // 将“年月日”替换为“/”
+        pDate = dateText.trim()
+          .replace("年", "/")
+          .replace("月", "/")
+          .replace("日", "");
+      }
+
+      // 自动获取当前域名（自动包含 http 或 https）
+      const siteUrlEl = document.getElementById("poster-site-url");
+      if (siteUrlEl) {
+        siteUrlEl.innerText = window.location.origin; 
+      }
+      
+      // 赋值给海报模板
+      const dayEl = document.getElementById("poster-day");
+      const monthEl = document.getElementById("poster-month");
+      if (dayEl) dayEl.innerText = pDate;
+      if (monthEl) monthEl.innerText = ""; 
+
+      // 3. 安全处理封面图
+      const firstImg = document.querySelector(".mian-body img");
+      const coverEl = document.getElementById("poster-cover");
+      
+      if (firstImg && firstImg.src) {
+        try {
+          const response = await fetch(firstImg.src);
+          const blob = await response.blob();
+          const base64Url = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
+          });
+          
+          coverEl.src = base64Url;
+          coverEl.style.opacity = "1";
+        } catch (e) {
+          console.error("图片抓取失败", e);
+        }
+      }
+
+      // 4. 生成超高清二维码
+      const qrContainer = document.getElementById("poster-qrcode");
+      qrContainer.innerHTML = ""; 
+
+      const qr = qrcode(0, 'H');
+      qr.addData(window.location.href);
+      qr.make();
+
+      qrContainer.innerHTML = qr.createImgTag(10, 0); 
+      
+      const qrImg = qrContainer.querySelector('img');
+      if (qrImg) {
+        qrImg.style.width = '75px';
+        qrImg.style.height = '75px';
+        qrImg.style.display = 'block';
+      }
+
+      // 5. 截图
+      setTimeout(async () => {
+        const renderArea = document.getElementById("poster-render-area");
+        const canvas = await html2canvas(renderArea, {
+          scale: 2, 
+          useCORS: true, 
+          backgroundColor: "#fff",
+          allowTaint: false 
+        });
+        
+        imgEl.src = canvas.toDataURL("image/png");
+
+        // 6. 多端提示文字切换
+        const tipsEl = document.getElementById("poster-tips");
+        if (tipsEl) {
+          if (window.matchMedia("(hover: hover)").matches) {
+            tipsEl.innerText = "右键保存图片";
+          } else {
+            tipsEl.innerText = "长按图片保存到手机";
+          }
+        }
+        
+        modal.classList.add("show");
+        
+        // 恢复按钮文字
+        btnTextEl.innerText = originalText;
+        btn.disabled = true; 
+        setTimeout(() => { btn.disabled = false; }, 1000);
+
+      }, 500);
+
+    } catch (error) {
+      console.error("生成失败", error);
+      alert("生成失败，请重试！");
+      // 报错时也要恢复文字
+      btnTextEl.innerText = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // 点击空白关闭弹窗
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) { 
+      modal.classList.remove("show");
+    }
+  });
+});
 </script>
 
 </body>
