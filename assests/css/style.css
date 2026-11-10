@@ -162,7 +162,7 @@ h1 , h2 , h3 { font-family: var(--display); }
 .article-section h3:first-child { margin-top: 10px; }
 .article-section ul li h3,.article-section ol li h3 { padding-left: 0px; }
 .article-section ul li h3::before, .article-section ol li h3::before { content: ""; }
-pre { position: relative; padding: 30px 0 0 0; border-radius: 4px; margin: 8px 0; overflow: hidden; }
+pre { position: relative; padding: 30px 0 0 0; border-radius: 5px; margin: 8px 0; overflow: hidden; }
 pre.has-line-numbers { display: grid; grid-template-columns: max-content 1fr; padding: 42px 0 8px; }
 pre code, pre code.hljs { display: contents !important; font-family: var(--mono, monospace); font-size: 13px; }
 .code-line { display: contents !important; }
@@ -173,7 +173,7 @@ pre::before { content: "\e606\00a0" attr(data-lang); left: 0; right: 0; text-tra
 pre::after { content: "\e63d\00a0复制"; right: 0; cursor: pointer; transition: all 0.2s ease; font-family: "iconfont" !important; }z
 pre::after, [data-lang]::before, [data-lang]::after { z-index: 2; }
 pre.copied::after { content: "\eaf1\00a0已复制"; color: var(--green); background: transparent !important; font-family: "iconfont" !important; }
-blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border: 1px solid #dae1eb; border-radius: 4px; }
+blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border: 1px solid #dae1eb; border-radius: 5px; }
 .steps { margin: 0; padding: 5px 0 5px; list-style: none; counter-reset: step-main; }
 .steps > li { position: relative; padding: 0 0 10px 26px; counter-increment: step-main; }
 .steps > li:last-child { padding-bottom: 0px; }
@@ -187,7 +187,7 @@ blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border
 .steps > li > ol > li::before { position: absolute; top: 5px; left: -23px; display: grid; width: 25px; height: 20px; align-items: center; content: counter(step-sub) "."; text-align: left; line-height: 1; letter-spacing: -0.75px; box-sizing: border-box; }
 .steps > li > ul > li { list-style-type: disc; }
 .steps > li > ol > li::marker { text-align: left; color: #999; }
-.steps > li > ol > li > :where(pre, figure, blockquote) { margin-left: -24px; }
+.steps > li > ol > li > :where(pre, figure, blockquote, .promo-card) { margin-left: -24px; }
 .steps > li > ol > li > blockquote { margin-top: 10px; }
 .steps > li > blockquote > ul { padding: 10px 0 10px 18px; }
 .steps > li > ol > li > blockquote > ul { padding: 6px 0 6px 18px; }
@@ -260,6 +260,23 @@ blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border
 .article-quote-card::before, .article-quote-card::after { content: ""; position: absolute; width: 20px; height: 20px; background-color: var(--white); box-shadow: 0 0 0 4px var(--white); background-image: var(--svg-quote); background-size: contain; background-repeat: no-repeat; z-index: 2; }
 .article-quote-card::before { top: -10px; left: 12px; }
 .article-quote-card::after { bottom: -10px; right: 12px; transform: rotate(180deg); }
+/*--------------------------------------------------------------
+/* 优惠码 / 验证码 - 模块
+--------------------------------------------------------------*/
+.promo-card { background-color: #f8fffe; border: 1.5px dashed #7bb7cf; border-radius: 5px; padding: 12px 12px; margin: 10px 0; box-sizing: border-box; }
+.promo-title { font-size: 16px; font-weight: 700; color: #1d1c1a; margin-bottom: 4px; }
+.promo-desc { font-size: 14px; color: #5c6664; margin-bottom: 10px; line-height: 1.4; }
+.promo-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
+.promo-code , .promo-btn-copy , .promo-btn-link { height: 36px; line-height: 35px; border: 1px solid #d9d9d9; border-radius: 5px; padding: 0px 8px !important; font-size: 13px; }
+.promo-code { padding: 0px 10px !important; background-color: var(--white); cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; user-select: none; }
+.promo-code:active { background: #f5f5f7; transform: scale(0.98); }
+.promo-code .code-text { font-family: var(--mono, monospace); font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #0067ff 0%, #ff0000 50%, #4e00ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline-block; }
+.promo-btn-copy { background-color: var(--white); color: #333; cursor: pointer; transition: all 0.2s; }
+.promo-btn-link { background-color: #6f9fb2; border-color: #528295; 
+  color: var(--white) !important; text-decoration: none !important; transition: background-color 0.2s; box-shadow: none !important; }
+.promo-btn-link::before{ content: none !important; display: none !important; }
+.copy-toast { position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.8); color: #fff; padding: 10px 20px; border-radius: 20px; font-size: 14px; z-index: 99999; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
+.copy-toast.show { opacity: 1; }
 
 
 /*+++++++++++++++++++++++++++++++++*/
@@ -510,6 +527,18 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   --------------------------------------------------------------*/
   .article-quote-card { border: 1px solid var(--section-steps-border); background-color: var(--bgcolor); }
   .article-quote-card::before, .article-quote-card::after { background-color: var(--bgcolor); box-shadow: 0 0 0 4px var(--bgcolor); background-image: var(--svg-quote); }
+  /*--------------------------------------------------------------
+  /* 优惠码 / 验证码 - 模块
+  --------------------------------------------------------------*/
+  .promo-card { background-color: #172120; border-color: #48837a; }
+  .promo-title { color: #e0e0e0; }
+  .promo-desc { color: #999; }
+  .promo-code , .promo-btn-copy { border-color: #3a3a3c; }
+  .promo-code { background: var(--bgcolor); }
+  .promo-code:active { background-color: #2a2a2a; }
+  .promo-code .code-text { background: linear-gradient(90deg, #c6ff8a 0%, #ff86d6 50%, #ebff00 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+  .promo-btn-copy { background-color: var(--bgcolor); color: #ccc; }
+  .promo-btn-link { background-color: #164f47; border-color: #216c61; color: rgba(255, 255, 255, 0.75) !important; }
 
 
   /*+++++++++++++++++++++++++++++++++*/

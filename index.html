@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261109-3">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261110-1">
 </head>
 <body>
   <header class="site-header">
@@ -162,6 +162,22 @@
     &lt;p&gt;内容区域&lt;/p&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
+              
+              <div class="promo-card">
+                <div class="promo-title">飞猫云 · 新用户季付以上 8 折</div>
+                <div class="promo-desc">适用范围：季付及以上套餐 · 最后核验 2026-07-12（有效性以商家页面为准）</div>
+                <div class="promo-actions">
+                  <!-- 验证码区域（点击复制） -->
+                  <div class="promo-code" onclick="copyPromoCode(this, 'flycat888')" title="点击复制验证码">
+                    <span class="code-text">flycat888</span>
+                  </div>
+                  <!-- 复制按钮 -->
+                  <button class="promo-btn-copy" onclick="copyPromoCode(this, 'flycat888')" style="">复制</button>
+                  <!-- 前往官网按钮（替换你的真实链接） -->
+                  <a href="https://你的官网链接.com" target="_blank" class="promo-btn-link">前往官网</a>
+                </div>
+              </div>
+
             </div>
           </section>
 
@@ -221,9 +237,31 @@
                     <p>里面的 <strong>&lt;figcaption&gt;文字说明&lt;/figcaption&gt;</strong>，如不需要可以删除。</p>
                   </blockquote>
                 </li>
+                <li>
+                  <p>验证码模块代码</p>
+                  <pre><code class="lang-html">&lt;!-- 验证码模块 --&gt;
+&lt;div class="promo-card"&gt;
+  &lt;div class="promo-title"&gt;标题文字&lt;/div&gt;
+  &lt;div class="promo-desc"&gt;描述文字&lt;/div&gt;
+  &lt;div class="promo-actions"&gt;
+    &lt;!-- 验证码区域 --&gt;
+    &lt;div class="promo-code" onclick="copyPromoCode(this, 'gxfc8888')" title="点击复制验证码"&gt;
+      &lt;span class="code-text"&gt;gxfc8888&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;!-- 复制按钮 --&gt;
+    &lt;button class="promo-btn-copy" onclick="copyPromoCode(this, 'gxfc8888')" style=""&gt;复制&lt;/button&gt;
+    &lt;!-- 前往官网按钮 --&gt;
+    &lt;a href="###" target="_blank" class="promo-btn-link"&gt;前往官网&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  <blockquote>
+                    <p>可以自己随意组合，「标题文字」「描述文字」「前往官网」三项都可不填</p>
+                  </blockquote>
+                </li>
               </ul>
             </div>
           </section>
+
 
           <!-- 引号主题卡片模块 -->
           <section class="article-section">
@@ -283,6 +321,17 @@
                         <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421016.jpg" alt="" loading="lazy">
                         <figcaption>根据需求填写图片的文字说明</figcaption>
                       </figure>
+                    </li>
+                    <li>
+                      填写验证码
+                      <div class="promo-card">
+                        <div class="promo-actions">
+                          <div class="promo-code" onclick="copyPromoCode(this, 'wsyzm6666')" title="点击复制验证码">
+                            <span class="code-text">wsyzm6666</span>
+                          </div>
+                          <button class="promo-btn-copy" onclick="copyPromoCode(this, 'wsyzm6666')" style="">复制</button>
+                        </div>
+                      </div>
                     </li>
                   </ol>
                 </li>
@@ -1350,6 +1399,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+</script>
+
+<script>
+// 复制验证码的通用函数
+window.copyPromoCode = function(btnElement, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    
+    // 1. 找到这个模块里的“复制”按钮
+    let copyBtn = btnElement;
+    // 如果用户点的是验证码本身，我们就去找它旁边的复制按钮
+    if (btnElement.classList.contains("promo-code")) {
+      copyBtn = btnElement.parentElement.querySelector(".promo-btn-copy");
+    }
+
+    // 2. 记录原来的文字
+    const originalText = copyBtn.innerText;
+
+    // 3. 变成“已复制”并加个颜色或样式（可以借助你代码块里的变量）
+    copyBtn.innerText = "已复制";
+    copyBtn.style.color = "var(--green, #1aae19)"; // 变成绿色
+    copyBtn.style.borderColor = "var(--green, #1aae19)";
+    copyBtn.disabled = true; // 防止连续点击
+
+    // 4. 1.5 秒后恢复原状
+    setTimeout(() => {
+      copyBtn.innerText = originalText;
+      copyBtn.style.color = "";
+      copyBtn.style.borderColor = "";
+      copyBtn.disabled = false;
+    }, 1500);
+
+  }).catch(err => {
+    alert("复制失败，请手动长按选择复制：" + text);
+  });
+};
 </script>
 
 </body>
