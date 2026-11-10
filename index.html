@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261110-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261110-2">
 </head>
 <body>
   <header class="site-header">
@@ -760,6 +760,48 @@ database_id = "这里填你的D1数据库ID"
       <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   </button>
+  
+  <!-- 自动抓取文章目录悬浮组件 (默认隐藏，JS检测到有标题才会显示) -->
+  <div id="floatTocWrap" class="float-toc-wrap" style="display: none;">
+    <button id="floatTocBtn" class="float-btn" aria-label="文章目录">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="8" y1="6" x2="21" y2="6"></line>
+        <line x1="8" y1="12" x2="21" y2="12"></line>
+        <line x1="8" y1="18" x2="21" y2="18"></line>
+        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+      </svg>
+    </button>
+    
+    <!-- PC 端悬浮面板 -->
+    <div class="float-toc-panel" id="floatTocPanel">
+      <div class="toc-panel-title">本文目录</div>
+      <ul class="float-toc-list" id="floatTocList"></ul>
+    </div>
+  </div>
+  <!-- 移动端全屏目录弹窗 -->
+  <div id="mobileTocModal" class="mobile-toc-modal">
+    <div class="mobile-toc-content">
+      <div class="mobile-toc-header">
+        <span>文章目录</span>
+        <button id="closeMobileToc" class="mobile-toc-close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list" id="mobileTocList"></ul>
+    </div>
+  </div>
+  <!-- 移动端全屏目录弹窗 -->
+  <div id="mobileTocModal" class="mobile-toc-modal">
+    <div class="mobile-toc-content">
+      <div class="mobile-toc-header">
+        <span>文章目录</span>
+        <button id="closeMobileToc" class="mobile-toc-close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list" id="mobileTocList">
+        <!-- JS 动态生成 -->
+      </ul>
+    </div>
+  </div>
 
   <!-- 弹窗结构 (放在 body 底部) -->
   <dialog id="tocModal" class="toc-modal">
@@ -1434,6 +1476,102 @@ window.copyPromoCode = function(btnElement, text) {
     alert("复制失败，请手动长按选择复制：" + text);
   });
 };
+</script>
+
+<!-- 自动抓取文章目录悬浮组件 -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // 🔒 安全锁 1：如果不是文章页（没有正文或者没有目录挂载点），直接退出，不报错
+  const mainBody = document.querySelector(".mian-body");
+  const tocWrap = document.getElementById("floatTocWrap");
+  
+  if (!mainBody || !tocWrap) return;
+
+  // 抓取标题
+  const headings = mainBody.querySelectorAll("h2, h3");
+  
+  // 🔒 安全锁 2：如果文章里没写任何标题，隐藏按钮，直接退出
+  if (headings.length === 0) return;
+  tocWrap.style.display = "block";
+
+  const floatTocList = document.getElementById("floatTocList");
+  const mobileTocList = document.getElementById("mobileTocList");
+  const mobileTocModal = document.getElementById("mobileTocModal");
+  const closeMobileToc = document.getElementById("closeMobileToc");
+  const tocBtn = document.getElementById("floatTocBtn");
+
+  let floatHtml = "", mobileHtml = "";
+  headings.forEach((heading, index) => {
+    if (!heading.id) heading.id = `heading-${index}`;
+    let text = heading.innerText.replace(/\n/g, ' ').trim();
+    const levelClass = heading.tagName.toLowerCase() === "h3" ? "toc-h3" : "toc-h2";
+    const liHtml = `<li class="${levelClass}"><a href="#${heading.id}" data-target="${heading.id}">${text}</a></li>`;
+    floatHtml += liHtml;
+    mobileHtml += liHtml;
+  });
+
+  floatTocList.innerHTML = floatHtml;
+  mobileTocList.innerHTML = mobileHtml;
+
+  // 绑定平滑滚动事件
+  const allTocLinks = document.querySelectorAll(".float-toc-list a, .mobile-toc-list a");
+  allTocLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetEl = document.getElementById(link.getAttribute("data-target"));
+      if (targetEl) {
+        const y = targetEl.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        if (window.innerWidth <= 820) mobileTocModal.classList.remove("show");
+      }
+    });
+  });
+
+  // 移动端弹窗逻辑
+  tocBtn.addEventListener("click", () => {
+    if (!window.matchMedia("(hover: hover)").matches) {
+      mobileTocModal.classList.add("show");
+      setTimeout(() => {
+        const activeItem = mobileTocList.querySelector("a.active");
+        if (activeItem) {
+          const listContainer = activeItem.closest(".mobile-toc-list");
+          // 👇 加上这层保护
+          if (listContainer) {
+            listContainer.scrollTop = activeItem.offsetTop - (listContainer.clientHeight / 2);
+          }
+        }
+      }, 350);
+    }
+  });
+  
+  closeMobileToc.addEventListener("click", () => mobileTocModal.classList.remove("show"));
+  mobileTocModal.addEventListener("click", (e) => {
+    if (e.target === mobileTocModal) mobileTocModal.classList.remove("show");
+  });
+
+  // 滚动高亮 (IntersectionObserver)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        allTocLinks.forEach(link => link.classList.remove("active"));
+        document.querySelectorAll(`a[data-target="${entry.target.id}"]`).forEach(link => {
+          link.classList.add("active");
+          
+          // PC端目录面板内部自动滚动居中
+          if (window.matchMedia("(hover: hover)").matches) {
+             const listContainer = link.closest(".float-toc-list");
+             // 👇 核心修复：只有找到了容器才执行滚动，防止在移动端链接上报错
+             if (listContainer) {
+               listContainer.scrollTop = link.offsetTop - (listContainer.clientHeight / 2);
+             }
+          }
+        });
+      }
+    });
+  }, { rootMargin: "-70px 0px -80% 0px" });
+
+  headings.forEach(heading => observer.observe(heading));
+});
 </script>
 
 </body>
