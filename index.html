@@ -8,10 +8,10 @@
   <meta property="og:image" content="">
   <title>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</title>
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_jwymrt7w3u8.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_55t3u04q17c.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261111-3">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261111-5">
 </head>
 <body>
   <header class="site-header">
@@ -22,26 +22,39 @@
           <!-- 建议给个默认高度，防止图片加载前乱跳 -->
           <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="海纳百川" style="height: 32px; width: auto;">
         </a>
-
         <nav class="header-nav" id="headerNav">
-          <!-- 存放所有菜单的容器 -->
-          <div class="nav-main" id="navMain">
-            <a href="#" class="active">首页</a>
-            <a href="#">技术类</a>
-            <a href="#">MySQL</a>
-            <a href="#">Excel</a>
-            <a href="#">DEDE</a>
-            <a href="#">Linux</a>
-            <a href="#">MacCMS</a>
-            <a href="#">文献类</a>
-            <a href="#">MENU9</a>
-            <a href="#">MENU10</a>
-            <a href="#">MENU11</a>
-            <a href="#">MENU12</a>
-            <a href="#">MENU13</a>
-          </div>
-          
-          <!-- 折叠下拉框 -->
+          <!-- 使用 ul 包裹 -->
+          <ul class="nav-main" id="navMain">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">技术类</a></li>
+            <!-- 带有二级菜单的标准结构 -->
+            <li>
+              <a href="#">MySQL</a>
+              <ul class="sub-menu">
+                <li><a href="#">MySQL-SUB1</a></li>
+                <li><a href="#">MySQL-SUB2</a></li>
+              </ul>
+            </li>
+            <!-- 其他普通菜单 -->
+            <li><a href="#">Excel</a></li>
+            <li><a href="#">DEDE</a></li>
+            <li><a href="#">Linux</a></li>
+            <li><a href="#">MacCMS</a></li>
+            <li><a href="#">文献类</a></li>
+            <li><a href="#">MENU9</a></li>
+            <!-- 带有二级菜单的标准结构 -->
+            <li>
+              <a href="#">MENU10</a>
+              <ul class="sub-menu">
+                <li class="active"><a href="#">MENU10-SUB1</a></li>
+                <li><a href="#">MENU10-SUB2</a></li>
+              </ul>
+            </li>
+            <li><a href="#">MENU11</a></li>
+            <li><a href="#">MENU12</a></li>
+            <li><a href="#">MENU13</a></li>
+          </ul>
+          <!-- 折叠下拉框 (保持原样) -->
           <div class="nav-more" id="navMore">
             <button class="nav-more-btn">
               <i class="iconfont icon-updown-min"></i>
@@ -49,6 +62,7 @@
             <div class="nav-more-dropdown" id="navMoreDropdown"></div>
           </div>
         </nav>
+
       </div>
 
       <!-- 右侧：操作按钮 -->
@@ -811,17 +825,14 @@ database_id = "这里填你的D1数据库ID"
   <!-- 侧边栏 -->
   <div id="sideMenu" class="side-menu-drawer">
     <div class="side-menu-topbar">
-      <!-- 左上角只放 Logo -->
       <a href="/" class="side-menu-brand">
         <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="Logo">
       </a>
-      <!-- 右侧放关闭按钮 -->
       <button class="side-close" id="closeMenuBtn">
         <i class="iconfont icon-close"></i>
       </button>
     </div>
 
-    <!-- 👇 新增：沉浸式搜索大卡片 -->
     <div class="side-menu-search">
       <div class="side-search-box" id="sideSearchTrigger">
         <i class="iconfont icon-search"></i>
@@ -831,18 +842,29 @@ database_id = "这里填你的D1数据库ID"
     
     <div class="side-menu-body">
       <ul class="mobile-menu-inner">
-        <li class="menu-item"><a href="#">首页</a></li>
-        <li class="menu-item"><a href="#">技术类</a></li>
-        <li class="menu-item active"><a href="#">MySQL</a></li>
-        <li class="menu-item"><a href="#">Excel</a></li>
-        <li class="menu-item"><a href="#">DEDE</a></li>
-        <li class="menu-item"><a href="#">Linux</a></li>
-        <li class="menu-item"><a href="#">MacCMS</a></li>
-        <li class="menu-item"><a href="#">MENU9</a></li>
-        <li class="menu-item"><a href="#">MENU10</a></li>
-        <li class="menu-item"><a href="#">MENU11</a></li>
-        <li class="menu-item"><a href="#">MENU12</a></li>
-        <li class="menu-item"><a href="#">MENU13</a></li>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">技术类</a></li>
+        <li>
+          <a href="#MySQL">MySQL</a>
+          <ul class="sub-menu">
+            <li class="active"><a href="#">MySQL-SUB1</a></li>
+            <li><a href="#">MySQL-SUB2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Excel</a></li>
+        <li><a href="#">DEDE</a></li>
+        <li><a href="#">Linux</a></li>
+        <li><a href="#">MacCMS</a></li>
+        <li>
+          <a href="#">MENU10</a>
+          <ul class="sub-menu">
+            <li><a href="#">MENU10-SUB1</a></li>
+            <li><a href="#">MENU10-SUB2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">MENU11</a></li>
+        <li><a href="#">MENU12</a></li>
+        <li><a href="#">MENU13</a></li>
       </ul>
     </div>
   </div>
@@ -877,11 +899,41 @@ database_id = "这里填你的D1数据库ID"
 
 <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js"></script>
 <script>
+  // ==========================================
+  // 全局函数：复制验证码 (放在最外层，方便 HTML 直接 onclick 调用)
+  // ==========================================
+  window.copyPromoCode = function(btnElement, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      let copyBtn = btnElement;
+      // 如果点的是验证码本身，去找它旁边的复制按钮
+      if (btnElement.classList.contains("promo-code")) {
+        copyBtn = btnElement.parentElement.querySelector(".promo-btn-copy");
+      }
+      if (!copyBtn) return;
+
+      const originalText = copyBtn.innerText;
+      copyBtn.innerText = "已复制";
+      copyBtn.style.color = "var(--green, #1aae19)"; 
+      copyBtn.style.borderColor = "var(--green, #1aae19)";
+      copyBtn.disabled = true; 
+
+      setTimeout(() => {
+        copyBtn.innerText = originalText;
+        copyBtn.style.color = "";
+        copyBtn.style.borderColor = "";
+        copyBtn.disabled = false;
+      }, 1500);
+    }).catch(err => {
+      alert("复制失败，请手动长按选择复制：" + text);
+    });
+  };
+
+  // ==========================================
+  // 页面核心逻辑 (等待 DOM 加载完成后执行)
+  // ==========================================
   document.addEventListener("DOMContentLoaded", () => {
     
-    // ==========================================
-    // 0. 公共 DOM 变量获取
-    // ==========================================
+    // --- 0. 公共 DOM 变量获取 ---
     const openMenuBtn = document.getElementById("openMenuBtn");
     const closeMenuBtn = document.getElementById("closeMenuBtn");
     const sideMenu = document.getElementById("sideMenu");
@@ -910,13 +962,8 @@ database_id = "这里填你的D1数据库ID"
 
 
     // ==========================================
-    // 1. 全局/通用功能 (代码高亮 & 复制)
-    // ==========================================
-    if (typeof hljs !== 'undefined') {
-      hljs.highlightAll();
-    }
-
     // 1. 全局/通用功能 (代码高亮 & 复制 & 行号)
+    // ==========================================
     if (typeof hljs !== 'undefined') {
       hljs.highlightAll();
     }
@@ -925,28 +972,23 @@ database_id = "这里填你的D1数据库ID"
       const code = pre.querySelector("code");
       if (!code) return;
 
-          // --- 👇 终结版：按行拆分，彻底解决错位 ---
       const codeText = code.textContent || "";
       const lines = codeText.split('\n');
       if (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
 
-      // 获取高亮后的 HTML，按行拆分
       const highlightedLines = code.innerHTML.split('\n');
       
       let newHtml = '';
       lines.forEach((_, index) => {
         newHtml += `<div class="code-line">`;
         newHtml += `<span class="line-num">${index + 1}</span>`;
-        // 如果高亮插件那一行有内容，就放进去，否则给个空格占位
         newHtml += `<span class="line-text">${highlightedLines[index] || ' '}</span>`;
         newHtml += `</div>`;
       });
 
       code.innerHTML = newHtml;
       pre.classList.add("has-line-numbers");
-      // --- 👆 替换结束 ---
 
-      // 原有的语言识别逻辑
       let lang = "code";
       const classList = Array.from(code.classList);
       const langClass = classList.find(c => c.startsWith("language-") || c.startsWith("lang-")) || classList.find(c => c !== "hljs");
@@ -956,7 +998,6 @@ database_id = "这里填你的D1数据库ID"
       }
       pre.setAttribute("data-lang", lang);
       
-      // 👇 终极复制逻辑：完美避开行号
       pre.addEventListener("click", (e) => {
         const rect = pre.getBoundingClientRect();
         if (e.clientY - rect.top < 40 && e.clientX > rect.right - 100) {
@@ -974,27 +1015,122 @@ database_id = "这里填你的D1数据库ID"
 
 
     // ==========================================
-    // 2. 顶部导航折叠加算
+    // 2. PC端 顶部导航折叠 & 多级菜单
     // ==========================================
+
+    // 2.1 PC端：二级菜单激活时，父级一级菜单高亮
+    const pcActiveSubItem = document.querySelector('.nav-main .sub-menu li.active');
+    if (pcActiveSubItem) {
+      const parentLi = pcActiveSubItem.closest('.nav-main > li');
+      if (parentLi) {
+        parentLi.classList.add('active');
+      }
+    }
+
+    // 2.2 折叠面板内的子菜单防溢出（右侧不够自动向左弹）
+    const moreDropdown = document.getElementById("navMoreDropdown");
+    if (moreDropdown) {
+      moreDropdown.addEventListener("mouseover", (e) => {
+        const li = e.target.closest("li:has(> .sub-menu)");
+        if (!li) return;
+
+        li.classList.remove("flip-left");
+
+        const rect = li.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const remainingRightSpace = windowWidth - rect.right;
+
+        if (remainingRightSpace < 200) {
+          li.classList.add("flip-left");
+        }
+      });
+    }
+
+    // 2.3 顶部导航溢出折叠计算
     const checkNavOverflow = () => {
       if (window.innerWidth <= 820) return;
       navMore.classList.remove("show");
       dropdown.innerHTML = "";
-      navLinks.forEach(link => link.style.display = "");
+      
+      const navItems = Array.from(navMain.children);
+      navItems.forEach(li => li.style.display = "");
+
       const moreBtnWidth = navMore.querySelector('.nav-more-btn').offsetWidth || 40;
       const availableWidth = headerNav.offsetWidth - moreBtnWidth - 20;
+
       if (navMain.scrollWidth > availableWidth) {
         navMore.classList.add("show");
-        for (let i = navLinks.length - 1; i >= 0; i--) {
-          const link = navLinks[i];
-          link.style.display = "none"; 
-          const clone = link.cloneNode(true);
+        for (let i = navItems.length - 1; i >= 0; i--) {
+          const li = navItems[i];
+          li.style.display = "none"; 
+          const clone = li.cloneNode(true); 
           clone.style.display = "block";
-          dropdown.prepend(clone);
+          
+          dropdown.prepend(clone); 
+          
           if (navMain.scrollWidth <= availableWidth) break;
         }
       }
     };
+
+    // ==========================================
+    // 3. 移动端侧边栏：多级菜单逻辑
+    // ==========================================
+    
+    // 3.1 自动注入展开箭头 & 手风琴排他逻辑
+    document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(li => {
+      if (li.querySelector('.mobile-sub-btn')) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'mobile-sub-btn';
+      btn.innerHTML = '<i class="iconfont icon-right"></i>'; 
+      btn.setAttribute('aria-label', '展开子菜单');
+      
+      const subMenu = li.querySelector('.sub-menu');
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        e.preventDefault();
+        
+        const isCurrentlyOpen = btn.classList.contains('open');
+
+        document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(otherLi => {
+          const otherBtn = otherLi.querySelector('.mobile-sub-btn');
+          const otherSubMenu = otherLi.querySelector('.sub-menu');
+          
+          if (otherLi !== li) {
+            if (otherBtn) otherBtn.classList.remove('open');
+            if (otherSubMenu) otherSubMenu.classList.remove('show');
+          }
+        });
+
+        if (!isCurrentlyOpen) {
+          btn.classList.add('open');
+          if (subMenu) subMenu.classList.add('show');
+        } else {
+          btn.classList.remove('open');
+          if (subMenu) subMenu.classList.remove('show');
+        }
+      });
+
+      li.appendChild(btn);
+    });
+
+    // 3.2 移动端：页面加载时，自动展开当前高亮所在的父级
+    const activeSubItem = document.querySelector('.mobile-menu-inner .sub-menu li.active');
+    
+    if (activeSubItem) {
+      const parentLi = activeSubItem.closest('li:has(> .sub-menu)');
+      
+      if (parentLi) {
+        const parentBtn = parentLi.querySelector('.mobile-sub-btn');
+        const parentSubMenu = parentLi.querySelector('.sub-menu');
+        
+        if (parentBtn) parentBtn.classList.add('open');
+        if (parentSubMenu) parentSubMenu.classList.add('show');
+      }
+    }
+    
     requestAnimationFrame(checkNavOverflow);
     let navTimeout;
     window.addEventListener("resize", () => {
@@ -1004,7 +1140,7 @@ database_id = "这里填你的D1数据库ID"
 
 
     // ==========================================
-    // 3. 左侧侧边栏逻辑
+    // 4. 侧边栏整体开关逻辑
     // ==========================================
     if (openMenuBtn) {
       openMenuBtn.addEventListener("click", () => {
@@ -1026,7 +1162,7 @@ database_id = "这里填你的D1数据库ID"
 
 
     // ==========================================
-    // 4. 搜索弹窗核心逻辑 (历史记录 & 开关)
+    // 5. 搜索弹窗核心逻辑 (历史记录 & 开关) 
     // ==========================================
     const getHistory = () => {
       try { return JSON.parse(localStorage.getItem("myBlogSearchHistory")) || []; } 
@@ -1111,7 +1247,7 @@ database_id = "这里填你的D1数据库ID"
     }
 
     // ==========================================
-    // 5. 侧边栏搜索联动 (完美共用遮罩)
+    // 6. 侧边栏搜索联动 (完美共用遮罩) 
     // ==========================================
     if (sideSearchTrigger) {
       sideSearchTrigger.addEventListener("click", () => {
@@ -1129,15 +1265,15 @@ database_id = "这里填你的D1数据库ID"
           searchPanel.classList.add("show"); 
           document.body.classList.add("modal-open");
           if (typeof renderHistory === 'function') renderHistory();
-          searchInput.focus(); // 瞬间弹出键盘
-          searchInput.click(); // 手机端保险
+          searchInput.focus(); 
+          searchInput.click(); 
         }
       });
     }
 
 
     // ==========================================
-    // 6. 文章目录弹窗 (TOC)
+    // 7. 文章目录弹窗 (TOC)
     // ==========================================
     if (openTocBtn) {
       openTocBtn.addEventListener("click", () => {
@@ -1168,8 +1304,9 @@ database_id = "这里填你的D1数据库ID"
       item.addEventListener("click", closeTocModal);
     });
 
+
     // ==========================================
-    // 7. 自动为所有 Markdown 表格包裹滚动容器
+    // 8. 自动为所有 Markdown 表格包裹滚动容器
     // ==========================================
     document.querySelectorAll('.article-section table').forEach(table => {
       const wrapper = document.createElement('div');
@@ -1179,30 +1316,26 @@ database_id = "这里填你的D1数据库ID"
     });
 
     // ==========================================
-    // 8. 返回顶部按钮
+    // 9. 返回顶部按钮
     // ==========================================
     const backToTopBtn = document.getElementById("backToTop");
     
     if (backToTopBtn) {
-      let isHiding = false; // 👈 加一个锁，防止用户疯狂上下滑动时动画卡住
+      let isHiding = false; 
 
       window.addEventListener("scroll", () => {
         const triggerDistance = window.innerHeight * 1.5; 
         
         if (window.scrollY > triggerDistance) {
-          // 滚到下面：如果正在播放退场动画，立刻停止
           isHiding = false;
           backToTopBtn.classList.remove("hiding");
           backToTopBtn.classList.add("show");
         } else {
-          // 滚回顶部：
-          // 如果已经有 show 类，并且当前没有在退场，才执行退场
           if (backToTopBtn.classList.contains("show") && !isHiding) {
             isHiding = true;
             backToTopBtn.classList.remove("show");
             backToTopBtn.classList.add("hiding");
 
-            // 👇 核心魔法：等 300 毫秒（动画播完），再彻底移除 hiding 类，让它变成 display: none
             setTimeout(() => {
               if (isHiding) {
                 backToTopBtn.classList.remove("hiding");
@@ -1220,6 +1353,7 @@ database_id = "这里填你的D1数据库ID"
 
   });
 </script>
+
 <!-- 引入 PhotoSwipe 核心库 -->
 <script type="module">
   const style = document.createElement('style');
@@ -1297,290 +1431,254 @@ database_id = "这里填你的D1数据库ID"
 <script src="https://gh.lib.aaqq.site/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://gh.lib.aaqq.site/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("generatePosterBtn");
-  const btnTextEl = document.getElementById("posterBtnText");
-  const modal = document.getElementById("posterModal");
-  const imgEl = document.getElementById("posterImage");
-  
-  if (!btn) return;
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("generatePosterBtn");
+    const btnTextEl = document.getElementById("posterBtnText");
+    const modal = document.getElementById("posterModal");
+    const imgEl = document.getElementById("posterImage");
+    
+    if (!btn) return;
 
-  btn.addEventListener("click", async () => {
-    const originalText = btnTextEl.innerText;
-    btnTextEl.innerText = "正在生成中…";
-    btn.disabled = true;
+    btn.addEventListener("click", async () => {
+      const originalText = btnTextEl.innerText;
+      btnTextEl.innerText = "正在生成中…";
+      btn.disabled = true;
 
-    try {
-      // 1. 抓取标题
-      const title = document.querySelector(".article-header h1")?.innerText || "未命名文章";
-      document.getElementById("poster-title").innerText = title;
-      
-      // 2. 抓取文章的发布日期，并转换为 xxxx/xx/xx 格式
-      let pDate = new Date().toLocaleDateString('zh-CN').replace(/\//g, '/'); 
-      
-      const dateText = document.querySelector(".article-meta span")?.innerText;
-      if (dateText) {
-        // 将“年月日”替换为“/”
-        pDate = dateText.trim()
-          .replace("年", "/")
-          .replace("月", "/")
-          .replace("日", "");
-      }
-
-      // 自动获取当前域名（自动包含 http 或 https）
-      const urlElements = document.querySelectorAll(".poster-site-url");
-      urlElements.forEach(el => {
-        el.innerText = window.location.origin;
-      });
-
-      // 处理文章具体地址（与二维码一致）
-      const articleUrlElements = document.querySelectorAll(".poster-cover-art-url");
-      articleUrlElements.forEach(el => {
-        el.innerText = window.location.href; 
-      });
-      
-      // 赋值给海报模板
-      const dayEl = document.getElementById("poster-day");
-      const monthEl = document.getElementById("poster-month");
-      if (dayEl) dayEl.innerText = pDate;
-      if (monthEl) monthEl.innerText = ""; 
-
-      // 3. 安全处理封面图（优先级：OG标签 -> 正文首图 -> 默认背景）
-      const coverEl = document.getElementById("poster-cover");
-      // 3.1. 尝试获取 og:image
-      let targetImgSrc = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
-      // 3.2. 如果没有 og:image，尝试获取正文第一张大图
-      if (!targetImgSrc) {
-        // 过滤掉头像、图标等干扰
-        const firstImg = document.querySelector(".mian-body img");
-        if (firstImg) {
-          targetImgSrc = firstImg.src;
+      try {
+        // 1. 抓取标题
+        const title = document.querySelector(".article-header h1")?.innerText || "未命名文章";
+        document.getElementById("poster-title").innerText = title;
+        
+        // 2. 抓取文章的发布日期，并转换为 xxxx/xx/xx 格式
+        let pDate = new Date().toLocaleDateString('zh-CN').replace(/\//g, '/'); 
+        
+        const dateText = document.querySelector(".article-meta span")?.innerText;
+        if (dateText) {
+          // 将“年月日”替换为“/”
+          pDate = dateText.trim()
+            .replace("年", "/")
+            .replace("月", "/")
+            .replace("日", "");
         }
-      }
-      // 3.3. 如果找到了图片地址，开始转 Base64 并渲染
-      if (targetImgSrc) {
-        try {
-          const response = await fetch(targetImgSrc);
-          const blob = await response.blob();
-          const base64Url = await new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.readAsDataURL(blob);
+
+        // 自动获取当前域名（自动包含 http 或 https）
+        const urlElements = document.querySelectorAll(".poster-site-url");
+        urlElements.forEach(el => {
+          el.innerText = window.location.origin;
+        });
+
+        // 处理文章具体地址（与二维码一致）
+        const articleUrlElements = document.querySelectorAll(".poster-cover-art-url");
+        articleUrlElements.forEach(el => {
+          el.innerText = window.location.href; 
+        });
+        
+        // 赋值给海报模板
+        const dayEl = document.getElementById("poster-day");
+        const monthEl = document.getElementById("poster-month");
+        if (dayEl) dayEl.innerText = pDate;
+        if (monthEl) monthEl.innerText = ""; 
+
+        // 3. 安全处理封面图（优先级：OG标签 -> 正文首图 -> 默认背景）
+        const coverEl = document.getElementById("poster-cover");
+        // 3.1. 尝试获取 og:image
+        let targetImgSrc = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
+        // 3.2. 如果没有 og:image，尝试获取正文第一张大图
+        if (!targetImgSrc) {
+          // 过滤掉头像、图标等干扰
+          const firstImg = document.querySelector(".mian-body img");
+          if (firstImg) {
+            targetImgSrc = firstImg.src;
+          }
+        }
+        // 3.3. 如果找到了图片地址，开始转 Base64 并渲染
+        if (targetImgSrc) {
+          try {
+            const response = await fetch(targetImgSrc);
+            const blob = await response.blob();
+            const base64Url = await new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result);
+              reader.readAsDataURL(blob);
+            });
+            
+            coverEl.src = base64Url;
+            coverEl.style.opacity = "1";
+          } catch (e) {
+            console.error("图片抓取失败，使用默认背景", e);
+            coverEl.style.opacity = "0"; // 抓取失败（比如防盗链），隐藏图片，露出底色
+          }
+        } else {
+          // 既没有 OG 图，正文也没有图
+          coverEl.style.opacity = "0";
+        }
+
+        // 4. 生成超高清二维码
+        const qrContainer = document.getElementById("poster-qrcode");
+        qrContainer.innerHTML = ""; 
+
+        const qr = qrcode(0, 'H');
+        qr.addData(window.location.href);
+        qr.make();
+
+        qrContainer.innerHTML = qr.createImgTag(10, 0); 
+        
+        const qrImg = qrContainer.querySelector('img');
+        if (qrImg) {
+          qrImg.style.width = '80px';
+          qrImg.style.height = '80px';
+          qrImg.style.display = 'block';
+        }
+
+        // 5. 截图
+        setTimeout(async () => {
+          const renderArea = document.getElementById("poster-render-area");
+          const canvas = await html2canvas(renderArea, {
+            scale: 2, 
+            useCORS: true, 
+            backgroundColor: "#fff",
+            allowTaint: false 
           });
           
-          coverEl.src = base64Url;
-          coverEl.style.opacity = "1";
-        } catch (e) {
-          console.error("图片抓取失败，使用默认背景", e);
-          coverEl.style.opacity = "0"; // 抓取失败（比如防盗链），隐藏图片，露出底色
-        }
-      } else {
-        // 既没有 OG 图，正文也没有图
-        coverEl.style.opacity = "0";
-      }
+          imgEl.src = canvas.toDataURL("image/png");
 
-      // 4. 生成超高清二维码
-      const qrContainer = document.getElementById("poster-qrcode");
-      qrContainer.innerHTML = ""; 
-
-      const qr = qrcode(0, 'H');
-      qr.addData(window.location.href);
-      qr.make();
-
-      qrContainer.innerHTML = qr.createImgTag(10, 0); 
-      
-      const qrImg = qrContainer.querySelector('img');
-      if (qrImg) {
-        qrImg.style.width = '80px';
-        qrImg.style.height = '80px';
-        qrImg.style.display = 'block';
-      }
-
-      // 5. 截图
-      setTimeout(async () => {
-        const renderArea = document.getElementById("poster-render-area");
-        const canvas = await html2canvas(renderArea, {
-          scale: 2, 
-          useCORS: true, 
-          backgroundColor: "#fff",
-          allowTaint: false 
-        });
-        
-        imgEl.src = canvas.toDataURL("image/png");
-
-        // 6. 多端提示文字切换
-        const tipsEl = document.getElementById("poster-tips");
-        if (tipsEl) {
-          if (window.matchMedia("(hover: hover)").matches) {
-            tipsEl.innerText = "右键保存海报图片";
-          } else {
-            tipsEl.innerText = "长按图片保存到手机";
+          // 6. 多端提示文字切换
+          const tipsEl = document.getElementById("poster-tips");
+          if (tipsEl) {
+            if (window.matchMedia("(hover: hover)").matches) {
+              tipsEl.innerText = "右键保存海报图片";
+            } else {
+              tipsEl.innerText = "长按图片保存到手机";
+            }
           }
-        }
-        
-        modal.classList.add("show");
-        
-        // 恢复按钮文字
+          
+          modal.classList.add("show");
+          
+          // 恢复按钮文字
+          btnTextEl.innerText = originalText;
+          btn.disabled = true; 
+          setTimeout(() => { btn.disabled = false; }, 1000);
+
+        }, 500);
+
+      } catch (error) {
+        console.error("生成失败", error);
+        alert("生成失败，请重试！");
+        // 报错时也要恢复文字
         btnTextEl.innerText = originalText;
-        btn.disabled = true; 
-        setTimeout(() => { btn.disabled = false; }, 1000);
+        btn.disabled = false;
+      }
+    });
 
-      }, 500);
-
-    } catch (error) {
-      console.error("生成失败", error);
-      alert("生成失败，请重试！");
-      // 报错时也要恢复文字
-      btnTextEl.innerText = originalText;
-      btn.disabled = false;
-    }
+    // 点击空白关闭弹窗
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) { 
+        modal.classList.remove("show");
+      }
+    });
   });
-
-  // 点击空白关闭弹窗
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) { 
-      modal.classList.remove("show");
-    }
-  });
-});
 </script>
-
-<script>
-// 复制验证码的通用函数
-window.copyPromoCode = function(btnElement, text) {
-  navigator.clipboard.writeText(text).then(() => {
-    
-    // 1. 找到这个模块里的“复制”按钮
-    let copyBtn = btnElement;
-    // 如果用户点的是验证码本身，我们就去找它旁边的复制按钮
-    if (btnElement.classList.contains("promo-code")) {
-      copyBtn = btnElement.parentElement.querySelector(".promo-btn-copy");
-    }
-
-    // 2. 记录原来的文字
-    const originalText = copyBtn.innerText;
-
-    // 3. 变成“已复制”并加个颜色或样式（可以借助你代码块里的变量）
-    copyBtn.innerText = "已复制";
-    copyBtn.style.color = "var(--green, #1aae19)"; // 变成绿色
-    copyBtn.style.borderColor = "var(--green, #1aae19)";
-    copyBtn.disabled = true; // 防止连续点击
-
-    // 4. 1.5 秒后恢复原状
-    setTimeout(() => {
-      copyBtn.innerText = originalText;
-      copyBtn.style.color = "";
-      copyBtn.style.borderColor = "";
-      copyBtn.disabled = false;
-    }, 1500);
-
-  }).catch(err => {
-    alert("复制失败，请手动长按选择复制：" + text);
-  });
-};
-</script>
-
 <!-- 自动抓取文章目录悬浮组件 -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // 🔒 安全锁 1：如果不是文章页（没有正文或者没有目录挂载点），直接退出，不报错
-  const mainBody = document.querySelector(".mian-body");
-  const tocWrap = document.getElementById("floatTocWrap");
-  
-  if (!mainBody || !tocWrap) return;
+  document.addEventListener("DOMContentLoaded", () => {
+    // 🔒 安全锁 1：如果不是文章页（没有正文或者没有目录挂载点），直接退出，不报错
+    const mainBody = document.querySelector(".mian-body");
+    const tocWrap = document.getElementById("floatTocWrap");
+    
+    if (!mainBody || !tocWrap) return;
 
-  // 抓取标题
-  const headings = mainBody.querySelectorAll("h2, h3");
-  
-  // 🔒 安全锁 2：如果文章里没写任何标题，隐藏按钮，直接退出
-  if (headings.length === 0) return;
-  tocWrap.style.display = "block";
+    // 抓取标题
+    const headings = mainBody.querySelectorAll("h2, h3");
+    
+    // 🔒 安全锁 2：如果文章里没写任何标题，隐藏按钮，直接退出
+    if (headings.length === 0) return;
+    tocWrap.style.display = "block";
 
-  const floatTocList = document.getElementById("floatTocList");
-  const mobileTocList = document.getElementById("mobileTocList");
-  const mobileTocModal = document.getElementById("mobileTocModal");
-  const closeMobileToc = document.getElementById("closeMobileToc");
-  const tocBtn = document.getElementById("floatTocBtn");
+    const floatTocList = document.getElementById("floatTocList");
+    const mobileTocList = document.getElementById("mobileTocList");
+    const mobileTocModal = document.getElementById("mobileTocModal");
+    const closeMobileToc = document.getElementById("closeMobileToc");
+    const tocBtn = document.getElementById("floatTocBtn");
 
-  let floatHtml = "", mobileHtml = "";
-  headings.forEach((heading, index) => {
-    if (!heading.id) heading.id = `heading-${index}`;
-    let text = heading.innerText.replace(/\n/g, ' ').trim();
-    const levelClass = heading.tagName.toLowerCase() === "h3" ? "toc-h3" : "toc-h2";
-    const liHtml = `<li class="${levelClass}"><a href="#${heading.id}" data-target="${heading.id}">${text}</a></li>`;
-    floatHtml += liHtml;
-    mobileHtml += liHtml;
-  });
-
-  floatTocList.innerHTML = floatHtml;
-  mobileTocList.innerHTML = mobileHtml;
-
-  // 绑定平滑滚动事件
-  const allTocLinks = document.querySelectorAll(".float-toc-list a, .mobile-toc-list a");
-  allTocLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetEl = document.getElementById(link.getAttribute("data-target"));
-      if (targetEl) {
-        const y = targetEl.getBoundingClientRect().top + window.scrollY - 70;
-        window.scrollTo({ top: y, behavior: "smooth" });
-        if (window.innerWidth <= 820) mobileTocModal.classList.remove("show");
-      }
+    let floatHtml = "", mobileHtml = "";
+    headings.forEach((heading, index) => {
+      if (!heading.id) heading.id = `heading-${index}`;
+      let text = heading.innerText.replace(/\n/g, ' ').trim();
+      const levelClass = heading.tagName.toLowerCase() === "h3" ? "toc-h3" : "toc-h2";
+      const liHtml = `<li class="${levelClass}"><a href="#${heading.id}" data-target="${heading.id}">${text}</a></li>`;
+      floatHtml += liHtml;
+      mobileHtml += liHtml;
     });
-  });
 
-  // 移动端弹窗逻辑
-  tocBtn.addEventListener("click", () => {
-    if (!window.matchMedia("(hover: hover)").matches) {
-      mobileTocModal.classList.add("show");
-      setTimeout(() => {
-        const activeItem = mobileTocList.querySelector("a.active");
-        if (activeItem) {
-          const listContainer = activeItem.closest(".mobile-toc-list");
-          // 👇 加上这层保护
-          if (listContainer) {
-            listContainer.scrollTop = activeItem.offsetTop - (listContainer.clientHeight / 2);
-          }
+    floatTocList.innerHTML = floatHtml;
+    mobileTocList.innerHTML = mobileHtml;
+
+    // 绑定平滑滚动事件
+    const allTocLinks = document.querySelectorAll(".float-toc-list a, .mobile-toc-list a");
+    allTocLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetEl = document.getElementById(link.getAttribute("data-target"));
+        if (targetEl) {
+          const y = targetEl.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top: y, behavior: "smooth" });
+          if (window.innerWidth <= 820) mobileTocModal.classList.remove("show");
         }
-      }, 350);
-    }
-  });
-  
-  closeMobileToc.addEventListener("click", () => mobileTocModal.classList.remove("show"));
-  mobileTocModal.addEventListener("click", (e) => {
-    if (e.target === mobileTocModal) mobileTocModal.classList.remove("show");
-  });
+      });
+    });
 
-  // 滚动高亮 (IntersectionObserver)
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // 👇 移除所有 li 的 active 类
-        document.querySelectorAll(".float-toc-list li, .mobile-toc-list li").forEach(li => {
-          li.classList.remove("active");
-        });
-        
-        const currentId = entry.target.id;
-        
-        // 👇 找到对应的 a 标签，把 active 加在它的父级 li 上
-        document.querySelectorAll(`a[data-target="${currentId}"]`).forEach(link => {
-          const li = link.parentElement;
-          li.classList.add("active");
-          
-          // PC端目录面板内部自动滚动居中
-          if (window.matchMedia("(hover: hover)").matches) {
-             const listContainer = link.closest(".float-toc-list");
-             if (listContainer) {
-               listContainer.scrollTop = li.offsetTop - (listContainer.clientHeight / 2);
-             }
+    // 移动端弹窗逻辑
+    tocBtn.addEventListener("click", () => {
+      if (!window.matchMedia("(hover: hover)").matches) {
+        mobileTocModal.classList.add("show");
+        setTimeout(() => {
+          const activeItem = mobileTocList.querySelector("a.active");
+          if (activeItem) {
+            const listContainer = activeItem.closest(".mobile-toc-list");
+            // 👇 加上这层保护
+            if (listContainer) {
+              listContainer.scrollTop = activeItem.offsetTop - (listContainer.clientHeight / 2);
+            }
           }
-        });
+        }, 350);
       }
     });
-  }, { rootMargin: "-70px 0px -80% 0px" });
+    
+    closeMobileToc.addEventListener("click", () => mobileTocModal.classList.remove("show"));
+    mobileTocModal.addEventListener("click", (e) => {
+      if (e.target === mobileTocModal) mobileTocModal.classList.remove("show");
+    });
 
-  headings.forEach(heading => observer.observe(heading));
-});
+    // 滚动高亮 (IntersectionObserver)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 👇 移除所有 li 的 active 类
+          document.querySelectorAll(".float-toc-list li, .mobile-toc-list li").forEach(li => {
+            li.classList.remove("active");
+          });
+          
+          const currentId = entry.target.id;
+          
+          // 👇 找到对应的 a 标签，把 active 加在它的父级 li 上
+          document.querySelectorAll(`a[data-target="${currentId}"]`).forEach(link => {
+            const li = link.parentElement;
+            li.classList.add("active");
+            
+            // PC端目录面板内部自动滚动居中
+            if (window.matchMedia("(hover: hover)").matches) {
+               const listContainer = link.closest(".float-toc-list");
+               if (listContainer) {
+                 listContainer.scrollTop = li.offsetTop - (listContainer.clientHeight / 2);
+               }
+            }
+          });
+        }
+      });
+    }, { rootMargin: "-70px 0px -80% 0px" });
+
+    headings.forEach(heading => observer.observe(heading));
+  });
 </script>
 
 </body>
