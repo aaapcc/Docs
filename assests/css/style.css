@@ -27,7 +27,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-size: 16px; margin: 0; background: var(--white); color: var(--ink); font-family: var(--body); line-height: 1.5; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+body { font-size: 15.5px; margin: 0; background: var(--white); color: var(--ink); font-family: var(--body); line-height: 1.45; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 a ,a:hover { color: var(--accent); }
 img { display: block; height: auto; max-width: 100%; vertical-align: middle; }
 svg { display: block; }
@@ -147,7 +147,7 @@ h1 , h2 , h3 { font-family: var(--display); }
 /* 文章内容板块
 --------------------------------------------------------------*/
 .article-section { padding: 10px 0 10px; }
-.article-section p { margin: 6px 0; }
+.article-section p { margin: 10px 0; }
 .article-section a { padding-left: 12px; position: relative; }
 .article-section a::before { content: "\e687"; position: absolute; left: 1px; top: 0px; font-family: "iconfont" !important; font-style: normal; -webkit-font-smoothing: antialiased; font-size: 11px; font-weight: normal; }
 .article-section a , .article-toc a { color: var(--accent); text-decoration: none; box-shadow: inset 0 -1.1px 0 #d0d2d6; padding-right: 2px; }
@@ -156,13 +156,19 @@ h1 , h2 , h3 { font-family: var(--display); }
 .article-figure { margin: 10px 0 8px; }
 .article-section img { width: 100%; border: 1px solid var(--soft-line); border-radius: 6px; background: #fcfcfc; }
 .article-section figcaption { margin-top: 8px; color: var(--text-q-gray); font-size: 12px; }
-.article-section table { border-spacing: 0; border-collapse: collapse; width: 100%; max-width: 100%; margin: 12px 0px 15px; display: inline-block; overflow-x: auto; -webkit-overflow-scrolling: touch; vertical-align: top; }
+.article-section table { border-spacing: 0; border-collapse: collapse; width: 100%; max-width: 100%; margin: 12px 0px 12px; display: inline-block; overflow-x: auto; -webkit-overflow-scrolling: touch; vertical-align: top; }
+.article-section p ~ :has(table) table { margin-top: 0px; }
 .article-section th ,.article-section td { min-width: 80px; padding: 8px 10px; border: 1px solid var(--border-color-gray); }
 .article-section th { background: var(--bg-gray-color); font-weight: bold; white-space: nowrap; }
 .article-section td { word-wrap: break-word; }
-.article-section h3 { font-size: 20px; margin: 25px 0px 10px; padding-left: 14px; position: relative; }
+.article-section h3 { font-size: 19px; margin: 25px 0px 10px; padding-left: 14px; position: relative; }
 .article-section h3::before { content: "\e601"; font-family: "iconfont" !important; font-size: 12px; position: absolute; left: 0px; top: 5px; color: #338eba; }
 .article-section h3:first-child { margin-top: 10px; }
+.article-section p + h3 { margin-top: 4px !important; }
+.article-section h3:has(+ ul), .article-section h3:has(+ ol) { margin-bottom: 4px !important; }
+.article-section li:has(> p) > p {
+  margin: 0 !important;
+}
 .article-section li { padding: 5px 0px 0px; }
 .article-section ul li h3,.article-section ol li h3 { padding-left: 0px; }
 .article-section ul li h3::before, .article-section ol li h3::before { content: ""; }
@@ -181,12 +187,13 @@ blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border
 .steps { margin: 0; padding: 5px 0 5px; list-style: none; counter-reset: step-main; }
 .steps > li { position: relative; padding: 0 0 10px 24px; counter-increment: step-main; }
 .steps > li:last-child { padding-bottom: 0px; }
-.steps > li::before { position: absolute; top: 1px; left: -6px; display: grid; width: 22px; height: 22px; place-items: center; line-height: 1; background: linear-gradient(to bottom, #c9d8e5 0%, #7192b0 35%, #5e7a92 65%, #5e7a92 100%); border: 1px solid #566f86; border-radius: 4px; color: var(--white); content: counter(step-main); font-family: var(--mono); font-size: 12px; font-weight: 700; box-sizing: border-box; text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3); } 
-.steps li h3 { margin: 0; font-size: 20px; padding-left: 0px; position: relative; }
+.steps > li::before { position: absolute; top: 1px; left: -2px; display: grid; width: 20px; height: 20px; place-items: center; line-height: 1; background: linear-gradient(to bottom, #c9d8e5 0%, #7192b0 35%, #5e7a92 65%, #5e7a92 100%); border: 1px solid #566f86; border-radius: 4px; color: var(--white); content: counter(step-main); font-family: var(--mono); font-size: 12px; font-weight: 700; box-sizing: border-box; text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3); } 
+.steps li h3 { margin: 0; font-size: 19px; padding-left: 0px; position: relative; }
 .steps li h3::before{ content: ""; width: 5px; height: 100%; border-radius: 3px; background: none;  position: absolute; left: 0px; top: 0px; }
+.article-section .steps li > p { margin: 10px 0 !important; }
 .steps ul { padding-left: 18px; }
 .steps ul li { margin: 4px 0; }
-.steps > li > ol { margin-left: -8px; padding-top: 5px; padding-bottom: 8px; counter-reset: step-sub; }
+.steps > li > ol { margin-left: -8px; padding-bottom: 8px; counter-reset: step-sub; }
 .steps > li > ol > li { position: relative; padding: 5px 0 0; list-style-type: none; counter-increment: step-sub; }
 .steps > li > ol > li::before { position: absolute; top: 6px; left: -23px; display: grid; font-size: 15px; width: 25px; height: 20px; align-items: center; content: counter(step-sub) "."; text-align: left; line-height: 1; letter-spacing: -0.75px; box-sizing: border-box; }
 .steps > li > ul > li { list-style-type: disc; }
@@ -242,7 +249,7 @@ blockquote { padding: 0px 12px; margin: 6px 0; background-color: #fafafa; border
 /* 开始前准备 - 卡片
 --------------------------------------------------------------*/
 .article-before-start-card { position: relative; margin: 16px auto 0px; }
-.article-before-start-card ul li{ padding: 4px 0 0; }
+/*.article-before-start-card ul li{ padding: 4px 0 0; }*/
 /*--------------------------------------------------------------
 /* 提醒点 - 卡片
 --------------------------------------------------------------*/
@@ -418,7 +425,7 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
 --------------------------------------------------------------*/
 .float-actions { position: fixed; bottom: 25px; right: 15px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
 /* --- 返回顶部&文章目录 按钮 --- */
-.back-to-top, .float-btn { width: 36px; height: 36px; background-color: rgba(0, 0, 0, 0.3); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); color: rgba(255, 255, 255, 0.8); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 50%; align-items: center; justify-content: center; cursor: pointer; }
+.back-to-top, .float-btn { width: 38px; height: 38px; background-color: rgba(0, 0, 0, 0.3); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); color: rgba(255, 255, 255, 0.8); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 50%; align-items: center; justify-content: center; cursor: pointer; }
 /* --- 返回顶部按钮 --- */
 .back-to-top { display: none; }
 .back-to-top.show { display: flex; animation: fadeInUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -692,9 +699,7 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   .menu-btn { display: flex; }
   .header-logo { font-size: 20px; }
   .article-section th ,.article-section td { min-width: 60px; padding: 6px 10px; font-size: 13px; }
-  /*.back-to-top { right: 10px; }
-  .float-toc-wrap { right: 10px; }*/
-  .float-actions { right: 10px; }
+  .float-actions { right: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) { 

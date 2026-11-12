@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="darkreader-lock" content="true">
   <meta name="description" content="">
+  <meta property="og:image" content="">
   <title>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</title>
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_jwymrt7w3u8.css">
@@ -110,7 +111,7 @@
             <!-- Content -->
             <div class="article-remind-dots-card">
               <p>橙色火卡片</p>
-              <h3 class="mt-1">〔橙色火〕模块整体代码</h3>
+              <h3>〔橙色火〕模块整体代码</h3>
               <pre><code class="lang-html">&lt;!-- 橙色火卡片模块 --&gt;
 &lt;section class="article-section"&gt;
   &lt;!-- title --&gt;
@@ -130,7 +131,7 @@
             <!-- Content -->
             <div class="article-remind-dots-card">
               <p>提醒点卡片</p>
-              <h3 class="mt-1">〔提醒点卡片〕模块整体代码</h3>
+              <h3>〔提醒点卡片〕模块整体代码</h3>
               <pre><code class="lang-html">&lt;!-- 提醒点卡片模块 --&gt;
 &lt;section class="article-section"&gt;
   &lt;!-- title --&gt;
@@ -150,7 +151,7 @@
             <!-- Content -->
             <div class="article-star-card">
               <p>星星卡片</p>
-              <h3 class="mt-1">〔星星卡片〕模块整体代码</h3>
+              <h3>〔星星卡片〕模块整体代码</h3>
               <pre><code class="lang-html">&lt;!-- 星星卡片模块 --&gt;
 &lt;section class="article-section"&gt;
   &lt;!-- title --&gt;
@@ -186,7 +187,7 @@
             <!-- Content -->
             <div class="article-quote-card">
               <p>引号主题卡片</p>
-              <h3 class="mt-1">〔引号主题卡片〕模块整体代码</h3>
+              <h3>〔引号主题卡片〕模块整体代码</h3>
               <pre><code class="lang-html">&lt;!-- 引号主题卡片模块 --&gt;
 &lt;section class="article-section"&gt;
   &lt;!-- title --&gt;
@@ -1344,13 +1345,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (dayEl) dayEl.innerText = pDate;
       if (monthEl) monthEl.innerText = ""; 
 
-      // 3. 安全处理封面图
-      const firstImg = document.querySelector(".mian-body img");
+      // 3. 安全处理封面图（优先级：OG标签 -> 正文首图 -> 默认背景）
       const coverEl = document.getElementById("poster-cover");
-      
-      if (firstImg && firstImg.src) {
+      // 3.1. 尝试获取 og:image
+      let targetImgSrc = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
+      // 3.2. 如果没有 og:image，尝试获取正文第一张大图
+      if (!targetImgSrc) {
+        // 过滤掉头像、图标等干扰
+        const firstImg = document.querySelector(".mian-body img");
+        if (firstImg) {
+          targetImgSrc = firstImg.src;
+        }
+      }
+      // 3.3. 如果找到了图片地址，开始转 Base64 并渲染
+      if (targetImgSrc) {
         try {
-          const response = await fetch(firstImg.src);
+          const response = await fetch(targetImgSrc);
           const blob = await response.blob();
           const base64Url = await new Promise((resolve) => {
             const reader = new FileReader();
@@ -1361,8 +1371,12 @@ document.addEventListener("DOMContentLoaded", () => {
           coverEl.src = base64Url;
           coverEl.style.opacity = "1";
         } catch (e) {
-          console.error("图片抓取失败", e);
+          console.error("图片抓取失败，使用默认背景", e);
+          coverEl.style.opacity = "0"; // 抓取失败（比如防盗链），隐藏图片，露出底色
         }
+      } else {
+        // 既没有 OG 图，正文也没有图
+        coverEl.style.opacity = "0";
       }
 
       // 4. 生成超高清二维码
