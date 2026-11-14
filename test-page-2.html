@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="darkreader-lock" content="true">
+  <meta name="description" content="">
+  <title>Search</title>
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_55t3u04q17c.css">
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
+  <link rel="stylesheet" href="assests/css/style.css?v=20261114-1">
+  <link rel="stylesheet" href="assests/css/list.css?v=20261114-1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <!-- 左侧：Logo + 导航 -->
+      <div class="header-left">
+        <a href="/" class="header-logo">
+          <!-- 建议给个默认高度，防止图片加载前乱跳 -->
+          <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="海纳百川" style="height: 32px; width: auto;">
+        </a>
+        <nav class="header-nav" id="headerNav">
+          <!-- 使用 ul 包裹 -->
+          <ul class="nav-main" id="navMain">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">技术类</a></li>
+            <!-- 带有二级菜单的标准结构 -->
+            <li>
+              <a href="#">MySQL</a>
+              <ul class="sub-menu">
+                <li><a href="#">MySQL-SUB1</a></li>
+                <li><a href="#">MySQL-SUB2</a></li>
+              </ul>
+            </li>
+            <!-- 其他普通菜单 -->
+            <li><a href="#">Excel</a></li>
+            <li><a href="#">DEDE</a></li>
+            <li><a href="#">Linux</a></li>
+            <li><a href="#">MacCMS</a></li>
+            <li><a href="#">文献类</a></li>
+            <li><a href="#">MENU9</a></li>
+            <!-- 带有二级菜单的标准结构 -->
+            <li>
+              <a href="#">MENU10</a>
+              <ul class="sub-menu">
+                <li class="active"><a href="#">MENU10-SUB1</a></li>
+                <li><a href="#">MENU10-SUB2</a></li>
+              </ul>
+            </li>
+            <li><a href="#">MENU11</a></li>
+            <li><a href="#">MENU12</a></li>
+            <li><a href="#">MENU13</a></li>
+          </ul>
+          <!-- 折叠下拉框 (保持原样) -->
+          <div class="nav-more" id="navMore">
+            <button class="nav-more-btn">
+              <i class="iconfont icon-updown-min"></i>
+            </button>
+            <div class="nav-more-dropdown" id="navMoreDropdown"></div>
+          </div>
+        </nav>
+
+      </div>
+
+      <!-- 右侧：操作按钮 -->
+      <div class="header-actions">
+        <button class="action-btn" id="openSearchBtn" aria-label="搜索">
+          <i class="iconfont icon-search"></i>
+        </button>
+        <button class="action-btn menu-btn" id="openMenuBtn" aria-label="菜单">
+          <i class="iconfont icon-mulu2"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <article class="layout article">
+        <header class="article-header">
+          <!-- 面包屑导航 -->
+          <nav class="breadcrumb-nav" aria-label="面包屑导航">
+            <a href="index.html">首页</a>
+            <span>搜索</span>
+          </nav>
+        </header>
+
+        <div class="mian-body">
+          <div class="search-header">
+            <div class="search-header-icon">
+              <i class="iconfont icon-search"></i>
+            </div>
+            <div class="search-header-body">
+              <h1>织梦</h1>
+              <div class="search-header-tips">共找到 4 篇相关文章</div>
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="list-grid">
+            <!-- 第一条数据 -->
+            <article class="list-item">
+              <!-- 图片区域 -->
+              <div class="media">
+                <a href="/article/000004.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421002.jpg" alt="织梦dedecms联动类型地区联动及省份-市级-地区分开+高亮">
+                </a>
+              </div>
+              <!-- 内容区域 -->
+              <a href="#" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">我是第二页加载出来的新文章！</span>
+                </h2>
+                <div class="list-desc h-2x">
+                  如果你能看到这段文字，说明无限滚动生效了。
+                </div>
+                <footer class="list-footer">
+                  <span class="date">2022年04月14日</span>
+                  <span class="category">DEDE</span>
+                </footer>
+              </a>
+            </article>
+            
+          </div>
+
+          <!-- 放在列表 <div class="list-grid"> 的下面 -->
+          <div id="pagination-wrapper">
+              <!-- 加载更多按钮 (PC端显示) -->
+              <button id="load-more-btn" class="load-more-btn">加载更多文章</button>
+
+              <!-- 底部翻页条 -->
+              <div class="custom-pagination">
+                  <a href="#" class="page-btn prev disabled"> &lt; 上一页 </a>
+                  <span class="page-info">第 1 页 / 共 1 页</span>
+                  <a href="test-page-2.html" class="page-btn next" id="real-next-btn"> 下一页 &gt; </a>
+              </div>
+          </div>
+
+        </div>
+    </article>
+  </main>
+
+  <!-- 页面底部 -->
+  <footer class="site-footer">
+      <div class="container">
+        <div class="footer-logo">
+          <a href="#"><img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt=""></a>
+        </div>
+        <div class="footer-copyright text-center d-md-block">
+          © <span class="dqnianfen"><script>window.onload=function(){var currentYear=new Date().getFullYear();var yearElement=document.querySelector('.dqnianfen');if(yearElement){yearElement.textContent=currentYear}};</script></span> 海纳百川. All Rights Reserved
+        </div>
+    </div>
+  </footer>
+
+  <!-- 在 header 下面新增侧边栏 -->
+  <!-- 遮罩层 -->
+  <div id="menuOverlay" class="menu-overlay"></div>
+  <!-- 侧边栏 -->
+  <div id="sideMenu" class="side-menu-drawer">
+    <div class="side-menu-topbar">
+      <a href="/" class="side-menu-brand">
+        <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="Logo">
+      </a>
+      <button class="side-close" id="closeMenuBtn">
+        <i class="iconfont icon-close"></i>
+      </button>
+    </div>
+
+    <div class="side-menu-search">
+      <div class="side-search-box" id="sideSearchTrigger">
+        <i class="iconfont icon-search"></i>
+        <span>搜索文章 / 关键词</span>
+      </div>
+    </div>
+    
+    <div class="side-menu-body">
+      <ul class="mobile-menu-inner">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">技术类</a></li>
+        <li>
+          <a href="#MySQL">MySQL</a>
+          <ul class="sub-menu">
+            <li class="active"><a href="#">MySQL-SUB1</a></li>
+            <li><a href="#">MySQL-SUB2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Excel</a></li>
+        <li><a href="#">DEDE</a></li>
+        <li><a href="#">Linux</a></li>
+        <li><a href="#">MacCMS</a></li>
+        <li>
+          <a href="#">MENU10</a>
+          <ul class="sub-menu">
+            <li><a href="#">MENU10-SUB1</a></li>
+            <li><a href="#">MENU10-SUB2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">MENU11</a></li>
+        <li><a href="#">MENU12</a></li>
+        <li><a href="#">MENU13</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 搜索遮罩层 -->
+  <div id="searchOverlay" class="search-overlay"></div>
+  <!-- 搜索面板 -->
+  <div id="searchPanel" class="search-panel">
+    <div class="search-container">
+      <form class="search-input-group" id="searchForm" action="search.html" method="GET">
+        <i class="iconfont search-icon icon-search"></i>
+        <input type="search" name="q" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off" enterkeyhint="search">
+        <button class="search-close-btn" type="button" id="closeSearchBtn" aria-label="关闭搜索">
+          <i class="iconfont icon-close"></i>
+        </button>
+      </form>
+      
+      <!-- 搜索提示区 (搜索历史) -->
+      <div class="search-hints" id="searchHistoryBox" style="display: none;">
+        <div class="hint-header">
+          <div class="hint-title">搜索历史</div>
+          <button class="clear-history-btn" id="clearHistoryBtn">
+            <i class="iconfont icon-delete"></i>清空
+          </button>
+        </div>
+        <div class="hint-tags" id="historyTags">
+          <!-- 历史记录标签会由 JS 动态生成到这里 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // ==========================================
+  // 全局函数：复制验证码 (放在最外层，方便 HTML 直接 onclick 调用)
+  // ==========================================
+  window.copyPromoCode = function(btnElement, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      let copyBtn = btnElement;
+      // 如果点的是验证码本身，去找它旁边的复制按钮
+      if (btnElement.classList.contains("promo-code")) {
+        copyBtn = btnElement.parentElement.querySelector(".promo-btn-copy");
+      }
+      if (!copyBtn) return;
+
+      const originalText = copyBtn.innerText;
+      copyBtn.innerText = "已复制";
+      copyBtn.style.color = "var(--green, #1aae19)"; 
+      copyBtn.style.borderColor = "var(--green, #1aae19)";
+      copyBtn.disabled = true; 
+
+      setTimeout(() => {
+        copyBtn.innerText = originalText;
+        copyBtn.style.color = "";
+        copyBtn.style.borderColor = "";
+        copyBtn.disabled = false;
+      }, 1500);
+    }).catch(err => {
+      alert("复制失败，请手动长按选择复制：" + text);
+    });
+  };
+
+  // ==========================================
+  // 页面核心逻辑 (等待 DOM 加载完成后执行)
+  // ==========================================
+  document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- 0. 公共 DOM 变量获取 ---
+    const openMenuBtn = document.getElementById("openMenuBtn");
+    const closeMenuBtn = document.getElementById("closeMenuBtn");
+    const sideMenu = document.getElementById("sideMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const sideSearchTrigger = document.getElementById("sideSearchTrigger");
+    
+    const openSearchBtn = document.getElementById("openSearchBtn");
+    const closeSearchBtn = document.getElementById("closeSearchBtn");
+    const searchOverlay = document.getElementById("searchOverlay");
+    const searchPanel = document.getElementById("searchPanel");
+    const searchInput = document.getElementById("searchInput");
+    const searchHistoryBox = document.getElementById("searchHistoryBox");
+    const historyTags = document.getElementById("historyTags");
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+    const searchForm = document.getElementById("searchForm");
+
+    const headerNav = document.getElementById("headerNav");
+    const navMain = document.getElementById("navMain");
+    const navMore = document.getElementById("navMore");
+    const dropdown = document.getElementById("navMoreDropdown");
+    const navLinks = Array.from(navMain.querySelectorAll("a"));
+
+    const openTocBtn = document.getElementById("openTocBtn");
+    const closeTocBtn = document.getElementById("closeTocBtn");
+    const tocModal = document.getElementById("tocModal");
+
+
+    // ==========================================
+    // 1. 全局/通用功能 (代码高亮 & 复制 & 行号)
+    // ==========================================
+    if (typeof hljs !== 'undefined') {
+      hljs.highlightAll();
+    }
+
+    document.querySelectorAll("pre").forEach((pre) => {
+      const code = pre.querySelector("code");
+      if (!code) return;
+
+      const codeText = code.textContent || "";
+      const lines = codeText.split('\n');
+      if (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
+
+      const highlightedLines = code.innerHTML.split('\n');
+      
+      let newHtml = '';
+      lines.forEach((_, index) => {
+        newHtml += `<div class="code-line">`;
+        newHtml += `<span class="line-num">${index + 1}</span>`;
+        newHtml += `<span class="line-text">${highlightedLines[index] || ' '}</span>`;
+        newHtml += `</div>`;
+      });
+
+      code.innerHTML = newHtml;
+      pre.classList.add("has-line-numbers");
+
+      let lang = "code";
+      const classList = Array.from(code.classList);
+      const langClass = classList.find(c => c.startsWith("language-") || c.startsWith("lang-")) || classList.find(c => c !== "hljs");
+
+      if (langClass) {
+        lang = langClass.replace("language-", "").replace("lang-", "");
+      }
+      pre.setAttribute("data-lang", lang);
+      
+      pre.addEventListener("click", (e) => {
+        const rect = pre.getBoundingClientRect();
+        if (e.clientY - rect.top < 40 && e.clientX > rect.right - 100) {
+          const contentToCopy = Array.from(code.querySelectorAll('.line-text'))
+                                     .map(el => el.textContent)
+                                     .join('\n');
+          
+          navigator.clipboard.writeText(contentToCopy).then(() => {
+            pre.classList.add("copied");
+            setTimeout(() => pre.classList.remove("copied"), 1500);
+          }).catch((err) => console.error("复制失败: ", err));
+        }
+      });
+    });
+
+
+    // ==========================================
+    // 2. PC端 顶部导航折叠 & 多级菜单
+    // ==========================================
+
+    // 2.1 PC端：二级菜单激活时，父级一级菜单高亮
+    const pcActiveSubItem = document.querySelector('.nav-main .sub-menu li.active');
+    if (pcActiveSubItem) {
+      const parentLi = pcActiveSubItem.closest('.nav-main > li');
+      if (parentLi) {
+        parentLi.classList.add('active');
+      }
+    }
+
+    // 2.2 折叠面板内的子菜单防溢出（右侧不够自动向左弹）
+    const moreDropdown = document.getElementById("navMoreDropdown");
+    if (moreDropdown) {
+      moreDropdown.addEventListener("mouseover", (e) => {
+        const li = e.target.closest("li:has(> .sub-menu)");
+        if (!li) return;
+
+        li.classList.remove("flip-left");
+
+        const rect = li.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const remainingRightSpace = windowWidth - rect.right;
+
+        if (remainingRightSpace < 200) {
+          li.classList.add("flip-left");
+        }
+      });
+    }
+
+    // 2.3 顶部导航溢出折叠计算
+    const checkNavOverflow = () => {
+      if (window.innerWidth <= 820) return;
+      navMore.classList.remove("show");
+      dropdown.innerHTML = "";
+      
+      const navItems = Array.from(navMain.children);
+      navItems.forEach(li => li.style.display = "");
+
+      const moreBtnWidth = navMore.querySelector('.nav-more-btn').offsetWidth || 40;
+      const availableWidth = headerNav.offsetWidth - moreBtnWidth - 20;
+
+      if (navMain.scrollWidth > availableWidth) {
+        navMore.classList.add("show");
+        for (let i = navItems.length - 1; i >= 0; i--) {
+          const li = navItems[i];
+          li.style.display = "none"; 
+          const clone = li.cloneNode(true); 
+          clone.style.display = "block";
+          
+          dropdown.prepend(clone); 
+          
+          if (navMain.scrollWidth <= availableWidth) break;
+        }
+      }
+    };
+
+    // ==========================================
+    // 3. 移动端侧边栏：多级菜单逻辑
+    // ==========================================
+    
+    // 3.1 自动注入展开箭头 & 手风琴排他逻辑
+    document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(li => {
+      if (li.querySelector('.mobile-sub-btn')) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'mobile-sub-btn';
+      btn.innerHTML = '<i class="iconfont icon-right"></i>'; 
+      btn.setAttribute('aria-label', '展开子菜单');
+      
+      const subMenu = li.querySelector('.sub-menu');
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        e.preventDefault();
+        
+        const isCurrentlyOpen = btn.classList.contains('open');
+
+        document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(otherLi => {
+          const otherBtn = otherLi.querySelector('.mobile-sub-btn');
+          const otherSubMenu = otherLi.querySelector('.sub-menu');
+          
+          if (otherLi !== li) {
+            if (otherBtn) otherBtn.classList.remove('open');
+            if (otherSubMenu) otherSubMenu.classList.remove('show');
+          }
+        });
+
+        if (!isCurrentlyOpen) {
+          btn.classList.add('open');
+          if (subMenu) subMenu.classList.add('show');
+        } else {
+          btn.classList.remove('open');
+          if (subMenu) subMenu.classList.remove('show');
+        }
+      });
+
+      li.appendChild(btn);
+    });
+
+    // 3.2 移动端：页面加载时，自动展开当前高亮所在的父级
+    const activeSubItem = document.querySelector('.mobile-menu-inner .sub-menu li.active');
+    
+    if (activeSubItem) {
+      const parentLi = activeSubItem.closest('li:has(> .sub-menu)');
+      
+      if (parentLi) {
+        const parentBtn = parentLi.querySelector('.mobile-sub-btn');
+        const parentSubMenu = parentLi.querySelector('.sub-menu');
+        
+        if (parentBtn) parentBtn.classList.add('open');
+        if (parentSubMenu) parentSubMenu.classList.add('show');
+      }
+    }
+    
+    requestAnimationFrame(checkNavOverflow);
+    let navTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(navTimeout);
+      navTimeout = setTimeout(checkNavOverflow, 100);
+    });
+
+
+    // ==========================================
+    // 4. 侧边栏整体开关逻辑
+    // ==========================================
+    if (openMenuBtn) {
+      openMenuBtn.addEventListener("click", () => {
+        sideMenu.classList.add("show");
+        menuOverlay.classList.add("show");
+        document.body.classList.add("modal-open");
+      });
+    }
+    const closeMenu = () => {
+      sideMenu.classList.remove("show");
+      menuOverlay.classList.remove("show");
+      document.body.classList.remove("modal-open");
+    };
+    if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
+    if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+    document.querySelectorAll(".menu-link").forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
+
+
+    // ==========================================
+    // 5. 搜索弹窗核心逻辑 (历史记录 & 开关) 
+    // ==========================================
+    const getHistory = () => {
+      try { return JSON.parse(localStorage.getItem("myBlogSearchHistory")) || []; } 
+      catch (e) { return []; }
+    };
+
+    const renderHistory = () => {
+      const history = getHistory();
+      if (history.length === 0) {
+        searchHistoryBox.style.display = "none";
+        return;
+      }
+      searchHistoryBox.style.display = "block";
+      historyTags.innerHTML = history.map(tag => `<span class="hint-tag">${tag}</span>`).join("");
+
+      document.querySelectorAll("#historyTags .hint-tag").forEach(tag => {
+        tag.addEventListener("click", () => {
+          searchInput.value = tag.innerText;
+          saveHistory(tag.innerText);
+          if (searchForm) {
+            searchForm.requestSubmit();
+          }
+        });
+      });
+    };
+
+    const saveHistory = (keyword) => {
+      let history = getHistory().filter(item => item !== keyword);
+      history.unshift(keyword);
+      if (history.length > 5) history = history.slice(0, 5);
+      localStorage.setItem("myBlogSearchHistory", JSON.stringify(history));
+      renderHistory();
+    };
+
+    if (clearHistoryBtn) {
+      clearHistoryBtn.addEventListener("click", () => {
+        localStorage.removeItem("myBlogSearchHistory");
+        renderHistory();
+      });
+    }
+
+    const openSearchPanel = () => {
+      searchOverlay.classList.remove("no-overlay-bg");
+      searchOverlay.classList.add("show");
+      searchPanel.classList.add("show");
+      document.body.classList.add("modal-open");
+      renderHistory(); 
+      searchInput.focus(); 
+      searchInput.click(); 
+    };
+
+    const closeSearch = () => {
+      searchOverlay.classList.remove("show");
+      searchPanel.classList.remove("show");
+      searchInput.value = ""; 
+      searchOverlay.classList.remove("no-overlay-bg");
+      if (menuOverlay && menuOverlay.classList.contains("show")) {
+        menuOverlay.classList.remove("show");
+      }
+      document.body.classList.remove("modal-open");
+    };
+
+    if (openSearchBtn) {
+      openSearchBtn.addEventListener("click", openSearchPanel);
+    }
+    if (closeSearchBtn) closeSearchBtn.addEventListener("click", closeSearch);
+    if (searchOverlay) searchOverlay.addEventListener("click", closeSearch);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && searchPanel.classList.contains("show")) closeSearch();
+    });
+
+    if (searchForm) {
+      searchForm.addEventListener("submit", (e) => {
+        const keyword = searchInput.value.trim();
+        if (keyword !== "") {
+          saveHistory(keyword);
+        } else {
+          e.preventDefault(); 
+        }
+      });
+    }
+
+    // ==========================================
+    // 6. 侧边栏搜索联动 (完美共用遮罩) 
+    // ==========================================
+    if (sideSearchTrigger) {
+      sideSearchTrigger.addEventListener("click", () => {
+        sideMenu.classList.add("no-transition");
+        sideMenu.classList.remove("show");
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            sideMenu.classList.remove("no-transition");
+          });
+        });
+        
+        if (searchOverlay && searchPanel) {
+          searchOverlay.classList.add("no-overlay-bg");
+          searchOverlay.classList.add("show"); 
+          searchPanel.classList.add("show"); 
+          document.body.classList.add("modal-open");
+          if (typeof renderHistory === 'function') renderHistory();
+          searchInput.focus(); 
+          searchInput.click(); 
+        }
+      });
+    }
+
+
+    // ==========================================
+    // 7. 文章目录弹窗 (TOC)
+    // ==========================================
+    if (openTocBtn) {
+      openTocBtn.addEventListener("click", () => {
+        tocModal.showModal();
+        document.body.classList.add("modal-open");
+      });
+    }
+    const closeTocModal = () => {
+      tocModal.classList.add("closing");
+      setTimeout(() => {
+        tocModal.close();
+        tocModal.classList.remove("closing");
+        document.body.classList.remove("modal-open");
+      }, 300); 
+    };
+    if (closeTocBtn) closeTocBtn.addEventListener("click", closeTocModal);
+    if (tocModal) {
+      tocModal.addEventListener("click", (e) => {
+        const rect = tocModal.getBoundingClientRect();
+        const isInDialog = (
+          e.clientX >= rect.left && e.clientX <= rect.right &&
+          e.clientY >= rect.top && e.clientY <= rect.bottom
+        );
+        if (!isInDialog) closeTocModal();
+      });
+    }
+    document.querySelectorAll(".toc-item").forEach(item => {
+      item.addEventListener("click", closeTocModal);
+    });
+
+
+    // ==========================================
+    // 8. 自动为所有 Markdown 表格包裹滚动容器
+    // ==========================================
+    document.querySelectorAll('.article-section table').forEach(table => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+
+    // ==========================================
+    // 9. 返回顶部按钮
+    // ==========================================
+    const backToTopBtn = document.getElementById("backToTop");
+    
+    if (backToTopBtn) {
+      let isHiding = false; 
+
+      window.addEventListener("scroll", () => {
+        const triggerDistance = window.innerHeight * 1.5; 
+        
+        if (window.scrollY > triggerDistance) {
+          isHiding = false;
+          backToTopBtn.classList.remove("hiding");
+          backToTopBtn.classList.add("show");
+        } else {
+          if (backToTopBtn.classList.contains("show") && !isHiding) {
+            isHiding = true;
+            backToTopBtn.classList.remove("show");
+            backToTopBtn.classList.add("hiding");
+
+            setTimeout(() => {
+              if (isHiding) {
+                backToTopBtn.classList.remove("hiding");
+                isHiding = false;
+              }
+            }, 300);
+          }
+        }
+      });
+
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+  });
+</script>
+
+<!-- 无限滚动 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const realNextBtn = document.getElementById('real-next-btn');
+    const pageInfo = document.querySelector('.page-info');
+    
+    // 用于测试的假链接
+    const testNextBtn = document.getElementById('test-next-btn'); 
+    
+    let isLoading = false;
+    let hasNextPage = true;
+    let currentPage = 1;
+
+    // 判断是不是手机端
+    const isMobile = window.innerWidth <= 768;
+
+    // PC端：显示“加载更多”按钮
+    if (!isMobile) {
+        loadMoreBtn.style.display = 'inline-block';
+    }
+
+    // 核心加载函数
+    async function loadNextPage() {
+        if (isLoading || !hasNextPage) return;
+        
+        // 找真实链接或测试链接
+        let nextUrl = null;
+        if (realNextBtn && realNextBtn.href !== '#' && !realNextBtn.href.endsWith('#')) {
+            nextUrl = realNextBtn.href;
+        } else if (testNextBtn && testNextBtn.href) {
+            nextUrl = testNextBtn.href;
+        }
+
+        if (!nextUrl) {
+            hasNextPage = false;
+            return;
+        }
+
+        isLoading = true;
+        loadMoreBtn.innerText = '加载中...';
+        loadMoreBtn.style.opacity = '0.5';
+
+        try {
+            const response = await fetch(nextUrl);
+            const htmlText = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+            
+            const newItems = doc.querySelectorAll('.list-item'); 
+            
+            if (newItems.length > 0) {
+                const currentItems = document.querySelectorAll('.list-item');
+                const lastItem = currentItems[currentItems.length - 1];
+                
+                newItems.forEach(item => {
+                    if(lastItem) {
+                        lastItem.parentNode.insertBefore(item, lastItem.nextSibling);
+                    } else {
+                        document.querySelector('.list-grid').appendChild(item);
+                    }
+                });
+
+                // 更新地址栏
+                window.history.pushState({}, '', nextUrl);
+                
+                // 更新页码（假数据演示）
+                currentPage++;
+                pageInfo.innerText = `第 ${currentPage} 页 / 共 5 页`; 
+                
+                loadMoreBtn.innerText = '加载更多文章';
+                loadMoreBtn.style.opacity = '1';
+                
+            } else {
+                hasNextPage = false;
+                loadMoreBtn.innerText = '没有更多了';
+                pageInfo.innerText = `第 ${currentPage} 页 / 共 ${currentPage} 页`;
+            }
+        } catch (error) {
+            console.error('加载失败', error);
+            loadMoreBtn.innerText = '加载失败，点击重试';
+            loadMoreBtn.style.opacity = '1';
+        } finally {
+            isLoading = false;
+        }
+    }
+
+    // PC 端：点击加载
+    loadMoreBtn.addEventListener('click', loadNextPage);
+
+    // 移动端：触底加载
+    if (isMobile) {
+        window.addEventListener('scroll', function() {
+            if (isLoading || !hasNextPage) return;
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                loadNextPage();
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
