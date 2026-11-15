@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="darkreader-lock" content="true">
   <meta name="description" content="">
-  <meta property="og:image" content="">
-  <title>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</title>
+  <title>海纳百川</title>
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_55t3u04q17c.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_cvfanb5sdmd.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261114-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261115-1">
 </head>
 <body>
   <header class="site-header">
@@ -78,674 +77,216 @@
   </header>
   <main>
     <article class="layout article">
-        <header class="article-header">
-          <!-- 面包屑导航 -->
-          <nav class="breadcrumb-nav" aria-label="面包屑导航">
-            <a href="index.html">首页</a>
-            <a href="index.html">技术类</a>
-            <span>个人密码库</span>
-          </nav>
-          <h1>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</h1>
-          <div class="article-meta">
-            <span>2026年03月18日</span>
-            <span>149次阅读</span>
-            <span>12条评论</span>
-          </div>
-        </header>
 
         <div class="mian-body">
-          <!-- 开始前准备卡片 -->
-          <section class="article-section">
-            <div class="article-before-start-card">
-              <h3>开始前要准备什么</h3>
-              <ul>
-                <li>一个可以正常登录的 <span class="ui-label">Cloudflare</span> 账号。</li>
-                <li>一个可以正常登录的 <span class="ui-label">Github</span> 账号。</li>
-                <li>Fork <span class="ui-label">NodeWarden</span> 开源项目。</li>
-              </ul>
-              <h3>本期会用到的项目与网址 </h3>
-              <ul>
-                <li><a href="#" rel="noopener noreferrer">Cloudflare 官网</a></li>
-                <li><a href="#" rel="noopener noreferrer">GitHub 官网</a></li>
-                <li><a href="#" rel="noopener noreferrer">NodeWarden 开源项目</a></li>
-              </ul>
-            </div>
-          </section>
+          <!-- List -->
+          <div class="list-grid">
+            <!-- 第一条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="art-apple.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421002.jpg" alt="测试文章 1">
+                </a>
+              </div>
+              <a href="art-apple.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span>
+                </h2>
+                <div class="list-desc h-2x">随着互联网的飞速发展，前端技术也在不断地迭代更新。从最初的 jQuery 到现在的 Vue 和 React，前端工程化越来越成熟...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年01月15日</span>
+                  <span class="category">前端开发</span>
+                </footer>
+              </a>
+            </article>
 
-          <!-- 分割线标题 -->
-          <div class="article-split-line">
-            <span class="article-split-text">
-              <strong>❤️分割线标题❤️</strong>
-            </span>
-          </div>
+            <!-- 第二条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421009.jpg" alt="测试文章 2">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span>
+                </h2>
+                <div class="list-desc h-2x">lexbox 适用于一维布局，而 Grid 更擅长二维布局。在实际开发中，合理地结合使用这两种布局方案，能极大地提高开发效率...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年02月20日</span>
+                  <span class="category">CSS 技巧</span>
+                </footer>
+              </a>
+            </article>
 
-          <section class="article-section">
-            <!-- title -->
-            <h2 class="title-gradient-tag">节点标题</h2>
-            <!-- Content -->
-            <div class="article-remind-dots-card">
-              <p>橙色火卡片</p>
-              <h3>〔橙色火〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 橙色火卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2 class="title-gradient-tag"&gt;节点标题&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-remind-dots-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-            </div>
-          </section>
-
-          <!-- 文章提醒点卡片 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2 class="number-title">节点标题</h2>
-            <!-- Content -->
-            <div class="article-remind-dots-card">
-              <p>提醒点卡片</p>
-              <h3>〔提醒点卡片〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 提醒点卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2 class="number-title"&gt;节点标题&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-remind-dots-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-            </div>
-          </section>
-
-          <!-- 星星卡片 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2 class="title-love-tag"><span>节点标题</span></h2>
-            <!-- Content -->
-            <div class="article-star-card">
-              <p>星星卡片</p>
-              <h3>〔星星卡片〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 星星卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2 class="title-love-tag"&gt;&lt;span&gt;节点标题&lt;/span&gt;&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-star-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-              
-              <div class="promo-card">
-                <div class="promo-title">飞猫云 · 新用户季付以上 8 折</div>
-                <div class="promo-desc">适用范围：季付及以上套餐 · 最后核验 2026-07-12（有效性以商家页面为准）</div>
-                <div class="promo-actions">
-                  <!-- 验证码区域（点击复制） -->
-                  <div class="promo-code" onclick="copyPromoCode(this, 'flycat888')" title="点击复制验证码">
-                    <span class="code-text">flycat888</span>
-                  </div>
-                  <!-- 复制按钮 -->
-                  <button class="promo-btn-copy" onclick="copyPromoCode(this, 'flycat888')" style="">复制</button>
-                  <!-- 前往官网按钮（替换你的真实链接） -->
-                  <a href="https://你的官网链接.com" target="_blank" class="promo-btn-link">前往官网</a>
+            <!-- 第三条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421016.jpg" alt="测试文章 3">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 3 篇文章：JavaScript 异步编程指南</span>
+                </h2>
+                <div class="list-desc h-2x">从回调函数到 Promise，再到 async/await，JavaScript 的异步编程模型经历了巨大的演变。理解它们的底层原理至关重要...
                 </div>
-              </div>
-
-            </div>
-          </section>
-
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>节点标题</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <p>引号主题卡片</p>
-              <h3>〔引号主题卡片〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 引号主题卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2&gt;节点标题&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-quote-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-            </div>
-          </section>
-
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>节点标题</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <h3>分段代码</h3>
-              <ul>
-                <li>
-                  <p>带自定义序号的UL</p>
-                  <pre><code class="lang-html">&lt;ol class="steps"&gt;
-  &lt;li&gt;
-    &lt;h3&gt;一级标题&lt;/h3&gt;
-    &lt;p&gt;一级内容&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h3&gt;一级标题&lt;/h3&gt;
-    &lt;ol&gt;
-      &lt;li&gt;二级内容&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</code></pre>
-                  <blockquote>
-                    <p>主要区别就在，是否在 ol 或 ul 中添加 <strong>&lt;ol class="steps"&gt;</strong>，加了会显示成自定义序号，未加则是最原始的样式。 </p>
-                  </blockquote>
-                </li>
-                <li>
-                  <p>图片代码</p>
-                  <pre><code class="lang-html">&lt;figure class="article-figure"&gt;
-  &lt;img src="url" alt="" loading="lazy"&gt;
-  &lt;figcaption&gt;文字说明&lt;/figcaption&gt;
-&lt;/figure&gt;</code></pre>
-                  <blockquote>
-                    <p>里面的 <strong>&lt;figcaption&gt;文字说明&lt;/figcaption&gt;</strong>，如不需要可以删除。</p>
-                  </blockquote>
-                </li>
-                <li>
-                  <p>验证码模块代码</p>
-                  <pre><code class="lang-html">&lt;!-- 验证码模块 --&gt;
-&lt;div class="promo-card"&gt;
-  &lt;div class="promo-title"&gt;标题文字&lt;/div&gt;
-  &lt;div class="promo-desc"&gt;描述文字&lt;/div&gt;
-  &lt;div class="promo-actions"&gt;
-    &lt;!-- 验证码区域 --&gt;
-    &lt;div class="promo-code" onclick="copyPromoCode(this, 'gxfc8888')" title="点击复制验证码"&gt;
-      &lt;span class="code-text"&gt;gxfc8888&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;!-- 复制按钮 --&gt;
-    &lt;button class="promo-btn-copy" onclick="copyPromoCode(this, 'gxfc8888')" style=""&gt;复制&lt;/button&gt;
-    &lt;!-- 前往官网按钮 --&gt;
-    &lt;a href="###" target="_blank" class="promo-btn-link"&gt;前往官网&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                  <blockquote>
-                    <p>可以自己随意组合，「标题文字」「描述文字」「前往官网」三项都可不填</p>
-                  </blockquote>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>在 GitHub 创建一个新仓库</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <ol class="steps">
-                <li>
-                  <h3>注册登录 GitHub 账号</h3>
-                  <p>打开 <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Github</a> 官网，注册或登录自己的账户。</p>
-                </li>
-                <li>
-                  <h3>Fork “NodeWarden” 开源项目</h3>
-                  <ol>
-                    <li>点击前往 <a href="https://github.com/shuaiplus/NodeWarden" target="_blank" rel="noopener noreferrer">NodeWarden</a> 的官方仓库。</li>
-                    <li>点击页面右上角的 <span class="ui-label">Fork</span> 按钮，将该项目完整复制到你自己的 <span class="ui-label">GitHub</span> 账号下。</li>
-                  </ol>
-                </li>
-                <li>
-                  <h3>修改 wrangler.toml 配置文件</h3>
-                  <ol>
-                    <li>把 wrangler.toml 重新命名为其他名称。</li>
-                    <li>把 wrangler.kv.toml 更名为 wrangler.toml。</li>
-                  </ol>
-                </li>
-              </ol>
-            </div>
-          </section>
-
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>进行部署</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <ol class="steps">
-                <li>
-                  <h3>注册登录 Cloudflare 账号</h3>
-                  <p>打开 <a href="https://dash.cloudflare.com" target="_blank" rel="noopener noreferrer">Cloudflare</a> 官网，注册或登录自己的账户。</p>
-                </li>
-                <li>
-                  <h3>部署到 Cloudflare 中</h3>
-                  <ol>
-                    <li>找到 <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create" target="_blank" rel="noopener noreferrer">Cloudflare Workers</a> 并打开。</li>
-                    <li>Continue with GitHub（连接 Github 账号）。</li>
-                    <li>选择你 Fork 后的 <span class="ui-label">NodeWarden</span> 项目。</li>
-                    <li>点下一步，进行部署。
-                      <figure class="article-figure">
-                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421002.jpg" alt="" loading="lazy">
-                        <figcaption>根据需求填写图片的文字说明</figcaption>
-                      </figure>
-                    </li>
-                    <li>部署完成后，打开生成的链接。</li>
-                    <li>点下一步，进行部署。
-                      <figure class="article-figure">
-                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421016.jpg" alt="" loading="lazy">
-                        <figcaption>根据需求填写图片的文字说明</figcaption>
-                      </figure>
-                    </li>
-                    <li>
-                      填写验证码
-                      <div class="promo-card">
-                        <div class="promo-actions">
-                          <div class="promo-code" onclick="copyPromoCode(this, 'wsyzm6666')" title="点击复制验证码">
-                            <span class="code-text">wsyzm6666</span>
-                          </div>
-                          <button class="promo-btn-copy" onclick="copyPromoCode(this, 'wsyzm6666')" style="">复制</button>
-                        </div>
-                      </div>
-                    </li>
-                  </ol>
-                </li>
-                <li>
-                  <h3>再次修改 wrangler.toml 配置文件</h3>
-                  <p>确保里面只有 <span class="ui-label">KV</span> 配置，没有 <span class="ui-label">R2</span> 相关内容。</p>
-                  <ol>
-                    <li>在 kv_namespaces 中增加 KV空间ID。
-                      <pre><code>[[kv_namespaces]]
-binding = "ATTACHMENTS_KV" 
-id = "你的KV命名空间ID" 
-preview_id = "你的KV空间ID"
-</code></pre>
-                      <blockquote>
-                        <p>打开 <a href="https://dash.cloudflare.com/" title="CloudFlare主页">CloudFlare主页</a>，点击左侧的 “<strong>存储和数据库</strong>”，然后点击 “<strong>Workers KV</strong>”，找到 “<strong>xxx-attachments-kv</strong>” 复制ID。</p>
-                      </blockquote>
-                    </li>
-                    <li>在 d1_databases 中增加 D1数据库ID。
-                      <pre><code class="lang-ini">[[d1_databases]]
-binding = "DB"
-database_name = "nodewarden-db"
-database_id = "这里填你的D1数据库ID"
-</code></pre>
-                      <blockquote>
-                        <p>进入 <strong>D1 SQL Database</strong>（D1 SQL 数据库），找到你的数据库，点击去就可以找到你的 <strong>D1数据库UUID</strong>。</p>
-                      </blockquote>
-                      <pre><code class="lang-html">&lt;!-- 放在 &lt;head&gt; 里 --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"&gt;
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"&gt;&lt;/script&gt;
-</code></pre>
-                    </li>
-                  </ol>
-                </li>
-                <li>
-                  <h3>部署完成</h3>
-                  <p>到此部署完成，绑定自定义域名即可访问。</p>
-                </li>
-              </ol>
-            </div>
-          </section>
-
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>基本配置</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <p>打开自定义域名，首次打开时，需进行基础配置</p>
-              <ol class="steps">
-                <li>
-                  <h3>配置 JWT_SECRET</h3>
-                  <p>进入 Cloudflare 控制台 -> Workers 和 Pages -> 你的项目 -> 设置 -> 变量和机密 -> 添加。</p>
-                  <blockquote>
-                    <ul>
-                      <li>类型：<strong>秘钥</strong></li>
-                      <li>变量名称：<strong>JWT_SECRET</strong></li>
-                      <li>值：在基本配置页面里可以获取的到</li>
-                    </ul>
-                  </blockquote>
-                </li>
-                <li>
-                  <h3>创建账号&主密码</h3>
-                  <p>按照界面中指示来即可。</p>
-                  <blockquote>
-                    <p>主密码一定要记住，非常重要。</p>
-                  </blockquote>
-                </li>
-              </ol>
-            </div>
-          </section>
-
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>到 Bitwarden 中使用</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <ol class="steps">
-                <li>
-                  <h3>在 Bitwarden 项中，选择自托管</h3>
-                  <p>指定您的本地托管 Bitwarden 安装的基础 URL。例如：<a href="https://xxx.domain.com">https://xxx.domain.com</a></p>
-                  <blockquote>
-                    <p>注意，域名后面不要带 / 斜杠</p>
-                  </blockquote>
-                </li>
-              </ol>
-            </div>
-          </section>
-        </div>
-
-        <div class="article-ending">─── • / THE END / • ───</div>
-
-        <!-- Tags + 上一篇/下一篇 -->
-        <div class="article-tags-read">
-          <!-- Tags -->
-          <div class="article-tags-wrap">
-            <a href="tags.html" rel="tag">密码库</a>
-            <a href="tags.html" rel="tag">NodeWarden</a>
-            <a href="tags.html" rel="tag">Cloudflare</a>
-            <a href="tags.html" rel="tag">D1</a>
-          </div>
-          <!-- 上一篇/下一篇 -->
-          <div class="album-read-nav-wrap">
-            <div class="album-read-source" id="openTocBtn">文章·目录</div>
-            <section class="album-read-nav-cont">
-              <a href="art-apple.html" class="album-read-nav-cont-prev">
-                <div class="nav-label">上一篇</div>
-                <div class="album-read-nav-title">Apple系统很多软件都要付费下载，都是所谓的“苹果税”</div>
+                <footer class="list-footer">
+                  <span class="date">2023年03月05日</span>
+                  <span class="category">JavaScript</span>
+                </footer>
               </a>
-              <a href="#" class="album-read-nav-cont-next">
-                <div class="nav-label">下一篇</div>
-                <div class="album-read-nav-title">用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</div>
+            </article>
+
+            <!-- 第四条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421023.jpg" alt="测试文章 4">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 4 篇文章：如何优化网站的加载速度</span>
+                </h2>
+                <div class="list-desc h-2x">网站性能优化是一个系统工程，包括图片压缩、代码分割、CDN 加速、浏览器缓存等多个方面。今天我们来聊聊最立竿见影的几个方法...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年04月12日</span>
+                  <span class="category">性能优化</span>
+                </footer>
               </a>
-            </section>
+            </article>
+
+            <!-- 第五条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421030.jpg" alt="测试文章 5">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 5 篇文章：Git 常用命令速查手册</span>
+                </h2>
+                <div class="list-desc h-2x">整理了一份日常开发中最常用的 Git 命令，包括分支管理、代码回退、冲突解决等场景，建议收藏备用...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年05月18日</span>
+                  <span class="category">开发工具</span>
+                </footer>
+              </a>
+            </article>
+
+            <!-- 第六条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421037.jpg" alt="测试文章 6">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 6 篇文章：Node.js 搭建轻量级 API 服务</span>
+                </h2>
+                <div class="list-desc h-2x">使用 Express 或 Koa 框架，结合 MongoDB 数据库，快速搭建一个具备增删改查功能的 RESTful API 接口...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年06月22日</span>
+                  <span class="category">后端技术</span>
+                </footer>
+              </a>
+            </article>
+
+            <!-- 第七条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421044.jpg" alt="测试文章 7">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 7 篇文章：UI 设计中的色彩心理学</span>
+                </h2>
+                <div class="list-desc h-2x">不同的颜色会引发用户不同的情绪反应。在网页设计中，合理搭配色彩不仅能提升视觉美感，还能引导用户的操作行为...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年07月10日</span>
+                  <span class="category">UI 设计</span>
+                </footer>
+              </a>
+            </article>
+
+            <!-- 第八条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421051.jpg" alt="测试文章 8">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 8 篇文章：Cloudflare Workers 入门实践</span>
+                </h2>
+                <div class="list-desc h-2x">Serverless 架构正在改变我们开发后端服务的方式。通过 Cloudflare Workers，我们可以在边缘节点运行 JavaScript 代码...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年08月05日</span>
+                  <span class="category">云服务</span>
+                </footer>
+              </a>
+            </article>
+
+            <!-- 第九条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421058.jpg" alt="测试文章 9">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 9 篇文章：如何写出优雅的代码</span>
+                </h2>
+                <div class="list-desc h-2x">代码不仅是写给机器执行的，更是写给人类阅读的。保持命名规范、遵循单一职责原则、适当添加注释，是写出优雅代码的基础...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年09月14日</span>
+                  <span class="category">编程思想</span>
+                </footer>
+              </a>
+            </article>
+
+            <!-- 第十条数据 -->
+            <article class="list-item">
+              <div class="media">
+                <a href="article.html" class="media-content">
+                  <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd542106.jpg" alt="测试文章 10">
+                </a>
+              </div>
+              <a href="article.html" class="list-content">
+                <h2 class="list-title">
+                  <span class="h-2x">这是第 1 页的第 10 篇文章：博客搭建踩坑记录与经验分享</span>
+                </h2>
+                <div class="list-desc h-2x">记录一下使用 Cloudflare Pages 和 Workers 搭建这个博客时遇到的各种问题，包括域名解析、SSL 证书、静态资源加速等...</div>
+                <footer class="list-footer">
+                  <span class="date">2023年10月01日</span>
+                  <span class="category">经验分享</span>
+                </footer>
+              </a>
+            </article>
           </div>
+
+          <!-- 放在列表 <div class="list-grid"> 的下面 -->
+          <div id="pagination-wrapper">
+            <button id="load-more-btn" class="load-more-btn">加载更多文章</button>
+            <div class="custom-pagination">
+              <a href="search.html" class="real-first disabled">首页</a>
+              <a href="#" class="real-prev disabled">上一页</a>
+              <span class="page-info">第 1 页 / 共 3 页</span>
+              <a href="test-page-2.html" class="real-next" id="real-next-btn">下一页</a>
+              <a href="test-page-3.html" class="real-last">尾页</a>
+            </div>
         </div>
 
-        <!-- 1. 生成分享海报按钮 -->
-        <div class="poster-btn-wrap">
-          <button id="generatePosterBtn" class="poster-btn">
-            <i class="iconfont icon-share"></i>
-            <span id="posterBtnText">生成分享海报</span></button>
         </div>
-        <!-- 2. 生成分享海报预览弹窗 -->
-        <div class="poster-modal" id="posterModal">
-          <img id="posterImage" src="" alt="海报">
-          <div class="poster-tips" id="poster-tips">长按图片保存到手机</div>
-        </div>
-        <!-- 3. 生成分享海报主框架 -->
-        <div id="poster-render-area">
-          <div class="poster-render-area-body">
-            <!-- 顶部封面区 -->
-            <div id="poster-bg">
-              <!-- 顶层：原图完整居中显示（你目前的代码） -->
-              <div class="poster-cover-body">
-                <img id="poster-cover" src="">
-              </div>
-              <div class="poster-cover-text">
-                <div>© 海纳百川</div>
-                <div class="poster-cover-art-url">https://cf.blog.aaqq.site/article/000014.html</div>
-              </div>
-              <!-- 黑色渐变遮罩 -->
-              <div class="poster-black-mask"></div>
-            </div>
-            <!-- 2. 文章标题 (锁定字体大小) -->
-            <div class="poster-title-body">
-              <h2 id="poster-title"></h2>
-            </div>
-            <div class="poster-date-body">
-              <span id="poster-day">2025/01/01</span>
-            </div>
-            <!-- 底部区域 -->
-            <div class="poster-footer">
-              <div style="font-size: 16px; font-weight: bold; color: #333;">
-                <span class="poster-footer-sitename">© 海纳百川</span>
-                <span class="poster-footer-url poster-site-url" id="poster-site-url"></span>
-                <span class="poster-footer-tips">扫描〔二维码〕查看详情</span>
-              </div>
-              <div id="poster-qrcode"></div>
-            </div>
-            </div>
-          </div>
-        </div>
-
     </article>
-  
-    <!-- 评论区 -->
-    <div class="comments" id="comments">
-      <div class="comments-body">
-        <!-- 评论头部 -->
-        <section class="comments-header">
-          <h2 class="d-flex align-items-center">评论 (<span class="comments-count">2</span>)</h2>
-        </section>
-        <section class="comments-card-body">
-          <!-- 评论表单 -->
-          <div id="respond" class="comment-respond">
-            <form id="commentForm" class="comment-form" onsubmit="return submitComment(event)">
-              <input type="hidden" id="parentId" value="1772037659596">
-              
-              <div class="comment-avatar flex-avatar">
-                <img src="https://api.dicebear.com/10.x/voxel-art/svg?seed=author" alt="头像">
-              </div>
-              
-              <div class="comment-body">
-                <div class="comment-input mb-2">
-                  <div class="mb-2">
-                    <input class="form-control" id="author" placeholder="昵称" name="author" type="text" required>
-                  </div>
-                  <div>
-                    <input id="email" class="form-control" name="mail" placeholder="邮箱（用于回复通知）" type="email">
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <textarea class="form-control" id="content" rows="3" placeholder="说点什么..." required></textarea>
-                  <div class="mt-2" style="font-size: 13px;">
-                    <span class="text-muted" id="commentMsg">正在回复 <strong>阿克苏</strong> 的评论</span>
-                    <a href="javascript:;" id="cancelReply" class="text-danger ms-1" onclick="cancelReply()">[取消回复]</a>
-                  </div>
-                </div>
-                
-                <div class="form-submit d-flex align-items-center">
-                  <button type="submit" id="submit" class="btn btn-primary ms-auto">提交评论</button>
-                </div>
-              </div>
-            </form>
-          </div>
-          <!-- 评论列表 -->
-          <div class="comment-list">
-            <ul class="comment-list-body">
-              <li id="comment-1772037659596" class="comment">
-                <article class="comment-body">
-                  <div class="comment-avatar flex-avatar disabled">
-                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
-                  </div>
-                  <div class="comment-content">
-                    <div class="comment-chat">
-                      <div class="comment-info d-flex justify-content-between align-items-center">
-                        <div class="comment-left d-flex">
-                          <span class="comment-author">啥菜要放葱</span>
-                          <span class="comment-date">2026/2/25</span>
-                        </div>
-                        <span class="comment-reply">回复</span>
-                      </div>
-                      <div class="comment-text">
-                        <p>无语😑你标题能不能取的严谨一点，我一下子就发给我好朋友了，以为我在表白，然后就回了句好，搞得两个人现在很尴尬</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-
-                <!-- 子评论 -->
-                <ul class="children">
-                  <li id="comment-1772078159987" class="comment">
-                    <article class="comment-body">
-                      <div class="comment-avatar flex-avatar disabled">
-                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
-                      </div>
-                      <div class="comment-content">
-                        <div class="comment-chat">
-                          <div class="comment-info d-flex justify-content-between align-items-center">
-                            <div class="comment-left d-flex">
-                              <span class="comment-author">啥菜要放葱</span>
-                              <span class="comment-date">2026/2/26</span>
-                            </div>
-                            <span class="comment-reply">回复</span>
-                          </div>
-                          <div class="comment-text">
-                            <p>你标题能不能也带上情侣两个字</p>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                  <li id="comment-1772078159980" class="comment">
-                    <article class="comment-body">
-                      <div class="comment-avatar flex-avatar disabled">
-                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
-                      </div>
-                      <div class="comment-content">
-                        <div class="comment-chat">
-                          <div class="comment-info d-flex justify-content-between align-items-center">
-                            <div class="comment-left d-flex">
-                              <span class="comment-author">长沙本地宝</span>
-                              <span class="comment-date">2026/2/26</span>
-                            </div>
-                            <span class="comment-reply">回复</span>
-                          </div>
-                          <div class="comment-text">
-                            <p>啊啊啊啊sorry</p>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="comment-list-body">
-              <li id="comment-1772032319596" class="comment">
-                <article class="comment-body">
-                  <div class="comment-avatar flex-avatar disabled">
-                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=背过手" alt="头像">
-                  </div>
-                  <div class="comment-content">
-                    <div class="comment-chat">
-                      <div class="comment-info d-flex justify-content-between align-items-center">
-                        <div class="comment-left d-flex">
-                          <span class="comment-author">背过手</span>
-                          <span class="comment-date">2026/2/25</span>
-                        </div>
-                        <span class="comment-reply">回复</span>
-                      </div>
-                      <div class="comment-text">
-                        <p>浏阳河婚庆公园是薛之谦迟迟mv取景地，很漂亮</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-
-                <!-- 子评论 -->
-                <ul class="children">
-                  <li id="comment-1772078159987" class="comment">
-                    <article class="comment-body">
-                      <div class="comment-avatar flex-avatar disabled">
-                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
-                      </div>
-                      <div class="comment-content">
-                        <div class="comment-chat">
-                          <div class="comment-info d-flex justify-content-between align-items-center">
-                            <div class="comment-left d-flex">
-                              <span class="comment-author">长沙本地宝</span>
-                              <span class="comment-date">2026/2/26</span>
-                            </div>
-                            <span class="comment-reply">回复</span>
-                          </div>
-                          <div class="comment-text">
-                            <p>好美~</p>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="comment-list-body">
-              <li id="comment-xxxx112" class="comment">
-                <article class="comment-body">
-                  <div class="comment-avatar flex-avatar disabled">
-                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=AA-徐先生8" alt="头像">
-                  </div>
-                  <div class="comment-content">
-                    <div class="comment-chat">
-                      <div class="comment-info d-flex justify-content-between align-items-center">
-                        <div class="comment-left d-flex">
-                          <span class="comment-author">AA-徐先生8</span>
-                          <span class="comment-date">2026/2/25</span>
-                        </div>
-                        <span class="comment-reply">回复</span>
-                      </div>
-                      <div class="comment-text">
-                        <p>天气还是热，适合秋高气爽的时候去。</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            </ul>
-            <ul class="comment-list-body">
-              <li id="comment-1772037659596" class="comment">
-                <article class="comment-body">
-                  <div class="comment-avatar flex-avatar disabled">
-                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=友爱 湖南" alt="头像">
-                  </div>
-                  <div class="comment-content">
-                    <div class="comment-chat">
-                      <div class="comment-info d-flex justify-content-between align-items-center">
-                        <div class="comment-left d-flex">
-                          <span class="comment-author">友爱 湖南</span>
-                          <span class="comment-date">2026/2/25</span>
-                        </div>
-                        <span class="comment-reply">回复</span>
-                      </div>
-                      <div class="comment-text">
-                        <p>长沙真有情侣的爱心，太好了</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-
-                <!-- 子评论 -->
-                <ul class="children">
-                  <li id="comment-1772078159987" class="comment">
-                    <article class="comment-body">
-                      <div class="comment-avatar flex-avatar disabled">
-                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
-                      </div>
-                      <div class="comment-content">
-                        <div class="comment-chat">
-                          <div class="comment-info d-flex justify-content-between align-items-center">
-                            <div class="comment-left d-flex">
-                              <span class="comment-author">长沙本地宝</span>
-                              <span class="comment-date">2026/2/26</span>
-                            </div>
-                            <span class="comment-reply">回复</span>
-                          </div>
-                          <div class="comment-text">
-                            <p>❤️哈哈</p>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </div>
-    </div>
   </main>
 
   <!-- 页面底部 -->
@@ -759,65 +300,6 @@ database_id = "这里填你的D1数据库ID"
         </div>
     </div>
   </footer>
-
-  <!-- 右下角悬浮工具组 -->
-  <div class="float-actions">
-    <!-- 返回顶部按钮 (排在上面) -->
-    <button id="backToTop" class="back-to-top" aria-label="返回顶部">
-      <i class="iconfont icon-toup"></i>
-    </button>
-    <!-- 目录悬浮组件 (排在下面，永远贴底) -->
-    <div id="floatTocWrap" class="float-toc-wrap" style="display: none;">
-      <button id="floatTocBtn" class="float-btn" aria-label="文章目录">
-        <i class="iconfont icon-rb-menu"></i>
-      </button>
-      <!-- PC 端悬浮面板 -->
-      <div class="float-toc-panel" id="floatTocPanel">
-        <div class="toc-panel-title">本文·目录</div>
-        <ul class="float-toc-list" id="floatTocList"></ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- 移动端全屏目录弹窗 -->
-  <div id="mobileTocModal" class="mobile-toc-modal">
-    <div class="mobile-toc-content">
-      <div class="mobile-toc-header">
-        <h3>本文·目录</h3>
-        <button class="mobile-toc-close" id="closeMobileToc">
-          <i class="iconfont icon-close"></i>
-        </button>
-      </div>
-      <ul class="mobile-toc-list" id="mobileTocList">
-        <!-- JS 动态生成 -->
-      </ul>
-    </div>
-  </div>
-
-  <!-- 弹窗结构 (放在 body 底部) -->
-  <dialog id="tocModal" class="toc-modal">
-    <div class="toc-modal-header">
-      <!-- 关闭按钮（向下的箭头） -->
-      <button class="toc-close" id="closeTocBtn">
-        <i class="iconfont icon-updown-min"></i>
-      </button>
-      <h3>文章·目录 </h3>
-      <a href="#" class="toc-detail-link">详情</a>
-    </div>
-    
-    <div class="toc-list">
-      <a href="index.html" class="active"><span>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span></a>
-      <a href="art-apple.html"><span>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span></a>
-      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
-      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
-      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
-      <a href="#section1"><span>【辅警招聘】高中/大专可报名！湖南临澧县公安局招聘辅警！</span></a>
-      <a href="#section2"><span>【国企招聘】湖南省演艺集团、机械院等3家国企最新招聘汇总！附报名方式→</span></a>
-      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
-      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
-      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
-    </div>
-  </dialog>
 
   <!-- 在 header 下面新增侧边栏 -->
   <!-- 遮罩层 -->
@@ -898,6 +380,8 @@ database_id = "这里填你的D1数据库ID"
   </div>
 
 <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js"></script>
+<!-- 无限滚动 -->
+<script src="assests/js/page.js?v=20261115-1"></script>
 <script>
   // ==========================================
   // 全局函数：复制验证码 (放在最外层，方便 HTML 直接 onclick 调用)
@@ -1351,333 +835,6 @@ database_id = "这里填你的D1数据库ID"
       });
     }
 
-  });
-</script>
-
-<!-- 引入 PhotoSwipe 核心库 -->
-<script type="module">
-  const style = document.createElement('style');
-  style.textContent = `
-    .pswp { backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; }
-    .pswp__bg { background: rgba(0, 0, 0, 0.95) !important; opacity: 1 !important; }
-    .pswp__button--zoom { display: none !important; }
-  `;
-  document.head.appendChild(style);
-
-  import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe-lightbox.esm.min.js';
-  import PhotoSwipe from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.esm.min.js';
-
-  const lightbox = new PhotoSwipeLightbox({
-    pswpModule: PhotoSwipe,
-    bgOpacity: 0.9,
-    showHideAnimationType: 'none', // 👈 核心：直接禁用淡入动画，秒出纯黑底！
-    wheelToZoom: true,
-    loop: true,
-    clickToClose: false, 
-  });
-  lightbox.init();
-
-  // 👇 区分“点击”和“滑动”
-  lightbox.on('beforeOpen', () => {
-    // 解除网页缩放限制，允许图片放大
-    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
-    // 关闭时，重新把网页缩放锁死
-    lightbox.pswp.on('destroy', () => {
-      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
-    });
-  });
-
-  // 抓图逻辑
-  const bindImages = () => {
-    const allImgs = Array.from(document.querySelectorAll('main img'));
-    const realImages = allImgs.filter(img => {
-      if (img.closest('.comments') || img.closest('.site-header')) return false;
-      if (img.closest('#poster-render-area')) return false;
-      return img.clientWidth > 50;
-    });
-
-    if (realImages.length === 0 || realImages[0].dataset.pswpBound) return;
-
-    realImages.forEach((img, index) => {
-      img.style.cursor = 'zoom-in';
-      img.dataset.pswpBound = 'true';
-      
-      img.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const items = realImages.map(image => {
-          let realW = image.naturalWidth || 1920;
-          let realH = image.naturalHeight || 1080;
-          return { 
-            src: image.src,
-            width: realW * 10,  
-            height: realH * 10
-          };
-        });
-        
-        lightbox.loadAndOpen(index, items);
-      });
-    });
-  };
-
-  bindImages();
-  
-  const observer = new MutationObserver(() => {
-    bindImages();
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-</script>
-<!-- 引入生成图片和二维码所需的库 -->
-<script src="https://gh.lib.aaqq.site/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://gh.lib.aaqq.site/qrcode-generator/1.4.4/qrcode.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("generatePosterBtn");
-    const btnTextEl = document.getElementById("posterBtnText");
-    const modal = document.getElementById("posterModal");
-    const imgEl = document.getElementById("posterImage");
-    
-    if (!btn) return;
-
-    btn.addEventListener("click", async () => {
-      const originalText = btnTextEl.innerText;
-      btnTextEl.innerText = "正在生成中…";
-      btn.disabled = true;
-
-      try {
-        // 1. 抓取标题
-        const title = document.querySelector(".article-header h1")?.innerText || "未命名文章";
-        document.getElementById("poster-title").innerText = title;
-        
-        // 2. 抓取文章的发布日期，并转换为 xxxx/xx/xx 格式
-        let pDate = new Date().toLocaleDateString('zh-CN').replace(/\//g, '/'); 
-        
-        const dateText = document.querySelector(".article-meta span")?.innerText;
-        if (dateText) {
-          // 将“年月日”替换为“/”
-          pDate = dateText.trim()
-            .replace("年", "/")
-            .replace("月", "/")
-            .replace("日", "");
-        }
-
-        // 自动获取当前域名（自动包含 http 或 https）
-        const urlElements = document.querySelectorAll(".poster-site-url");
-        urlElements.forEach(el => {
-          el.innerText = window.location.origin;
-        });
-
-        // 处理文章具体地址（与二维码一致）
-        const articleUrlElements = document.querySelectorAll(".poster-cover-art-url");
-        articleUrlElements.forEach(el => {
-          el.innerText = window.location.href; 
-        });
-        
-        // 赋值给海报模板
-        const dayEl = document.getElementById("poster-day");
-        const monthEl = document.getElementById("poster-month");
-        if (dayEl) dayEl.innerText = pDate;
-        if (monthEl) monthEl.innerText = ""; 
-
-        // 3. 安全处理封面图（优先级：OG标签 -> 正文首图 -> 默认背景）
-        const coverEl = document.getElementById("poster-cover");
-        // 3.1. 尝试获取 og:image
-        let targetImgSrc = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
-        // 3.2. 如果没有 og:image，尝试获取正文第一张大图
-        if (!targetImgSrc) {
-          // 过滤掉头像、图标等干扰
-          const firstImg = document.querySelector(".mian-body img");
-          if (firstImg) {
-            targetImgSrc = firstImg.src;
-          }
-        }
-        // 3.3. 如果找到了图片地址，开始转 Base64 并渲染
-        if (targetImgSrc) {
-          try {
-            const response = await fetch(targetImgSrc);
-            const blob = await response.blob();
-            const base64Url = await new Promise((resolve) => {
-              const reader = new FileReader();
-              reader.onloadend = () => resolve(reader.result);
-              reader.readAsDataURL(blob);
-            });
-            
-            coverEl.src = base64Url;
-            coverEl.style.opacity = "1";
-          } catch (e) {
-            console.error("图片抓取失败，使用默认背景", e);
-            coverEl.style.opacity = "0"; // 抓取失败（比如防盗链），隐藏图片，露出底色
-          }
-        } else {
-          // 既没有 OG 图，正文也没有图
-          coverEl.style.opacity = "0";
-        }
-
-        // 4. 生成超高清二维码
-        const qrContainer = document.getElementById("poster-qrcode");
-        qrContainer.innerHTML = ""; 
-
-        const qr = qrcode(0, 'H');
-        qr.addData(window.location.href);
-        qr.make();
-
-        qrContainer.innerHTML = qr.createImgTag(10, 0); 
-        
-        const qrImg = qrContainer.querySelector('img');
-        if (qrImg) {
-          qrImg.style.width = '80px';
-          qrImg.style.height = '80px';
-          qrImg.style.display = 'block';
-        }
-
-        // 5. 截图
-        setTimeout(async () => {
-          const renderArea = document.getElementById("poster-render-area");
-          const canvas = await html2canvas(renderArea, {
-            scale: 2, 
-            useCORS: true, 
-            backgroundColor: "#fff",
-            allowTaint: false 
-          });
-          
-          imgEl.src = canvas.toDataURL("image/png");
-
-          // 6. 多端提示文字切换
-          const tipsEl = document.getElementById("poster-tips");
-          if (tipsEl) {
-            if (window.matchMedia("(hover: hover)").matches) {
-              tipsEl.innerText = "右键保存海报图片";
-            } else {
-              tipsEl.innerText = "长按图片保存到手机";
-            }
-          }
-          
-          modal.classList.add("show");
-          
-          // 恢复按钮文字
-          btnTextEl.innerText = originalText;
-          btn.disabled = true; 
-          setTimeout(() => { btn.disabled = false; }, 1000);
-
-        }, 500);
-
-      } catch (error) {
-        console.error("生成失败", error);
-        alert("生成失败，请重试！");
-        // 报错时也要恢复文字
-        btnTextEl.innerText = originalText;
-        btn.disabled = false;
-      }
-    });
-
-    // 点击空白关闭弹窗
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) { 
-        modal.classList.remove("show");
-      }
-    });
-  });
-</script>
-<!-- 自动抓取文章目录悬浮组件 -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // 🔒 安全锁 1：如果不是文章页（没有正文或者没有目录挂载点），直接退出，不报错
-    const mainBody = document.querySelector(".mian-body");
-    const tocWrap = document.getElementById("floatTocWrap");
-    
-    if (!mainBody || !tocWrap) return;
-
-    // 抓取标题
-    const headings = mainBody.querySelectorAll("h2, h3");
-    
-    // 🔒 安全锁 2：如果文章里没写任何标题，隐藏按钮，直接退出
-    if (headings.length === 0) return;
-    tocWrap.style.display = "block";
-
-    const floatTocList = document.getElementById("floatTocList");
-    const mobileTocList = document.getElementById("mobileTocList");
-    const mobileTocModal = document.getElementById("mobileTocModal");
-    const closeMobileToc = document.getElementById("closeMobileToc");
-    const tocBtn = document.getElementById("floatTocBtn");
-
-    let floatHtml = "", mobileHtml = "";
-    headings.forEach((heading, index) => {
-      if (!heading.id) heading.id = `heading-${index}`;
-      let text = heading.innerText.replace(/\n/g, ' ').trim();
-      const levelClass = heading.tagName.toLowerCase() === "h3" ? "toc-h3" : "toc-h2";
-      const liHtml = `<li class="${levelClass}"><a href="#${heading.id}" data-target="${heading.id}">${text}</a></li>`;
-      floatHtml += liHtml;
-      mobileHtml += liHtml;
-    });
-
-    floatTocList.innerHTML = floatHtml;
-    mobileTocList.innerHTML = mobileHtml;
-
-    // 绑定平滑滚动事件
-    const allTocLinks = document.querySelectorAll(".float-toc-list a, .mobile-toc-list a");
-    allTocLinks.forEach(link => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const targetEl = document.getElementById(link.getAttribute("data-target"));
-        if (targetEl) {
-          const y = targetEl.getBoundingClientRect().top + window.scrollY - 70;
-          window.scrollTo({ top: y, behavior: "smooth" });
-          if (window.innerWidth <= 820) mobileTocModal.classList.remove("show");
-        }
-      });
-    });
-
-    // 移动端弹窗逻辑
-    tocBtn.addEventListener("click", () => {
-      if (!window.matchMedia("(hover: hover)").matches) {
-        mobileTocModal.classList.add("show");
-        setTimeout(() => {
-          const activeItem = mobileTocList.querySelector("a.active");
-          if (activeItem) {
-            const listContainer = activeItem.closest(".mobile-toc-list");
-            // 👇 加上这层保护
-            if (listContainer) {
-              listContainer.scrollTop = activeItem.offsetTop - (listContainer.clientHeight / 2);
-            }
-          }
-        }, 350);
-      }
-    });
-    
-    closeMobileToc.addEventListener("click", () => mobileTocModal.classList.remove("show"));
-    mobileTocModal.addEventListener("click", (e) => {
-      if (e.target === mobileTocModal) mobileTocModal.classList.remove("show");
-    });
-
-    // 滚动高亮 (IntersectionObserver)
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // 👇 移除所有 li 的 active 类
-          document.querySelectorAll(".float-toc-list li, .mobile-toc-list li").forEach(li => {
-            li.classList.remove("active");
-          });
-          
-          const currentId = entry.target.id;
-          
-          // 👇 找到对应的 a 标签，把 active 加在它的父级 li 上
-          document.querySelectorAll(`a[data-target="${currentId}"]`).forEach(link => {
-            const li = link.parentElement;
-            li.classList.add("active");
-            
-            // PC端目录面板内部自动滚动居中
-            if (window.matchMedia("(hover: hover)").matches) {
-               const listContainer = link.closest(".float-toc-list");
-               if (listContainer) {
-                 listContainer.scrollTop = li.offsetTop - (listContainer.clientHeight / 2);
-               }
-            }
-          });
-        }
-      });
-    }, { rootMargin: "-70px 0px -80% 0px" });
-
-    headings.forEach(heading => observer.observe(heading));
   });
 </script>
 

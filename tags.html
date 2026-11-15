@@ -7,10 +7,10 @@
   <meta name="description" content="">
   <title>Tags</title>
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_y53tmit8pvo.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_cvfanb5sdmd.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261110-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261115-1">
 </head>
 <body>
   <header class="site-header">
@@ -21,51 +21,313 @@
           <!-- 建议给个默认高度，防止图片加载前乱跳 -->
           <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="海纳百川" style="height: 32px; width: auto;">
         </a>
-
         <nav class="header-nav" id="headerNav">
-          <!-- 存放所有菜单的容器 -->
-          <div class="nav-main" id="navMain">
-            <a href="#" class="active">首页</a>
-            <a href="#">技术类</a>
-            <a href="#">MySQL</a>
-            <a href="#">Excel</a>
-            <a href="#">DEDE</a>
-            <a href="#">Linux</a>
-            <a href="#">MacCMS</a>
-            <a href="#">文献类</a>
-            <a href="#">MENU9</a>
-            <a href="#">MENU10</a>
-            <a href="#">MENU11</a>
-            <a href="#">MENU12</a>
-            <a href="#">MENU13</a>
-          </div>
-          
-          <!-- 折叠下拉框 -->
+          <!-- 使用 ul 包裹 -->
+          <ul class="nav-main" id="navMain">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">技术类</a></li>
+            <!-- 带有二级菜单的标准结构 -->
+            <li>
+              <a href="#">MySQL</a>
+              <ul class="sub-menu">
+                <li><a href="#">MySQL-SUB1</a></li>
+                <li><a href="#">MySQL-SUB2</a></li>
+              </ul>
+            </li>
+            <!-- 其他普通菜单 -->
+            <li><a href="#">Excel</a></li>
+            <li><a href="#">DEDE</a></li>
+            <li><a href="#">Linux</a></li>
+            <li><a href="#">MacCMS</a></li>
+            <li><a href="#">文献类</a></li>
+            <li><a href="#">MENU9</a></li>
+            <!-- 带有二级菜单的标准结构 -->
+            <li>
+              <a href="#">MENU10</a>
+              <ul class="sub-menu">
+                <li class="active"><a href="#">MENU10-SUB1</a></li>
+                <li><a href="#">MENU10-SUB2</a></li>
+              </ul>
+            </li>
+            <li><a href="#">MENU11</a></li>
+            <li><a href="#">MENU12</a></li>
+            <li><a href="#">MENU13</a></li>
+          </ul>
+          <!-- 折叠下拉框 (保持原样) -->
           <div class="nav-more" id="navMore">
             <button class="nav-more-btn">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+              <i class="iconfont icon-updown-min"></i>
             </button>
             <div class="nav-more-dropdown" id="navMoreDropdown"></div>
           </div>
         </nav>
+
       </div>
 
       <!-- 右侧：操作按钮 -->
       <div class="header-actions">
         <button class="action-btn" id="openSearchBtn" aria-label="搜索">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <i class="iconfont icon-search"></i>
         </button>
         <button class="action-btn menu-btn" id="openMenuBtn" aria-label="菜单">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <i class="iconfont icon-mulu2"></i>
         </button>
       </div>
     </div>
   </header>
   <main>
-    <article>
-      ddddd
+    <article class="layout article">
+        <header class="article-header">
+          <!-- 面包屑导航 -->
+          <nav class="breadcrumb-nav" aria-label="面包屑导航">
+            <a href="index.html">首页</a>
+            <span>Tags</span>
+          </nav>
+        </header>
+
+        <div class="mian-body">
+          <div class="page-header-wrap">
+            <div class="page-header-wrap-icon">
+              <i class="iconfont icon-biaoqian"></i>
+            </div>
+            <div class="page-header-wrap-body">
+              <h1>D1</h1>
+              <div class="page-header-wrap-tips">该标签共 <strong>0</strong> 篇相关文章</div>
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="list-grid">
+            <!-- 无搜索结果时显示 -->
+            <div class="search-empty-state">
+                <h3 class="empty-title">未找到相关文章</h3>
+                <p class="empty-desc">抱歉，没找到 "<strong>D1</strong>" 标签相关的文章。</p>
+                <a href="index.html" class="empty-btn">返回首页</a>
+            </div>
+            <!-- 第一条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000001.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421002.jpg" alt="测试文章 1">
+                    </a>
+                </div>
+                <a href="/article/000001.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 1 篇文章：探索现代前端技术的发展</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        随着互联网的飞速发展，前端技术也在不断地迭代更新。从最初的 jQuery 到现在的 Vue 和 React，前端工程化越来越成熟...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年01月15日</span>
+                        <span class="category">前端开发</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第二条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000002.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421009.jpg" alt="测试文章 2">
+                    </a>
+                </div>
+                <a href="/article/000002.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 2 篇文章：深入理解 CSS Flexbox 与 Grid 布局</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        Flexbox 适用于一维布局，而 Grid 更擅长二维布局。在实际开发中，合理地结合使用这两种布局方案，能极大地提高开发效率...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年02月20日</span>
+                        <span class="category">CSS 技巧</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第三条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000003.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421016.jpg" alt="测试文章 3">
+                    </a>
+                </div>
+                <a href="/article/000003.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 3 篇文章：JavaScript 异步编程指南</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        从回调函数到 Promise，再到 async/await，JavaScript 的异步编程模型经历了巨大的演变。理解它们的底层原理至关重要...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年03月05日</span>
+                        <span class="category">JavaScript</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第四条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000004.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421023.jpg" alt="测试文章 4">
+                    </a>
+                </div>
+                <a href="/article/000004.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 4 篇文章：如何优化网站的加载速度</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        网站性能优化是一个系统工程，包括图片压缩、代码分割、CDN 加速、浏览器缓存等多个方面。今天我们来聊聊最立竿见影的几个方法...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年04月12日</span>
+                        <span class="category">性能优化</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第五条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000005.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421030.jpg" alt="测试文章 5">
+                    </a>
+                </div>
+                <a href="/article/000005.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 5 篇文章：Git 常用命令速查手册</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        整理了一份日常开发中最常用的 Git 命令，包括分支管理、代码回退、冲突解决等场景，建议收藏备用...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年05月18日</span>
+                        <span class="category">开发工具</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第六条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000006.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421037.jpg" alt="测试文章 6">
+                    </a>
+                </div>
+                <a href="/article/000006.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 6 篇文章：Node.js 搭建轻量级 API 服务</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        使用 Express 或 Koa 框架，结合 MongoDB 数据库，快速搭建一个具备增删改查功能的 RESTful API 接口...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年06月22日</span>
+                        <span class="category">后端技术</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第七条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000007.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421044.jpg" alt="测试文章 7">
+                    </a>
+                </div>
+                <a href="/article/000007.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 7 篇文章：UI 设计中的色彩心理学</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        不同的颜色会引发用户不同的情绪反应。在网页设计中，合理搭配色彩不仅能提升视觉美感，还能引导用户的操作行为...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年07月10日</span>
+                        <span class="category">UI 设计</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第八条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000008.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421051.jpg" alt="测试文章 8">
+                    </a>
+                </div>
+                <a href="/article/000008.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 8 篇文章：Cloudflare Workers 入门实践</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        Serverless 架构正在改变我们开发后端服务的方式。通过 Cloudflare Workers，我们可以在边缘节点运行 JavaScript 代码...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年08月05日</span>
+                        <span class="category">云服务</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第九条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000009.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421058.jpg" alt="测试文章 9">
+                    </a>
+                </div>
+                <a href="/article/000009.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 9 篇文章：如何写出优雅的代码</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        代码不仅是写给机器执行的，更是写给人类阅读的。保持命名规范、遵循单一职责原则、适当添加注释，是写出优雅代码的基础...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年09月14日</span>
+                        <span class="category">编程思想</span>
+                    </footer>
+                </a>
+            </article>
+
+            <!-- 第十条数据 -->
+            <article class="list-item">
+                <div class="media">
+                    <a href="/article/000010.html" class="media-content">
+                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd542106.jpg" alt="测试文章 10">
+                    </a>
+                </div>
+                <a href="/article/000010.html" class="list-content">
+                    <h2 class="list-title">
+                        <span class="h-2x">这是第 1 页的第 10 篇文章：博客搭建踩坑记录与经验分享</span>
+                    </h2>
+                    <div class="list-desc h-2x">
+                        记录一下使用 Cloudflare Pages 和 Workers 搭建这个博客时遇到的各种问题，包括域名解析、SSL 证书、静态资源加速等...
+                    </div>
+                    <footer class="list-footer">
+                        <span class="date">2023年10月01日</span>
+                        <span class="category">经验分享</span>
+                    </footer>
+                </a>
+            </article>
+          </div>
+
+          <!-- 放在列表 <div class="list-grid"> 的下面 -->
+          <div id="pagination-wrapper">
+            <button id="load-more-btn" class="load-more-btn">加载更多文章</button>
+            <div class="custom-pagination">
+              <a href="search.html" class="real-first disabled">首页</a>
+              <a href="#" class="real-prev disabled">上一页</a>
+              <span class="page-info">第 1 页 / 共 3 页</span>
+              <a href="test-page-2.html" class="real-next" id="real-next-btn">下一页</a>
+              <a href="test-page-3.html" class="real-last">尾页</a>
+            </div>
+        </div>
+
+        </div>
     </article>
   </main>
 
@@ -81,77 +343,52 @@
     </div>
   </footer>
 
-  <!-- 返回顶部按钮 -->
-  <button id="backToTop" class="back-to-top" aria-label="返回顶部">
-    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
-  </button>
-
-  <!-- 弹窗结构 (放在 body 底部) -->
-  <dialog id="tocModal" class="toc-modal">
-    <div class="toc-modal-header">
-      <!-- 关闭按钮（向下的箭头） -->
-      <button class="toc-close" id="closeTocBtn">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
-      <h3>文章·目录 </h3>
-      <a href="#" class="toc-detail-link">详情</a>
-    </div>
-    
-    <div class="toc-list">
-      <a href="index.html" class="active"><span>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span></a>
-      <a href="art-apple.html"><span>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span></a>
-      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
-      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
-      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
-      <a href="#section1"><span>【辅警招聘】高中/大专可报名！湖南临澧县公安局招聘辅警！</span></a>
-      <a href="#section2"><span>【国企招聘】湖南省演艺集团、机械院等3家国企最新招聘汇总！附报名方式→</span></a>
-      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
-      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
-      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
-    </div>
-  </dialog>
-
   <!-- 在 header 下面新增侧边栏 -->
   <!-- 遮罩层 -->
   <div id="menuOverlay" class="menu-overlay"></div>
   <!-- 侧边栏 -->
   <div id="sideMenu" class="side-menu-drawer">
     <div class="side-menu-topbar">
-      <!-- 左上角只放 Logo -->
       <a href="/" class="side-menu-brand">
         <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="Logo">
       </a>
-      <!-- 右侧放关闭按钮 -->
       <button class="side-close" id="closeMenuBtn">
-        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <i class="iconfont icon-close"></i>
       </button>
     </div>
 
-    <!-- 👇 新增：沉浸式搜索大卡片 -->
     <div class="side-menu-search">
       <div class="side-search-box" id="sideSearchTrigger">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <i class="iconfont icon-search"></i>
         <span>搜索文章 / 关键词</span>
       </div>
     </div>
     
     <div class="side-menu-body">
       <ul class="mobile-menu-inner">
-        <li class="menu-item"><a href="#">首页</a></li>
-        <li class="menu-item"><a href="#">技术类</a></li>
-        <li class="menu-item active"><a href="#">MySQL</a></li>
-        <li class="menu-item"><a href="#">Excel</a></li>
-        <li class="menu-item"><a href="#">DEDE</a></li>
-        <li class="menu-item"><a href="#">Linux</a></li>
-        <li class="menu-item"><a href="#">MacCMS</a></li>
-        <li class="menu-item"><a href="#">MENU9</a></li>
-        <li class="menu-item"><a href="#">MENU10</a></li>
-        <li class="menu-item"><a href="#">MENU11</a></li>
-        <li class="menu-item"><a href="#">MENU12</a></li>
-        <li class="menu-item"><a href="#">MENU13</a></li>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">技术类</a></li>
+        <li>
+          <a href="#MySQL">MySQL</a>
+          <ul class="sub-menu">
+            <li class="active"><a href="#">MySQL-SUB1</a></li>
+            <li><a href="#">MySQL-SUB2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Excel</a></li>
+        <li><a href="#">DEDE</a></li>
+        <li><a href="#">Linux</a></li>
+        <li><a href="#">MacCMS</a></li>
+        <li>
+          <a href="#">MENU10</a>
+          <ul class="sub-menu">
+            <li><a href="#">MENU10-SUB1</a></li>
+            <li><a href="#">MENU10-SUB2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">MENU11</a></li>
+        <li><a href="#">MENU12</a></li>
+        <li><a href="#">MENU13</a></li>
       </ul>
     </div>
   </div>
@@ -161,11 +398,11 @@
   <!-- 搜索面板 -->
   <div id="searchPanel" class="search-panel">
     <div class="search-container">
-      <form class="search-input-group" id="searchForm" action="/search" method="GET">
-        <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <form class="search-input-group" id="searchForm" action="search.html" method="GET">
+        <i class="iconfont search-icon icon-search"></i>
         <input type="search" name="q" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off" enterkeyhint="search">
         <button class="search-close-btn" type="button" id="closeSearchBtn" aria-label="关闭搜索">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <i class="iconfont icon-close"></i>
         </button>
       </form>
       
@@ -174,7 +411,7 @@
         <div class="hint-header">
           <div class="hint-title">搜索历史</div>
           <button class="clear-history-btn" id="clearHistoryBtn">
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: -2px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>清空
+            <i class="iconfont icon-delete"></i>清空
           </button>
         </div>
         <div class="hint-tags" id="historyTags">
@@ -185,12 +422,44 @@
   </div>
 
 <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js"></script>
+<!-- 无限滚动 -->
+<script src="assests/js/page.js?v=20261115-1"></script>
 <script>
+  // ==========================================
+  // 全局函数：复制验证码 (放在最外层，方便 HTML 直接 onclick 调用)
+  // ==========================================
+  window.copyPromoCode = function(btnElement, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      let copyBtn = btnElement;
+      // 如果点的是验证码本身，去找它旁边的复制按钮
+      if (btnElement.classList.contains("promo-code")) {
+        copyBtn = btnElement.parentElement.querySelector(".promo-btn-copy");
+      }
+      if (!copyBtn) return;
+
+      const originalText = copyBtn.innerText;
+      copyBtn.innerText = "已复制";
+      copyBtn.style.color = "var(--green, #1aae19)"; 
+      copyBtn.style.borderColor = "var(--green, #1aae19)";
+      copyBtn.disabled = true; 
+
+      setTimeout(() => {
+        copyBtn.innerText = originalText;
+        copyBtn.style.color = "";
+        copyBtn.style.borderColor = "";
+        copyBtn.disabled = false;
+      }, 1500);
+    }).catch(err => {
+      alert("复制失败，请手动长按选择复制：" + text);
+    });
+  };
+
+  // ==========================================
+  // 页面核心逻辑 (等待 DOM 加载完成后执行)
+  // ==========================================
   document.addEventListener("DOMContentLoaded", () => {
     
-    // ==========================================
-    // 0. 公共 DOM 变量获取
-    // ==========================================
+    // --- 0. 公共 DOM 变量获取 ---
     const openMenuBtn = document.getElementById("openMenuBtn");
     const closeMenuBtn = document.getElementById("closeMenuBtn");
     const sideMenu = document.getElementById("sideMenu");
@@ -205,7 +474,7 @@
     const searchHistoryBox = document.getElementById("searchHistoryBox");
     const historyTags = document.getElementById("historyTags");
     const clearHistoryBtn = document.getElementById("clearHistoryBtn");
-    const searchForm = document.getElementById("searchForm"); // 👈 新增的获取表单
+    const searchForm = document.getElementById("searchForm");
 
     const headerNav = document.getElementById("headerNav");
     const navMain = document.getElementById("navMain");
@@ -219,13 +488,8 @@
 
 
     // ==========================================
-    // 1. 全局/通用功能 (代码高亮 & 复制)
-    // ==========================================
-    if (typeof hljs !== 'undefined') {
-      hljs.highlightAll();
-    }
-
     // 1. 全局/通用功能 (代码高亮 & 复制 & 行号)
+    // ==========================================
     if (typeof hljs !== 'undefined') {
       hljs.highlightAll();
     }
@@ -234,28 +498,23 @@
       const code = pre.querySelector("code");
       if (!code) return;
 
-          // --- 👇 终结版：按行拆分，彻底解决错位 ---
       const codeText = code.textContent || "";
       const lines = codeText.split('\n');
       if (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
 
-      // 获取高亮后的 HTML，按行拆分
       const highlightedLines = code.innerHTML.split('\n');
       
       let newHtml = '';
       lines.forEach((_, index) => {
         newHtml += `<div class="code-line">`;
         newHtml += `<span class="line-num">${index + 1}</span>`;
-        // 如果高亮插件那一行有内容，就放进去，否则给个空格占位
         newHtml += `<span class="line-text">${highlightedLines[index] || ' '}</span>`;
         newHtml += `</div>`;
       });
 
       code.innerHTML = newHtml;
       pre.classList.add("has-line-numbers");
-      // --- 👆 替换结束 ---
 
-      // 原有的语言识别逻辑
       let lang = "code";
       const classList = Array.from(code.classList);
       const langClass = classList.find(c => c.startsWith("language-") || c.startsWith("lang-")) || classList.find(c => c !== "hljs");
@@ -265,7 +524,6 @@
       }
       pre.setAttribute("data-lang", lang);
       
-      // 👇 终极复制逻辑：完美避开行号
       pre.addEventListener("click", (e) => {
         const rect = pre.getBoundingClientRect();
         if (e.clientY - rect.top < 40 && e.clientX > rect.right - 100) {
@@ -283,27 +541,122 @@
 
 
     // ==========================================
-    // 2. 顶部导航折叠加算
+    // 2. PC端 顶部导航折叠 & 多级菜单
     // ==========================================
+
+    // 2.1 PC端：二级菜单激活时，父级一级菜单高亮
+    const pcActiveSubItem = document.querySelector('.nav-main .sub-menu li.active');
+    if (pcActiveSubItem) {
+      const parentLi = pcActiveSubItem.closest('.nav-main > li');
+      if (parentLi) {
+        parentLi.classList.add('active');
+      }
+    }
+
+    // 2.2 折叠面板内的子菜单防溢出（右侧不够自动向左弹）
+    const moreDropdown = document.getElementById("navMoreDropdown");
+    if (moreDropdown) {
+      moreDropdown.addEventListener("mouseover", (e) => {
+        const li = e.target.closest("li:has(> .sub-menu)");
+        if (!li) return;
+
+        li.classList.remove("flip-left");
+
+        const rect = li.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const remainingRightSpace = windowWidth - rect.right;
+
+        if (remainingRightSpace < 200) {
+          li.classList.add("flip-left");
+        }
+      });
+    }
+
+    // 2.3 顶部导航溢出折叠计算
     const checkNavOverflow = () => {
       if (window.innerWidth <= 820) return;
       navMore.classList.remove("show");
       dropdown.innerHTML = "";
-      navLinks.forEach(link => link.style.display = "");
+      
+      const navItems = Array.from(navMain.children);
+      navItems.forEach(li => li.style.display = "");
+
       const moreBtnWidth = navMore.querySelector('.nav-more-btn').offsetWidth || 40;
       const availableWidth = headerNav.offsetWidth - moreBtnWidth - 20;
+
       if (navMain.scrollWidth > availableWidth) {
         navMore.classList.add("show");
-        for (let i = navLinks.length - 1; i >= 0; i--) {
-          const link = navLinks[i];
-          link.style.display = "none"; 
-          const clone = link.cloneNode(true);
+        for (let i = navItems.length - 1; i >= 0; i--) {
+          const li = navItems[i];
+          li.style.display = "none"; 
+          const clone = li.cloneNode(true); 
           clone.style.display = "block";
-          dropdown.prepend(clone);
+          
+          dropdown.prepend(clone); 
+          
           if (navMain.scrollWidth <= availableWidth) break;
         }
       }
     };
+
+    // ==========================================
+    // 3. 移动端侧边栏：多级菜单逻辑
+    // ==========================================
+    
+    // 3.1 自动注入展开箭头 & 手风琴排他逻辑
+    document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(li => {
+      if (li.querySelector('.mobile-sub-btn')) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'mobile-sub-btn';
+      btn.innerHTML = '<i class="iconfont icon-right"></i>'; 
+      btn.setAttribute('aria-label', '展开子菜单');
+      
+      const subMenu = li.querySelector('.sub-menu');
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        e.preventDefault();
+        
+        const isCurrentlyOpen = btn.classList.contains('open');
+
+        document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(otherLi => {
+          const otherBtn = otherLi.querySelector('.mobile-sub-btn');
+          const otherSubMenu = otherLi.querySelector('.sub-menu');
+          
+          if (otherLi !== li) {
+            if (otherBtn) otherBtn.classList.remove('open');
+            if (otherSubMenu) otherSubMenu.classList.remove('show');
+          }
+        });
+
+        if (!isCurrentlyOpen) {
+          btn.classList.add('open');
+          if (subMenu) subMenu.classList.add('show');
+        } else {
+          btn.classList.remove('open');
+          if (subMenu) subMenu.classList.remove('show');
+        }
+      });
+
+      li.appendChild(btn);
+    });
+
+    // 3.2 移动端：页面加载时，自动展开当前高亮所在的父级
+    const activeSubItem = document.querySelector('.mobile-menu-inner .sub-menu li.active');
+    
+    if (activeSubItem) {
+      const parentLi = activeSubItem.closest('li:has(> .sub-menu)');
+      
+      if (parentLi) {
+        const parentBtn = parentLi.querySelector('.mobile-sub-btn');
+        const parentSubMenu = parentLi.querySelector('.sub-menu');
+        
+        if (parentBtn) parentBtn.classList.add('open');
+        if (parentSubMenu) parentSubMenu.classList.add('show');
+      }
+    }
+    
     requestAnimationFrame(checkNavOverflow);
     let navTimeout;
     window.addEventListener("resize", () => {
@@ -313,7 +666,7 @@
 
 
     // ==========================================
-    // 3. 左侧侧边栏逻辑
+    // 4. 侧边栏整体开关逻辑
     // ==========================================
     if (openMenuBtn) {
       openMenuBtn.addEventListener("click", () => {
@@ -335,7 +688,7 @@
 
 
     // ==========================================
-    // 4. 搜索弹窗核心逻辑 (历史记录 & 开关)
+    // 5. 搜索弹窗核心逻辑 (历史记录 & 开关) 
     // ==========================================
     const getHistory = () => {
       try { return JSON.parse(localStorage.getItem("myBlogSearchHistory")) || []; } 
@@ -420,7 +773,7 @@
     }
 
     // ==========================================
-    // 5. 侧边栏搜索联动 (完美共用遮罩)
+    // 6. 侧边栏搜索联动 (完美共用遮罩) 
     // ==========================================
     if (sideSearchTrigger) {
       sideSearchTrigger.addEventListener("click", () => {
@@ -438,15 +791,15 @@
           searchPanel.classList.add("show"); 
           document.body.classList.add("modal-open");
           if (typeof renderHistory === 'function') renderHistory();
-          searchInput.focus(); // 瞬间弹出键盘
-          searchInput.click(); // 手机端保险
+          searchInput.focus(); 
+          searchInput.click(); 
         }
       });
     }
 
 
     // ==========================================
-    // 6. 文章目录弹窗 (TOC)
+    // 7. 文章目录弹窗 (TOC)
     // ==========================================
     if (openTocBtn) {
       openTocBtn.addEventListener("click", () => {
@@ -477,8 +830,9 @@
       item.addEventListener("click", closeTocModal);
     });
 
+
     // ==========================================
-    // 7. 自动为所有 Markdown 表格包裹滚动容器
+    // 8. 自动为所有 Markdown 表格包裹滚动容器
     // ==========================================
     document.querySelectorAll('.article-section table').forEach(table => {
       const wrapper = document.createElement('div');
@@ -488,101 +842,42 @@
     });
 
     // ==========================================
-    // 8. 返回顶部按钮
+    // 9. 返回顶部按钮
     // ==========================================
     const backToTopBtn = document.getElementById("backToTop");
     
     if (backToTopBtn) {
-      // 监听页面滚动
+      let isHiding = false; 
+
       window.addEventListener("scroll", () => {
-        // 动态计算触发距离：比如手机端，滑动超过 1.5 个屏幕高度才出现
         const triggerDistance = window.innerHeight * 1.5; 
         
         if (window.scrollY > triggerDistance) {
+          isHiding = false;
+          backToTopBtn.classList.remove("hiding");
           backToTopBtn.classList.add("show");
         } else {
-          backToTopBtn.classList.remove("show");
+          if (backToTopBtn.classList.contains("show") && !isHiding) {
+            isHiding = true;
+            backToTopBtn.classList.remove("show");
+            backToTopBtn.classList.add("hiding");
+
+            setTimeout(() => {
+              if (isHiding) {
+                backToTopBtn.classList.remove("hiding");
+                isHiding = false;
+              }
+            }, 300);
+          }
         }
       });
 
-      // 点击回到顶部
       backToTopBtn.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth" // 平滑滚动
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     }
 
   });
-</script>
-<!-- 引入 PhotoSwipe 核心库 -->
-<script type="module">
-  const style = document.createElement('style');
-  style.textContent = `
-    .pswp { backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; }
-    .pswp__bg { background: rgba(0, 0, 0, 0.95) !important; opacity: 1 !important; }
-    .pswp__button--zoom { display: none !important; }
-  `;
-  document.head.appendChild(style);
-
-  import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe-lightbox.esm.min.js';
-  import PhotoSwipe from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.esm.min.js';
-
-  const lightbox = new PhotoSwipeLightbox({
-    pswpModule: PhotoSwipe,
-    bgOpacity: 0.9,
-    showHideAnimationType: 'none', // 👈 核心：直接禁用淡入动画，秒出纯黑底！
-    wheelToZoom: true,
-    loop: true,
-    clickToClose: false, 
-  });
-  lightbox.init();
-
-  // 👇 区分“点击”和“滑动”
-  lightbox.on('beforeOpen', () => {
-    // 解除网页缩放限制，允许图片放大
-    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
-    // 关闭时，重新把网页缩放锁死
-    lightbox.pswp.on('destroy', () => {
-      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
-    });
-  });
-
-  // 抓图逻辑
-  const bindImages = () => {
-    const allImgs = Array.from(document.querySelectorAll('main img'));
-    const realImages = allImgs.filter(img => {
-      if (img.closest('.comments') || img.closest('.site-header')) return false;
-      return img.clientWidth > 50;
-    });
-
-    if (realImages.length === 0 || realImages[0].dataset.pswpBound) return;
-
-    realImages.forEach((img, index) => {
-      img.style.cursor = 'zoom-in';
-      img.dataset.pswpBound = 'true';
-      
-      img.addEventListener('click', (e) => {
-        e.preventDefault();
-        const items = realImages.map(image => {
-          return { 
-            src: image.src,
-            width: 2000, 
-            height: 2000
-          };
-        });
-        lightbox.loadAndOpen(index, items);
-      });
-    });
-  };
-
-  bindImages();
-  
-  const observer = new MutationObserver(() => {
-    bindImages();
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
 </script>
 
 </body>
