@@ -8,51 +8,51 @@
   <meta property="og:image" content="">
   <title>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</title>
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_cvfanb5sdmd.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_66v2gs060gq.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261115-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261116-1">
 </head>
 <body>
   <header class="site-header">
     <div class="header-container">
       <!-- 左侧：Logo + 导航 -->
       <div class="header-left">
-        <a href="/" class="header-logo">
+        <a href="index.html" class="header-logo">
           <!-- 建议给个默认高度，防止图片加载前乱跳 -->
           <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="海纳百川" style="height: 32px; width: auto;">
         </a>
         <nav class="header-nav" id="headerNav">
           <!-- 使用 ul 包裹 -->
           <ul class="nav-main" id="navMain">
-            <li><a href="#">首页</a></li>
-            <li><a href="#">技术类</a></li>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="list.html">技术类</a></li>
             <!-- 带有二级菜单的标准结构 -->
             <li>
-              <a href="#">MySQL</a>
+              <a href="list.html">MySQL</a>
               <ul class="sub-menu">
-                <li><a href="#">MySQL-SUB1</a></li>
-                <li><a href="#">MySQL-SUB2</a></li>
+                <li><a href="list.html">MySQL-SUB1</a></li>
+                <li><a href="list.html">MySQL-SUB2</a></li>
               </ul>
             </li>
             <!-- 其他普通菜单 -->
-            <li><a href="#">Excel</a></li>
-            <li><a href="#">DEDE</a></li>
-            <li><a href="#">Linux</a></li>
-            <li><a href="#">MacCMS</a></li>
-            <li><a href="#">文献类</a></li>
-            <li><a href="#">MENU9</a></li>
+            <li><a href="list.html">Excel</a></li>
+            <li><a href="list.html">DEDE</a></li>
+            <li><a href="list.html">Linux</a></li>
+            <li><a href="list.html">MacCMS</a></li>
+            <li><a href="list.html">文献类</a></li>
+            <li><a href="list.html">MENU9</a></li>
             <!-- 带有二级菜单的标准结构 -->
             <li>
-              <a href="#">MENU10</a>
+              <a href="list.html">MENU10</a>
               <ul class="sub-menu">
                 <li class="active"><a href="#">MENU10-SUB1</a></li>
-                <li><a href="#">MENU10-SUB2</a></li>
+                <li><a href="list.html">MENU10-SUB2</a></li>
               </ul>
             </li>
-            <li><a href="#">MENU11</a></li>
-            <li><a href="#">MENU12</a></li>
-            <li><a href="#">MENU13</a></li>
+            <li><a href="list.html">MENU11</a></li>
+            <li><a href="list.html">MENU12</a></li>
+            <li><a href="list.html">MENU13</a></li>
           </ul>
           <!-- 折叠下拉框 (保持原样) -->
           <div class="nav-more" id="navMore">
@@ -94,345 +94,348 @@
         </header>
 
         <div class="mian-body">
-          <!-- 开始前准备卡片 -->
-          <section class="article-section">
-            <div class="article-before-start-card">
-              <h3>开始前要准备什么</h3>
-              <ul>
-                <li>一个可以正常登录的 <span class="ui-label">Cloudflare</span> 账号。</li>
-                <li>一个可以正常登录的 <span class="ui-label">Github</span> 账号。</li>
-                <li>Fork <span class="ui-label">NodeWarden</span> 开源项目。</li>
-              </ul>
-              <h3>本期会用到的项目与网址 </h3>
-              <ul>
-                <li><a href="#" rel="noopener noreferrer">Cloudflare 官网</a></li>
-                <li><a href="#" rel="noopener noreferrer">GitHub 官网</a></li>
-                <li><a href="#" rel="noopener noreferrer">NodeWarden 开源项目</a></li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- 分割线标题 -->
-          <div class="article-split-line">
-            <span class="article-split-text">
-              <strong>❤️分割线标题❤️</strong>
-            </span>
-          </div>
-
-          <section class="article-section">
-            <!-- title -->
-            <h2 class="title-gradient-tag">节点标题</h2>
-            <!-- Content -->
-            <div class="article-remind-dots-card">
-              <p>橙色火卡片</p>
-              <h3>〔橙色火〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 橙色火卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2 class="title-gradient-tag"&gt;节点标题&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-remind-dots-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-            </div>
-          </section>
-
-          <!-- 文章提醒点卡片 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2 class="number-title">节点标题</h2>
-            <!-- Content -->
-            <div class="article-remind-dots-card">
-              <p>提醒点卡片</p>
-              <h3>〔提醒点卡片〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 提醒点卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2 class="number-title"&gt;节点标题&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-remind-dots-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-            </div>
-          </section>
-
-          <!-- 星星卡片 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2 class="title-love-tag"><span>节点标题</span></h2>
-            <!-- Content -->
-            <div class="article-star-card">
-              <p>星星卡片</p>
-              <h3>〔星星卡片〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 星星卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2 class="title-love-tag"&gt;&lt;span&gt;节点标题&lt;/span&gt;&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-star-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-              
-              <div class="promo-card">
-                <div class="promo-title">飞猫云 · 新用户季付以上 8 折</div>
-                <div class="promo-desc">适用范围：季付及以上套餐 · 最后核验 2026-07-12（有效性以商家页面为准）</div>
-                <div class="promo-actions">
-                  <!-- 验证码区域（点击复制） -->
-                  <div class="promo-code" onclick="copyPromoCode(this, 'flycat888')" title="点击复制验证码">
-                    <span class="code-text">flycat888</span>
-                  </div>
-                  <!-- 复制按钮 -->
-                  <button class="promo-btn-copy" onclick="copyPromoCode(this, 'flycat888')" style="">复制</button>
-                  <!-- 前往官网按钮（替换你的真实链接） -->
-                  <a href="https://你的官网链接.com" target="_blank" class="promo-btn-link">前往官网</a>
-                </div>
+          <div class="article-content">
+            <!-- 开始前准备卡片 -->
+            <section class="article-section">
+              <div class="article-before-start-card">
+                <h3>开始前要准备什么</h3>
+                <ul>
+                  <li>一个可以正常登录的 <span class="ui-label">Cloudflare</span> 账号。</li>
+                  <li>一个可以正常登录的 <span class="ui-label">Github</span> 账号。</li>
+                  <li>Fork <span class="ui-label">NodeWarden</span> 开源项目。</li>
+                </ul>
+                <h3>本期会用到的项目与网址 </h3>
+                <ul>
+                  <li><a href="#" rel="noopener noreferrer">Cloudflare 官网</a></li>
+                  <li><a href="#" rel="noopener noreferrer">GitHub 官网</a></li>
+                  <li><a href="#" rel="noopener noreferrer">NodeWarden 开源项目</a></li>
+                </ul>
               </div>
+            </section>
 
+            <!-- 分割线标题 -->
+            <div class="article-split-line">
+              <span class="article-split-text">
+                <strong>❤️分割线标题❤️</strong>
+              </span>
             </div>
-          </section>
 
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>节点标题</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <p>引号主题卡片</p>
-              <h3>〔引号主题卡片〕模块整体代码</h3>
-              <pre><code class="lang-html">&lt;!-- 引号主题卡片模块 --&gt;
-&lt;section class="article-section"&gt;
-  &lt;!-- title --&gt;
-  &lt;h2&gt;节点标题&lt;/h2&gt;
-  &lt;!-- Content --&gt;
-  &lt;div class="article-quote-card"&gt;
-    &lt;p&gt;内容区域&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-            </div>
-          </section>
-
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>节点标题</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <h3>分段代码</h3>
-              <ul>
-                <li>
-                  <p>带自定义序号的UL</p>
-                  <pre><code class="lang-html">&lt;ol class="steps"&gt;
-  &lt;li&gt;
-    &lt;h3&gt;一级标题&lt;/h3&gt;
-    &lt;p&gt;一级内容&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h3&gt;一级标题&lt;/h3&gt;
-    &lt;ol&gt;
-      &lt;li&gt;二级内容&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</code></pre>
-                  <blockquote>
-                    <p>主要区别就在，是否在 ol 或 ul 中添加 <strong>&lt;ol class="steps"&gt;</strong>，加了会显示成自定义序号，未加则是最原始的样式。 </p>
-                  </blockquote>
-                </li>
-                <li>
-                  <p>图片代码</p>
-                  <pre><code class="lang-html">&lt;figure class="article-figure"&gt;
-  &lt;img src="url" alt="" loading="lazy"&gt;
-  &lt;figcaption&gt;文字说明&lt;/figcaption&gt;
-&lt;/figure&gt;</code></pre>
-                  <blockquote>
-                    <p>里面的 <strong>&lt;figcaption&gt;文字说明&lt;/figcaption&gt;</strong>，如不需要可以删除。</p>
-                  </blockquote>
-                </li>
-                <li>
-                  <p>验证码模块代码</p>
-                  <pre><code class="lang-html">&lt;!-- 验证码模块 --&gt;
-&lt;div class="promo-card"&gt;
-  &lt;div class="promo-title"&gt;标题文字&lt;/div&gt;
-  &lt;div class="promo-desc"&gt;描述文字&lt;/div&gt;
-  &lt;div class="promo-actions"&gt;
-    &lt;!-- 验证码区域 --&gt;
-    &lt;div class="promo-code" onclick="copyPromoCode(this, 'gxfc8888')" title="点击复制验证码"&gt;
-      &lt;span class="code-text"&gt;gxfc8888&lt;/span&gt;
+            <!-- 橙色火卡片 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2 class="title-gradient-tag">节点标题</h2>
+              <!-- Content -->
+              <div class="article-remind-dots-card">
+                <p>橙色火卡片</p>
+                <h3>〔橙色火〕模块整体代码</h3>
+                <pre><code class="lang-html">&lt;!-- 橙色火卡片模块 --&gt;
+  &lt;section class="article-section"&gt;
+    &lt;!-- title --&gt;
+    &lt;h2 class="title-gradient-tag"&gt;节点标题&lt;/h2&gt;
+    &lt;!-- Content --&gt;
+    &lt;div class="article-remind-dots-card"&gt;
+      &lt;p&gt;内容区域&lt;/p&gt;
     &lt;/div&gt;
-    &lt;!-- 复制按钮 --&gt;
-    &lt;button class="promo-btn-copy" onclick="copyPromoCode(this, 'gxfc8888')" style=""&gt;复制&lt;/button&gt;
-    &lt;!-- 前往官网按钮 --&gt;
-    &lt;a href="###" target="_blank" class="promo-btn-link"&gt;前往官网&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                  <blockquote>
-                    <p>可以自己随意组合，「标题文字」「描述文字」「前往官网」三项都可不填</p>
-                  </blockquote>
-                </li>
-              </ul>
-            </div>
-          </section>
+  &lt;/section&gt;</code></pre>
+              </div>
+            </section>
+
+            <!-- 文章提醒点卡片 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2 class="number-title">节点标题</h2>
+              <!-- Content -->
+              <div class="article-remind-dots-card">
+                <p>提醒点卡片</p>
+                <h3>〔提醒点卡片〕模块整体代码</h3>
+                <pre><code class="lang-html">&lt;!-- 提醒点卡片模块 --&gt;
+  &lt;section class="article-section"&gt;
+    &lt;!-- title --&gt;
+    &lt;h2 class="number-title"&gt;节点标题&lt;/h2&gt;
+    &lt;!-- Content --&gt;
+    &lt;div class="article-remind-dots-card"&gt;
+      &lt;p&gt;内容区域&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;</code></pre>
+              </div>
+            </section>
+
+            <!-- 星星卡片 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2 class="title-love-tag"><span>节点标题</span></h2>
+              <!-- Content -->
+              <div class="article-star-card">
+                <p>星星卡片</p>
+                <h3>〔星星卡片〕模块整体代码</h3>
+                <pre><code class="lang-html">&lt;!-- 星星卡片模块 --&gt;
+  &lt;section class="article-section"&gt;
+    &lt;!-- title --&gt;
+    &lt;h2 class="title-love-tag"&gt;&lt;span&gt;节点标题&lt;/span&gt;&lt;/h2&gt;
+    &lt;!-- Content --&gt;
+    &lt;div class="article-star-card"&gt;
+      &lt;p&gt;内容区域&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;</code></pre>
+                
+                <div class="promo-card">
+                  <div class="promo-title">飞猫云 · 新用户季付以上 8 折</div>
+                  <div class="promo-desc">适用范围：季付及以上套餐 · 最后核验 2026-07-12（有效性以商家页面为准）</div>
+                  <div class="promo-actions">
+                    <!-- 验证码区域（点击复制） -->
+                    <div class="promo-code" onclick="copyPromoCode(this, 'flycat888')" title="点击复制验证码">
+                      <span class="code-text">flycat888</span>
+                    </div>
+                    <!-- 复制按钮 -->
+                    <button class="promo-btn-copy" onclick="copyPromoCode(this, 'flycat888')" style="">复制</button>
+                    <!-- 前往官网按钮（替换你的真实链接） -->
+                    <a href="https://你的官网链接.com" target="_blank" class="promo-btn-link">前往官网</a>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- 引号主题卡片模块 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2>节点标题</h2>
+              <!-- Content -->
+              <div class="article-quote-card">
+                <p>引号主题卡片</p>
+                <h3>〔引号主题卡片〕模块整体代码</h3>
+                <pre><code class="lang-html">&lt;!-- 引号主题卡片模块 --&gt;
+  &lt;section class="article-section"&gt;
+    &lt;!-- title --&gt;
+    &lt;h2&gt;节点标题&lt;/h2&gt;
+    &lt;!-- Content --&gt;
+    &lt;div class="article-quote-card"&gt;
+      &lt;p&gt;内容区域&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;</code></pre>
+              </div>
+            </section>
+
+            <!-- 引号主题卡片模块 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2>节点标题</h2>
+              <!-- Content -->
+              <div class="article-quote-card">
+                <h3>分段代码</h3>
+                <ul>
+                  <li>
+                    <p>带自定义序号的UL</p>
+                    <pre><code class="lang-html">&lt;ol class="steps"&gt;
+    &lt;li&gt;
+      &lt;h3&gt;一级标题&lt;/h3&gt;
+      &lt;p&gt;一级内容&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;h3&gt;一级标题&lt;/h3&gt;
+      &lt;ol&gt;
+        &lt;li&gt;二级内容&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;</code></pre>
+                    <blockquote>
+                      <p>主要区别就在，是否在 ol 或 ul 中添加 <strong>&lt;ol class="steps"&gt;</strong>，加了会显示成自定义序号，未加则是最原始的样式。 </p>
+                    </blockquote>
+                  </li>
+                  <li>
+                    <p>图片代码</p>
+                    <pre><code class="lang-html">&lt;figure class="article-figure"&gt;
+    &lt;img src="url" alt="" loading="lazy"&gt;
+    &lt;figcaption&gt;文字说明&lt;/figcaption&gt;
+  &lt;/figure&gt;</code></pre>
+                    <blockquote>
+                      <p>里面的 <strong>&lt;figcaption&gt;文字说明&lt;/figcaption&gt;</strong>，如不需要可以删除。</p>
+                    </blockquote>
+                  </li>
+                  <li>
+                    <p>验证码模块代码</p>
+                    <pre><code class="lang-html">&lt;!-- 验证码模块 --&gt;
+  &lt;div class="promo-card"&gt;
+    &lt;div class="promo-title"&gt;标题文字&lt;/div&gt;
+    &lt;div class="promo-desc"&gt;描述文字&lt;/div&gt;
+    &lt;div class="promo-actions"&gt;
+      &lt;!-- 验证码区域 --&gt;
+      &lt;div class="promo-code" onclick="copyPromoCode(this, 'gxfc8888')" title="点击复制验证码"&gt;
+        &lt;span class="code-text"&gt;gxfc8888&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;!-- 复制按钮 --&gt;
+      &lt;button class="promo-btn-copy" onclick="copyPromoCode(this, 'gxfc8888')" style=""&gt;复制&lt;/button&gt;
+      &lt;!-- 前往官网按钮 --&gt;
+      &lt;a href="###" target="_blank" class="promo-btn-link"&gt;前往官网&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+                    <blockquote>
+                      <p>可以自己随意组合，「标题文字」「描述文字」「前往官网」三项都可不填</p>
+                    </blockquote>
+                  </li>
+                </ul>
+              </div>
+            </section>
 
 
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>在 GitHub 创建一个新仓库</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <ol class="steps">
-                <li>
-                  <h3>注册登录 GitHub 账号</h3>
-                  <p>打开 <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Github</a> 官网，注册或登录自己的账户。</p>
-                </li>
-                <li>
-                  <h3>Fork “NodeWarden” 开源项目</h3>
-                  <ol>
-                    <li>点击前往 <a href="https://github.com/shuaiplus/NodeWarden" target="_blank" rel="noopener noreferrer">NodeWarden</a> 的官方仓库。</li>
-                    <li>点击页面右上角的 <span class="ui-label">Fork</span> 按钮，将该项目完整复制到你自己的 <span class="ui-label">GitHub</span> 账号下。</li>
-                  </ol>
-                </li>
-                <li>
-                  <h3>修改 wrangler.toml 配置文件</h3>
-                  <ol>
-                    <li>把 wrangler.toml 重新命名为其他名称。</li>
-                    <li>把 wrangler.kv.toml 更名为 wrangler.toml。</li>
-                  </ol>
-                </li>
-              </ol>
-            </div>
-          </section>
+            <!-- 引号主题卡片模块 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2>在 GitHub 创建一个新仓库</h2>
+              <!-- Content -->
+              <div class="article-quote-card">
+                <ol class="steps">
+                  <li>
+                    <h3>注册登录 GitHub 账号</h3>
+                    <p>打开 <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Github</a> 官网，注册或登录自己的账户。</p>
+                  </li>
+                  <li>
+                    <h3>Fork “NodeWarden” 开源项目</h3>
+                    <ol>
+                      <li>点击前往 <a href="https://github.com/shuaiplus/NodeWarden" target="_blank" rel="noopener noreferrer">NodeWarden</a> 的官方仓库。</li>
+                      <li>点击页面右上角的 <span class="ui-label">Fork</span> 按钮，将该项目完整复制到你自己的 <span class="ui-label">GitHub</span> 账号下。</li>
+                    </ol>
+                  </li>
+                  <li>
+                    <h3>修改 wrangler.toml 配置文件</h3>
+                    <ol>
+                      <li>把 wrangler.toml 重新命名为其他名称。</li>
+                      <li>把 wrangler.kv.toml 更名为 wrangler.toml。</li>
+                    </ol>
+                  </li>
+                </ol>
+              </div>
+            </section>
 
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>进行部署</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <ol class="steps">
-                <li>
-                  <h3>注册登录 Cloudflare 账号</h3>
-                  <p>打开 <a href="https://dash.cloudflare.com" target="_blank" rel="noopener noreferrer">Cloudflare</a> 官网，注册或登录自己的账户。</p>
-                </li>
-                <li>
-                  <h3>部署到 Cloudflare 中</h3>
-                  <ol>
-                    <li>找到 <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create" target="_blank" rel="noopener noreferrer">Cloudflare Workers</a> 并打开。</li>
-                    <li>Continue with GitHub（连接 Github 账号）。</li>
-                    <li>选择你 Fork 后的 <span class="ui-label">NodeWarden</span> 项目。</li>
-                    <li>点下一步，进行部署。
-                      <figure class="article-figure">
-                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421002.jpg" alt="" loading="lazy">
-                        <figcaption>根据需求填写图片的文字说明</figcaption>
-                      </figure>
-                    </li>
-                    <li>部署完成后，打开生成的链接。</li>
-                    <li>点下一步，进行部署。
-                      <figure class="article-figure">
-                        <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421016.jpg" alt="" loading="lazy">
-                        <figcaption>根据需求填写图片的文字说明</figcaption>
-                      </figure>
-                    </li>
-                    <li>
-                      填写验证码
-                      <div class="promo-card">
-                        <div class="promo-actions">
-                          <div class="promo-code" onclick="copyPromoCode(this, 'wsyzm6666')" title="点击复制验证码">
-                            <span class="code-text">wsyzm6666</span>
+            <!-- 引号主题卡片模块 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2>进行部署</h2>
+              <!-- Content -->
+              <div class="article-quote-card">
+                <ol class="steps">
+                  <li>
+                    <h3>注册登录 Cloudflare 账号</h3>
+                    <p>打开 <a href="https://dash.cloudflare.com" target="_blank" rel="noopener noreferrer">Cloudflare</a> 官网，注册或登录自己的账户。</p>
+                  </li>
+                  <li>
+                    <h3>部署到 Cloudflare 中</h3>
+                    <ol>
+                      <li>找到 <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create" target="_blank" rel="noopener noreferrer">Cloudflare Workers</a> 并打开。</li>
+                      <li>Continue with GitHub（连接 Github 账号）。</li>
+                      <li>选择你 Fork 后的 <span class="ui-label">NodeWarden</span> 项目。</li>
+                      <li>点下一步，进行部署。
+                        <figure class="article-figure">
+                          <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421002.jpg" alt="" loading="lazy">
+                          <figcaption>根据需求填写图片的文字说明</figcaption>
+                        </figure>
+                      </li>
+                      <li>部署完成后，打开生成的链接。</li>
+                      <li>点下一步，进行部署。
+                        <figure class="article-figure">
+                          <img src="https://gh.static.aaqq.site/img/public/avatar/86ecbd5421016.jpg" alt="" loading="lazy">
+                          <figcaption>根据需求填写图片的文字说明</figcaption>
+                        </figure>
+                      </li>
+                      <li>
+                        填写验证码
+                        <div class="promo-card">
+                          <div class="promo-actions">
+                            <div class="promo-code" onclick="copyPromoCode(this, 'wsyzm6666')" title="点击复制验证码">
+                              <span class="code-text">wsyzm6666</span>
+                            </div>
+                            <button class="promo-btn-copy" onclick="copyPromoCode(this, 'wsyzm6666')" style="">复制</button>
                           </div>
-                          <button class="promo-btn-copy" onclick="copyPromoCode(this, 'wsyzm6666')" style="">复制</button>
                         </div>
-                      </div>
-                    </li>
-                  </ol>
-                </li>
-                <li>
-                  <h3>再次修改 wrangler.toml 配置文件</h3>
-                  <p>确保里面只有 <span class="ui-label">KV</span> 配置，没有 <span class="ui-label">R2</span> 相关内容。</p>
-                  <ol>
-                    <li>在 kv_namespaces 中增加 KV空间ID。
-                      <pre><code>[[kv_namespaces]]
-binding = "ATTACHMENTS_KV" 
-id = "你的KV命名空间ID" 
-preview_id = "你的KV空间ID"
-</code></pre>
-                      <blockquote>
-                        <p>打开 <a href="https://dash.cloudflare.com/" title="CloudFlare主页">CloudFlare主页</a>，点击左侧的 “<strong>存储和数据库</strong>”，然后点击 “<strong>Workers KV</strong>”，找到 “<strong>xxx-attachments-kv</strong>” 复制ID。</p>
-                      </blockquote>
-                    </li>
-                    <li>在 d1_databases 中增加 D1数据库ID。
-                      <pre><code class="lang-ini">[[d1_databases]]
-binding = "DB"
-database_name = "nodewarden-db"
-database_id = "这里填你的D1数据库ID"
-</code></pre>
-                      <blockquote>
-                        <p>进入 <strong>D1 SQL Database</strong>（D1 SQL 数据库），找到你的数据库，点击去就可以找到你的 <strong>D1数据库UUID</strong>。</p>
-                      </blockquote>
-                      <pre><code class="lang-html">&lt;!-- 放在 &lt;head&gt; 里 --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"&gt;
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"&gt;&lt;/script&gt;
-</code></pre>
-                    </li>
-                  </ol>
-                </li>
-                <li>
-                  <h3>部署完成</h3>
-                  <p>到此部署完成，绑定自定义域名即可访问。</p>
-                </li>
-              </ol>
-            </div>
-          </section>
+                      </li>
+                    </ol>
+                  </li>
+                  <li>
+                    <h3>再次修改 wrangler.toml 配置文件</h3>
+                    <p>确保里面只有 <span class="ui-label">KV</span> 配置，没有 <span class="ui-label">R2</span> 相关内容。</p>
+                    <ol>
+                      <li>在 kv_namespaces 中增加 KV空间ID。
+                        <pre><code>[[kv_namespaces]]
+  binding = "ATTACHMENTS_KV" 
+  id = "你的KV命名空间ID" 
+  preview_id = "你的KV空间ID"
+  </code></pre>
+                        <blockquote>
+                          <p>打开 <a href="https://dash.cloudflare.com/" title="CloudFlare主页">CloudFlare主页</a>，点击左侧的 “<strong>存储和数据库</strong>”，然后点击 “<strong>Workers KV</strong>”，找到 “<strong>xxx-attachments-kv</strong>” 复制ID。</p>
+                        </blockquote>
+                      </li>
+                      <li>在 d1_databases 中增加 D1数据库ID。
+                        <pre><code class="lang-ini">[[d1_databases]]
+  binding = "DB"
+  database_name = "nodewarden-db"
+  database_id = "这里填你的D1数据库ID"
+  </code></pre>
+                        <blockquote>
+                          <p>进入 <strong>D1 SQL Database</strong>（D1 SQL 数据库），找到你的数据库，点击去就可以找到你的 <strong>D1数据库UUID</strong>。</p>
+                        </blockquote>
+                        <pre><code class="lang-html">&lt;!-- 放在 &lt;head&gt; 里 --&gt;
+  &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"&gt;
+  &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"&gt;&lt;/script&gt;
+  </code></pre>
+                      </li>
+                    </ol>
+                  </li>
+                  <li>
+                    <h3>部署完成</h3>
+                    <p>到此部署完成，绑定自定义域名即可访问。</p>
+                  </li>
+                </ol>
+              </div>
+            </section>
 
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>基本配置</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <p>打开自定义域名，首次打开时，需进行基础配置</p>
-              <ol class="steps">
-                <li>
-                  <h3>配置 JWT_SECRET</h3>
-                  <p>进入 Cloudflare 控制台 -> Workers 和 Pages -> 你的项目 -> 设置 -> 变量和机密 -> 添加。</p>
-                  <blockquote>
-                    <ul>
-                      <li>类型：<strong>秘钥</strong></li>
-                      <li>变量名称：<strong>JWT_SECRET</strong></li>
-                      <li>值：在基本配置页面里可以获取的到</li>
-                    </ul>
-                  </blockquote>
-                </li>
-                <li>
-                  <h3>创建账号&主密码</h3>
-                  <p>按照界面中指示来即可。</p>
-                  <blockquote>
-                    <p>主密码一定要记住，非常重要。</p>
-                  </blockquote>
-                </li>
-              </ol>
-            </div>
-          </section>
+            <!-- 引号主题卡片模块 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2>基本配置</h2>
+              <!-- Content -->
+              <div class="article-quote-card">
+                <p>打开自定义域名，首次打开时，需进行基础配置</p>
+                <ol class="steps">
+                  <li>
+                    <h3>配置 JWT_SECRET</h3>
+                    <p>进入 Cloudflare 控制台 -> Workers 和 Pages -> 你的项目 -> 设置 -> 变量和机密 -> 添加。</p>
+                    <blockquote>
+                      <ul>
+                        <li>类型：<strong>秘钥</strong></li>
+                        <li>变量名称：<strong>JWT_SECRET</strong></li>
+                        <li>值：在基本配置页面里可以获取的到</li>
+                      </ul>
+                    </blockquote>
+                  </li>
+                  <li>
+                    <h3>创建账号&主密码</h3>
+                    <p>按照界面中指示来即可。</p>
+                    <blockquote>
+                      <p>主密码一定要记住，非常重要。</p>
+                    </blockquote>
+                  </li>
+                </ol>
+              </div>
+            </section>
 
-          <!-- 引号主题卡片模块 -->
-          <section class="article-section">
-            <!-- title -->
-            <h2>到 Bitwarden 中使用</h2>
-            <!-- Content -->
-            <div class="article-quote-card">
-              <ol class="steps">
-                <li>
-                  <h3>在 Bitwarden 项中，选择自托管</h3>
-                  <p>指定您的本地托管 Bitwarden 安装的基础 URL。例如：<a href="https://xxx.domain.com">https://xxx.domain.com</a></p>
-                  <blockquote>
-                    <p>注意，域名后面不要带 / 斜杠</p>
-                  </blockquote>
-                </li>
-              </ol>
-            </div>
-          </section>
+            <!-- 引号主题卡片模块 -->
+            <section class="article-section">
+              <!-- title -->
+              <h2>到 Bitwarden 中使用</h2>
+              <!-- Content -->
+              <div class="article-quote-card">
+                <ol class="steps">
+                  <li>
+                    <h3>在 Bitwarden 项中，选择自托管</h3>
+                    <p>指定您的本地托管 Bitwarden 安装的基础 URL。例如：<a href="https://xxx.domain.com">https://xxx.domain.com</a></p>
+                    <blockquote>
+                      <p>注意，域名后面不要带 / 斜杠</p>
+                    </blockquote>
+                  </li>
+                </ol>
+              </div>
+            </section>
+          </div>
         </div>
 
         <div class="article-ending">─── • / THE END / • ───</div>
@@ -448,7 +451,7 @@ database_id = "这里填你的D1数据库ID"
           </div>
           <!-- 上一篇/下一篇 -->
           <div class="album-read-nav-wrap">
-            <div class="album-read-source" id="openTocBtn">文章·目录</div>
+            <div class="album-read-source" id="openTocBtn">文章·列表</div>
             <section class="album-read-nav-cont">
               <a href="art-apple.html" class="album-read-nav-cont-prev">
                 <div class="nav-label">上一篇</div>
@@ -779,53 +782,13 @@ database_id = "这里填你的D1数据库ID"
     </div>
   </div>
 
-  <!-- 移动端全屏目录弹窗 -->
-  <div id="mobileTocModal" class="mobile-toc-modal">
-    <div class="mobile-toc-content">
-      <div class="mobile-toc-header">
-        <h3>本文·目录</h3>
-        <button class="mobile-toc-close" id="closeMobileToc">
-          <i class="iconfont icon-close"></i>
-        </button>
-      </div>
-      <ul class="mobile-toc-list" id="mobileTocList">
-        <!-- JS 动态生成 -->
-      </ul>
-    </div>
-  </div>
-
-  <!-- 弹窗结构 (放在 body 底部) -->
-  <dialog id="tocModal" class="toc-modal">
-    <div class="toc-modal-header">
-      <!-- 关闭按钮（向下的箭头） -->
-      <button class="toc-close" id="closeTocBtn">
-        <i class="iconfont icon-updown-min"></i>
-      </button>
-      <h3>文章·目录 </h3>
-      <a href="#" class="toc-detail-link">详情</a>
-    </div>
-    
-    <div class="toc-list">
-      <a href="index.html" class="active"><span>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span></a>
-      <a href="art-apple.html"><span>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span></a>
-      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
-      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
-      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
-      <a href="#section1"><span>【辅警招聘】高中/大专可报名！湖南临澧县公安局招聘辅警！</span></a>
-      <a href="#section2"><span>【国企招聘】湖南省演艺集团、机械院等3家国企最新招聘汇总！附报名方式→</span></a>
-      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
-      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
-      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
-    </div>
-  </dialog>
-
   <!-- 在 header 下面新增侧边栏 -->
   <!-- 遮罩层 -->
   <div id="menuOverlay" class="menu-overlay"></div>
   <!-- 侧边栏 -->
   <div id="sideMenu" class="side-menu-drawer">
     <div class="side-menu-topbar">
-      <a href="/" class="side-menu-brand">
+      <a href="index.html" class="side-menu-brand">
         <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/hnbc-mmlogo.png" alt="Logo">
       </a>
       <button class="side-close" id="closeMenuBtn">
@@ -842,29 +805,29 @@ database_id = "这里填你的D1数据库ID"
     
     <div class="side-menu-body">
       <ul class="mobile-menu-inner">
-        <li><a href="#">首页</a></li>
-        <li><a href="#">技术类</a></li>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="list.html">技术类</a></li>
         <li>
-          <a href="#MySQL">MySQL</a>
+          <a href="list.htmlL">MySQL</a>
           <ul class="sub-menu">
-            <li class="active"><a href="#">MySQL-SUB1</a></li>
-            <li><a href="#">MySQL-SUB2</a></li>
+            <li class="active"><a href="list.html">MySQL-SUB1</a></li>
+            <li><a href="list.html">MySQL-SUB2</a></li>
           </ul>
         </li>
-        <li><a href="#">Excel</a></li>
-        <li><a href="#">DEDE</a></li>
-        <li><a href="#">Linux</a></li>
-        <li><a href="#">MacCMS</a></li>
+        <li><a href="list.html">Excel</a></li>
+        <li><a href="list.html">DEDE</a></li>
+        <li><a href="list.html">Linux</a></li>
+        <li><a href="list.html">MacCMS</a></li>
         <li>
-          <a href="#">MENU10</a>
+          <a href="list.html">MENU10</a>
           <ul class="sub-menu">
-            <li><a href="#">MENU10-SUB1</a></li>
-            <li><a href="#">MENU10-SUB2</a></li>
+            <li><a href="list.html">MENU10-SUB1</a></li>
+            <li><a href="list.html">MENU10-SUB2</a></li>
           </ul>
         </li>
-        <li><a href="#">MENU11</a></li>
-        <li><a href="#">MENU12</a></li>
-        <li><a href="#">MENU13</a></li>
+        <li><a href="list.html">MENU11</a></li>
+        <li><a href="list.html">MENU12</a></li>
+        <li><a href="list.html">MENU13</a></li>
       </ul>
     </div>
   </div>
@@ -896,6 +859,46 @@ database_id = "这里填你的D1数据库ID"
       </div>
     </div>
   </div>
+
+  <!-- 移动端全屏目录弹窗 -->
+  <div id="mobileTocModal" class="mobile-toc-modal">
+    <div class="mobile-toc-content">
+      <div class="mobile-toc-header">
+        <h3>本文·目录</h3>
+        <button class="mobile-toc-close" id="closeMobileToc">
+          <i class="iconfont icon-close"></i>
+        </button>
+      </div>
+      <ul class="mobile-toc-list" id="mobileTocList">
+        <!-- JS 动态生成 -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- 弹窗结构 (放在 body 底部) -->
+  <dialog id="tocModal" class="toc-modal">
+    <div class="toc-modal-header">
+      <!-- 关闭按钮（向下的箭头） -->
+      <button class="toc-close" id="closeTocBtn">
+        <i class="iconfont icon-updown-min"></i>
+      </button>
+      <h3>文章·列表</h3>
+      <a href="#" class="toc-detail-link">详情</a>
+    </div>
+    
+    <div class="toc-list">
+      <a href="index.html" class="active"><span>用 Cloudflare 免费轻松部署个人密码库（NodeWarden）</span></a>
+      <a href="art-apple.html"><span>Apple系统很多软件都要付费下载，都是所谓的“苹果税”</span></a>
+      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
+      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
+      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
+      <a href="#section1"><span>【辅警招聘】高中/大专可报名！湖南临澧县公安局招聘辅警！</span></a>
+      <a href="#section2"><span>【国企招聘】湖南省演艺集团、机械院等3家国企最新招聘汇总！附报名方式→</span></a>
+      <a href="#section3"><span>【长沙招聘会】长沙八月有59场招聘会！（附具体安排）</span></a>
+      <a href="#section4"><span>【长沙医院招聘】长沙3家医院最新招聘信息！含医师/护士/检验/康复等岗位</span></a>
+      <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
+    </div>
+  </dialog>
 
 <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js"></script>
 <script>
@@ -1078,39 +1081,33 @@ database_id = "这里填你的D1数据库ID"
     // ==========================================
     
     // 3.1 自动注入展开箭头 & 手风琴排他逻辑
-    document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(li => {
+    document.querySelectorAll('.mobile-menu-inner > li').forEach(li => {
+      const subMenu = li.querySelector(':scope > .sub-menu');
+      if (!subMenu) return; // 没有子菜单就跳过
+      
       if (li.querySelector('.mobile-sub-btn')) return;
 
       const btn = document.createElement('button');
       btn.className = 'mobile-sub-btn';
-      btn.innerHTML = '<i class="iconfont icon-right"></i>'; 
-      btn.setAttribute('aria-label', '展开子菜单');
+      btn.innerHTML = '❯'; 
       
-      const subMenu = li.querySelector('.sub-menu');
-
       btn.addEventListener('click', (e) => {
         e.stopPropagation(); 
         e.preventDefault();
-        
         const isCurrentlyOpen = btn.classList.contains('open');
 
-        document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(otherLi => {
+        // 排他逻辑
+        document.querySelectorAll('.mobile-menu-inner > li').forEach(otherLi => {
           const otherBtn = otherLi.querySelector('.mobile-sub-btn');
-          const otherSubMenu = otherLi.querySelector('.sub-menu');
-          
-          if (otherLi !== li) {
-            if (otherBtn) otherBtn.classList.remove('open');
-            if (otherSubMenu) otherSubMenu.classList.remove('show');
+          const otherSubMenu = otherLi.querySelector(':scope > .sub-menu');
+          if (otherLi !== li && otherBtn && otherSubMenu) {
+            otherBtn.classList.remove('open');
+            otherSubMenu.classList.remove('show');
           }
         });
 
-        if (!isCurrentlyOpen) {
-          btn.classList.add('open');
-          if (subMenu) subMenu.classList.add('show');
-        } else {
-          btn.classList.remove('open');
-          if (subMenu) subMenu.classList.remove('show');
-        }
+        btn.classList.toggle('open', !isCurrentlyOpen);
+        subMenu.classList.toggle('show', !isCurrentlyOpen);
       });
 
       li.appendChild(btn);
@@ -1118,14 +1115,11 @@ database_id = "这里填你的D1数据库ID"
 
     // 3.2 移动端：页面加载时，自动展开当前高亮所在的父级
     const activeSubItem = document.querySelector('.mobile-menu-inner .sub-menu li.active');
-    
     if (activeSubItem) {
-      const parentLi = activeSubItem.closest('li:has(> .sub-menu)');
-      
+      const parentLi = activeSubItem.closest('.mobile-menu-inner > li');
       if (parentLi) {
         const parentBtn = parentLi.querySelector('.mobile-sub-btn');
-        const parentSubMenu = parentLi.querySelector('.sub-menu');
-        
+        const parentSubMenu = parentLi.querySelector(':scope > .sub-menu');
         if (parentBtn) parentBtn.classList.add('open');
         if (parentSubMenu) parentSubMenu.classList.add('show');
       }
@@ -1308,7 +1302,7 @@ database_id = "这里填你的D1数据库ID"
     // ==========================================
     // 8. 自动为所有 Markdown 表格包裹滚动容器
     // ==========================================
-    document.querySelectorAll('.article-section table').forEach(table => {
+    document.querySelectorAll('.article-content table').forEach(table => {
       const wrapper = document.createElement('div');
       wrapper.className = 'table-wrap';
       table.parentNode.insertBefore(wrapper, table);
@@ -1627,21 +1621,23 @@ database_id = "这里填你的D1数据库ID"
       });
     });
 
-    // 移动端弹窗逻辑
+    // 移动端 & 平板弹窗逻辑 (PC端禁止点击)
     tocBtn.addEventListener("click", () => {
-      if (!window.matchMedia("(hover: hover)").matches) {
-        mobileTocModal.classList.add("show");
-        setTimeout(() => {
-          const activeItem = mobileTocList.querySelector("a.active");
-          if (activeItem) {
-            const listContainer = activeItem.closest(".mobile-toc-list");
-            // 👇 加上这层保护
-            if (listContainer) {
-              listContainer.scrollTop = activeItem.offsetTop - (listContainer.clientHeight / 2);
-            }
+      // 判断是否是“真正的电脑环境”：屏幕够宽，且没有触摸屏
+      const isRealPC = window.innerWidth > 820 && !('ontouchstart' in window);
+      // 如果是电脑，直接退出，不弹窗
+      if (isRealPC) return;
+      // 否则（包括手机和平板），执行弹窗逻辑
+      mobileTocModal.classList.add("show");
+      setTimeout(() => {
+        const activeItem = mobileTocList.querySelector("a.active");
+        if (activeItem) {
+          const listContainer = activeItem.closest(".mobile-toc-list");
+          if (listContainer) {
+            listContainer.scrollTop = activeItem.offsetTop - (listContainer.clientHeight / 2);
           }
-        }, 350);
-      }
+        }
+      }, 350);
     });
     
     closeMobileToc.addEventListener("click", () => mobileTocModal.classList.remove("show"));
@@ -1653,19 +1649,13 @@ database_id = "这里填你的D1数据库ID"
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // 👇 移除所有 li 的 active 类
           document.querySelectorAll(".float-toc-list li, .mobile-toc-list li").forEach(li => {
             li.classList.remove("active");
           });
-          
           const currentId = entry.target.id;
-          
-          // 👇 找到对应的 a 标签，把 active 加在它的父级 li 上
           document.querySelectorAll(`a[data-target="${currentId}"]`).forEach(link => {
             const li = link.parentElement;
             li.classList.add("active");
-            
-            // PC端目录面板内部自动滚动居中
             if (window.matchMedia("(hover: hover)").matches) {
                const listContainer = link.closest(".float-toc-list");
                if (listContainer) {
