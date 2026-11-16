@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_66v2gs060gq.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261116-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261116-2">
 </head>
 <body>
   <header class="site-header">
@@ -570,39 +570,33 @@
     // ==========================================
     
     // 3.1 自动注入展开箭头 & 手风琴排他逻辑
-    document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(li => {
+    document.querySelectorAll('.mobile-menu-inner > li').forEach(li => {
+      const subMenu = li.querySelector(':scope > .sub-menu');
+      if (!subMenu) return; // 没有子菜单就跳过
+      
       if (li.querySelector('.mobile-sub-btn')) return;
 
       const btn = document.createElement('button');
       btn.className = 'mobile-sub-btn';
       btn.innerHTML = '<i class="iconfont icon-right"></i>'; 
-      btn.setAttribute('aria-label', '展开子菜单');
       
-      const subMenu = li.querySelector('.sub-menu');
-
       btn.addEventListener('click', (e) => {
         e.stopPropagation(); 
         e.preventDefault();
-        
         const isCurrentlyOpen = btn.classList.contains('open');
 
-        document.querySelectorAll('.mobile-menu-inner > li:has(> .sub-menu)').forEach(otherLi => {
+        // 排他逻辑
+        document.querySelectorAll('.mobile-menu-inner > li').forEach(otherLi => {
           const otherBtn = otherLi.querySelector('.mobile-sub-btn');
-          const otherSubMenu = otherLi.querySelector('.sub-menu');
-          
-          if (otherLi !== li) {
-            if (otherBtn) otherBtn.classList.remove('open');
-            if (otherSubMenu) otherSubMenu.classList.remove('show');
+          const otherSubMenu = otherLi.querySelector(':scope > .sub-menu');
+          if (otherLi !== li && otherBtn && otherSubMenu) {
+            otherBtn.classList.remove('open');
+            otherSubMenu.classList.remove('show');
           }
         });
 
-        if (!isCurrentlyOpen) {
-          btn.classList.add('open');
-          if (subMenu) subMenu.classList.add('show');
-        } else {
-          btn.classList.remove('open');
-          if (subMenu) subMenu.classList.remove('show');
-        }
+        btn.classList.toggle('open', !isCurrentlyOpen);
+        subMenu.classList.toggle('show', !isCurrentlyOpen);
       });
 
       li.appendChild(btn);
@@ -610,14 +604,11 @@
 
     // 3.2 移动端：页面加载时，自动展开当前高亮所在的父级
     const activeSubItem = document.querySelector('.mobile-menu-inner .sub-menu li.active');
-    
     if (activeSubItem) {
-      const parentLi = activeSubItem.closest('li:has(> .sub-menu)');
-      
+      const parentLi = activeSubItem.closest('.mobile-menu-inner > li');
       if (parentLi) {
         const parentBtn = parentLi.querySelector('.mobile-sub-btn');
-        const parentSubMenu = parentLi.querySelector('.sub-menu');
-        
+        const parentSubMenu = parentLi.querySelector(':scope > .sub-menu');
         if (parentBtn) parentBtn.classList.add('open');
         if (parentSubMenu) parentSubMenu.classList.add('show');
       }
