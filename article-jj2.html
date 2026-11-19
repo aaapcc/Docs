@@ -6,12 +6,14 @@
   <meta name="darkreader-lock" content="true">
   <meta name="description" content="">
   <meta property="og:image" content="">
-  <title>极简文章模板</title>
+  <title>使用Google Apps Script 实现定时自动访问URL</title>
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_66v2gs060gq.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="assests/css/style.css?v=20261119-1">
+  <link rel="stylesheet" href="assests/css/style.css?v=20261120-1">
+  <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js" defer></script>
+  <script src="assests/js/all.js?v=20261120-1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -85,7 +87,7 @@
             <a href="index.html">技术类</a>
             <span>个人密码库</span>
           </nav>
-          <h1>极简文章模板</h1>
+          <h1>使用Google Apps Script 实现定时自动访问URL</h1>
           <div class="article-meta">
             <span>2026年03月18日</span>
             <span>149次阅读</span>
@@ -95,433 +97,53 @@
 
         <div class="mian-body">
           <div class="article-content">
-            
-                  <h2 id="h2--types-ts-">
-                    <a name="一、修改 types.ts 文件" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    一、修改 types.ts 文件
-                  </h2>
-                  <ol>
-                    <li>
-                      打开
-                      <strong>types.ts</strong>
-                      文件
-                    </li>
-                    <li>
-                      找到
-                      <strong>Category</strong>
-                      接口，在
-                      <strong>password?: string;</strong>
-                      下面添加一行：
-                    </li>
-                  </ol>
-                  <pre>
-                    <code>parentId?: string; // 父分类ID level?: number; // 分类层级（0=顶级，1=二级，2=三级...） sortOrder?: number; // 同级分类的排序顺序</code>
-                  </pre>
-                  <h2 id="h2--components-categorymanagermodal-tsx-">
-                    <a name="二、修改 components/CategoryManagerModal.tsx 文件" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    二、修改 components/CategoryManagerModal.tsx 文件
-                  </h2>
-                  <h3 id="h3-1-">
-                    <a name="1. 导入的图标新增" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    1. 导入的图标新增
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>import { X, ArrowUp, ArrowDown, Trash2, Edit2, Plus, Check, Lock, Merge, Smile } from 'lucide-react';</code>
-                  </pre>
-                  <p>替换成</p>
-                  <pre>
-                    <code>import { X, ArrowUp, ArrowDown, Trash2, Edit2, Plus, Check, Lock, Merge, Smile, ChevronRight, ChevronDown } from 'lucide-react';</code>
-                  </pre>
-                  <h3 id="h3-2-common_icons-">
-                    <a name="2. 在文件顶部添加常量（放在 COMMON_ICONS 下面）" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    2. 在文件顶部添加常量（放在 COMMON_ICONS 下面）
-                  </h3>
-                  <p>
-                    在
-                    <strong>COMMON_ICONS</strong>
-                    定义之后添加：
-                  </p>
-                  <pre>
-                    <code>// 预定义常用图标列表 const COMMON_ICONS = [ // ... 原有的图标列表 ... ]; // 添加这个常量 const NO_PARENT_VALUE = 'no-parent';</code>
-                  </pre>
-                  <h3 id="h3-3-">
-                    <a name="3. 新增状态变量" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    3. 新增状态变量
-                  </h3>
-                  <p>
-                    找到
-                    <strong>const [newCatPassword, setNewCatPassword] = useState(‘’);</strong>
-                    这行，在后面添加：
-                  </p>
-                  <pre>
-                    <code>const [newCatParentId, setNewCatParentId] = useState&lt;string&gt;(NO_PARENT_VALUE); const [editParentId, setEditParentId] = useState&lt;string&gt;(NO_PARENT_VALUE); const [expandedFolders, setExpandedFolders] = useState&lt;Set&lt;string&gt;&gt;(new Set()); // 记录展开的文件夹</code>
-                  </pre>
-                  <h3 id="h3-4-parentid-">
-                    <a name="4. 修改现有函数 - 添加 parentId 支持" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    4. 修改现有函数 - 添加 parentId 支持
-                  </h3>
-                  <h4 id="h4-4-1-startedit-">
-                    <a name="4.1 startEdit 函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    4.1 startEdit 函数
-                  </h4>
-                  <p>
-                    找到
-                    <strong>const startEdit = (cat: Category) =&gt; {</strong>
-                    ，在里面添加一行：
-                  </p>
-                  <pre>
-                    <code>const startEdit = (cat: Category) =&gt; { setEditingId(cat.id); setEditName(cat.name); setEditIcon(cat.icon || 'Folder'); setEditPassword(cat.password || ''); setEditParentId((cat as any).parentId || NO_PARENT_VALUE); // 👈 添加这一行 setMergingCatId(null); };</code>
-                  </pre>
-                  <h4 id="h4-4-2-saveedit-">
-                    <a name="4.2 saveEdit 函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    4.2 saveEdit 函数
-                  </h4>
-                  <p>找到</p>
-                  <pre>
-                    <code>const saveEdit = () =&gt; { if (!editingId || !editName.trim()) return; const newCats = categories.map(c =&gt; c.id === editingId ? { ...c, name: editName.trim(), icon: editIcon.trim(), password: editPassword.trim() || undefined } : c); onUpdateCategories(newCats); setEditingId(null); };</code>
-                  </pre>
-                  <p>替换成</p>
-                  <pre>
-                    <code>const saveEdit = () =&gt; { if (!editingId || !editName.trim()) return; const newCats = categories.map(c =&gt; c.id === editingId ? { ...c, name: editName.trim(), icon: editIcon.trim(), password: editPassword.trim() || undefined, parentId: editParentId === NO_PARENT_VALUE ? undefined : editParentId // ← 新增 } : c); onUpdateCategories(newCats); setEditingId(null); };</code>
-                  </pre>
-                  <h4 id="h4-4-3-handleadd-">
-                    <a name="4.3 handleAdd 函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    4.3 handleAdd 函数
-                  </h4>
-                  <p>找到</p>
-                  <pre>
-                    <code>const handleAdd = () =&gt; { if (!newCatName.trim()) return; const newCat: Category = { id: Date.now().toString(), name: newCatName.trim(), icon: newCatIcon.trim() || 'Folder', password: newCatPassword.trim() || undefined }; onUpdateCategories([...categories, newCat]); setNewCatName(''); setNewCatIcon('Folder'); setNewCatPassword(''); };</code>
-                  </pre>
-                  <p>替换成</p>
-                  <pre>
-                    <code>const handleAdd = () =&gt; { if (!newCatName.trim()) return; const newCat: Category = { id: Date.now().toString(), name: newCatName.trim(), icon: newCatIcon.trim() || 'Folder', password: newCatPassword.trim() || undefined, parentId: newCatParentId === NO_PARENT_VALUE ? undefined : newCatParentId // ← 新增 }; onUpdateCategories([...categories, newCat]); setNewCatName(''); setNewCatIcon('Folder'); setNewCatPassword(''); setNewCatParentId(NO_PARENT_VALUE); // ← 新增 };</code>
-                  </pre>
-                  <h3 id="h3-5-">
-                    <a name="5. 新增辅助函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    5. 新增辅助函数
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>const handleAdd = () =&gt; { // ... 原有内容 ... };</code>
-                  </pre>
-                  <p>在它下面添加</p>
-                  <pre>
-                    <code>// 切换文件夹折叠状态 const toggleFolder = (catId: string, e: React.MouseEvent) =&gt; { e.stopPropagation(); setExpandedFolders(prev =&gt; { const newSet = new Set(prev); if (newSet.has(catId)) { newSet.delete(catId); } else { newSet.add(catId); } return newSet; }); }; // 获取分类的所有子分类（递归） const getAllChildrenIds = (parentId: string): string[] =&gt; { const children = categories.filter(c =&gt; c.parentId === parentId); return children.reduce((acc, child) =&gt; { return [...acc, child.id, ...getAllChildrenIds(child.id)]; }, [] as string[]); };</code>
-                  </pre>
-                  <h3 id="h3-6-">
-                    <a name="6. 渲染部分的重大改动" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    6. 渲染部分的重大改动
-                  </h3>
-                  <h4 id="h4-6-1-">
-                    <a name="6.1 分类列表过滤" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    6.1 分类列表过滤
-                  </h4>
-                  <p>找到</p>
-                  <pre>
-                    <code>&lt;div className="flex-1 overflow-y-auto p-4 space-y-2"&gt; ... 原有内容 ... &lt;/div&gt;</code>
-                  </pre>
-                  <p>整个替换成</p>
-                  <pre>
-                    <code>&lt;div className="flex-1 overflow-y-auto p-4 space-y-2"&gt; {/* 只显示顶级分类（没有 parentId 的） */} {categories.filter(cat =&gt; !cat.parentId).map((cat, index) =&gt; { // 找到这个分类在原始数组中的真实索引（用于上下移动） const realIndex = categories.findIndex(c =&gt; c.id === cat.id); return ( &lt;div key={cat.id} className="flex flex-col p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg group gap-2 border border-slate-100 dark:border-slate-600"&gt; {/* 第一行：左侧固定区域 + 排序按钮 + 图标 + 名称区域 + 操作按钮 */} &lt;div className="flex items-start gap-2"&gt; {/* 左侧固定宽度区域：用于显示展开箭头或留白 */} &lt;div className="w-6 shrink-0 flex justify-center mt-1"&gt; {categories.some(c =&gt; c.parentId === cat.id) &amp;&amp; editingId !== cat.id &amp;&amp; mergingCatId !== cat.id ? ( // 有子分类：显示展开/折叠按钮 &lt;button onClick={(e) =&gt; toggleFolder(cat.id, e)} className="text-slate-400 hover:text-blue-500" &gt; {expandedFolders.has(cat.id) ? &lt;ChevronDown size={16} /&gt; : &lt;ChevronRight size={16} /&gt;} &lt;/button&gt; ) : ( // 没有子分类：留出空白占位，保持对齐 editingId !== cat.id &amp;&amp; mergingCatId !== cat.id &amp;&amp; &lt;div className="w-4"&gt;&lt;/div&gt; )} &lt;/div&gt; {/* 上下箭头 - 所有分类都显示（合并模式下也显示） */} {editingId !== cat.id &amp;&amp; ( &lt;div className="flex flex-col gap-1 mr-1 shrink-0"&gt; &lt;button onClick={() =&gt; handleMove(realIndex, 'up')} disabled={realIndex === 0} className="p-0.5 text-slate-400 hover:text-blue-500 disabled:opacity-30" &gt; &lt;ArrowUp size={14} /&gt; &lt;/button&gt; &lt;button onClick={() =&gt; handleMove(realIndex, 'down')} disabled={realIndex === categories.length - 1} className="p-0.5 text-slate-400 hover:text-blue-500 disabled:opacity-30" &gt; &lt;ArrowDown size={14} /&gt; &lt;/button&gt; &lt;/div&gt; )} {/* 图标和文字区域 */} &lt;div className="flex-1 min-w-0"&gt; {editingId === cat.id ? ( // 编辑模式 &lt;div className="flex flex-col gap-2"&gt; &lt;div className="flex gap-2"&gt; &lt;div className="relative w-32 shrink-0"&gt; &lt;select value={editIcon} onChange={(e) =&gt; setEditIcon(e.target.value)} className="w-full p-1.5 text-sm rounded border border-blue-500 dark:bg-slate-800 dark:text-white outline-none appearance-none" &gt; {COMMON_ICONS.map(icon =&gt; ( &lt;option key={icon.value} value={icon.value}&gt;{icon.label}&lt;/option&gt; ))} &lt;/select&gt; &lt;div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500"&gt; &lt;Icon name={editIcon} size={14} /&gt; &lt;/div&gt; &lt;/div&gt; &lt;input type="text" value={editName} onChange={(e) =&gt; setEditName(e.target.value)} className="flex-1 p-1.5 px-2 text-sm rounded border border-blue-500 dark:bg-slate-800 dark:text-white outline-none" placeholder="分类名称" autoFocus /&gt; &lt;/div&gt; &lt;div className="flex items-center gap-2"&gt; &lt;Lock size={14} className="text-slate-400" /&gt; &lt;input type="text" value={editPassword} onChange={(e) =&gt; setEditPassword(e.target.value)} className="flex-1 p-1.5 px-2 text-xs rounded border border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white outline-none" placeholder="设置密码 (留空则不加密)" /&gt; &lt;/div&gt; {/* 父分类选择 */} &lt;div className="flex items-center gap-2"&gt; &lt;svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"&gt; &lt;path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"&gt;&lt;/path&gt; &lt;/svg&gt; &lt;select value={editParentId} onChange={(e) =&gt; setEditParentId(e.target.value)} className="flex-1 p-1.5 px-2 text-xs rounded border border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white outline-none" &gt; &lt;option value={NO_PARENT_VALUE}&gt;作为顶级分类&lt;/option&gt; {categories .filter(c =&gt; c.id !== cat.id &amp;&amp; !c.parentId) .map(parent =&gt; ( &lt;option key={parent.id} value={parent.id}&gt; 作为「{parent.name}」子分类 &lt;/option&gt; ))} &lt;/select&gt; &lt;/div&gt; {/* 编辑模式下的保存和取消按钮 */} {editingId === cat.id &amp;&amp; ( &lt;div className="flex justify-end gap-2 mt-2"&gt; &lt;button onClick={saveEdit} className="px-3 py-1 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors flex items-center gap-1" &gt; &lt;Check size={14} /&gt; 保存 &lt;/button&gt; &lt;button onClick={() =&gt; { setEditingId(null); setEditName(''); setEditIcon('Folder'); setEditPassword(''); setEditParentId(NO_PARENT_VALUE); }} className="px-3 py-1 bg-slate-400 text-white text-sm rounded-lg hover:bg-slate-500 transition-colors flex items-center gap-1" &gt; &lt;X size={14} /&gt; 取消 &lt;/button&gt; &lt;/div&gt; )} &lt;/div&gt; ) : mergingCatId === cat.id ? ( // 合并模式 &lt;div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 p-2 rounded"&gt; &lt;span className="text-sm dark:text-slate-200 whitespace-nowrap"&gt;合并到 →&lt;/span&gt; &lt;select value={targetMergeId} onChange={(e) =&gt; setTargetMergeId(e.target.value)} className="flex-1 text-sm p-1 rounded border border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white" style={{ maxHeight: '200px', overflowY: 'auto' }} &gt; &lt;option value="" disabled&gt;请选择目标分类&lt;/option&gt; {categories .filter(c =&gt; c.id !== cat.id) // 排除自身 .filter(c =&gt; !c.parentId) // 先取顶级分类 .map(topCat =&gt; { // 获取这个顶级分类下的所有子分类（排除自身） const children = categories.filter(c =&gt; c.parentId === topCat.id &amp;&amp; c.id !== cat.id); return ( &lt;React.Fragment key={topCat.id}&gt; {/* 顶级分类 */} &lt;option value={topCat.id}&gt;{topCat.name}&lt;/option&gt; {/* 子分类 - 缩进显示 */} {children.map(child =&gt; ( &lt;option key={child.id} value={child.id} style={{ paddingLeft: '24px' }}&gt; └ {child.name} &lt;/option&gt; ))} &lt;/React.Fragment&gt; ); })} &lt;/select&gt; &lt;button onClick={executeMerge} className="text-xs bg-blue-600 text-white px-2 py-1 rounded"&gt;确认&lt;/button&gt; &lt;button onClick={() =&gt; setMergingCatId(null)} className="text-xs text-slate-500 px-2 py-1"&gt;取消&lt;/button&gt; &lt;/div&gt; ) : ( // 正常显示模式 &lt;div className="flex items-center gap-3"&gt; {/* 图标 */} &lt;div className="w-8 h-8 rounded bg-white dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-600 shrink-0"&gt; {cat.icon &amp;&amp; cat.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(cat.icon) ? &lt;span className="text-lg"&gt;{cat.icon}&lt;/span&gt; : &lt;Icon name={cat.icon} size={16} /&gt; } &lt;/div&gt; {/* 文字信息 */} &lt;div className="flex flex-col"&gt; {/* 分类名称 + 密码锁 */} &lt;div className="flex items-center gap-2"&gt; &lt;span className="font-medium dark:text-slate-200 truncate"&gt;{cat.name}&lt;/span&gt; {cat.password &amp;&amp; &lt;Lock size={12} className="text-amber-500 shrink-0" /&gt;} &lt;/div&gt; {/* 链接数量 */} &lt;span className="text-xs text-slate-400"&gt;{links.filter(l =&gt; l.categoryId === cat.id).length} 个链接&lt;/span&gt; {/* 可见性下拉框 */} &lt;div className="pt-2"&gt; &lt;select value={ (cat as any).isVisible === false ? "hidden" : (cat as any).isAdminOnly === true ? "admin" : "public" } onChange={(e) =&gt; { const value = e.target.value; let isVisible = true; let isAdminOnly = false; if (value === "hidden") { isVisible = false; isAdminOnly = false; } else if (value === "admin") { isVisible = true; isAdminOnly = true; } else { isVisible = true; isAdminOnly = false; } const updatedCategories = categories.map(c =&gt; c.id === cat.id ? { ...c, isVisible, isAdminOnly } : c ); onUpdateCategories(updatedCategories); }} className="text-xs p-1 pr-6 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none appearance-none cursor-pointer" style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.25rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.2em 1.2em', }} &gt; &lt;option value="public" className="dark:bg-slate-800"&gt;👥 全员可见&lt;/option&gt; &lt;option value="admin" className="dark:bg-slate-800"&gt;👑 仅管理员可见&lt;/option&gt; &lt;option value="hidden" className="dark:bg-slate-800"&gt;🚫 全员隐藏&lt;/option&gt; &lt;/select&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; )} &lt;/div&gt; {/* 操作按钮 - 只在非编辑且非合并模式下显示 */} {editingId !== cat.id &amp;&amp; mergingCatId !== cat.id &amp;&amp; ( &lt;div className="flex items-center gap-1 ml-auto"&gt; &lt;button onClick={() =&gt; startEdit(cat)} className="p-1.5 text-slate-400 hover:text-blue-500 hover:bg-slate-200 dark:hover:bg-slate-600 rounded" title="编辑"&gt; &lt;Edit2 size={14} /&gt; &lt;/button&gt; &lt;button onClick={() =&gt; openMerge(cat.id)} className="p-1.5 text-slate-400 hover:text-purple-500 hover:bg-slate-200 dark:hover:bg-slate-600 rounded" title="合并"&gt; &lt;Merge size={14} /&gt; &lt;/button&gt; &lt;button onClick={() =&gt; { if(confirm(`确定删除"${cat.name}"分类吗？该分类下的书签将移动到"常用推荐"。`)) onDeleteCategory(cat.id); }} className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-slate-200 dark:hover:bg-slate-600 rounded" title="删除" &gt; &lt;Trash2 size={14} /&gt; &lt;/button&gt; &lt;/div&gt; )} &lt;/div&gt; {/* 子分类列表 */} {expandedFolders.has(cat.id) &amp;&amp; ( &lt;div className="w-full mt-2 space-y-2"&gt; {categories .filter(sub =&gt; sub.parentId === cat.id) .map((sub, subIndex) =&gt; { const subCategoryIndex = categories.findIndex(c =&gt; c.id === sub.id); return ( &lt;div key={sub.id} className="w-full p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700" &gt; {/* 第一行：子分类基本信息 + 操作按钮 - 完全仿照顶级分类 */} &lt;div className="flex items-start gap-2"&gt; {/* 上下箭头 - 子分类移动 */} &lt;div className="flex flex-col gap-1 mr-1 shrink-0"&gt; &lt;button onClick={() =&gt; { // 找出当前父分类下的所有子分类 const siblings = categories.filter(c =&gt; c.parentId === cat.id); const currentIndex = siblings.findIndex(s =&gt; s.id === sub.id); if (currentIndex &gt; 0) { // 和上一个子分类交换位置 const newCategories = [...categories]; const prevSibling = siblings[currentIndex - 1]; // 找到这两个分类在数组中的真实位置 const currentPos = newCategories.findIndex(c =&gt; c.id === sub.id); const prevPos = newCategories.findIndex(c =&gt; c.id === prevSibling.id); // 交换它们的位置 [newCategories[currentPos], newCategories[prevPos]] = [newCategories[prevPos], newCategories[currentPos]]; onUpdateCategories(newCategories); } }} disabled={(() =&gt; { const siblings = categories.filter(c =&gt; c.parentId === cat.id); const currentIndex = siblings.findIndex(s =&gt; s.id === sub.id); return currentIndex === 0; })()} className="p-0.5 text-slate-400 hover:text-blue-500 disabled:opacity-30" &gt; &lt;ArrowUp size={14} /&gt; &lt;/button&gt; &lt;button onClick={() =&gt; { // 找出当前父分类下的所有子分类 const siblings = categories.filter(c =&gt; c.parentId === cat.id); const currentIndex = siblings.findIndex(s =&gt; s.id === sub.id); if (currentIndex &lt; siblings.length - 1) { // 和下一个子分类交换位置 const newCategories = [...categories]; const nextSibling = siblings[currentIndex + 1]; // 找到这两个分类在数组中的真实位置 const currentPos = newCategories.findIndex(c =&gt; c.id === sub.id); const nextPos = newCategories.findIndex(c =&gt; c.id === nextSibling.id); // 交换它们的位置 [newCategories[currentPos], newCategories[nextPos]] = [newCategories[nextPos], newCategories[currentPos]]; onUpdateCategories(newCategories); } }} disabled={(() =&gt; { const siblings = categories.filter(c =&gt; c.parentId === cat.id); const currentIndex = siblings.findIndex(s =&gt; s.id === sub.id); return currentIndex === siblings.length - 1; })()} className="p-0.5 text-slate-400 hover:text-blue-500 disabled:opacity-30" &gt; &lt;ArrowDown size={14} /&gt; &lt;/button&gt; &lt;/div&gt; {/* 图标和名称区域 - 完全仿照顶级分类 */} &lt;div className="flex-1 min-w-0"&gt; {editingId === sub.id ? ( // 子分类编辑模式 - 和顶级分类保持一致 &lt;div className="flex flex-col gap-2"&gt; &lt;div className="flex gap-2"&gt; &lt;div className="relative w-32 shrink-0"&gt; &lt;select value={editIcon} onChange={(e) =&gt; setEditIcon(e.target.value)} className="w-full p-1.5 text-sm rounded border border-blue-500 dark:bg-slate-800 dark:text-white outline-none appearance-none" &gt; {COMMON_ICONS.map(icon =&gt; ( &lt;option key={icon.value} value={icon.value}&gt;{icon.label}&lt;/option&gt; ))} &lt;/select&gt; &lt;div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500"&gt; &lt;Icon name={editIcon} size={14} /&gt; &lt;/div&gt; &lt;/div&gt; &lt;input type="text" value={editName} onChange={(e) =&gt; setEditName(e.target.value)} className="flex-1 p-1.5 px-2 text-sm rounded border border-blue-500 dark:bg-slate-800 dark:text-white outline-none" placeholder="分类名称" autoFocus /&gt; &lt;/div&gt; &lt;div className="flex items-center gap-2"&gt; &lt;Lock size={14} className="text-slate-400" /&gt; &lt;input type="text" value={editPassword} onChange={(e) =&gt; setEditPassword(e.target.value)} className="flex-1 p-1.5 px-2 text-xs rounded border border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white outline-none" placeholder="设置密码 (留空则不加密)" /&gt; &lt;/div&gt; &lt;div className="flex items-center gap-2"&gt; &lt;svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"&gt; &lt;path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"&gt;&lt;/path&gt; &lt;/svg&gt; &lt;select value={editParentId} onChange={(e) =&gt; setEditParentId(e.target.value)} className="flex-1 p-1.5 px-2 text-xs rounded border border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white outline-none" &gt; &lt;option value={NO_PARENT_VALUE}&gt;作为顶级分类&lt;/option&gt; {categories .filter(c =&gt; c.id !== sub.id &amp;&amp; !c.parentId) .map(parent =&gt; ( &lt;option key={parent.id} value={parent.id}&gt; 作为「{parent.name}」子分类 &lt;/option&gt; ))} &lt;/select&gt; &lt;/div&gt; {/* 子分类编辑模式下的保存和取消按钮 */} &lt;div className="flex justify-end gap-2 mt-2"&gt; &lt;button onClick={saveEdit} className="px-3 py-1 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors flex items-center gap-1" &gt; &lt;Check size={14} /&gt; 保存 &lt;/button&gt; &lt;button onClick={() =&gt; { setEditingId(null); setEditName(''); setEditIcon('Folder'); setEditPassword(''); setEditParentId(NO_PARENT_VALUE); }} className="px-3 py-1 bg-slate-400 text-white text-sm rounded-lg hover:bg-slate-500 transition-colors flex items-center gap-1" &gt; &lt;X size={14} /&gt; 取消 &lt;/button&gt; &lt;/div&gt; &lt;/div&gt; ) : ( // 子分类正常显示模式 &lt;div className="flex items-center gap-3"&gt; {/* 图标 */} &lt;div className="w-6 h-6 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 shrink-0"&gt; {sub.icon &amp;&amp; sub.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(sub.icon) ? &lt;span className="text-sm"&gt;{sub.icon}&lt;/span&gt; : &lt;Icon name={sub.icon} size={12} /&gt; } &lt;/div&gt; {/* 文字信息 */} &lt;div className="flex flex-col"&gt; {/* 分类名称 + 密码锁 */} &lt;div className="flex items-center gap-2"&gt; &lt;span className="font-medium dark:text-slate-200"&gt;{sub.name}&lt;/span&gt; {sub.password &amp;&amp; &lt;Lock size={10} className="text-amber-500 shrink-0" /&gt;} &lt;/div&gt; {/* 链接数量 */} &lt;span className="text-xs text-slate-400"&gt; {links.filter(l =&gt; l.categoryId === sub.id).length} 个链接 &lt;/span&gt; {/* 第二行：可见性下拉框 */} {editingId !== sub.id &amp;&amp; mergingCatId !== sub.id &amp;&amp; ( &lt;div className="pt-2"&gt; &lt;select value={ (sub as any).isVisible === false ? "hidden" : (sub as any).isAdminOnly === true ? "admin" : "public" } onChange={(e) =&gt; { const value = e.target.value; let isVisible = true; let isAdminOnly = false; if (value === "hidden") { isVisible = false; isAdminOnly = false; } else if (value === "admin") { isVisible = true; isAdminOnly = true; } else { isVisible = true; isAdminOnly = false; } const updatedCategories = categories.map(c =&gt; c.id === sub.id ? { ...c, isVisible, isAdminOnly } : c ); onUpdateCategories(updatedCategories); }} className="text-xs p-1 pr-5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white outline-none appearance-none cursor-pointer w-28" style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.2rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1em 1em', }} &gt; &lt;option value="public"&gt;👥 全员可见&lt;/option&gt; &lt;option value="admin"&gt;👑 仅管理员&lt;/option&gt; &lt;option value="hidden"&gt;🚫 隐藏&lt;/option&gt; &lt;/select&gt; &lt;/div&gt; )} &lt;/div&gt; &lt;/div&gt; )} &lt;/div&gt; {/* 操作按钮 - 完全仿照顶级分类 */} {editingId !== sub.id &amp;&amp; mergingCatId !== sub.id &amp;&amp; ( &lt;div className="flex items-center gap-1 ml-auto shrink-0"&gt; &lt;button onClick={() =&gt; startEdit(sub)} className="p-1.5 text-slate-400 hover:text-blue-500 hover:bg-slate-200 dark:hover:bg-slate-700 rounded" title="编辑" &gt; &lt;Edit2 size={14} /&gt; &lt;/button&gt; &lt;button onClick={() =&gt; openMerge(sub.id)} className="p-1.5 text-slate-400 hover:text-purple-500 hover:bg-slate-200 dark:hover:bg-slate-700 rounded" title="合并" &gt; &lt;Merge size={14} /&gt; &lt;/button&gt; &lt;button onClick={() =&gt; { if(confirm(`确定删除"${sub.name}"分类吗？`)) onDeleteCategory(sub.id); }} className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-slate-200 dark:hover:bg-slate-700 rounded" title="删除" &gt; &lt;Trash2 size={14} /&gt; &lt;/button&gt; &lt;/div&gt; )} &lt;/div&gt; {/* 在这里添加子分类的合并模式显示 */} {mergingCatId === sub.id &amp;&amp; ( &lt;div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 p-2 rounded mt-2"&gt; &lt;span className="text-sm dark:text-slate-200 whitespace-nowrap"&gt;合并到 →&lt;/span&gt; &lt;select value={targetMergeId} onChange={(e) =&gt; setTargetMergeId(e.target.value)} className="flex-1 text-sm p-1 rounded border border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white" style={{ maxHeight: '200px', overflowY: 'auto' }} &gt; &lt;option value="" disabled&gt;请选择目标分类&lt;/option&gt; {categories .filter(c =&gt; c.id !== sub.id) // 排除自身 .filter(c =&gt; !c.parentId) // 先取顶级分类 .map(topCat =&gt; { // 获取这个顶级分类下的所有子分类（排除自身） const children = categories.filter(c =&gt; c.parentId === topCat.id &amp;&amp; c.id !== sub.id); return ( &lt;React.Fragment key={topCat.id}&gt; {/* 顶级分类 */} &lt;option value={topCat.id}&gt;{topCat.name}&lt;/option&gt; {/* 子分类 - 缩进显示 */} {children.map(child =&gt; ( &lt;option key={child.id} value={child.id} style={{ paddingLeft: '24px' }}&gt; └ {child.name} &lt;/option&gt; ))} &lt;/React.Fragment&gt; ); })} &lt;/select&gt; &lt;button onClick={executeMerge} className="text-xs bg-blue-600 text-white px-2 py-1 rounded"&gt;确认&lt;/button&gt; &lt;button onClick={() =&gt; setMergingCatId(null)} className="text-xs text-slate-500 px-2 py-1"&gt;取消&lt;/button&gt; &lt;/div&gt; )} &lt;/div&gt; ); })} &lt;/div&gt; )} &lt;/div&gt; ); })} &lt;/div&gt;</code>
-                  </pre>
-                  <h4 id="h4-6-2-">
-                    <a name="6.2 添加新分类" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    6.2 添加新分类
-                  </h4>
-                  <p>找到</p>
-                  <pre>
-                    <code>&lt;div className="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50"&gt; ... 原有内容 ... &lt;/div&gt;</code>
-                  </pre>
-                  <p>整个替换成</p>
-                  <pre>
-                    <code>&lt;div className="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50"&gt; &lt;label className="text-xs font-semibold text-slate-500 uppercase mb-2 block"&gt;添加新分类&lt;/label&gt; &lt;div className="flex flex-col gap-2"&gt; &lt;div className="flex gap-2"&gt; &lt;div className="relative w-32 shrink-0"&gt; &lt;select value={newCatIcon} onChange={(e) =&gt; setNewCatIcon(e.target.value)} className="w-full p-2 pl-2 pr-8 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white text-sm outline-none appearance-none" &gt; {COMMON_ICONS.map(icon =&gt; ( &lt;option key={icon.value} value={icon.value}&gt; {icon.label} &lt;/option&gt; ))} &lt;/select&gt; &lt;div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500"&gt; &lt;Icon name={newCatIcon} size={16} /&gt; &lt;/div&gt; &lt;/div&gt; &lt;input type="text" value={newCatName} onChange={(e) =&gt; setNewCatName(e.target.value)} placeholder="分类名称" className="flex-1 p-2 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none" /&gt; &lt;/div&gt; &lt;div className="flex gap-2"&gt; &lt;div className="flex-1 relative"&gt; &lt;Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" /&gt; &lt;input type="text" value={newCatPassword} onChange={(e) =&gt; setNewCatPassword(e.target.value)} placeholder="密码 (可选)" className="w-full pl-8 p-2 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none" onKeyDown={(e) =&gt; e.key === 'Enter' &amp;&amp; handleAdd()} /&gt; &lt;/div&gt; {/* 添加时的父分类选择 */} &lt;div className="flex items-center gap-2"&gt; &lt;select value={newCatParentId} onChange={(e) =&gt; setNewCatParentId(e.target.value)} className="flex-1 p-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-blue-500" &gt; &lt;option value={NO_PARENT_VALUE}&gt;作为顶级分类&lt;/option&gt; {categories .filter(c =&gt; !c.parentId) .map(parent =&gt; ( &lt;option key={parent.id} value={parent.id}&gt; 作为「{parent.name}」子分类 &lt;/option&gt; ))} &lt;/select&gt; &lt;/div&gt; &lt;button onClick={handleAdd} disabled={!newCatName.trim()} className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-4 py-2 rounded-lg transition-colors flex items-center" &gt; &lt;Plus size={18} /&gt; &lt;/button&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</code>
-                  </pre>
-                  <h2 id="h2--app-tsx-">
-                    <a name="三、修改 App.tsx 文件" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    三、修改 App.tsx 文件
-                  </h2>
-                  <h3 id="h3-1-">
-                    <a name="1. 导入的图标新增" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    1. 导入的图标新增
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>import { Search, Plus, Upload, Moon, Sun, Menu, Trash2, Edit2, Loader2, Cloud, CheckCircle2, AlertCircle, Pin, Settings, Lock, CloudCog, Github, GitFork, MoreVertical, QrCode, Copy, LayoutGrid, List, Check, ExternalLink, ArrowRight } from 'lucide-react';</code>
-                  </pre>
-                  <p>整个替换成</p>
-                  <pre>
-                    <code>import { Search, Plus, Upload, Moon, Sun, Menu, Trash2, Edit2, Loader2, Cloud, CheckCircle2, AlertCircle, Pin, Settings, Lock, CloudCog, Github, GitFork, MoreVertical, QrCode, Copy, LayoutGrid, List, Check, ExternalLink, ArrowRight, ChevronRight, ChevronDown // ← 新增 } from 'lucide-react';</code>
-                  </pre>
-                  <h3 id="h3-2-">
-                    <a name="2. 新增：路由相关" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    2. 新增：路由相关
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>import React, { useState, useEffect, useMemo, useRef } from 'react';</code>
-                  </pre>
-                  <p>替换成</p>
-                  <pre>
-                    <code>import React, { useState, useEffect, useMemo, useRef } from 'react'; import { useNavigate, useParams } from 'react-router-dom';</code>
-                  </pre>
-                  <h3 id="h3-3-hooks">
-                    <a name="3. 添加路由 Hooks" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    3. 添加路由 Hooks
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>function App() {</code>
-                  </pre>
-                  <p>替换成</p>
-                  <pre>
-                    <code>function App() { const navigate = useNavigate(); // 新增：用于页面跳转 const { categoryId } = useParams&lt;{ categoryId: string }&gt;(); // 新增：获取URL参数</code>
-                  </pre>
-                  <h3 id="h3-4-">
-                    <a name="4. 新增辅助函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    4. 新增辅助函数
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>// --- Render Components ---</code>
-                  </pre>
-                  <p>在上面添加下面代码</p>
-                  <pre>
-                    <code>// 处理更多按钮点击 - 使用路由跳转 const handleMoreClick = (catId: string) =&gt; { navigate(`/cat/${catId}`); }; // 处理返回首页 - 使用路由跳转 const handleBackToHome = () =&gt; { navigate('/'); };</code>
-                  </pre>
-                  <h3 id="h3-5-">
-                    <a name="5. 新增状态变量" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    5. 新增状态变量
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>const mainRef = useRef&lt;HTMLDivElement&gt;(null);</code>
-                  </pre>
-                  <p>在上面添加下面代码</p>
-                  <pre>
-                    <code>const [collapsedFolders, setCollapsedFolders] = useState&lt;Set&lt;string&gt;&gt;(new Set()); const [detailCategoryId, setDetailCategoryId] = useState&lt;string | null&gt;(null); // 新增：当前查看的分类详情页</code>
-                  </pre>
-                  <h3 id="h3-6-">
-                    <a name="6. 新增辅助函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    6. 新增辅助函数
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>// --- Helpers ---</code>
-                  </pre>
-                  <p>在上面添加下面代码</p>
-                  <pre>
-                    <code>// 新增：监听URL参数变化，同步 detailCategoryId useEffect(() =&gt; { if (categoryId) { setDetailCategoryId(categoryId); } else { setDetailCategoryId(null); } }, [categoryId]); // 安全地获取顶级分类 const getTopLevelCategories = useMemo(() =&gt; { return categories.filter(cat =&gt; !cat.parentId); }, [categories]); // 安全地获取子分类 const getSubCategories = (parentId: string) =&gt; { return categories.filter(cat =&gt; cat.parentId === parentId); };</code>
-                  </pre>
-                  <h3 id="h3-7-loadfromlocal-">
-                    <a name="7. 修改 loadFromLocal 函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    7. 修改 loadFromLocal 函数
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>const loadFromLocal = () =&gt; { const stored = localStorage.getItem(LOCAL_STORAGE_KEY); ... 原有内容 ... };</code>
-                  </pre>
-                  <p>整段替换成</p>
-                  <pre>
-                    <code>const loadFromLocal = () =&gt; { const stored = localStorage.getItem(LOCAL_STORAGE_KEY); if (stored) { try { const parsed = JSON.parse(stored); setLinks(parsed.links || INITIAL_LINKS); setCategories(parsed.categories || DEFAULT_CATEGORIES); if (parsed.settings) setSiteSettings(prev =&gt; ({ ...prev, ...parsed.settings })); // 设置默认折叠状态（新增） const initialCollapsed = new Set&lt;string&gt;(); (parsed.categories || DEFAULT_CATEGORIES).forEach((cat: Category) =&gt; { const hasChildren = (parsed.categories || DEFAULT_CATEGORIES).some((c: Category) =&gt; c.parentId === cat.id); if (hasChildren) { initialCollapsed.add(cat.id); } }); setCollapsedFolders(initialCollapsed); } catch (e) { setLinks(INITIAL_LINKS); setCategories(DEFAULT_CATEGORIES); } } else { setLinks(INITIAL_LINKS); setCategories(DEFAULT_CATEGORIES); } };</code>
-                  </pre>
-                  <h3 id="h3-8-initdata-">
-                    <a name="8. 修改 initData 函数" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    8. 修改 initData 函数
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>if (data.links &amp;&amp; data.links.length &gt; 0) { setLinks(data.links); ... 原有内容 ... return; }</code>
-                  </pre>
-                  <p>整段替换成</p>
-                  <pre>
-                    <code>if (data.links &amp;&amp; data.links.length &gt; 0) { setLinks(data.links); setCategories(data.categories || DEFAULT_CATEGORIES); if (data.settings) setSiteSettings(prev =&gt; ({ ...prev, ...data.settings })); localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data)); // 数据加载完成后，设置默认折叠状态（新增） const initialCollapsed = new Set&lt;string&gt;(); (data.categories || DEFAULT_CATEGORIES).forEach((cat: Category) =&gt; { const hasChildren = (data.categories || DEFAULT_CATEGORIES).some((c: Category) =&gt; c.parentId === cat.id); if (hasChildren) { initialCollapsed.add(cat.id); } }); setCollapsedFolders(initialCollapsed); return; }</code>
-                  </pre>
-                  <h3 id="h3-9-">
-                    <a name="9. 左侧菜单渲染的重大改动" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    9. 左侧菜单渲染的重大改动
-                  </h3>
-                  <pre>
-                    <code>{/* 左侧菜单过滤，先过滤出可见的分类，然后再渲染 */} {categories .filter(cat =&gt; { // 如果是管理员（已登录），能看到"全员可见"和"仅管理员可见"的分类 ... 原有内容 ... &lt;/button&gt; ); })}</code>
-                  </pre>
-                  <p>整段替换成</p>
-                  <pre>
-                    <code>{/* 左侧菜单过滤，先过滤出可见的分类，然后再渲染 */} {getTopLevelCategories .filter(cat =&gt; { if (authToken) return cat.isVisible !== false; return cat.isVisible !== false &amp;&amp; !cat.isAdminOnly; }) .map(cat =&gt; { const isLocked = cat.password &amp;&amp; !unlockedCategoryIds.has(cat.id); const isEmoji = cat.icon &amp;&amp; cat.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(cat.icon); // 获取子分类 const subCategories = categories.filter(sub =&gt; sub.parentId === cat.id &amp;&amp; (authToken ? sub.isVisible !== false : sub.isVisible !== false &amp;&amp; !sub.isAdminOnly) ); const hasChildren = subCategories.length &gt; 0; // 默认是折叠的（collapsed 为 true） const isCollapsed = collapsedFolders.has(cat.id); return ( &lt;div key={cat.id} className="space-y-1"&gt; {/* 顶级分类 */} &lt;div className="flex items-center w-full"&gt; &lt;button onClick={() =&gt; scrollToCategory(cat.id)} className={`flex-1 flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all group ${ activeCategory === cat.id ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700' }`} &gt; &lt;div className={`p-1.5 rounded-lg transition-colors flex items-center justify-center ${activeCategory === cat.id ? 'bg-blue-100 dark:bg-blue-800' : 'bg-slate-100 dark:bg-slate-800'}`}&gt; {isLocked ? &lt;Lock size={16} className="text-amber-500" /&gt; : (isEmoji ? &lt;span className="text-base leading-none"&gt;{cat.icon}&lt;/span&gt; : &lt;Icon name={cat.icon} size={16} /&gt;)} &lt;/div&gt; &lt;span className="truncate flex-1 text-left"&gt; {cat.name} {cat.isAdminOnly &amp;&amp; authToken &amp;&amp; ( &lt;span className="ml-1.5 inline-flex items-center px-1 py-0.5 rounded text-[10px] font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border border-purple-200 dark:border-purple-800"&gt;管&lt;/span&gt; )} &lt;/span&gt; &lt;/button&gt; {/* 箭头移到右侧 */} {hasChildren &amp;&amp; ( &lt;button onClick={() =&gt; { setCollapsedFolders(prev =&gt; { const newSet = new Set(prev); if (newSet.has(cat.id)) { newSet.delete(cat.id); // 如果已经折叠，就展开 } else { newSet.add(cat.id); // 如果已经展开，就折叠 } return newSet; }); }} className="p-2 ml-1 text-slate-400 hover:text-blue-500 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700" &gt; {isCollapsed ? &lt;ChevronRight size={16} /&gt; : &lt;ChevronDown size={16} /&gt;} &lt;/button&gt; )} &lt;/div&gt; {/* 子分类 - 默认不显示（因为 isCollapsed 初始为 true） */} {!isCollapsed &amp;&amp; hasChildren &amp;&amp; ( &lt;div className="ml-6 space-y-1"&gt; {subCategories.map(sub =&gt; { const isSubLocked = sub.password &amp;&amp; !unlockedCategoryIds.has(sub.id); const isSubEmoji = sub.icon &amp;&amp; sub.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(sub.icon); return ( &lt;button key={sub.id} onClick={() =&gt; scrollToCategory(sub.id)} className={`w-full flex items-center gap-2 px-4 py-1.5 rounded-lg transition-all text-sm ${ activeCategory === sub.id ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700' }`} &gt; &lt;div className="w-4 h-4 flex items-center justify-center"&gt; {isSubLocked ? &lt;Lock size={12} className="text-amber-500" /&gt; : (isSubEmoji ? &lt;span className="text-xs"&gt;{sub.icon}&lt;/span&gt; : &lt;Icon name={sub.icon} size={12} /&gt;)} &lt;/div&gt; &lt;span className="truncate flex-1 text-left flex items-center gap-1"&gt; {sub.name} {/* 新增：二级分类的「管」图标 */} {sub.isAdminOnly &amp;&amp; authToken &amp;&amp; ( &lt;span className="inline-flex items-center px-1 rounded text-[10px] font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border border-purple-200 dark:border-purple-800"&gt;管&lt;/span&gt; )} &lt;/span&gt; &lt;/button&gt; ); })} &lt;/div&gt; )} &lt;/div&gt; ); })}</code>
-                  </pre>
-                  <h3 id="h3-10-">
-                    <a name="10. 右侧内容区域的重构" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    10. 右侧内容区域的重构
-                  </h3>
-                  <pre>
-                    <code>&lt;div className="p-4 lg:p-8 space-y-8"&gt; ... 原有内容 ... &lt;/div&gt;</code>
-                  </pre>
-                  <p>整段替换成</p>
-                  <pre>
-                    <code>&lt;div className="p-4 lg:p-8 space-y-8"&gt; {detailCategoryId ? ( /* 分类详情页 - 替换首页内容 */ (() =&gt; { const cat = categories.find(c =&gt; c.id === detailCategoryId); if (!cat) return null; const subCategories = getSubCategories(cat.id).filter(sub =&gt; { if (authToken) return sub.isVisible !== false; return sub.isVisible !== false &amp;&amp; !sub.isAdminOnly; }); const catLinks = searchResults.filter(l =&gt; l.categoryId === cat.id); const isLocked = cat.password &amp;&amp; !unlockedCategoryIds.has(cat.id); return ( &lt;div className="space-y-6"&gt; {/* 返回首页按钮 - 使用路由跳转 */} &lt;div className="flex items-center gap-3"&gt; &lt;button onClick={() =&gt; navigate('/')} className="flex items-center gap-1 px-2.5 py-1.5 text-sm bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" &gt; &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"&gt; &lt;path d="M19 12H5M12 19l-7-7 7-7"/&gt; &lt;/svg&gt; 返回首页 &lt;/button&gt; &lt;div className="text-sm text-slate-500"&gt; 当前分类：{catLinks.length} 个链接 · {subCategories.length} 个子分类 &lt;/div&gt; &lt;/div&gt; {/* 分类标题 */} &lt;div className="flex items-center gap-1"&gt; &lt;div className="w-8 h-8 flex items-center justify-center"&gt; {cat.icon &amp;&amp; cat.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(cat.icon) ? &lt;span className="text-xl"&gt;{cat.icon}&lt;/span&gt; : &lt;Icon name={cat.icon} size={24} /&gt; } &lt;/div&gt; &lt;div&gt; &lt;h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100"&gt; {cat.name} &lt;/h1&gt; &lt;/div&gt; {cat.isAdminOnly &amp;&amp; authToken &amp;&amp; ( &lt;span className="ml-auto px-2 py-1 rounded text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border border-purple-200 dark:border-purple-800"&gt; 仅管理员 &lt;/span&gt; )} &lt;/div&gt; {/* 密码验证 */} {isLocked ? ( &lt;div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 p-12 flex flex-col items-center justify-center text-center"&gt; &lt;div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center mb-4 text-amber-600 dark:text-amber-400"&gt; &lt;Lock size={32} /&gt; &lt;/div&gt; &lt;h3 className="text-xl text-slate-800 dark:text-slate-200 font-medium mb-2"&gt;私密目录&lt;/h3&gt; &lt;p className="text-slate-500 dark:text-slate-400 mb-6"&gt;该分类已加密，需要验证密码才能查看内容&lt;/p&gt; &lt;button onClick={() =&gt; setCatAuthModalData(cat)} className="px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-medium transition-colors" &gt; 输入密码解锁 &lt;/button&gt; &lt;/div&gt; ) : ( &lt;div className="space-y-8"&gt; {/* 顶级分类自己的链接 */} {catLinks.length &gt; 0 &amp;&amp; ( &lt;div&gt; &lt;div className={`grid gap-3 ${siteSettings.cardStyle === 'simple' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'}`}&gt; {catLinks.map(link =&gt; renderLinkCard(link))} &lt;/div&gt; &lt;/div&gt; )} {/* 子分类 */} {subCategories.map(sub =&gt; { const subLinks = searchResults.filter(l =&gt; l.categoryId === sub.id); const isSubLocked = sub.password &amp;&amp; !unlockedCategoryIds.has(sub.id); return ( &lt;div key={sub.id}&gt; &lt;div className="flex items-center gap-2 mb-4"&gt; &lt;div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center"&gt; {sub.icon &amp;&amp; sub.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(sub.icon) ? &lt;span className="text-lg"&gt;{sub.icon}&lt;/span&gt; : &lt;Icon name={sub.icon} size={18} /&gt; } &lt;/div&gt; &lt;h2 className="text-lg font-semibold text-slate-700 dark:text-slate-300"&gt; {sub.name} &lt;/h2&gt; {sub.isAdminOnly &amp;&amp; authToken &amp;&amp; ( &lt;span className="px-1.5 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border border-purple-200 dark:border-purple-800"&gt;管&lt;/span&gt; )} {isSubLocked &amp;&amp; &lt;Lock size={14} className="text-amber-500" /&gt;} &lt;/div&gt; {isSubLocked ? ( &lt;div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 p-8 flex flex-col items-center justify-center text-center"&gt; &lt;div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center mb-3 text-amber-600 dark:text-amber-400"&gt; &lt;Lock size={24} /&gt; &lt;/div&gt; &lt;h4 className="text-slate-800 dark:text-slate-200 font-medium mb-1"&gt;私密目录&lt;/h4&gt; &lt;p className="text-sm text-slate-500 dark:text-slate-400 mb-3"&gt;该子分类已加密，需要验证密码才能查看内容&lt;/p&gt; &lt;button onClick={() =&gt; setCatAuthModalData(sub)} className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-medium transition-colors" &gt; 输入密码解锁 &lt;/button&gt; &lt;/div&gt; ) : ( &lt;&gt; {subLinks.length === 0 ? ( &lt;div className="text-center py-6 text-slate-400 text-sm italic bg-slate-50 dark:bg-slate-800/50 rounded-lg"&gt; 暂无链接 &lt;/div&gt; ) : ( &lt;div className={`grid gap-3 ${siteSettings.cardStyle === 'simple' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'}`}&gt; {subLinks.map(link =&gt; renderLinkCard(link))} &lt;/div&gt; )} &lt;/&gt; )} &lt;/div&gt; ); })} {/* 如果没有内容 */} {catLinks.length === 0 &amp;&amp; subCategories.length === 0 &amp;&amp; ( &lt;div className="text-center py-12 text-slate-400 text-sm italic"&gt; 暂无内容 &lt;/div&gt; )} &lt;/div&gt; )} &lt;/div&gt; ); })() ) : ( /* 首页内容 */ &lt;&gt; {/* 置顶链接部分 */} {pinnedLinks.length &gt; 0 &amp;&amp; !searchQuery &amp;&amp; ( &lt;section&gt; &lt;div className="flex items-center gap-2 mb-4"&gt; &lt;Pin size={16} className="text-blue-500 fill-blue-500" /&gt; &lt;h2 className="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"&gt; 置顶 / 常用 &lt;/h2&gt; &lt;/div&gt; &lt;div className={`grid gap-3 ${siteSettings.cardStyle === 'simple' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'}`}&gt; {pinnedLinks.map(link =&gt; renderLinkCard(link))} &lt;/div&gt; &lt;/section&gt; )} {/* 分类列表 */} {getTopLevelCategories .filter(cat =&gt; { if (authToken) return cat.isVisible !== false; return cat.isVisible !== false &amp;&amp; !cat.isAdminOnly; }) .map(cat =&gt; { const subCategories = getSubCategories(cat.id).filter(sub =&gt; { if (authToken) return sub.isVisible !== false; return sub.isVisible !== false &amp;&amp; !sub.isAdminOnly; }); const catLinks = searchResults.filter(l =&gt; l.categoryId === cat.id); const isLocked = cat.password &amp;&amp; !unlockedCategoryIds.has(cat.id); const hasChildren = subCategories.length &gt; 0; if (searchQuery &amp;&amp; searchMode === 'local' &amp;&amp; catLinks.length === 0 &amp;&amp; subCategories.length === 0) return null; return ( &lt;section key={cat.id} id={`cat-${cat.id}`} className="scroll-mt-24"&gt; &lt;div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100 dark:border-slate-800"&gt; &lt;div className="flex items-center gap-2"&gt; &lt;div className="text-slate-400"&gt; {cat.icon &amp;&amp; cat.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(cat.icon) ? &lt;span className="text-lg"&gt;{cat.icon}&lt;/span&gt; : &lt;Icon name={cat.icon} size={20} /&gt;} &lt;/div&gt; &lt;div className="flex items-center gap-2"&gt; &lt;h2 className="text-lg font-bold text-slate-800 dark:text-slate-200"&gt; {cat.name} &lt;/h2&gt; {cat.isAdminOnly &amp;&amp; authToken &amp;&amp; ( &lt;span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border border-purple-200 dark:border-purple-800"&gt;管&lt;/span&gt; )} {isLocked &amp;&amp; &lt;Lock size={16} className="text-amber-500" /&gt;} &lt;/div&gt; &lt;/div&gt; {!isLocked &amp;&amp; ( &lt;button onClick={() =&gt; handleMoreClick(cat.id)} className="flex items-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" &gt; &lt;span&gt;更多&lt;/span&gt; &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"&gt; &lt;path d="m9 18 6-6-6-6"&gt;&lt;/path&gt; &lt;/svg&gt; &lt;/button&gt; )} &lt;/div&gt; {isLocked ? ( &lt;div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 p-8 flex flex-col items-center justify-center text-center"&gt; &lt;div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center mb-4 text-amber-600 dark:text-amber-400"&gt; &lt;Lock size={24} /&gt; &lt;/div&gt; &lt;h3 className="text-slate-800 dark:text-slate-200 font-medium mb-1"&gt;私密目录&lt;/h3&gt; &lt;p className="text-sm text-slate-500 dark:text-slate-400 mb-4"&gt;该分类已加密，需要验证密码才能查看内容&lt;/p&gt; &lt;button onClick={() =&gt; setCatAuthModalData(cat)} className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-medium transition-colors" &gt; 输入密码解锁 &lt;/button&gt; &lt;/div&gt; ) : ( &lt;&gt; {/* 修改1：顶级分类自己的链接为0时显示暂无链接提示 */} {catLinks.length === 0 ? ( &lt;div className="text-center py-4 text-slate-400 text-sm italic mb-6"&gt; 暂无链接 &lt;/div&gt; ) : ( &lt;div className={`grid gap-3 mb-6 ${siteSettings.cardStyle === 'simple' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'}`}&gt; {catLinks.slice(0, 4).map(link =&gt; renderLinkCard(link))} {catLinks.length &gt; 4 &amp;&amp; ( &lt;div className="flex items-center justify-center p-4 text-sm text-slate-400 italic col-span-full"&gt; 还有 {catLinks.length - 4} 个链接，点击「更多」查看全部 &lt;/div&gt; )} &lt;/div&gt; )} {subCategories.slice(0, 2).map(sub =&gt; { const subLinks = searchResults.filter(l =&gt; l.categoryId === sub.id); const isSubLocked = sub.password &amp;&amp; !unlockedCategoryIds.has(sub.id); return ( &lt;div key={sub.id} id={`cat-${sub.id}`} className="mb-6"&gt; &lt;div className="flex items-center gap-2 mb-3"&gt; &lt;div className="text-slate-400"&gt; {sub.icon &amp;&amp; sub.icon.length &lt;= 4 &amp;&amp; !/^[a-zA-Z]+$/.test(sub.icon) ? &lt;span className="text-lg"&gt;{sub.icon}&lt;/span&gt; : &lt;Icon name={sub.icon} size={18} /&gt;} &lt;/div&gt; &lt;h3 className="text-md font-semibold text-slate-700 dark:text-slate-300"&gt; {sub.name} &lt;/h3&gt; {sub.isAdminOnly &amp;&amp; authToken &amp;&amp; ( &lt;span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 border border-purple-200 dark:border-purple-800"&gt;管&lt;/span&gt; )} {isSubLocked &amp;&amp; &lt;Lock size={14} className="text-amber-500" /&gt;} &lt;/div&gt; {isSubLocked ? ( &lt;div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 p-8 flex flex-col items-center justify-center text-center"&gt; &lt;div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center mb-3 text-amber-600 dark:text-amber-400"&gt; &lt;Lock size={20} /&gt; &lt;/div&gt; &lt;h4 className="text-slate-800 dark:text-slate-200 font-medium mb-1"&gt;私密目录&lt;/h4&gt; &lt;p className="text-sm text-slate-500 dark:text-slate-400 mb-3"&gt;该子分类已加密，需要验证密码才能查看内容&lt;/p&gt; &lt;button onClick={() =&gt; setCatAuthModalData(sub)} className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-colors" &gt; 输入密码解锁 &lt;/button&gt; &lt;/div&gt; ) : ( &lt;&gt; {subLinks.length === 0 ? ( &lt;div className="text-center py-4 text-slate-400 text-sm italic"&gt; 暂无链接 &lt;/div&gt; ) : ( &lt;div className={`grid gap-3 ${siteSettings.cardStyle === 'simple' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'}`}&gt; {subLinks.slice(0, 4).map(link =&gt; renderLinkCard(link))} {subLinks.length &gt; 4 &amp;&amp; ( &lt;div className="flex items-center justify-center p-4 text-sm text-slate-400 italic col-span-full"&gt; 还有 {subLinks.length - 4} 个链接 &lt;/div&gt; )} &lt;/div&gt; )} &lt;/&gt; )} &lt;/div&gt; ); })} {/* 修改2：让「还有 X 个子分类」的文字可点击进入详情页 */} {subCategories.length &gt; 2 &amp;&amp; ( &lt;div className="text-center py-2 text-sm text-slate-400 italic border-t border-slate-100 dark:border-slate-800 pt-4"&gt; 还有 {subCategories.length - 2} 个子分类，点击 &lt;button onClick={() =&gt; handleMoreClick(cat.id)} className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mx-1 underline-offset-2 hover:underline transition-colors" &gt; 「更多」 &lt;/button&gt; 查看全部 &lt;/div&gt; )} {catLinks.length === 0 &amp;&amp; subCategories.length === 0 &amp;&amp; ( &lt;div className="text-center py-8 text-slate-400 text-sm italic"&gt; 暂无链接 &lt;/div&gt; )} &lt;/&gt; )} &lt;/section&gt; ); })} {/* 搜索空状态 */} {searchQuery &amp;&amp; searchMode === 'local' &amp;&amp; searchResults.length === 0 &amp;&amp; ( &lt;div className="flex flex-col items-center justify-center py-20 text-slate-400"&gt; &lt;Search size={40} className="opacity-30 mb-4" /&gt; &lt;p&gt;没有找到相关内容&lt;/p&gt; &lt;button onClick={() =&gt; setIsModalOpen(true)} className="mt-4 text-blue-500 hover:underline"&gt;添加一个?&lt;/button&gt; &lt;/div&gt; )} {/* 底部留白 */} &lt;div className="h-20"&gt;&lt;/div&gt; &lt;/&gt; )} &lt;/div&gt;</code>
-                  </pre>
-                  <h2 id="h2--components-linkmodal-tsx-">
-                    <a name="四、修改 components/LinkModal.tsx 文件" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    四、修改 components/LinkModal.tsx 文件
-                  </h2>
-                  <h3 id="h3-1-">
-                    <a name="1. 修改分类下拉框显示的层级结构" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    1. 修改分类下拉框显示的层级结构
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>&lt;div className="flex-1"&gt; &lt;label className="block text-sm font-medium mb-1 dark:text-slate-300"&gt;分类&lt;/label&gt; &lt;select value={categoryId} onChange={(e) =&gt; setCategoryId(e.target.value)} className="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" &gt; {categories.map(cat =&gt; ( &lt;option key={cat.id} value={cat.id}&gt;{cat.name}&lt;/option&gt; ))} &lt;/select&gt; &lt;/div&gt;</code>
-                  </pre>
-                  <p>整段替换成</p>
-                  <pre>
-                    <code>&lt;div className="flex-1"&gt; &lt;label className="block text-sm font-medium mb-1 dark:text-slate-300"&gt;分类&lt;/label&gt; &lt;select value={categoryId} onChange={(e) =&gt; setCategoryId(e.target.value)} className="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" style={{ maxHeight: '200px', overflowY: 'auto' }} &gt; &lt;option value="" disabled&gt;请选择目标分类&lt;/option&gt; {categories .filter(cat =&gt; !cat.parentId) // 先取顶级分类 .map(topCat =&gt; { // 获取这个顶级分类下的所有子分类 const children = categories.filter(c =&gt; c.parentId === topCat.id); return ( &lt;React.Fragment key={topCat.id}&gt; {/* 顶级分类 */} &lt;option value={topCat.id}&gt;{topCat.name}&lt;/option&gt; {/* 子分类 - 缩进显示 */} {children.map(child =&gt; ( &lt;option key={child.id} value={child.id} style={{ paddingLeft: '24px' }}&gt; └ {child.name} &lt;/option&gt; ))} &lt;/React.Fragment&gt; ); })} &lt;/select&gt; &lt;/div&gt;</code>
-                  </pre>
-                  <h3 id="h3-2-">
-                    <a name="2. 修改置顶按钮显示效果" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    2. 修改置顶按钮显示效果
-                  </h3>
-                  <p>找到</p>
-                  <pre>
-                    <code>&lt;div className="flex items-end pb-1"&gt; &lt;button type="button" onClick={() =&gt; setPinned(!pinned)} className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border transition-all h-[42px] ${</code>
-                  </pre>
-                  <p>替换成</p>
-                  <pre>
-                    <code>&lt;div className="flex items-end"&gt; &lt;button type="button" onClick={() =&gt; setPinned(!pinned)} className={`flex items-center gap-2 px-4 py-2.5 rounded border transition-all h-[39px] ${</code>
-                  </pre>
-                  <h2 id="h2--index-html-">
-                    <a name="五、修改 index.html 文件" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    五、修改 index.html 文件
-                  </h2>
-                  <p>直接替换</p>
-                  <pre>
-                    <code>&lt;!DOCTYPE html&gt; &lt;html lang="zh-CN"&gt; &lt;head&gt; &lt;meta charset="UTF-8" /&gt; &lt;link rel="icon" type="image/svg+xml" href="https://lucide.dev/favicon.ico" /&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"&gt; &lt;title&gt;&lt;/title&gt; &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt; &lt;script&gt; tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', secondary: '#64748b', dark: '#0f172a', card: '#1e293b', } } } } &lt;/script&gt; &lt;style&gt; body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; } /* Custom scrollbar for sidebar */ .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; } /* Simple CSS-only tooltip transition */ .tooltip-custom { transition: opacity 0.2s, visibility 0.2s; pointer-events: none; } /* 禁用所有元素的长按菜单 */ * { -webkit-touch-callout: none !important; -webkit-user-select: none !important; user-select: none !important; } /* 允许输入框可以选中文本 */ input, textarea { -webkit-user-select: auto !important; user-select: auto !important; } /* 禁用图片保存菜单 */ img { -webkit-touch-callout: none !important; pointer-events: none; } a img { pointer-events: none; } &lt;/style&gt; &lt;script type="importmap"&gt; { "imports": { "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/", "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0", "react/": "https://aistudiocdn.com/react@^19.2.0/", "react": "https://aistudiocdn.com/react@^19.2.0", "uuid": "https://aistudiocdn.com/uuid@^13.0.0", "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0", "buffer": "https://aistudiocdn.com/buffer@^6.0.3", "jszip": "https://aistudiocdn.com/jszip@^3.10.1" } } &lt;/script&gt; &lt;/head&gt; &lt;body class="bg-gray-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 transition-colors duration-300"&gt; &lt;div id="root"&gt;&lt;/div&gt; &lt;script type="module" src="/index.tsx"&gt;&lt;/script&gt; &lt;/body&gt; &lt;/html&gt;</code>
-                  </pre>
-                  <h2 id="h2--package-json-">
-                    <a name="六、修改 package.json 文件" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    六、修改 package.json 文件
-                  </h2>
-                  <p>找到</p>
-                  <pre>
-                    <code>"buffer": "^6.0.3",</code>
-                  </pre>
-                  <p>替换成</p>
-                  <pre>
-                    <code>"buffer": "^6.0.3", "react-router-dom": "^6.22.0",</code>
-                  </pre>
-                  <h2 id="h2--index-tsx-">
-                    <a name="七、修改 index.tsx 文件" class="reference-link">
-                    </a>
-                    <span class="header-link octicon octicon-link">
-                    </span>
-                    七、修改 index.tsx 文件
-                  </h2>
-                  <p>整个替换成</p>
-                  <pre>
-                    <code>import React from 'react'; import ReactDOM from 'react-dom/client'; import { createBrowserRouter, RouterProvider } from 'react-router-dom'; import App from './App'; // 定义路由配置 const router = createBrowserRouter([ { path: '/', element: &lt;App /&gt;, }, { path: '/cat/:categoryId', element: &lt;App /&gt;, }, ]); const rootElement = document.getElementById('root'); if (!rootElement) { throw new Error("Could not find root element to mount to"); } const root = ReactDOM.createRoot(rootElement); root.render( &lt;React.StrictMode&gt; &lt;RouterProvider router={router} /&gt; &lt;/React.StrictMode&gt; );</code>
-                  </pre>
-                  
-            <!-- FAQ -->
-            <div class="faq-wrap">
-              <h3>常见问题</h3>
-              <div class="faq-item">
-                <div class="faq-title">这里写你的问题一？</div>
-                <div class="faq-content">
-                  <div class="faq-inner">这里写答案。支持放图片、链接。
-                    <br>建议直接在答案里敲字。</div></div>
-              </div>
-              <div class="faq-item">
-                <div class="faq-title">这里写你的问题二？</div>
-                <div class="faq-content">
-                  <div class="faq-inner">这里是第二个答案。</div></div>
-              </div>
-            </div>
+<p>我们可以使用Google Apps Script 实现定时自动访问URL。<br>Apps Script官网：<a href="https://script.google.com/">https://script.google.com/</a></p>
+<h2>第一步</h2><p><strong>在编辑器中输入以下代码</strong>：</p>
+<pre><code class="lang-javascript">function scheduledUrlFetch() {
+  // 需要访问的网页链接
+  var url = &quot;https://www.abc.com&quot;; // 替换成你的URL
 
+  // 打开Google Sheets表格
+  var sheet = SpreadsheetApp.openById(&quot;1-YnPomgmgp3v6-_PC4PqpVJSdH4KjjZHMykeBo5&quot;).getActiveSheet(); // 替换成你的Google Sheets ID，在url链接中能看到
+  var currentTime = new Date(); // 记录当前时间
+
+  try {
+    // 发送GET请求访问网页
+    var response = UrlFetchApp.fetch(url);
+
+    // 获取响应状态码和部分响应内容
+    var statusCode = response.getResponseCode();
+    var contentSnippet = response.getContentText().substring(0, 80); // 只截取前80个字符
+
+    // 将结果写入Google Sheets，放入新的一行
+    sheet.appendRow([new Date(), url, statusCode, contentSnippet]);
+
+    // 停留180秒（180秒 = 180 * 1000 毫秒）
+    Utilities.sleep(180 * 1000); // 180秒 = 180 * 1000 毫秒
+
+    // 写入完成180秒停留的日志
+    sheet.appendRow([new Date(), url, &quot;完成 180 秒訪問&quot;, &quot;&quot;]);
+
+  } catch (error) {
+    // 捕捉请求失败或其他错误
+    sheet.appendRow([new Date(), url, &quot;Error: &quot; + error.message, &quot;&quot;]);
+  }
+}
+</code></pre>
+<p><strong>Google Sheets ID 在 URL中能看到</strong></p>
+<pre><code class="lang-html">https://docs.google.com/spreadsheets/d/1-YnPomgmgp3v6-_PC4PqpVJSdH4KjjZHMykeBo5/
+</code></pre>
+<p>其中 <strong>1-YnPomgmgp3v6-_PC4PqpVJSdH4KjjZHMykeBo5</strong> 就是Google Sheets ID</p>
+<h2>第二步</h2><p><strong>设置定时触发器</strong></p>
+<ul>
+<li>在 Google Apps Script 编辑器中，点击左侧的“触发器”（时钟图标）。</li><li>在右下角，点击“添加触发器”。</li><li>在“选择要运行的函数”下拉菜单中，选择 scheduledUrlFetch（或您修改后的函数名称）。</li><li>在“选择事件源”下拉菜单中，选择“时间驱动”。</li><li>在“选择时间驱动的类型”下拉菜单中，选择“日期计时器”。</li><li>在“选择特定的时间”下拉菜单中，选择“自定义”。</li><li>在“重复间隔”中，选择“每天”。</li><li>在“时间”文本框中，输入以下时间（每个时间段添加一个触发器）：<ul>
+<li>01&#58;00&#58;00</li><li>07&#58;00&#58;00</li><li>13&#58;00&#58;00</li><li>19&#58;00&#58;00</li><li>23&#58;00&#58;00</li></ul>
+</li><li>点击“保存”。</li><li>重复上述步骤，为每个时间段创建一个触发器。</li></ul>
+<h2>第三步</h2><p><strong>授权 Google Apps Script</strong></p>
+<p>首次设置触发器时，系统会要求您授权 Google Apps Script 访问您的 Google 账户。请按照提示进行授权。</p>
+<h3>注意事项</h3><ul>
+<li>Google Apps Script 的触发器可能会有一定的延迟，因此实际执行时间可能会与您设置的时间略有偏差。</li><li>如果您的脚本运行时间过长（超过 6 分钟），可能会导致触发器失败。请确保您的脚本能够在限制时间内完成。</li><li>如果您的 Google Sheets 表格非常大，写入操作可能会比较耗时，请注意脚本的运行时间。</li><li>如果脚本出现任何的异常，Google会发送邮件到你google账号的邮箱中，请注意查看。</li></ul>
+<p>通过以上步骤，您就可以实现每天在指定时间自动访问 URL 并将结果记录到 Google Sheets 表格中。</p>
           </div>
         </div>
 
@@ -802,10 +424,6 @@
       <a href="#section5"><span>【事业编招聘】长沙工业学院招聘中！岗位表→</span></a>
     </div>
   </dialog>
-
-<script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js"></script>
-<!-- 全局 -->
-<script src="assests/js/all.js?v=20261119-1"></script>
 
 <!-- 引入 PhotoSwipe 核心库 -->
 <script type="module">
