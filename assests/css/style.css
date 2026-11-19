@@ -459,6 +459,23 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
 
 /*+++++++++++++++++++++++++++++++++*/
 /*--------------------------------------------------------------
+/*  FAQ 常见问题
+--------------------------------------------------------------*/
+.faq-wrap { margin: 40px 0 20px; }
+.faq-item { background-color: var(--white); border: 1px solid var(--border-color-gray); border-radius: 8px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.3s; }
+.faq-title { padding: 12px 15px; font-weight: bold; color: var(--ink); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: color 0.3s; }
+.faq-title::after { content: "\e60b"; font-size: 20px; color: var(--text-q-gray); transition: transform 0.3s, color 0.3s; font-family: "iconfont" !important; font-size: 14px; }
+.faq-item.active { border-color: var(--accent); }
+.faq-item.active .faq-title { color: var(--accent); }
+.faq-item.active .faq-title::after { content: "\e60b"; color: var(--accent); transform: rotate(90deg); font-family: "iconfont" !important; }
+.faq-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+.faq-item.active .faq-content { grid-template-rows: 1fr; }
+.faq-inner { overflow: hidden; padding: 0 15px; color: var(--ink); font-size: 14px; line-height: 1.6; opacity: 0; transition: opacity 0.3s ease, padding 0.3s ease; }
+.faq-item.active .faq-inner { padding-bottom: 16px; opacity: 1; }
+
+
+/*+++++++++++++++++++++++++++++++++*/
+/*--------------------------------------------------------------
 /*  页面底部
 --------------------------------------------------------------*/
 .site-footer { border-top: 1px solid rgba(75, 75, 75, 0.1); margin: 10px auto; padding: 20px 0px 20px; font-size: 14px; }
@@ -775,6 +792,13 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
   .form-control::placeholder, .form-control::-webkit-input-placeholder { color: var(--text-q-gray); }
   .form-control:focus { color: var(--ink); background-color: #252525; border-color: var(--accent); box-shadow: none; }
   .comment-text { color: var(--ink); }
+
+  /*+++++++++++++++++++++++++++++++++*/
+  /*--------------------------------------------------------------
+  /*  FAQ 常见问题
+  --------------------------------------------------------------*/
+  .faq-item { background-color: var(--bgcolor); }
+  .faq-item.active { border-color: var(--accent); }
 
   /*+++++++++++++++++++++++++++++++++*/
   /*--------------------------------------------------------------

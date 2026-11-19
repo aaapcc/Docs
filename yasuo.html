@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML / CSS 压缩格式化工具</title>
+    <style>
+        * { box-sizing: border-box; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+        body { background: #f1f5f9; min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; padding: 20px; }
+        .tool-container { background: #ffffff; border-radius: 24px; box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.2); padding: 30px 30px 35px; max-width: 1300px; width: 100%; }
+        h1 { font-size: 1.9rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 0.5rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+        h1 span { background: #e2e8f0; font-size: 0.9rem; font-weight: 500; padding: 4px 12px; border-radius: 40px; color: #1e293b; }
+        .subhead { color: #475569; margin-bottom: 1.2rem; border-left: 4px solid #3b82f6; padding-left: 16px; font-size: 0.98rem; }
+        .lang-tabs { display: flex; gap: 8px; margin-bottom: 1rem; background: #f1f5f9; padding: 6px; border-radius: 60px; width: fit-content; }
+        .lang-tab { border: none; background: transparent; padding: 10px 32px; font-size: 1rem; font-weight: 600; color: #64748b; border-radius: 60px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
+        .lang-tab:hover { color: #0f172a; background: #e2e8f0; }
+        .lang-tab.active { background: #ffffff; color: #2563eb; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); }
+        .hint { font-size: 0.82rem; color: #64748b; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #3b82f6; padding: 10px 16px; border-radius: 10px; margin-bottom: 1.6rem; line-height: 1.5; }
+        .editors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+        @media (max-width: 720px) { .editors-grid { grid-template-columns: 1fr; gap: 18px; } }
+        .editor-card { background: #f8fafc; border-radius: 18px; border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.2s; }
+        .editor-card:focus-within { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); border-color: #3b82f6; }
+        .editor-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #ffffff; border-bottom: 1px solid #e2e8f0; font-weight: 500; color: #1e293b; font-size: 0.95rem; }
+        .editor-header .badge { font-size: 0.75rem; background: #dbeafe; color: #1e40af; padding: 3px 10px; border-radius: 30px; font-weight: 500; }
+        textarea { width: 100%; min-height: 300px; padding: 18px; font-family: 'SFMono-Regular', 'Fira Code', 'JetBrains Mono', 'Menlo', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.6; border: none; background: #ffffff; resize: vertical; outline: none; color: #0f172a; tab-size: 2; }
+        textarea::placeholder { color: #94a3b8; font-style: italic; }
+        .button-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px; margin: 10px 0 0; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: none; background: #ffffff; padding: 14px 30px; font-size: 1.05rem; font-weight: 600; border-radius: 60px; cursor: pointer; transition: all 0.15s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03); border: 1px solid #cbd5e1; color: #1e293b; letter-spacing: 0.01em; flex: 0 1 auto; min-width: 160px; }
+        .btn:hover { background: #f1f5f9; border-color: #94a3b8; transform: translateY(-2px); box-shadow: 0 12px 18px -8px rgba(0, 0, 0, 0.15); }
+        .btn:active { transform: translateY(0); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); }
+        .btn-primary { background: #2563eb; border-color: #2563eb; color: white; }
+        .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+        .btn-secondary { background: #ffffff; border-color: #cbd5e1; color: #0f172a; }
+        .btn-secondary:hover { background: #f8fafc; }
+        .btn-icon { font-size: 1.2rem; line-height: 1; }
+        .footer-note { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; font-size: 0.82rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 18px; flex-wrap: wrap; gap: 10px; }
+        .status-message { background: #f1f5f9; padding: 5px 14px; border-radius: 30px; transition: all 0.2s; }
+        .status-message.success { background: #dcfce7; color: #166534; }
+        .status-message.error { background: #fee2e2; color: #991b1b; }
+        .clear-btn { background: none; border: none; color: #64748b; cursor: pointer; font-size: 0.82rem; text-decoration: underline; text-underline-offset: 3px; padding: 4px 8px; border-radius: 6px; }
+        .clear-btn:hover { color: #0f172a; background: #e2e8f0; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>⚡ 代码压缩 / 格式化 <span>HTML · CSS</span></h1>
+        <div class="subhead">切换语言会清空当前内容；压缩会移除多余空白，格式化会重新缩进。</div>
+
+        <div class="lang-tabs" id="langTabs">
+            <button class="lang-tab active" data-lang="html">HTML</button>
+            <button class="lang-tab" data-lang="css">CSS</button>
+        </div>
+
+        <div class="hint" id="hintText">💡 当前语言：HTML。压缩会合并标签间空白，保留注释内容；格式化会缩进并对齐标签结构。</div>
+
+        <div class="editors-grid">
+            <div class="editor-card">
+                <div class="editor-header"><span id="inputLabel">📄 压缩前 / 原始 HTML</span><span class="badge">可编辑</span></div>
+                <textarea id="inputCode" placeholder="在此粘贴或输入代码…" spellcheck="false"></textarea>
+            </div>
+            <div class="editor-card">
+                <div class="editor-header"><span id="outputLabel">📦 压缩后 / 格式化结果</span><span class="badge">结果</span></div>
+                <textarea id="outputCode" placeholder="处理结果将显示在这里…" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <div class="button-bar" id="buttonBar">
+            <button class="btn btn-primary" id="compressBtn"><span class="btn-icon">🗜️</span> 压缩</button>
+            <button class="btn btn-secondary" id="formatBtn"><span class="btn-icon">✨</span> 格式化</button>
+        </div>
+
+        <div class="footer-note">
+            <div class="status-message" id="statusMsg">就绪</div>
+            <button class="clear-btn" id="clearOutputBtn">清空输出</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const inputEl = document.getElementById('inputCode');
+            const outputEl = document.getElementById('outputCode');
+            const statusMsg = document.getElementById('statusMsg');
+            const clearOutputBtn = document.getElementById('clearOutputBtn');
+            const inputLabel = document.getElementById('inputLabel');
+            const hintText = document.getElementById('hintText');
+            const langTabs = document.getElementById('langTabs');
+            const buttonBar = document.getElementById('buttonBar');
+
+            let currentLang = 'html';
+
+            const hints = {
+                html: '💡 当前语言：HTML。压缩会合并标签间空白并保留注释内容；格式化会缩进并对齐标签结构。',
+                css: '💡 当前语言：CSS。智能保护字符串和括号（如 data URI、url），避免破坏特殊符号；:root 按变量分行，标准规则单行/格式化。'
+            };
+
+            function setStatus(text, type = '') {
+                statusMsg.textContent = text;
+                statusMsg.className = 'status-message';
+                if (type === 'success') statusMsg.classList.add('success');
+                if (type === 'error') statusMsg.classList.add('error');
+            }
+
+            function renderButtons() {
+                if (currentLang === 'css') {
+                    buttonBar.innerHTML = `
+                        <button class="btn btn-primary" id="compressSingleBtn"><span class="btn-icon">🗜️</span> 单行压缩</button>
+                        <button class="btn btn-primary" id="compressExtremeBtn" style="background:#7c3aed;border-color:#7c3aed;"><span class="btn-icon">⚡</span> 极限压缩</button>
+                        <button class="btn btn-secondary" id="formatBtn"><span class="btn-icon">✨</span> 格式化</button>
+                    `;
+                    document.getElementById('compressSingleBtn').addEventListener('click', () => doCompress('single'));
+                    document.getElementById('compressExtremeBtn').addEventListener('click', () => doCompress('extreme'));
+                    document.getElementById('formatBtn').addEventListener('click', doFormat);
+                } else {
+                    buttonBar.innerHTML = `
+                        <button class="btn btn-primary" id="compressBtn"><span class="btn-icon">🗜️</span> 压缩</button>
+                        <button class="btn btn-secondary" id="formatBtn"><span class="btn-icon">✨</span> 格式化</button>
+                    `;
+                    document.getElementById('compressBtn').addEventListener('click', () => doCompress());
+                    document.getElementById('formatBtn').addEventListener('click', doFormat);
+                }
+            }
+
+            function switchLang(lang) {
+                currentLang = lang;
+                inputEl.value = '';
+                outputEl.value = '';
+                document.querySelectorAll('.lang-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.lang === lang));
+                const langNames = { html: 'HTML', css: 'CSS' };
+                inputLabel.textContent = `📄 压缩前 / 原始 ${langNames[lang]}`;
+                hintText.textContent = hints[lang];
+                renderButtons();
+                setStatus('已切换，内容已清空');
+            }
+
+            langTabs.addEventListener('click', (e) => {
+                const tab = e.target.closest('.lang-tab');
+                if (!tab || tab.dataset.lang === currentLang) return;
+                switchLang(tab.dataset.lang);
+            });
+
+            // ==================== HTML 处理 ====================
+            function compressHtml(html) {
+                if (!html || html.trim() === '') return '';
+                const commentPlaceholders = [];
+                let commentIndex = 0;
+                const commentRegex = /<!--[\s\S]*?-->/g;
+                let protectedHtml = html.replace(commentRegex, (match) => {
+                    const placeholder = `___COMMENT_${commentIndex}___`;
+                    commentPlaceholders.push(match);
+                    commentIndex++;
+                    return placeholder;
+                });
+                protectedHtml = protectedHtml.replace(/>\s+</g, '><').replace(/<\s+/g, '<').replace(/\s+>/g, '>');
+                let result = protectedHtml;
+                for (let i = 0; i < commentPlaceholders.length; i++) {
+                    let comment = commentPlaceholders[i];
+                    const commentMatch = comment.match(/^<!--([\s\S]*?)-->$/);
+                    if (commentMatch) {
+                        let inner = commentMatch[1].replace(/\s+/g, ' ').trim();
+                        comment = `<!--${inner}-->`;
+                    }
+                    result = result.replace(`___COMMENT_${i}___`, comment);
+                }
+                return result.replace(/>\s+</g, '><').trim();
+            }
+
+            function formatHtml(html) {
+                if (!html || html.trim() === '') return '';
+                const tokenRegex = /(<!--[\s\S]*?-->)|(<[^>]+>)|([^<]+)/g;
+                const tokens = [];
+                let match;
+                while ((match = tokenRegex.exec(html)) !== null) {
+                    if (match[1]) tokens.push({ type: 'comment', content: match[1] });
+                    else if (match[2]) tokens.push({ type: 'tag', content: match[2] });
+                    else if (match[3]) tokens.push({ type: 'text', content: match[3] });
+                }
+                if (tokens.length === 0) return html;
+
+                let indentLevel = 0;
+                const lines = [];
+                const voidElements = new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+
+                function parseTag(tagStr) {
+                    const trimmed = tagStr.trim();
+                    if (trimmed.startsWith('</')) return { type: 'close', tagName: trimmed.slice(2, -1).trim().toLowerCase() };
+                    else if (trimmed.endsWith('/>')) return { type: 'self', tagName: trimmed.slice(1, -2).trim().split(/\s+/)[0].toLowerCase() };
+                    else return { type: 'open', tagName: trimmed.slice(1, -1).trim().split(/\s+/)[0].toLowerCase() };
+                }
+
+                let i = 0;
+                while (i < tokens.length) {
+                    const token = tokens[i];
+                    if (token.type === 'tag') {
+                        const tagInfo = parseTag(token.content);
+                        if (tagInfo.type === 'open' && !voidElements.has(tagInfo.tagName)) {
+                            if (i + 2 < tokens.length) {
+                                const nextToken = tokens[i + 1];
+                                const afterNext = tokens[i + 2];
+                                if (nextToken.type === 'text' && nextToken.content.trim() !== '' && afterNext.type === 'tag') {
+                                    const closeInfo = parseTag(afterNext.content);
+                                    if (closeInfo.type === 'close' && closeInfo.tagName === tagInfo.tagName) {
+                                        const textContent = nextToken.content.trim().replace(/\s+/g, ' ');
+                                        lines.push('  '.repeat(indentLevel) + `${token.content}${textContent}${afterNext.content}`);
+                                        i += 3;
+                                        continue;
+                                    }
+                                }
+                            }
+                            lines.push('  '.repeat(indentLevel) + token.content);
+                            indentLevel++;
+                            i++;
+                            continue;
+                        } else if (tagInfo.type === 'close') {
+                            indentLevel = Math.max(0, indentLevel - 1);
+                            lines.push('  '.repeat(indentLevel) + token.content);
+                            i++;
+                            continue;
+                        } else if (tagInfo.type === 'self') {
+                            lines.push('  '.repeat(indentLevel) + token.content);
+                            i++;
+                            continue;
+                        }
+                    }
+                    if (token.type === 'comment') { lines.push('  '.repeat(indentLevel) + token.content.trim()); i++; continue; }
+                    if (token.type === 'text') {
+                        const trimmed = token.content.trim();
+                        if (trimmed !== '') lines.push('  '.repeat(indentLevel) + trimmed.replace(/\s+/g, ' '));
+                        i++;
+                        continue;
+                    }
+                    i++;
+                }
+                return lines.join('\n');
+            }
+
+            // ==================== CSS 处理（智能引号与括号保护） ====================
+            
+            // 安全拆分属性（按分号），能识别字符串和括号
+            function safeSplitProps(body) {
+                const props = [];
+                let current = '';
+                let inString = false;
+                let stringChar = '';
+                let parenDepth = 0;
+                
+                for (let i = 0; i < body.length; i++) {
+                    const ch = body[i];
+                    if (inString) {
+                        if (ch === stringChar && body[i - 1] !== '\\') inString = false;
+                        current += ch;
+                    } else if (ch === '"' || ch === "'") {
+                        inString = true;
+                        stringChar = ch;
+                        current += ch;
+                    } else if (ch === '(') {
+                        parenDepth++;
+                        current += ch;
+                    } else if (ch === ')') {
+                        parenDepth = Math.max(0, parenDepth - 1);
+                        current += ch;
+                    } else if (ch === ';' && parenDepth === 0) {
+                        if (current.trim()) props.push(current.trim() + ';');
+                        current = '';
+                    } else {
+                        current += ch;
+                    }
+                }
+                if (current.trim()) props.push(current.trim());
+                return props;
+            }
+
+            // 安全处理单个属性的冒号（避开引号和括号内的冒号）
+            function safeNormalizeProp(prop, mode) {
+                let inString = false;
+                let stringChar = '';
+                let parenDepth = 0;
+                let result = '';
+                let colonReplaced = false;
+
+                for (let i = 0; i < prop.length; i++) {
+                    const ch = prop[i];
+                    if (inString) {
+                        if (ch === stringChar && prop[i - 1] !== '\\') inString = false;
+                        result += ch;
+                    } else if (ch === '"' || ch === "'") {
+                        inString = true;
+                        stringChar = ch;
+                        result += ch;
+                    } else if (ch === '(') {
+                        parenDepth++;
+                        result += ch;
+                    } else if (ch === ')') {
+                        parenDepth = Math.max(0, parenDepth - 1);
+                        result += ch;
+                    } else if (ch === ':' && parenDepth === 0 && !colonReplaced) {
+                        colonReplaced = true;
+                        // 找到下一个非空白字符
+                        let next = i + 1;
+                        while (next < prop.length && /\s/.test(prop[next])) next++;
+                        if (mode === 'extreme') {
+                            result += ':';
+                        } else {
+                            result += ': ';
+                        }
+                        i = next - 1; // 跳过原有的空白
+                    } else if (/\s/.test(ch) && parenDepth === 0 && !inString) {
+                        // 在括号外压缩连续空白
+                        let next = i + 1;
+                        while (next < prop.length && /\s/.test(prop[next])) next++;
+                        result += ' ';
+                        i = next - 1;
+                    } else {
+                        result += ch;
+                    }
+                }
+                return result.trim();
+            }
+
+            function isAtRuleWithRules(name) { return ['media', 'supports', 'document', 'layer', 'container', 'scope', 'starting-style'].includes(name); }
+            function isKeyframes(name) { return ['keyframes', '-webkit-keyframes', '-moz-keyframes', '-o-keyframes'].includes(name); }
+
+            function parseCssFragment(css, startIdx, endIdx) {
+                const nodes = [];
+                let i = startIdx;
+                while (i < endIdx) {
+                    while (i < endIdx && /\s/.test(css[i])) i++;
+                    if (i >= endIdx) break;
+
+                    if (css[i] === '/' && css[i + 1] === '*') {
+                        const start = i;
+                        i += 2;
+                        while (i < endIdx && !(css[i] === '*' && css[i + 1] === '/')) i++;
+                        if (i < endIdx) i += 2;
+                        nodes.push({ type: 'comment', raw: css.slice(start, i) });
+                        continue;
+                    }
+
+                    const preludeStart = i;
+                    let inString = false, stringChar = '';
+                    while (i < endIdx) {
+                        const ch = css[i];
+                        if (inString) { if (ch === stringChar && css[i - 1] !== '\\') inString = false; i++; continue; }
+                        if (ch === '"' || ch === "'") { inString = true; stringChar = ch; i++; continue; }
+                        if (ch === '/' && css[i + 1] === '*') {
+                            i += 2;
+                            while (i < endIdx && !(css[i] === '*' && css[i + 1] === '/')) i++;
+                            if (i < endIdx) i += 2;
+                            continue;
+                        }
+                        if (ch === '{' || ch === ';') break;
+                        i++;
+                    }
+                    if (i >= endIdx) break;
+                    if (css[i] === ';') { i++; continue; }
+
+                    const prelude = css.slice(preludeStart, i).trim();
+                    i++;
+
+                    let braceDepth = 1;
+                    const bodyStart = i;
+                    while (i < endIdx && braceDepth > 0) {
+                        const ch = css[i];
+                        if (ch === '{') braceDepth++;
+                        else if (ch === '}') braceDepth--;
+                        if (braceDepth === 0) break;
+                        if (ch === '"' || ch === "'") { const q = ch; i++; while (i < endIdx && css[i] !== q) { if (css[i] === '\\') i++; i++; } }
+                        i++;
+                    }
+                    const bodyEnd = i;
+                    const rawBlock = css.slice(preludeStart, bodyEnd + 1);
+                    i++;
+
+                    if (prelude.startsWith('@')) {
+                        const atMatch = prelude.match(/^@([\w-]+)([\s\S]*)$/);
+                        const atName = atMatch ? atMatch[1].toLowerCase() : '';
+                        let kind = 'rules';
+                        if (isKeyframes(atName)) kind = 'keyframes';
+                        else if (isAtRuleWithRules(atName)) kind = 'rules';
+                        else if (['font-face','page','viewport','counter-style','font-feature-values','property'].includes(atName)) kind = 'decls';
+                        else kind = 'rules';
+                        nodes.push({ type: 'atrule', name: atName, prelude, rawBlock, body: css.slice(bodyStart, bodyEnd), kind });
+                    } else {
+                        nodes.push({ type: 'rule', selector: prelude, rawBlock, body: css.slice(bodyStart, bodyEnd), isRoot: /^:root\b/.test(prelude.trim()) });
+                    }
+                }
+                return nodes;
+            }
+
+            function normalizeSelector(selector, mode) {
+                let s = selector.trim().replace(/\s+/g, ' ');
+                return mode === 'extreme' ? s.replace(/\s*,\s*/g, ',') : s.replace(/\s*,\s*/g, ', ');
+            }
+
+            function normalizeAtPrelude(prelude, mode) {
+                let p = prelude.trim().replace(/\s+/g, ' ');
+                p = mode === 'extreme' ? p.replace(/\s*,\s*/g, ',') : p.replace(/\s*,\s*/g, ', ');
+                const atMatch = p.match(/^(@[\w-]+)([\s\S]*)$/);
+                if (atMatch) {
+                    const name = atMatch[1];
+                    let rest = atMatch[2];
+                    if (rest.length > 0 && !/^\s/.test(rest) && rest[0] !== '{') p = name + ' ' + rest;
+                }
+                return p;
+            }
+
+            // 处理属性体（用安全拆分和清理）
+            function getSafeProps(body, mode) {
+                // 移除块内注释
+                let cleanBody = body.replace(/\/\*[\s\S]*?\*\//g, '');
+                let rawProps = safeSplitProps(cleanBody);
+                return rawProps.map(p => safeNormalizeProp(p, mode)).filter(p => p !== '');
+            }
+
+            // 格式化 :root 专用（一行一个变量，原样保留）
+            function formatRootBlock(body, indent, mode) {
+                const pad = '  '.repeat(indent);
+                // 清除块内注释
+                let clean = body.replace(/\/\*[\s\S]*?\*\//g, '');
+                // 按行拆分原样（不强行拆分行内的分号，避免破坏 data uri）
+                let lines = clean.split(/\r?\n/).map(l => l.trim()).filter(l => l);
+                
+                // 如果用户写成了单行，用安全拆分器拆开
+                if (lines.length <= 1 && clean.includes(';')) {
+                    lines = safeSplitProps(clean).map(p => safeNormalizeProp(p, mode));
+                }
+
+                let out = [pad + ':root {'];
+                lines.forEach(line => {
+                    // 确保变量格式带分号
+                    if (!line.endsWith(';') && line !== '}') line += ';';
+                    out.push(pad + '  ' + line);
+                });
+                out.push(pad + '}');
+                return out;
+            }
+
+            function serializeSingleLine(nodes, indent, out) {
+                const pad = '  '.repeat(indent);
+                for (const node of nodes) {
+                    if (node.type === 'comment') { 
+                        out.push(pad + node.raw); 
+                    } else if (node.type === 'rule') {
+                        if (node.isRoot) {
+                            // 单行压缩：:root 保持变量一行一个
+                            formatRootBlock(node.body, indent, 'single').forEach(l => out.push(l));
+                        } else {
+                            const sel = normalizeSelector(node.selector, 'single');
+                            const props = getSafeProps(node.body, 'single');
+                            let propStr = props.join(' ');
+                            out.push(pad + (propStr ? `${sel} { ${propStr} }` : `${sel} { }`));
+                        }
+                    } else if (node.type === 'atrule') {
+                        if (node.kind === 'keyframes' || node.kind === 'rules') {
+                            out.push(pad + normalizeAtPrelude(node.prelude, 'single') + ' {');
+                            serializeSingleLine(parseCssFragment(node.body, 0, node.body.length), indent + 1, out);
+                            out.push(pad + '}');
+                        } else {
+                            const props = getSafeProps(node.body, 'single');
+                            let propStr = props.join(' ');
+                            out.push(pad + (propStr ? `${normalizeAtPrelude(node.prelude, 'single')} { ${propStr} }` : `${normalizeAtPrelude(node.prelude, 'single')} { }`));
+                        }
+                    }
+                }
+            }
+
+            function serializeFormat(nodes, indent, out) {
+                const pad = '  '.repeat(indent);
+                for (const node of nodes) {
+                    if (node.type === 'comment') { 
+                        out.push(pad + node.raw); 
+                    } else if (node.type === 'rule') {
+                        if (node.isRoot) {
+                            // 格式化：:root 同样保持变量一行一个
+                            formatRootBlock(node.body, indent, 'format').forEach(l => out.push(l));
+                        } else {
+                            const sel = normalizeSelector(node.selector, 'single');
+                            out.push(pad + `${sel} {`);
+                            getSafeProps(node.body, 'format').forEach(prop => {
+                                out.push(pad + '  ' + prop);
+                            });
+                            out.push(pad + '}');
+                        }
+                    } else if (node.type === 'atrule') {
+                        if (node.kind === 'keyframes' || node.kind === 'rules') {
+                            out.push(pad + normalizeAtPrelude(node.prelude, 'single') + ' {');
+                            serializeFormat(parseCssFragment(node.body, 0, node.body.length), indent + 1, out);
+                            out.push(pad + '}');
+                        } else {
+                            out.push(pad + `${normalizeAtPrelude(node.prelude, 'single')} {`);
+                            getSafeProps(node.body, 'format').forEach(prop => {
+                                out.push(pad + '  ' + prop);
+                            });
+                            out.push(pad + '}');
+                        }
+                    }
+                }
+            }
+
+            function serializeExtreme(nodes, out) {
+                for (const node of nodes) {
+                    if (node.type === 'comment') continue;
+                    else if (node.type === 'rule') {
+                        const sel = normalizeSelector(node.selector, 'extreme');
+                        const props = getSafeProps(node.body, 'extreme');
+                        // 极限压缩去掉最后一个分号
+                        let propStr = props.join('');
+                        if (propStr.endsWith(';')) propStr = propStr.slice(0, -1);
+                        out.push(propStr ? `${sel}{${propStr}}` : `${sel}{}`);
+                    } else if (node.type === 'atrule') {
+                        const prelude = normalizeAtPrelude(node.prelude, 'extreme');
+                        if (node.kind === 'keyframes' || node.kind === 'rules') {
+                            const innerOut = [];
+                            serializeExtreme(parseCssFragment(node.body, 0, node.body.length), innerOut);
+                            out.push(`${prelude}{${innerOut.join('')}}`);
+                        } else {
+                            const props = getSafeProps(node.body, 'extreme');
+                            let propStr = props.join('');
+                            if (propStr.endsWith(';')) propStr = propStr.slice(0, -1);
+                            out.push(propStr ? `${prelude}{${propStr}}` : `${prelude}{}`);
+                        }
+                    }
+                }
+            }
+
+            function compressCssSingleLine(css) { const out = []; serializeSingleLine(parseCssFragment(css, 0, css.length), 0, out); return out.join('\n'); }
+            function compressCssExtreme(css) { const out = []; serializeExtreme(parseCssFragment(css, 0, css.length), out); return out.join(''); }
+            function formatCss(css) { const out = []; serializeFormat(parseCssFragment(css, 0, css.length), 0, out); return out.join('\n'); }
+
+            // ==================== 统一入口 ====================
+            function doCompress(cssMode) {
+                const raw = inputEl.value;
+                if (!raw || raw.trim() === '') { setStatus('请输入需要压缩的代码', 'error'); outputEl.value = ''; return; }
+                try {
+                    let result = '';
+                    if (currentLang === 'html') result = compressHtml(raw);
+                    else if (currentLang === 'css') result = cssMode === 'extreme' ? compressCssExtreme(raw) : compressCssSingleLine(raw);
+                    outputEl.value = result;
+                    setStatus('✅ 压缩完成', 'success');
+                    outputEl.scrollTop = 0;
+                } catch (e) {
+                    console.error(e);
+                    setStatus('❌ 压缩出错: ' + e.message, 'error');
+                }
+            }
+
+            function doFormat() {
+                const raw = inputEl.value;
+                if (!raw || raw.trim() === '') { setStatus('请输入需要格式化的代码', 'error'); outputEl.value = ''; return; }
+                try {
+                    let result = '';
+                    if (currentLang === 'html') result = formatHtml(raw);
+                    else if (currentLang === 'css') result = formatCss(raw);
+                    outputEl.value = result;
+                    setStatus('✨ 格式化完成', 'success');
+                    outputEl.scrollTop = 0;
+                } catch (e) {
+                    console.error(e);
+                    setStatus('❌ 格式化出错: ' + e.message, 'error');
+                }
+            }
+
+            clearOutputBtn.addEventListener('click', () => { outputEl.value = ''; setStatus('输出已清空'); });
+            switchLang('html');
+        })();
+    </script>
+</body>
+</html>
