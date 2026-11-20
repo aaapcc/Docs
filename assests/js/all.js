@@ -27,15 +27,46 @@ window.copyPromoCode = function(btnElement, text) {
 };
 
 // ==========================================
-// 提取到外层的核心：老文章排版拯救 (无闪烁版)
+// 提取到外层的核心：老文章排版拯救 (含头部包裹)
 // ==========================================
 const articleContent = document.querySelector('.article-content');
 
 if (articleContent) {
   
+  // 👇 安全修复版：处理第一个 h2 出现前的内容
+  const firstNode = articleContent.firstChild;
+  
+  // 检查：如果有第一个节点，且它不是 h2，也不是提前写好的 section/div 结构
+  if (firstNode && firstNode.nodeName !== 'H2' && articleContent.querySelector('h2')) {
+    
+    // 过滤掉纯文本节点（比如空格、回车），找到第一个真正的“元素节点”
+    let realFirstElement = firstNode;
+    while (realFirstElement && realFirstElement.nodeType !== 1) {
+      realFirstElement = realFirstElement.nextSibling;
+    }
+
+    // 如果真正的第一个元素既不是 h2，也不是 section，说明是没包裹的散段落
+    if (realFirstElement && realFirstElement.nodeName !== 'H2' && realFirstElement.nodeName !== 'SECTION') {
+      
+      const introSection = document.createElement('section');
+      introSection.className = 'article-section';
+      articleContent.insertBefore(introSection, firstNode);
+      
+      let node = firstNode;
+      // 核心防呆：如果碰到 h2 或者 section，立刻停止吸收！
+      while (node && node.nodeName !== 'H2' && node.nodeName !== 'SECTION') {
+        const next = node.nextSibling; 
+        introSection.appendChild(node); 
+        node = next; 
+      }
+    }
+  }
+
+  // 👇 下面是你原有的遍历所有 h2 并包裹卡片的逻辑（保持不变）
   const h2s = Array.from(articleContent.querySelectorAll('h2'));
 
   h2s.forEach(h2 => {
+    // 排除已经被包裹过的
     if (h2.closest('.article-section') || h2.closest('.article-quote-card')) {
       return;
     }
@@ -72,8 +103,7 @@ if (articleContent) {
     }
   });
 
-  // 👇 核心魔法：强制让用户看 200 毫秒的转圈圈，然后再渲染显示！
-  // 这一步能让浏览器有时间把那个纯 CSS 画的 loading 圈圈画出来
+  // 👇 延迟 200 毫秒后显示，让加载动画能露个脸
   setTimeout(() => {
     articleContent.classList.add('rendered');
   }, 200); 

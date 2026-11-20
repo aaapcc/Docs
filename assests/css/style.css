@@ -403,7 +403,7 @@ body.modal-open { overflow: hidden !important; touch-action: none; }
 /*--------------------------------------------------------------
 /*  生成文章分享海报
 --------------------------------------------------------------*/
-.poster-btn-wrap { text-align: center; margin: 20px 0 30px; }
+.poster-btn-wrap { text-align: center; margin: 10px 0 30px; }
 .poster-btn { width: 180px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background-color: var(--accent); color: white; border: none; border-radius: 25px; font-size: 15px; font-weight: bold; cursor: pointer; }
 
 @media (hover: hover) and (pointer: fine) { 
@@ -474,7 +474,7 @@ ul.children li .comment-avatar{ width: 30px; height: 30px; }
 /*--------------------------------------------------------------
 /*  FAQ 常见问题
 --------------------------------------------------------------*/
-.faq-wrap { margin: 30px 0 20px; }
+.faq-wrap { margin: 10px 0 20px; }
 .faq-item { background-color: var(--white); border: 1px solid var(--border-color-gray); border-radius: 8px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.3s; }
 .faq-title { padding: 12px 15px; font-weight: bold; color: var(--ink); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: color 0.3s; }
 .faq-title::after { content: "\e60b"; font-size: 20px; color: var(--text-q-gray); transition: transform 0.3s, color 0.3s; font-family: "iconfont" !important; font-size: 14px; }
