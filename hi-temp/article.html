@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="darkreader-lock" content="true">
+  <meta name="description" content="{{ &OPT.siteDescription }}" />
+  <meta name="keywords" content="{{ &keyWords }}" />
+  <meta name="referrer" content="no-referrer" />
+  <meta property="og:image" content="">
+  <link rel="icon" href="{{ &OPT.siteFavicon }}" />
+  <title>{{ &title }}</title>
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/5.1.3/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_66v2gs060gq.css">
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
+  <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
+  <link rel="stylesheet" href="assests/css/style.css?v=20261120-2">
+  <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js" defer></script>
+  <script src="assests/js/all.js?v=20261120-2" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <!-- 左侧：Logo + 导航 -->
+      <div class="header-left">
+        <a href="/" class="header-logo">
+          <img src="{{ &OPT.logo }}" alt="{{ &OPT.siteName }}" style="height: 32px; width: auto;">
+        </a>
+        <nav class="header-nav" id="headerNav">
+          <ul class="nav-main" id="navMain">
+            <li><a href="/">首页</a></li>
+            {{ #widgetCategoryList }}
+            <li><a href="/category/{{&.}}">{{&.}}</a></li>
+            {{ /widgetCategoryList }}
+          </ul>
+          <div class="nav-more" id="navMore">
+            <button class="nav-more-btn">
+              <i class="iconfont icon-updown-min"></i>
+            </button>
+            <div class="nav-more-dropdown" id="navMoreDropdown"></div>
+          </div>
+        </nav>
+
+      </div>
+
+      <!-- 右侧：操作按钮 -->
+      <div class="header-actions">
+        <button class="action-btn" id="openSearchBtn" aria-label="搜索">
+          <i class="iconfont icon-search"></i>
+        </button>
+        <button class="action-btn menu-btn" id="openMenuBtn" aria-label="菜单">
+          <i class="iconfont icon-mulu2"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <article class="layout article">
+        <header class="article-header">
+          <!-- 面包屑导航 -->
+          <nav class="breadcrumb-nav" aria-label="面包屑导航">
+            <a href="/">首页</a>
+            <a href="index.html">技术类</a>
+            <span>个人密码库</span>
+          </nav>
+          <h1>{{ &articleSingle.title }}</h1>
+          <div class="article-meta">
+            <span>{{ &articleSingle.createDate10 }}</span>
+            <span>{{ &articleSingle.views }}次阅读</span>
+            <span class="comments-count">0</span>条评论
+          </div>
+        </header>
+
+        <div class="mian-body">
+          <div class="article-content">
+            {{ &articleSingle.contentHtml }}
+          </div>
+        </div>
+
+        <div class="article-ending">─── • / THE END / • ───</div>
+
+        <!-- Tags + 上一篇/下一篇 -->
+        <div class="article-tags-read">
+          <!-- Tags -->
+          <div class="article-tags-wrap">
+            {{ #articleSingle.tags }}
+            <a href="/tags/{{&.}}" rel="tag">{{&.}}</a>
+            {{ /articleSingle.tags }}
+          </div>
+          <!-- 上一篇/下一篇 -->
+          <div class="album-read-nav-wrap">
+            <div class="album-read-source" id="openTocBtn">文章·列表</div>
+            <section class="album-read-nav-cont">
+              {{ #articleOlder }}
+              <a href="{{ articleOlder.0.url }}" class="album-read-nav-cont-prev">
+                <div class="nav-label">上一篇</div>
+                <div class="album-read-nav-title">{{ articleOlder.0.title }}</div>
+              </a>
+              {{ /articleOlder }}
+
+              {{ ^articleOlder }}
+              {{ /articleOlder }}
+
+              {{ #articleNewer }}
+              <a href="{{ articleNewer.0.url }}" class="album-read-nav-cont-next">
+                <div class="nav-label">下一篇</div>
+                <div class="album-read-nav-title">{{ articleNewer.0.title }}</div>
+              </a>
+              {{ /articleNewer }}
+
+              {{ ^articleNewer }}
+              {{ /articleNewer }}
+            </section>
+          </div>
+        </div>
+
+        <!-- 1. 生成分享海报按钮 -->
+        <div class="poster-btn-wrap">
+          <button id="generatePosterBtn" class="poster-btn">
+            <i class="iconfont icon-share"></i>
+            <span id="posterBtnText">生成分享海报</span></button>
+        </div>
+        <!-- 2. 生成分享海报预览弹窗 -->
+        <div class="poster-modal" id="posterModal">
+          <img id="posterImage" src="" alt="海报">
+          <div class="poster-tips" id="poster-tips">长按图片保存到手机</div>
+        </div>
+        <!-- 3. 生成分享海报主框架 -->
+        <div id="poster-render-area">
+          <div class="poster-render-area-body">
+            <!-- 顶部封面区 -->
+            <div id="poster-bg">
+              <!-- 顶层：原图完整居中显示（你目前的代码） -->
+              <div class="poster-cover-body">
+                <img id="poster-cover" src="">
+              </div>
+              <div class="poster-cover-text">
+                <div>© {{ &OPT.siteName }}</div>
+                <div class="poster-cover-art-url"></div>
+              </div>
+              <!-- 黑色渐变遮罩 -->
+              <div class="poster-black-mask"></div>
+            </div>
+            <!-- 2. 文章标题 (锁定字体大小) -->
+            <div class="poster-title-body">
+              <h2 id="poster-title"></h2>
+            </div>
+            <div class="poster-date-body">
+              <span id="poster-day"></span>
+            </div>
+            <!-- 底部区域 -->
+            <div class="poster-footer">
+              <div style="font-size: 16px; font-weight: bold; color: #333;">
+                <span class="poster-footer-sitename">© {{ &OPT.siteName }}</span>
+                <span class="poster-footer-url poster-site-url" id="poster-site-url"></span>
+                <span class="poster-footer-tips">扫描〔二维码〕查看详情</span>
+              </div>
+              <div id="poster-qrcode"></div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+    </article>
+  
+    <!-- 评论区 -->
+    <div class="comments" id="comments">
+      <div class="comments-body">
+        <!-- 评论头部 -->
+        <section class="comments-header">
+          <h2 class="d-flex align-items-center">评论 (<span class="comments-count">0</span>)</h2>
+        </section>
+        <section class="comments-card-body">
+          <!-- 评论表单 -->
+          <div id="respond" class="comment-respond">
+            <form id="commentForm" class="comment-form" onsubmit="return submitComment(event)">
+              <input type="hidden" id="parentId" value="1772037659596">
+              
+              <div class="comment-avatar flex-avatar">
+                <img src="https://api.dicebear.com/10.x/voxel-art/svg?seed=author" alt="头像">
+              </div>
+              
+              <div class="comment-body">
+                <div class="comment-input mb-2">
+                  <div class="mb-2">
+                    <input class="form-control" id="author" placeholder="昵称" name="author" type="text" value="" required="required" />
+                  </div>
+                  <div>
+                    <input id="email" class="form-control" name="mail" placeholder="邮箱（用于回复通知）" type="email" value="" />
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <textarea class="form-control" id="content" rows="3" placeholder="说点什么..." required></textarea>
+                  <div class="mt-2" style="font-size: 13px;">
+                    <span class="text-muted" id="commentMsg">正在回复 <strong>阿克苏</strong> 的评论</span>
+                    <a href="javascript:;" id="cancelReply" class="text-danger ms-1" style="display: none;" onclick="cancelReply()">[取消回复]</a>
+                  </div>
+                </div>
+                
+                <div class="form-submit d-flex align-items-center">
+                  <button type="submit" id="submit" class="btn btn-primary ms-auto">提交评论</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- 评论列表 -->
+          <div class="comment-list">
+            <ul class="comment-list-body">
+              <li id="comment-1772037659596" class="comment">
+                <article class="comment-body">
+                  <div class="comment-avatar flex-avatar disabled">
+                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
+                  </div>
+                  <div class="comment-content">
+                    <div class="comment-chat">
+                      <div class="comment-info d-flex justify-content-between align-items-center">
+                        <div class="comment-left d-flex">
+                          <span class="comment-author">啥菜要放葱</span>
+                          <span class="comment-date">2026/2/25</span>
+                        </div>
+                        <span class="comment-reply">回复</span>
+                      </div>
+                      <div class="comment-text">
+                        <p>无语😑你标题能不能取的严谨一点，我一下子就发给我好朋友了，以为我在表白，然后就回了句好，搞得两个人现在很尴尬</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- 子评论 -->
+                <ul class="children">
+                  <li id="comment-1772078159987" class="comment">
+                    <article class="comment-body">
+                      <div class="comment-avatar flex-avatar disabled">
+                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-chat">
+                          <div class="comment-info d-flex justify-content-between align-items-center">
+                            <div class="comment-left d-flex">
+                              <span class="comment-author">啥菜要放葱</span>
+                              <span class="comment-date">2026/2/26</span>
+                            </div>
+                            <span class="comment-reply">回复</span>
+                          </div>
+                          <div class="comment-text">
+                            <p>你标题能不能也带上情侣两个字</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                  <li id="comment-1772078159980" class="comment">
+                    <article class="comment-body">
+                      <div class="comment-avatar flex-avatar disabled">
+                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-chat">
+                          <div class="comment-info d-flex justify-content-between align-items-center">
+                            <div class="comment-left d-flex">
+                              <span class="comment-author">长沙本地宝</span>
+                              <span class="comment-date">2026/2/26</span>
+                            </div>
+                            <span class="comment-reply">回复</span>
+                          </div>
+                          <div class="comment-text">
+                            <p>啊啊啊啊sorry</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页面底部 -->
+  <footer class="site-footer">
+      <div class="container">
+        <div class="footer-logo">
+          <a href="/"><img src="{{ &OPT.logo }}" alt="{{ &OPT.siteName }}"></a>
+        </div>
+        <div class="footer-copyright text-center d-md-block">
+          © <span class="dqnianfen"><script>window.onload=function(){var currentYear=new Date().getFullYear();var yearElement=document.querySelector('.dqnianfen');if(yearElement){yearElement.textContent=currentYear}};</script></span> {{ &OPT.siteName }}. All Rights Reserved
+        </div>
+    </div>
+  </footer>
+
+  <!-- 右下角悬浮工具组 -->
+  <div class="float-actions">
+    <!-- 返回顶部按钮 (排在上面) -->
+    <button id="backToTop" class="back-to-top" aria-label="返回顶部">
+      <i class="iconfont icon-toup"></i>
+    </button>
+    <!-- 目录悬浮组件 (排在下面，永远贴底) -->
+    <div id="floatTocWrap" class="float-toc-wrap" style="display: none;">
+      <button id="floatTocBtn" class="float-btn" aria-label="文章目录">
+        <i class="iconfont icon-rb-menu"></i>
+      </button>
+      <!-- PC 端悬浮面板 -->
+      <div class="float-toc-panel" id="floatTocPanel">
+        <div class="toc-panel-title">本文·目录</div>
+        <ul class="float-toc-list" id="floatTocList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 在 header 下面新增侧边栏 -->
+  <!-- 遮罩层 -->
+  <div id="menuOverlay" class="menu-overlay"></div>
+  <!-- 侧边栏 -->
+  <div id="sideMenu" class="side-menu-drawer">
+    <div class="side-menu-topbar">
+      <a href="/" class="side-menu-brand">
+        <img src="{{ &OPT.logo }}" alt="Logo">
+      </a>
+      <button class="side-close" id="closeMenuBtn">
+        <i class="iconfont icon-close"></i>
+      </button>
+    </div>
+
+    <div class="side-menu-search">
+      <div class="side-search-box" id="sideSearchTrigger">
+        <i class="iconfont icon-search"></i>
+        <span>搜索文章 / 关键词</span>
+      </div>
+    </div>
+    
+    <div class="side-menu-body">
+      <ul class="mobile-menu-inner">
+        <li><a href="/">首页</a></li>
+        {{ #widgetCategoryList }}
+        <li><a href="/category/{{&.}}">{{&.}}</a></li>
+        {{ /widgetCategoryList }}
+      </ul>
+    </div>
+  </div>
+
+  <!-- 搜索遮罩层 -->
+  <div id="searchOverlay" class="search-overlay"></div>
+  <!-- 搜索面板 -->
+  <div id="searchPanel" class="search-panel">
+    <div class="search-container">
+      <form role="search" class="search-input-group" id="searchForm" action="/search" method="GET">
+        <i class="iconfont search-icon icon-search"></i>
+        <input type="search" name="q" id="searchInput" placeholder="输入关键词搜索..." value="{{keyword}}" minlength="{{OPT.searchMinLength}}" autocomplete="off" enterkeyhint="search">
+        <button class="search-close-btn" type="button" id="closeSearchBtn" aria-label="关闭搜索">
+          <i class="iconfont icon-close"></i>
+        </button>
+      </form>
+      
+      <!-- 搜索提示区 (搜索历史) -->
+      <div class="search-hints" id="searchHistoryBox" style="display: none;">
+        <div class="hint-header">
+          <div class="hint-title">搜索历史</div>
+          <button class="clear-history-btn" id="clearHistoryBtn">
+            <i class="iconfont icon-delete"></i>清空
+          </button>
+        </div>
+        <div class="hint-tags" id="historyTags">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 移动端全屏目录弹窗 -->
+  <div id="mobileTocModal" class="mobile-toc-modal">
+    <div class="mobile-toc-content">
+      <div class="mobile-toc-header">
+        <h3>本文·目录</h3>
+        <button class="mobile-toc-close" id="closeMobileToc">
+          <i class="iconfont icon-close"></i>
+        </button>
+      </div>
+      <ul class="mobile-toc-list" id="mobileTocList">
+        <!-- JS 动态生成 -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- 弹窗结构 (放在 body 底部) -->
+  <dialog id="tocModal" class="toc-modal">
+    <div class="toc-modal-header">
+      <!-- 关闭按钮（向下的箭头） -->
+      <button class="toc-close" id="closeTocBtn">
+        <i class="iconfont icon-updown-min"></i>
+      </button>
+      <h3>文章·列表</h3>
+      <a href="#" class="toc-detail-link">详情</a>
+    </div>
+    
+    <div class="toc-list">
+      {{ #widgetRecentlyList }}
+      <a href="{{ &url }}" class="active"><span>{{ &title }}</span></a>
+      {{ /widgetRecentlyList }}
+    </div>
+  </dialog>
+
+<!-- 引入 PhotoSwipe 核心库 -->
+<script type="module">
+  const style = document.createElement('style');
+  style.textContent = `
+    .pswp { backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; }
+    .pswp__bg { background: rgba(0, 0, 0, 0.95) !important; opacity: 1 !important; }
+    .pswp__button--zoom { display: none !important; }
+  `;
+  document.head.appendChild(style);
+
+  import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe-lightbox.esm.min.js';
+  import PhotoSwipe from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.esm.min.js';
+
+  const lightbox = new PhotoSwipeLightbox({
+    pswpModule: PhotoSwipe,
+    bgOpacity: 0.9,
+    showHideAnimationType: 'none', // 👈 核心：直接禁用淡入动画，秒出纯黑底！
+    wheelToZoom: true,
+    loop: true,
+    clickToClose: false, 
+  });
+  lightbox.init();
+
+  // 👇 区分“点击”和“滑动”
+  lightbox.on('beforeOpen', () => {
+    // 解除网页缩放限制，允许图片放大
+    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
+    // 关闭时，重新把网页缩放锁死
+    lightbox.pswp.on('destroy', () => {
+      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
+    });
+  });
+
+  // 抓图逻辑
+  const bindImages = () => {
+    const allImgs = Array.from(document.querySelectorAll('main img'));
+    const realImages = allImgs.filter(img => {
+      if (img.closest('.comments') || img.closest('.site-header')) return false;
+      if (img.closest('#poster-render-area')) return false;
+      return img.clientWidth > 50;
+    });
+
+    if (realImages.length === 0 || realImages[0].dataset.pswpBound) return;
+
+    realImages.forEach((img, index) => {
+      img.style.cursor = 'zoom-in';
+      img.dataset.pswpBound = 'true';
+      
+      img.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const items = realImages.map(image => {
+          let realW = image.naturalWidth || 1920;
+          let realH = image.naturalHeight || 1080;
+          return { 
+            src: image.src,
+            width: realW * 10,  
+            height: realH * 10
+          };
+        });
+        
+        lightbox.loadAndOpen(index, items);
+      });
+    });
+  };
+
+  bindImages();
+  
+  const observer = new MutationObserver(() => {
+    bindImages();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
+<!-- 引入生成图片和二维码所需的库 -->
+<script src="https://gh.lib.aaqq.site/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://gh.lib.aaqq.site/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("generatePosterBtn");
+    const btnTextEl = document.getElementById("posterBtnText");
+    const modal = document.getElementById("posterModal");
+    const imgEl = document.getElementById("posterImage");
+    
+    if (!btn) return;
+
+    btn.addEventListener("click", async () => {
+      const originalText = btnTextEl.innerText;
+      btnTextEl.innerText = "正在生成中…";
+      btn.disabled = true;
+
+      try {
+        // 1. 抓取标题
+        const title = document.querySelector(".article-header h1")?.innerText || "未命名文章";
+        document.getElementById("poster-title").innerText = title;
+        
+        // 2. 抓取文章的发布日期，并转换为 xxxx/xx/xx 格式
+        let pDate = new Date().toLocaleDateString('zh-CN').replace(/\//g, '/'); 
+        
+        const dateText = document.querySelector(".article-meta span")?.innerText;
+        if (dateText) {
+          // 将“年月日”替换为“/”
+          pDate = dateText.trim()
+            .replace("年", "/")
+            .replace("月", "/")
+            .replace("日", "");
+        }
+
+        // 自动获取当前域名（自动包含 http 或 https）
+        const urlElements = document.querySelectorAll(".poster-site-url");
+        urlElements.forEach(el => {
+          el.innerText = window.location.origin;
+        });
+
+        // 处理文章具体地址（与二维码一致）
+        const articleUrlElements = document.querySelectorAll(".poster-cover-art-url");
+        articleUrlElements.forEach(el => {
+          el.innerText = window.location.href; 
+        });
+        
+        // 赋值给海报模板
+        const dayEl = document.getElementById("poster-day");
+        const monthEl = document.getElementById("poster-month");
+        if (dayEl) dayEl.innerText = pDate;
+        if (monthEl) monthEl.innerText = ""; 
+
+        // 3. 安全处理封面图（优先级：OG标签 -> 正文首图 -> 默认背景）
+        const coverEl = document.getElementById("poster-cover");
+        // 3.1. 尝试获取 og:image
+        let targetImgSrc = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
+        // 3.2. 如果没有 og:image，尝试获取正文第一张大图
+        if (!targetImgSrc) {
+          // 过滤掉头像、图标等干扰
+          const firstImg = document.querySelector(".mian-body img");
+          if (firstImg) {
+            targetImgSrc = firstImg.src;
+          }
+        }
+        // 3.3. 如果找到了图片地址，开始转 Base64 并渲染
+        if (targetImgSrc) {
+          try {
+            const response = await fetch(targetImgSrc);
+            const blob = await response.blob();
+            const base64Url = await new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result);
+              reader.readAsDataURL(blob);
+            });
+            
+            coverEl.src = base64Url;
+            coverEl.style.opacity = "1";
+          } catch (e) {
+            console.error("图片抓取失败，使用默认背景", e);
+            coverEl.style.opacity = "0"; // 抓取失败（比如防盗链），隐藏图片，露出底色
+          }
+        } else {
+          // 既没有 OG 图，正文也没有图
+          coverEl.style.opacity = "0";
+        }
+
+        // 4. 生成超高清二维码
+        const qrContainer = document.getElementById("poster-qrcode");
+        qrContainer.innerHTML = ""; 
+
+        const qr = qrcode(0, 'H');
+        qr.addData(window.location.href);
+        qr.make();
+
+        qrContainer.innerHTML = qr.createImgTag(10, 0); 
+        
+        const qrImg = qrContainer.querySelector('img');
+        if (qrImg) {
+          qrImg.style.width = '80px';
+          qrImg.style.height = '80px';
+          qrImg.style.display = 'block';
+        }
+
+        // 5. 截图
+        setTimeout(async () => {
+          const renderArea = document.getElementById("poster-render-area");
+          const canvas = await html2canvas(renderArea, {
+            scale: 2, 
+            useCORS: true, 
+            backgroundColor: "#fff",
+            allowTaint: false 
+          });
+          
+          imgEl.src = canvas.toDataURL("image/png");
+
+          // 6. 多端提示文字切换
+          const tipsEl = document.getElementById("poster-tips");
+          if (tipsEl) {
+            if (window.matchMedia("(hover: hover)").matches) {
+              tipsEl.innerText = "右键保存海报图片";
+            } else {
+              tipsEl.innerText = "长按图片保存到手机";
+            }
+          }
+          
+          modal.classList.add("show");
+          
+          // 恢复按钮文字
+          btnTextEl.innerText = originalText;
+          btn.disabled = true; 
+          setTimeout(() => { btn.disabled = false; }, 1000);
+
+        }, 500);
+
+      } catch (error) {
+        console.error("生成失败", error);
+        alert("生成失败，请重试！");
+        // 报错时也要恢复文字
+        btnTextEl.innerText = originalText;
+        btn.disabled = false;
+      }
+    });
+
+    // 点击空白关闭弹窗
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) { 
+        modal.classList.remove("show");
+      }
+    });
+  });
+</script>
+<!-- 自动抓取文章目录悬浮组件 -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 🔒 安全锁 1：如果不是文章页（没有正文或者没有目录挂载点），直接退出，不报错
+    const mainBody = document.querySelector(".mian-body");
+    const tocWrap = document.getElementById("floatTocWrap");
+    
+    if (!mainBody || !tocWrap) return;
+
+    // 抓取标题
+    const headings = mainBody.querySelectorAll("h2, h3");
+    
+    // 🔒 安全锁 2：如果文章里没写任何标题，隐藏按钮，直接退出
+    if (headings.length === 0) return;
+    tocWrap.style.display = "block";
+
+    const floatTocList = document.getElementById("floatTocList");
+    const mobileTocList = document.getElementById("mobileTocList");
+    const mobileTocModal = document.getElementById("mobileTocModal");
+    const closeMobileToc = document.getElementById("closeMobileToc");
+    const tocBtn = document.getElementById("floatTocBtn");
+
+    let floatHtml = "", mobileHtml = "";
+    headings.forEach((heading, index) => {
+      if (!heading.id) heading.id = `heading-${index}`;
+      let text = heading.innerText.replace(/\n/g, ' ').trim();
+      const levelClass = heading.tagName.toLowerCase() === "h3" ? "toc-h3" : "toc-h2";
+      const liHtml = `<li class="${levelClass}"><a href="#${heading.id}" data-target="${heading.id}">${text}</a></li>`;
+      floatHtml += liHtml;
+      mobileHtml += liHtml;
+    });
+
+    floatTocList.innerHTML = floatHtml;
+    mobileTocList.innerHTML = mobileHtml;
+
+    // 绑定平滑滚动事件
+    const allTocLinks = document.querySelectorAll(".float-toc-list a, .mobile-toc-list a");
+    allTocLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetEl = document.getElementById(link.getAttribute("data-target"));
+        if (targetEl) {
+          const y = targetEl.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top: y, behavior: "smooth" });
+          if (window.innerWidth <= 820) mobileTocModal.classList.remove("show");
+        }
+      });
+    });
+
+    // 移动端 & 平板弹窗逻辑 (PC端禁止点击)
+    tocBtn.addEventListener("click", () => {
+      // 判断是否是“真正的电脑环境”：屏幕够宽，且没有触摸屏
+      const isRealPC = window.innerWidth > 820 && !('ontouchstart' in window);
+      // 如果是电脑，直接退出，不弹窗
+      if (isRealPC) return;
+      // 否则（包括手机和平板），执行弹窗逻辑
+      mobileTocModal.classList.add("show");
+      setTimeout(() => {
+        const activeItem = mobileTocList.querySelector("a.active");
+        if (activeItem) {
+          const listContainer = activeItem.closest(".mobile-toc-list");
+          if (listContainer) {
+            listContainer.scrollTop = activeItem.offsetTop - (listContainer.clientHeight / 2);
+          }
+        }
+      }, 350);
+    });
+    
+    closeMobileToc.addEventListener("click", () => mobileTocModal.classList.remove("show"));
+    mobileTocModal.addEventListener("click", (e) => {
+      if (e.target === mobileTocModal) mobileTocModal.classList.remove("show");
+    });
+
+    // 滚动高亮 (IntersectionObserver)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll(".float-toc-list li, .mobile-toc-list li").forEach(li => {
+            li.classList.remove("active");
+          });
+          const currentId = entry.target.id;
+          document.querySelectorAll(`a[data-target="${currentId}"]`).forEach(link => {
+            const li = link.parentElement;
+            li.classList.add("active");
+            if (window.matchMedia("(hover: hover)").matches) {
+               const listContainer = link.closest(".float-toc-list");
+               if (listContainer) {
+                 listContainer.scrollTop = li.offsetTop - (listContainer.clientHeight / 2);
+               }
+            }
+          });
+        }
+      });
+    }, { rootMargin: "-70px 0px -80% 0px" });
+
+    headings.forEach(heading => observer.observe(heading));
+  });
+</script>
+<!-- 加载评论 -->
+<script>
+  async function loadComments(articleId) {
+    let res = await fetch(`/api/comments/get/${articleId}`);
+    let data = await res.json();
+    
+    let html = '';
+    data.comments.forEach(comment => {
+      html += renderComment(comment, data.replies[comment.id] || []);
+    });
+    
+    document.getElementById('commentsList').innerHTML = html || '';
+    let commentCounts = document.querySelectorAll('.comments-count');
+    commentCounts.forEach(el => {
+        el.textContent = data.comments.length;
+    });
+  }
+
+  // 渲染单条评论
+  function renderComment(comment, replies) {
+    return `
+      <ul class="comment-list-body">
+        <li id="comment-${comment.id}" class="comment">
+          <article id="div-comment-${comment.id}" class="comment-body">
+            <div class="comment-avatar flex-avatar disabled">
+              <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=${comment.author}" alt="${comment.author}">
+            </div>
+            <div class="comment-content">
+              <div class="comment-chat">
+                <div class="comment-info d-flex justify-content-between align-items-center">
+                  <div class="comment-left d-flex">
+                    <span class="comment-author">${comment.author}</span>
+                    <span class="comment-date">${comment.date}</span>
+                  </div>
+                  <span class="comment-reply">${comment.content.replace(/\n/g)}</span>
+                  <a href="javascript:;" onclick="replyTo('${comment.id}', '${comment.author}')" class="comment-reply">回复</a>
+                </div>
+                <div class="comment-text">
+                  <p>${comment.content.replace(/\n/g, '<br>')}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 子评论 -->
+          ${replies.length ? `
+          <ul class="children">
+            ${replies.map(r => renderComment(r, [])).join('')}
+          </ul>
+          ` : ''}
+        </li>
+      </ul>
+    `;
+  }
+
+  // 回复
+  function replyTo(parentId, author) {
+    document.getElementById('parentId').value = parentId;
+    document.getElementById('content').focus();
+    document.getElementById('commentMsg').innerHTML = `正在回复 <strong>${author}</strong> 的评论`;
+    document.getElementById('cancelReply').style.display = 'inline'; // 显示取消按钮
+  }
+
+  // 取消回复
+  function cancelReply() {
+    document.getElementById('parentId').value = '0';
+    document.getElementById('commentMsg').innerHTML = '';
+    document.getElementById('cancelReply').style.display = 'none';
+    document.getElementById('content').focus();
+  }
+
+  // 提交评论
+  async function submitComment(e) {
+    e.preventDefault();
+    
+    let articleId = window.location.pathname.split('/')[2]; // 获取文章ID
+    let btn = e.target.querySelector('button[type="submit"]');
+    let msgEl = document.getElementById('commentMsg');
+    
+    btn.disabled = true;
+    msgEl.innerHTML = '提交中...';
+    
+    try {
+      let res = await fetch(`/api/comments/post/${articleId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          author: document.getElementById('author').value,
+          email: document.getElementById('email').value,
+          content: document.getElementById('content').value,
+          parentId: document.getElementById('parentId').value
+        })
+      });
+      
+      let data = await res.json();
+      
+      if (data.success) {
+        msgEl.innerHTML = data.message;
+        if (!data.needReview) {
+          // 不需要审核，刷新评论
+          loadComments(articleId);
+          e.target.reset();
+          document.getElementById('parentId').value = '0';
+          document.getElementById('cancelReply').style.display = 'none';
+        } else {
+          // 需要审核，清空表单但提示等待
+          document.getElementById('content').value = '';
+          document.getElementById('parentId').value = '0';
+          document.getElementById('cancelReply').style.display = 'none';
+        }
+      } else {
+        msgEl.innerHTML = data.message;
+      }
+    } catch (err) {
+      msgEl.innerHTML = '提交失败，请重试';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // 页面加载时加载评论
+  document.addEventListener('DOMContentLoaded', function() {
+    let articleId = window.location.pathname.split('/')[2];
+    if (articleId) {
+      loadComments(articleId);
+    }
+  });
+</script>
+
+</body>
+</html>
