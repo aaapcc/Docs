@@ -27,6 +27,16 @@ window.copyPromoCode = function(btnElement, text) {
 };
 
 // ==========================================
+// 清理 Markdown 编辑器生成的冗余锚点
+// ==========================================
+document.querySelectorAll('.article-content h1, .article-content h2, .article-content h3, .article-content h4, .article-content h5, .article-content h6').forEach(heading => {
+  heading.querySelectorAll('a.reference-link, span.header-link').forEach(el => el.remove());
+  if (heading.id && !heading.id.startsWith('heading-')) {
+    heading.removeAttribute('id');
+  }
+});
+
+// ==========================================
 // 提取到外层的核心：老文章排版拯救 (含头部包裹)
 // ==========================================
 const articleContent = document.querySelector('.article-content');
