@@ -518,4 +518,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
+  // --- 11. 顶部导航：当前分类高亮 ---
+  
+  // 1. 如果我们在分类页，URL 会是 /category/分类名 或 /category/分类名/page/2
+  const pathSegments = window.location.pathname.split('/').filter(p => p);
+  
+  let currentCategory = null;
+  if (pathSegments[0] === 'category' && pathSegments[1]) {
+    currentCategory = decodeURIComponent(pathSegments[1]);
+  }
+
+  // 2. 如果在文章页，因为文章页没有 /category/ 前缀，我们要去面包屑里找
+  if (pathSegments[0] === 'article') {
+    const breadcrumbLinks = document.querySelectorAll('.breadcrumb-nav a');
+    if (breadcrumbLinks.length >= 2) {
+      currentCategory = breadcrumbLinks[1].innerText.trim();
+    }
+  }
+
+  // 3. 如果有确定的当前分类，就去菜单里匹配并高亮
+  if (currentCategory) {
+    document.querySelectorAll('.nav-main > li > a').forEach(link => {
+      const linkName = link.innerText.trim();
+      if (linkName === currentCategory) {
+        link.parentElement.classList.add('active');
+      }
+    });
+  }
+
 });

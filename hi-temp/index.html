@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_66v2gs060gq.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="https://d.722999.xyz/hi-temp/assests/css/style.css?v=20261120-2">
-  <script src="https://d.722999.xyz/hi-temp/assests/js/all.js?v=20261120-2" defer></script>
-  <script src="https://d.722999.xyz/hi-temp/assests/js/page.js?v=20261120-2" defer></script>
+  <link rel="stylesheet" href="https://d.722999.xyz/hi-temp/assests/css/style.css?v=20261121-1">
+  <script src="https://d.722999.xyz/hi-temp/assests/js/all.js?v=20261121-1" defer></script>
+  <script src="https://d.722999.xyz/hi-temp/assests/js/page.js?v=20261121-1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -52,6 +52,22 @@
   </header>
   <main>
     <article class="layout article">
+        <header class="article-header">
+          <!-- 面包屑导航 -->
+          {{^isHome}}
+          <nav class="breadcrumb-nav" aria-label="面包屑导航">
+            {{#breadcrumbs}}
+              {{#url}}
+                <a href="{{url}}">{{name}}</a>
+                <span class="breadcrumb-sep">›</span>
+              {{/url}}
+              {{^url}}
+                <span class="breadcrumb-current">{{name}}</span>
+              {{/url}}
+            {{/breadcrumbs}}
+          </nav>
+          {{/isHome}}
+        </header>
         <div class="mian-body">
           {{ #isCategory }}
           <div class="page-header-wrap">
@@ -95,17 +111,13 @@
           <div id="pagination-wrapper">
             <button id="load-more-btn" class="load-more-btn">加载更多文章</button>
             <div class="custom-pagination">
-              <a href="#" class="real-first">首页</a>
-              {{ #pageNewer }}
-              <a href="{{ &url }}" class="real-prev">上一页</a>
-              {{ /pageNewer }}
-              <span class="page-info">{{ #currentPage }}第 {{ currentPage }} 页 / 共 {{ totalPages }} 页{{ /currentPage }}</span>
-              {{ #pageOlder }}
-              <a href="{{ &url }}" class="real-next" id="real-next-btn">下一页</a>
-              {{ /pageOlder }}
-              <a href="#" class="real-last">尾页</a>
+              <a href="{{url_prefix}}/page/1" class="real-first {{#currentPage}}{{#isNotFirstPage}}disabled{{/isNotFirstPage}}{{/currentPage}}">首页</a>
+              <a href="{{url_prefix}}/page/{{currentPage - 1}}" class="real-prev {{#currentPage}}{{#isNotFirstPage}}disabled{{/isNotFirstPage}}{{/currentPage}}">上一页</a>
+              <span class="page-info">第 {{currentPage}} 页 / 共 {{totalPages}} 页</span>
+              <a href="{{url_prefix}}/page/{{currentPage + 1}}" class="real-next {{#isLastPage}}disabled{{/isLastPage}}">下一页</a>
+              <a href="{{url_prefix}}/page/{{totalPages}}" class="real-last {{#isLastPage}}disabled{{/isLastPage}}">尾页</a>
             </div>
-        </div>
+          </div>
 
         </div>
     </article>

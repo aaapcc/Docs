@@ -14,9 +14,9 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_66v2gs060gq.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="https://d.722999.xyz/hi-temp/assests/css/style.css?v=20261120-2">
+  <link rel="stylesheet" href="https://d.722999.xyz/hi-temp/assests/css/style.css?v=20261121-1">
   <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js" defer></script>
-  <script src="https://d.722999.xyz/hi-temp/assests/js/all.js?v=20261120-2" defer></script>
+  <script src="https://d.722999.xyz/hi-temp/assests/js/all.js?v=20261121-1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -59,9 +59,15 @@
         <header class="article-header">
           <!-- 面包屑导航 -->
           <nav class="breadcrumb-nav" aria-label="面包屑导航">
-            <a href="/">首页</a>
-            <a href="index.html">技术类</a>
-            <span>个人密码库</span>
+            {{#breadcrumbs}}
+              {{#url}}
+                <a href="{{url}}">{{name}}</a>
+                <span class="breadcrumb-sep">›</span>
+              {{/url}}
+              {{^url}}
+                <span class="breadcrumb-current">{{name}}</span>
+              {{/url}}
+            {{/breadcrumbs}}
           </nav>
           <h1>{{ &articleSingle.title }}</h1>
           <div class="article-meta">
@@ -174,12 +180,10 @@
           <!-- 评论表单 -->
           <div id="respond" class="comment-respond">
             <form id="commentForm" class="comment-form" onsubmit="return submitComment(event)">
-              <input type="hidden" id="parentId" value="1772037659596">
-              
+              <input type="hidden" id="parentId" value="0">
               <div class="comment-avatar flex-avatar">
-                <img src="https://api.dicebear.com/10.x/voxel-art/svg?seed=author" alt="头像">
+                <img src="https://api.dicebear.com/10.x/voxel-art/svg?seed={{ &OPT.siteName }}" alt="头像">
               </div>
-              
               <div class="comment-body">
                 <div class="comment-input mb-2">
                   <div class="mb-2">
@@ -193,7 +197,7 @@
                 <div class="mb-3">
                   <textarea class="form-control" id="content" rows="3" placeholder="说点什么..." required></textarea>
                   <div class="mt-2" style="font-size: 13px;">
-                    <span class="text-muted" id="commentMsg">正在回复 <strong>阿克苏</strong> 的评论</span>
+                    <span class="text-muted" id="commentMsg"></span>
                     <a href="javascript:;" id="cancelReply" class="text-danger ms-1" style="display: none;" onclick="cancelReply()">[取消回复]</a>
                   </div>
                 </div>
@@ -205,76 +209,7 @@
             </form>
           </div>
           <!-- 评论列表 -->
-          <div class="comment-list">
-            <ul class="comment-list-body">
-              <li id="comment-1772037659596" class="comment">
-                <article class="comment-body">
-                  <div class="comment-avatar flex-avatar disabled">
-                    <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
-                  </div>
-                  <div class="comment-content">
-                    <div class="comment-chat">
-                      <div class="comment-info d-flex justify-content-between align-items-center">
-                        <div class="comment-left d-flex">
-                          <span class="comment-author">啥菜要放葱</span>
-                          <span class="comment-date">2026/2/25</span>
-                        </div>
-                        <span class="comment-reply">回复</span>
-                      </div>
-                      <div class="comment-text">
-                        <p>无语😑你标题能不能取的严谨一点，我一下子就发给我好朋友了，以为我在表白，然后就回了句好，搞得两个人现在很尴尬</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-
-                <!-- 子评论 -->
-                <ul class="children">
-                  <li id="comment-1772078159987" class="comment">
-                    <article class="comment-body">
-                      <div class="comment-avatar flex-avatar disabled">
-                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=啥菜要放葱" alt="头像">
-                      </div>
-                      <div class="comment-content">
-                        <div class="comment-chat">
-                          <div class="comment-info d-flex justify-content-between align-items-center">
-                            <div class="comment-left d-flex">
-                              <span class="comment-author">啥菜要放葱</span>
-                              <span class="comment-date">2026/2/26</span>
-                            </div>
-                            <span class="comment-reply">回复</span>
-                          </div>
-                          <div class="comment-text">
-                            <p>你标题能不能也带上情侣两个字</p>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                  <li id="comment-1772078159980" class="comment">
-                    <article class="comment-body">
-                      <div class="comment-avatar flex-avatar disabled">
-                        <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=长沙本地宝" alt="头像">
-                      </div>
-                      <div class="comment-content">
-                        <div class="comment-chat">
-                          <div class="comment-info d-flex justify-content-between align-items-center">
-                            <div class="comment-left d-flex">
-                              <span class="comment-author">长沙本地宝</span>
-                              <span class="comment-date">2026/2/26</span>
-                            </div>
-                            <span class="comment-reply">回复</span>
-                          </div>
-                          <div class="comment-text">
-                            <p>啊啊啊啊sorry</p>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+          <div class="comment-list" id="commentsList">
           </div>
         </section>
       </div>
@@ -398,7 +333,7 @@
     
     <div class="toc-list">
       {{ #widgetRecentlyList }}
-      <a href="{{ &url }}" class="active"><span>{{ &title }}</span></a>
+      <a href="{{ &url }}"><span>{{ &title }}</span></a>
       {{ /widgetRecentlyList }}
     </div>
   </dialog>
