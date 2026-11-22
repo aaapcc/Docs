@@ -166,15 +166,11 @@
           <div id="pagination-wrapper">
             <button id="load-more-btn" class="load-more-btn">加载更多文章</button>
             <div class="custom-pagination">
-              <a href="#" class="real-first">首页</a>
-              {{ #hasPrev }}
-              <a href="{{ &url }}" class="real-prev">上一页</a>
-              {{ /hasPrev }}
-              <span class="page-info">{{ #total }}共 {{ total }} 篇{{ /total }}</span>
-              {{ #hasNext }}
-              <a href="{{ &url }}" class="real-next" id="real-next-btn">下一页</a>
-              {{ /hasNext }}
-              <a href="#" class="real-last">尾页</a>
+              <a href="{{firstPageUrl}}" class="real-first {{firstPageClass}}">首页</a>
+              <a href="{{prevPageUrl}}" class="real-prev {{firstPageClass}}">上一页</a>
+              <span class="page-info">第 {{currentPage}} 页 / 共 {{totalPages}} 页</span>
+              <a href="{{nextPageUrl}}" class="real-next {{lastPageClass}}">下一页</a>
+              <a href="{{lastPageUrl}}" class="real-last {{lastPageClass}}">尾页</a>
             </div>
         </div>
 
