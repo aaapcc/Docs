@@ -663,11 +663,25 @@
     let data = await res.json();
     
     let html = '';
-    data.comments.forEach(comment => {
-      html += renderComment(comment, data.replies[comment.id] || []);
-    });
+    // 1. 判断是否有评论
+    if (data.comments.length === 0) {
+      // 没有评论，显示空状态模块
+      html = `
+        <div class="comment-empty-state">
+          <p class="empty-desc">还没有评论，来写首评</p>
+        </div>
+      `;
+    } else {
+      // 有评论，正常渲染
+      data.comments.forEach(comment => {
+        html += renderComment(comment, data.replies[comment.id] || []);
+      });
+    }
     
-    document.getElementById('commentsList').innerHTML = html || '';
+    // 2. 注入到页面
+    document.getElementById('commentsList').innerHTML = html;
+    
+    // 3. 更新评论数量
     let commentCounts = document.querySelectorAll('.comments-count');
     commentCounts.forEach(el => {
         el.textContent = data.comments.length;
