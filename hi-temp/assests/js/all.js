@@ -557,4 +557,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+  // ==========================================
+  // 13. 分页按钮 disabled 状态控制 (纯 JS 自动挡)
+  // ==========================================
+  const firstBtn = document.getElementById("btn-first");
+  const prevBtn = document.getElementById("btn-prev");
+  const nextBtn = document.getElementById("btn-next");
+  const lastBtn = document.getElementById("btn-last");
+
+  // 第一页时，给首页和上一页加 disabled
+  if (prevBtn && prevBtn.getAttribute("href") === "javascript:;") {
+    firstBtn.classList.add("disabled");
+    prevBtn.classList.add("disabled");
+  }
+
+  // 最后一页时，给下一页和尾页加 disabled
+  if (nextBtn && nextBtn.getAttribute("href") === "javascript:;") {
+    nextBtn.classList.add("disabled");
+    lastBtn.classList.add("disabled");
+  }
+
 });
