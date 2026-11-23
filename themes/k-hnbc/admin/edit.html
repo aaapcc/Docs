@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑文章 - {{siteName}}</title>
+    <link rel="icon" href="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/ico/hnbc-icon-192.png" />
+    <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://gh.static.aaqq.site/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://gh.static.aaqq.site/editor.md-1.5.0/css/editormd.css" />
+    <link rel="stylesheet" href="https://gh.lib.aaqq.site/bootstrap-select/1.9.4/css/bootstrap-select.min.css">
+    <style>
+        /* 布局相关 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f5f7fb; }
+        
+        /* 侧边栏 */
+        .sidebar {
+            position: fixed; left: 0; top: 0; bottom: 0; width: 260px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 30px 20px; text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-header img {
+            width: 60px; height: 60px; border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3); margin-bottom: 10px;
+        }
+        
+        .sidebar-header p { 
+            color: rgba(255,255,255,0.9); 
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .sidebar-header h3 { 
+            font-size: 16px; 
+            font-weight: 300; 
+            margin: 0;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .sidebar-menu { padding: 20px 0; }
+        
+        .menu-item {
+            padding: 12px 25px; cursor: pointer; display: flex; align-items: center;
+            color: rgba(255,255,255,0.8); border-left: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover { background: rgba(255,255,255,0.1); color: white; }
+        .menu-item.active {
+            background: rgba(255,255,255,0.15); color: white;
+            border-left-color: #ffd700;
+        }
+        
+        .menu-item i { width: 24px; margin-right: 10px; }
+        .menu-item .badge {
+            background: #ffd700; color: #333; margin-left: auto;
+            font-size: 11px; padding: 2px 6px; border-radius: 10px;
+        }
+        
+        /* 主内容区 */
+        .main-content { margin-left: 260px; padding: 20px; }
+        
+        /* 顶部导航 */
+        .top-nav {
+            background: white; border-radius: 10px; padding: 15px 25px;
+            margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        
+        .page-title { font-size: 18px; color: #333; }
+        .page-title i { color: #667eea; margin-right: 10px; }
+        
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .user-avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; cursor: pointer;
+        }
+        .user-dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; right: 0; top: 45px; background: white;
+            border-radius: 5px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 150px; display: none; z-index: 1000;
+        }
+        .dropdown-menu.show { display: block; }
+        .dropdown-menu a {
+            padding: 10px 15px; display: block; color: #333;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover { background: #f5f7fb; color: #667eea; }
+        
+        /* 卡片样式 */
+        .card {
+            background: white; border-radius: 10px; padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 15px; padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-header h3 { font-size: 16px; margin: 0; }
+        .card-header h3 i { color: #667eea; margin-right: 8px; }
+        
+        /* 按钮样式 */
+        .btn {
+            padding: 10px 25px; border-radius: 5px; font-size: 13px;
+            border: none; cursor: pointer; display: inline-flex;
+            align-items: center; gap: 5px; transition: all 0.3s;
+        }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5a6fd8; }
+        .btn-default { background: #f0f2f5; color: #666; }
+        .btn-default:hover { background: #e4e6e9; }
+        .btn-warning { background: #ff9800; color: white; }
+        .btn-warning:hover { background: #f57c00; }
+        
+        /* 表单样式 */
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block; margin-bottom: 5px; color: #555;
+            font-size: 13px; font-weight: 500;
+        }
+        .form-control {
+            width: 100%; padding: 8px 12px; border: 1px solid #ddd;
+            border-radius: 5px; font-size: 13px;
+        }
+        
+        /* 网格布局 */
+        .row { display: flex; flex-wrap: wrap; margin: 0 -10px; }
+        .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-6, .col-sm-11, .col-sm-12 {
+            padding: 0 10px;
+        }
+        .col-sm-1 { width: 8.333333%; }
+        .col-sm-2 { width: 16.666667%; }
+        .col-sm-3 { width: 25%; }
+        .col-sm-4 { width: 33.333333%; }
+        .col-sm-6 { width: 50%; }
+        .col-sm-11 { width: 91.666667%; }
+        .col-sm-12 { width: 100%; }
+        
+        .text-end { text-align: right; }
+        .text-center { text-align: center; }
+        
+        /* 修复下拉框 */
+        .bootstrap-select { width: 100% !important; }
+        .bootstrap-select .dropdown-toggle { background: white !important; border: 1px solid #ddd !important; border-radius: 5px !important; }
+        
+        /* 操作按钮区 */
+        .action-bar {
+            display: flex; gap: 10px; justify-content: center;
+        }
+        
+        /* 提示框 */
+        .alert {
+            position: fixed; top: 20px; right: 20px; padding: 12px 20px;
+            border-radius: 5px; color: white; z-index: 9999;
+            display: none; animation: slideIn 0.3s;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .alert.success { background: #4caf50; }
+        .alert.error { background: #f44336; }
+        .alert.info { background: #2196f3; }
+        
+        /* 修复编辑器样式 - 确保编辑器内的元素不受影响 */
+        .editormd, .editormd * {
+            box-sizing: content-box; /* 编辑器自己控制盒模型 */
+        }
+        
+        .editormd .editormd-toolbar {
+            background: #f5f5f5 !important;
+            border-bottom: 1px solid #ddd !important;
+        }
+        
+        .editormd .editormd-preview {
+            background: #fff !important;
+        }
+        
+        /* 确保编辑器工具栏按钮正常显示 */
+        .editormd .editormd-toolbar i {
+            font-family: "FontAwesome" !important;
+            font-size: 14px !important;
+        }
+        /* 编辑器基本样式 - 极简 */
+        #content {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .editormd {
+            border-radius: 0 !important;
+        }
+        
+        .editormd .editormd-toolbar {
+            background: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .editormd .CodeMirror {
+            font-family: monospace;
+        }
+
+        /* 隐藏预览区域空内容时的滚动条 */
+        .editormd .editormd-preview {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;  /* 隐藏横向滚动条 */
+        }
+        
+        .editormd .editormd-preview-container {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;  /* 隐藏横向滚动条 */
+            word-wrap: break-word !important;  /* 长单词自动换行 */
+            word-break: break-word !important;
+        }
+        
+        /* 确保预览区域内容不会撑开宽度 */
+        .editormd .editormd-preview-container pre,
+        .editormd .editormd-preview-container code {
+            white-space: pre-wrap !important;  /* 代码块也换行 */
+            word-break: break-all !important;
+        }
+        
+        /* 隐藏空内容时的滚动条，但保留滚动功能 */
+        .editormd .editormd-preview-container:empty {
+            overflow-x: hidden !important;
+        }
+        /* 确保表单组有合适的间距 */
+		.form-group {
+		    margin-bottom: 15px;
+		}
+
+		/* 修复行内表单组的间距 */
+		.form-group.row {
+		    margin-bottom: 15px;
+		}
+    </style>
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://gh.static.aaqq.site/cfblog/themes/PandaPRO-2.4.2/img/author.jpg" alt="Logo">
+            <p>[{{username}}]</p>
+            <h3>{{siteName}}管理后台</h3>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item" onclick="location.href='/admin/#dashboard'">
+                <i class="fa fa-dashboard"></i>
+                <span>仪表盘</span>
+            </div>
+            <div class="menu-item active" onclick="location.href='/admin/#list'">
+                <i class="fa fa-list"></i>
+                <span>文章管理</span>
+                <span class="badge" id="articleCount">0</span>
+            </div>
+            <div class="menu-item" onclick="location.href='/admin/#new'">
+                <i class="fa fa-pencil"></i>
+                <span>写文章</span>
+            </div>
+            <div class="menu-item" onclick="location.href='/admin/#config'">
+                <i class="fa fa-cog"></i>
+                <span>系统设置</span>
+            </div>
+            <div class="menu-item" onclick="location.href='/admin/#comments'">
+                <i class="fa fa-comments"></i>
+                <span>评论管理</span>
+                <span class="badge" id="pendingCommentsCount">0</span>
+            </div>
+            <div class="menu-item" onclick="location.href='/admin/#pub'">
+                <i class="fa fa-cloud-upload"></i>
+                <span>发布</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div class="main-content">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="page-title">
+                <i class="fa fa-list"></i>
+                <span>文章管理</span>
+            </div>
+            
+            <div class="user-info">
+                <a href="/" target="_blank" class="btn btn-default btn-sm">
+                    <i class="fa fa-external-link"></i> 网站前台
+                </a>
+                
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="user-avatar" onclick="toggleUserMenu()" id="userAvatar"></div>
+                    <div class="dropdown-menu" id="userMenu">
+                        <a href="#" onclick="logout()"><i class="fa fa-sign-out"></i> 退出登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 编辑表单 -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fa fa-edit"></i> 编辑文章</h3>
+                <a href="/admin/#list" class="btn btn-default btn-sm">
+                    <i class="fa fa-arrow-left"></i> 返回文章管理
+                </a>
+            </div>
+            
+            <form id="editForm">
+                <input type="hidden" name="id" id="id">
+                
+                <!-- 第1行：标题 -->
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label text-end">标题 <span style="color: red;">*</span></label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="输入文章标题" required>
+                    </div>
+                </div>
+                
+                <!-- 第2行：特色图片、永久链接、创建日期 -->
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label text-end">特色图片</label>
+                    <div class="col-sm-3">
+                        <input type="url" class="form-control" name="img" id="img" placeholder="https://...">
+                    </div>
+                    
+                    <label class="col-sm-1 col-form-label text-end">永久链接</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="link" id="link" placeholder="url-slug">
+                    </div>
+                    
+                    <label class="col-sm-1 col-form-label text-end">创建日期</label>
+                    <div class="col-sm-3">
+                        <input type="datetime-local" class="form-control" id="createDate" name="createDate" required>
+                    </div>
+                </div>
+                
+                <!-- 第3行：分类、更新频率、权重 -->
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label text-end">分类</label>
+                    <div class="col-sm-3">
+                        <select class="selectpicker" multiple name="category[]" id="category" data-live-search="true" data-none-selected-text="选择分类" title="选择分类"></select>
+                    </div>
+                    
+                    <label class="col-sm-1 col-form-label text-end">更新频率</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="changefreq" name="changefreq">
+                            <option value="daily">每天</option>
+                            <option value="hourly">每小时</option>
+                            <option value="weekly">每周</option>
+                            <option value="monthly">每月</option>
+                            <option value="yearly">每年</option>
+                            <option value="never">从不</option>
+                            <option value="always">总是</option>
+                        </select>
+                    </div>
+                    
+                    <label class="col-sm-1 col-form-label text-end">权重</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="priority" id="priority" value="0.5" placeholder="0.5">
+                    </div>
+                </div>
+                
+                <!-- 第4行：标签、是否置顶、是否隐藏 -->
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label text-end">标签</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="tags" id="tags" placeholder="标签1,标签2">
+                    </div>
+                    
+                    <label class="col-sm-1 col-form-label text-end">是否置顶</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="istop" name="istop">
+                            <option value="0">不置顶</option>
+                            <option value="1">置顶</option>
+                        </select>
+                        <input type="hidden" id="top_timestamp" name="top_timestamp" value="0">
+                    </div>
+                    
+                    <label class="col-sm-1 col-form-label text-end">是否隐藏</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="hidden" name="hidden">
+                            <option value="0">不隐藏</option>
+                            <option value="1">隐藏</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- 编辑器区域 -->
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <div id="content"></div>
+                    </div>
+                </div>
+                
+                <!-- 操作按钮 -->
+                <div class="action-bar">
+                    <button type="button" class="btn btn-primary" onclick="saveEdit()">
+                        <i class="fa fa-save"></i> 保存文章
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="deleteArticle()" style="display: none;">
+                        <i class="fa fa-trash"></i> 删除文章
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="alert" id="alertMessage"></div>
+    
+    <script src="https://gh.lib.aaqq.site/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://gh.lib.aaqq.site/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://gh.static.aaqq.site/editor.md-1.5.0/editormd.js"></script>
+    <script src="https://gh.lib.aaqq.site/bootstrap-select/1.9.4/js/bootstrap-select.min.js"></script>
+    
+    <script type="text/javascript">
+        // 全局变量
+        var mdEditor = null;
+        var allArticles = [];
+        
+        // 添加解析HTML标签按钮的函数
+        function addParseHtmlButton(editor) {
+            // 检查是否已经有这个按钮
+            if ($('.editormd-menu li:contains("解析HTML标签")').length === 0) {
+                $(".editormd-menu").append(
+                    '<li class="divider" unselectable="on">|</li>' +
+                    '<li>' +
+                    '<a href="javascript:;" title="解析HTML标签" unselectable="on">' +
+                    '<i class="fa fa-toggle-off" name="parseHtml" unselectable="on"> 解析HTML标签 </i>' +
+                    '</a>' +
+                    '</li>'
+                );
+                
+                // 为按钮绑定点击事件
+                $('a[title="解析HTML标签"]').click(function() {
+                    let ele = $(".editormd-menu li a i:last");
+                    if (ele.hasClass('fa-toggle-off')) {
+                        ele.removeClass('fa-toggle-off').addClass('fa-toggle-on');
+                        editor.settings.htmlDecode = true;
+                    } else if (ele.hasClass('fa-toggle-on')) {
+                        ele.removeClass('fa-toggle-on').addClass('fa-toggle-off');
+                        editor.settings.htmlDecode = false;
+                    }
+                    editor.setMarkdown(editor.getMarkdown());
+                });
+            }
+        }
+        
+        $(function() {
+            // 获取文章数据
+            var articleJson = <!--{articleJson}--> || {};
+            var categoryJson = <!--{categoryJson}--> || [];
+            
+            // 设置用户头像
+            var username = '{{username}}' || 'A';
+            $('#userAvatar').text(username.charAt(0).toUpperCase());
+            
+            // 初始化编辑器
+            if ($('#content').length) {
+                $('#content').css('height', '500px');
+                
+                mdEditor = editormd("content", {
+                    width: "100%",
+                    height: 500,
+                    path: "https://gh.static.aaqq.site/editor.md-1.5.0/lib/",
+                    theme: "default",
+                    previewTheme: "default",
+                    editorTheme: "default",
+                    appendMarkdown: articleJson.contentMD || "",
+                    codeFold: true,
+                    saveHTMLToTextarea: true,
+                    searchReplace: true,
+                    htmlDecode: "style,script,iframe|on*",
+                    emoji: true,
+                    taskList: true,
+                    tex: true,
+                    flowChart: true,
+                    sequenceDiagram: true,
+                    imageUpload: false,
+                    toolbarIcons: function() {
+                        return editormd.toolbarModes['full'];
+                    },
+                    onload: function() {
+                        var editor = this;
+                        
+                        // 延迟一下让编辑器完全初始化
+                        setTimeout(function() {
+                            // 先添加解析HTML标签按钮
+                            addParseHtmlButton(editor);
+                            
+                            // 再调整高度，确保按钮添加后重新计算
+                            setTimeout(function() {
+                                editor.resize();
+                                if (editor.cm) {
+                                    editor.cm.refresh();
+                                }
+                            }, 100);
+                        }, 200);
+                    },
+                    onchange: function() {
+                        // 内容变化时的处理
+                    }
+                });
+            }
+            
+            // 表单赋值
+            if (articleJson.id) {
+                $('#id').val(articleJson.id);
+                $('#title').val(articleJson.title || '');
+                $('#img').val(articleJson.img || '');
+                $('#link').val(articleJson.link || '');
+                
+                // 处理日期
+                if (articleJson.createDate) {
+                    $('#createDate').val(articleJson.createDate.replace(' ', 'T').substring(0, 16));
+                }
+                
+                $('#tags').val(articleJson.tags ? articleJson.tags.join(',') : '');
+                $('#priority').val(articleJson.priority || '0.5');
+                
+                // 更新频率
+                if (articleJson.changefreq) {
+                    $('#changefreq').val(articleJson.changefreq);
+                }
+                
+                // 置顶和隐藏
+                $('#istop').val(articleJson.istop || '0');
+                $('#hidden').val(articleJson.hidden || '0');
+                
+                if (articleJson.istop == '1') {
+                    $('#top_timestamp').val(articleJson.top_timestamp || new Date().getTime());
+                }
+            }
+            
+            // 初始化分类下拉框
+            initCategorySelect(categoryJson, articleJson.category || []);
+            
+            // 置顶逻辑
+            $("#istop").change(function() {
+                $("#top_timestamp").val($(this).val() == "1" ? new Date().getTime() : "0");
+            });
+            
+            // 加载统计数据
+            loadStats();
+            
+            // 点击其他地方关闭下拉菜单
+            $(document).click(function(e) {
+                if (!$(e.target).closest('.user-dropdown').length) {
+                    $('#userMenu').removeClass('show');
+                }
+            });
+        });
+        
+        // 初始化分类下拉框
+        function initCategorySelect(categoryJson, selectedCategories) {
+            var category = $('#category');
+            category.empty();
+            
+            for (var i = 0; i < categoryJson.length; i++) {
+                category.append('<option value="' + categoryJson[i] + '">' + categoryJson[i] + '</option>');
+            }
+            
+            category.selectpicker('refresh');
+            
+            // 设置已选中的分类
+            if (selectedCategories && selectedCategories.length) {
+                category.selectpicker('val', selectedCategories);
+            }
+        }
+        
+        // 加载统计数据
+        function loadStats() {
+            // 加载文章数量
+            loadArticleCount();
+            
+            // 加载待审核评论数量
+            loadPendingCommentsCount();
+        }
+        
+        // 加载文章数量
+        function loadArticleCount() {
+            $.ajax({
+                url: '/admin/getList/1/',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data && data.length) {
+                        allArticles = data;
+                        $('#articleCount').text(allArticles.length);
+                        
+                        // 如果是20条，继续加载更多以获取总数
+                        if (data.length === 20) {
+                            loadMorePages(2);
+                        }
+                    }
+                }
+            });
+        }
+        
+        function loadMorePages(page) {
+            $.ajax({
+                url: '/admin/getList/' + page + '/',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data && data.length) {
+                        allArticles = allArticles.concat(data);
+                        $('#articleCount').text(allArticles.length);
+                        
+                        if (data.length === 20) {
+                            loadMorePages(page + 1);
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 加载待审核评论数量
+        function loadPendingCommentsCount() {
+            fetch('/api/admin/comments/pending')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.comments) {
+                        $('#pendingCommentsCount').text(data.comments.length);
+                    }
+                })
+                .catch(() => {
+                    // 静默失败
+                });
+        }
+        
+        // 保存编辑
+        function saveEdit() {
+            if (!$('#title').val()) {
+                alert('请输入标题', 'error');
+                return;
+            }
+            if (!$('#category').val() || $('#category').val().length === 0) {
+                alert('请选择分类', 'error');
+                return;
+            }
+            
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/admin/saveEdit/',
+                contentType: 'application/json',
+                data: JSON.stringify($('#editForm').serializeArray()),
+                success: function(result) {
+                    alert(result.msg || '保存成功', 'success');
+                },
+                error: function() {
+                    alert('保存失败', 'error');
+                }
+            });
+        }
+        
+        // 删除文章
+        function deleteArticle() {
+            if (!confirm('确定要删除这篇文章吗？删除后重新发布才能生效')) return;
+            
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/admin/delete/' + $('#id').val() + '/',
+                success: function(result) {
+                    alert(result.msg || '删除成功', 'success');
+                    setTimeout(function() {
+                        window.location.href = '/admin/';
+                    }, 1500);
+                },
+                error: function() {
+                    alert('删除失败', 'error');
+                }
+            });
+        }
+        
+        // 显示提示
+        function showAlert(message, type) {
+            var alert = $('#alertMessage');
+            alert.removeClass('success error info').addClass(type).text(message).fadeIn();
+            setTimeout(function() {
+                alert.fadeOut();
+            }, 3000);
+        }
+        
+        // 用户菜单
+        function toggleUserMenu() {
+            $('#userMenu').toggleClass('show');
+        }
+        
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                window.location.href = '/admin/logout/';
+            }
+        }
+    </script>
+</body>
+</html>

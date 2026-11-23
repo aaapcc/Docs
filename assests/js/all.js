@@ -27,6 +27,16 @@ window.copyPromoCode = function(btnElement, text) {
 };
 
 // ==========================================
+// 清理 Markdown 编辑器生成的冗余锚点
+// ==========================================
+document.querySelectorAll('.article-content h1, .article-content h2, .article-content h3, .article-content h4, .article-content h5, .article-content h6').forEach(heading => {
+  heading.querySelectorAll('a.reference-link, span.header-link').forEach(el => el.remove());
+  if (heading.id && !heading.id.startsWith('heading-')) {
+    heading.removeAttribute('id');
+  }
+});
+
+// ==========================================
 // 提取到外层的核心：老文章排版拯救 (含头部包裹)
 // ==========================================
 const articleContent = document.querySelector('.article-content');
@@ -425,13 +435,53 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // --- 7. 文章目录弹窗 (TOC) ---
+  // --- 7. 文章目录弹窗 (动态加载当前分类文章) ---
   if (openTocBtn) {
-    openTocBtn.addEventListener("click", () => {
+    openTocBtn.addEventListener("click", async () => {
       tocModal.showModal();
       document.body.classList.add("modal-open");
+      
+      const tocListEl = document.getElementById("tocDynamicList");
+      tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">加载中...</div>';
+
+      const titleText = openTocBtn.innerText.trim();
+      const categoryName = titleText.split('·')[0];
+
+      // 👇 直接请求我们刚刚写的 API
+      try {
+        const res = await fetch(`/api/category/${encodeURIComponent(categoryName)}`);
+        const articles = await res.json(); // 直接拿 JSON 数据！
+        
+        if (articles.length === 0) {
+          tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">该分类下暂无文章</div>';
+          return;
+        }
+
+        const currentUrl = window.location.pathname;
+        let html = '';
+        
+        // 遍历 JSON 数组渲染
+        articles.forEach(article => {
+          const href = `/article/${article.id}.html`;
+          const title = article.title;
+          const isActive = currentUrl.includes(href) ? 'active' : '';
+
+          html += `
+            <a href="${href}" class="${isActive}">
+              <span>${title}</span>
+            </a>
+          `;
+        });
+
+        tocListEl.innerHTML = html;
+
+      } catch (err) {
+        tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">加载失败，请重试</div>';
+      }
     });
   }
+
+  // 关闭弹窗逻辑（保持你原来的）
   const closeTocModal = () => {
     tocModal.classList.add("closing");
     setTimeout(() => {
@@ -440,6 +490,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.remove("modal-open");
     }, 300); 
   };
+  
   if (closeTocBtn) closeTocBtn.addEventListener("click", closeTocModal);
   if (tocModal) {
     tocModal.addEventListener("click", (e) => {
@@ -451,9 +502,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!isInDialog) closeTocModal();
     });
   }
-  document.querySelectorAll(".toc-item").forEach(item => {
-    item.addEventListener("click", closeTocModal);
-  });
 
 
   // --- 8. Markdown 表格包裹滚动容器 ---
@@ -517,5 +565,65 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+
+  // --- 11. 顶部导航 & 侧边栏：当前栏目高亮 (双端版) ---
+  const currentPath = window.location.pathname;
+  const pathSegments = currentPath.split('/').filter(p => p);
+  let currentCategory = null;
+  let isHomePage = false;
+
+  // 1. 判断是否是首页 (URL 是 / 或 /page/数字)
+  if (pathSegments.length === 0 || (pathSegments[0] === 'page' && pathSegments.length === 2)) {
+    isHomePage = true;
+  }
+
+  // 2. 获取当前分类名
+  if (pathSegments[0] === 'category' && pathSegments[1]) {
+    currentCategory = decodeURIComponent(pathSegments[1]);
+  } else if (pathSegments[0] === 'article') {
+    const breadcrumbLinks = document.querySelectorAll('.breadcrumb-nav a');
+    if (breadcrumbLinks.length >= 2) {
+      currentCategory = breadcrumbLinks[1].innerText.trim();
+    }
+  }
+
+  // 3. 遍历 PC 端和移动端的所有菜单链接，进行高亮
+  document.querySelectorAll('.nav-main > li, .mobile-menu-inner > li').forEach(li => {
+    const a = li.querySelector('a');
+    if (!a) return;
+    const linkName = a.innerText.trim();
+    const linkHref = a.getAttribute('href') || "";
+
+    // 如果是首页，且菜单名字是"首页"（或者链接是 /）
+    if (isHomePage && (linkName === "首页" || linkHref === "/")) {
+      li.classList.add('active');
+    }
+    // 如果是分类页，且菜单名字等于分类名
+    else if (currentCategory && linkName === currentCategory) {
+      li.classList.add('active');
+    }
+  });
+
+
+  // ==========================================
+  // 13. 分页按钮 disabled 状态控制 (纯 JS 自动挡)
+  // ==========================================
+  const firstBtn = document.getElementById("btn-first");
+  const prevBtn = document.getElementById("btn-prev");
+  const nextBtn = document.getElementById("btn-next");
+  const lastBtn = document.getElementById("btn-last");
+
+  // 第一页时，给首页和上一页加 disabled
+  if (prevBtn && prevBtn.getAttribute("href") === "javascript:;") {
+    firstBtn.classList.add("disabled");
+    prevBtn.classList.add("disabled");
+  }
+
+  // 最后一页时，给下一页和尾页加 disabled
+  if (nextBtn && nextBtn.getAttribute("href") === "javascript:;") {
+    nextBtn.classList.add("disabled");
+    lastBtn.classList.add("disabled");
+  }
 
 });

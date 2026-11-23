@@ -310,7 +310,7 @@
           </div>
           <!-- 上一篇/下一篇 -->
           <div class="album-read-nav-wrap">
-            <div class="album-read-source" id="openTocBtn">文章·列表</div>
+            <div class="album-read-source" id="openTocBtn">分类名称·列表</div>
             <section class="album-read-nav-cont">
               <a href="art-apple.html" class="album-read-nav-cont-prev">
                 <div class="nav-label">上一篇</div>
@@ -741,8 +741,8 @@
       <button class="toc-close" id="closeTocBtn">
         <i class="iconfont icon-updown-min"></i>
       </button>
-      <h3>文章·列表</h3>
-      <a href="#" class="toc-detail-link">详情</a>
+      <h3>分类名称·列表</h3>
+      <a href="list.html" class="toc-detail-link">详情</a>
     </div>
     
     <div class="toc-list">
@@ -1081,6 +1081,146 @@
     headings.forEach(heading => observer.observe(heading));
   });
 </script>
+<!-- 加载评论 -->
+<script>
+  async function loadComments(articleId) {
+    let res = await fetch(`/api/comments/get/${articleId}`);
+    let data = await res.json();
+    
+    let html = '';
+    // 1. 判断是否有评论
+    if (data.comments.length === 0) {
+      // 没有评论，显示空状态模块
+      html = `
+        <div class="comment-empty-state">
+          <p class="empty-desc">还没有评论，来写首评</p>
+        </div>
+      `;
+    } else {
+      // 有评论，正常渲染
+      data.comments.forEach(comment => {
+        html += renderComment(comment, data.replies[comment.id] || []);
+      });
+    }
+    
+    // 2. 注入到页面
+    document.getElementById('commentsList').innerHTML = html;
+    
+    // 3. 更新评论数量
+    let commentCounts = document.querySelectorAll('.comments-count');
+    commentCounts.forEach(el => {
+        el.textContent = data.comments.length;
+    });
+  }
 
+  // 渲染单条评论
+  function renderComment(comment, replies) {
+    return `
+      <ul class="comment-list-body">
+        <li id="comment-${comment.id}" class="comment">
+          <article id="div-comment-${comment.id}" class="comment-body">
+            <div class="comment-avatar flex-avatar disabled">
+              <img class="avatar" src="https://api.dicebear.com/10.x/voxel-art/svg?seed=${comment.author}" alt="${comment.author}">
+            </div>
+            <div class="comment-content">
+              <div class="comment-chat">
+                <div class="comment-info d-flex justify-content-between align-items-center">
+                  <div class="comment-left d-flex">
+                    <span class="comment-author">${comment.author}</span>
+                    <span class="comment-date">${comment.date}</span>
+                  </div>
+                  <a href="javascript:;" onclick="replyTo('${comment.id}', '${comment.author}')" class="comment-reply">回复</a>
+                </div>
+                <div class="comment-text">
+                  <p>${comment.content.replace(/\n/g, '<br>')}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 子评论 -->
+          ${replies.length ? `
+          <ul class="children">
+            ${replies.map(r => renderComment(r, [])).join('')}
+          </ul>
+          ` : ''}
+        </li>
+      </ul>
+    `;
+  }
+
+  // 回复
+  function replyTo(parentId, author) {
+    document.getElementById('parentId').value = parentId;
+    document.getElementById('content').focus();
+    document.getElementById('commentMsg').innerHTML = `正在回复 <strong>${author}</strong> 的评论`;
+    document.getElementById('cancelReply').style.display = 'inline'; // 显示取消按钮
+  }
+
+  // 取消回复
+  function cancelReply() {
+    document.getElementById('parentId').value = '0';
+    document.getElementById('commentMsg').innerHTML = '';
+    document.getElementById('cancelReply').style.display = 'none';
+    document.getElementById('content').focus();
+  }
+
+  // 提交评论
+  async function submitComment(e) {
+    e.preventDefault();
+    
+    let articleId = window.location.pathname.split('/')[2]; // 获取文章ID
+    let btn = e.target.querySelector('button[type="submit"]');
+    let msgEl = document.getElementById('commentMsg');
+    
+    btn.disabled = true;
+    msgEl.innerHTML = '提交中...';
+    
+    try {
+      let res = await fetch(`/api/comments/post/${articleId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          author: document.getElementById('author').value,
+          email: document.getElementById('email').value,
+          content: document.getElementById('content').value,
+          parentId: document.getElementById('parentId').value
+        })
+      });
+      
+      let data = await res.json();
+      
+      if (data.success) {
+        msgEl.innerHTML = data.message;
+        if (!data.needReview) {
+          // 不需要审核，刷新评论
+          loadComments(articleId);
+          e.target.reset();
+          document.getElementById('parentId').value = '0';
+          document.getElementById('cancelReply').style.display = 'none';
+        } else {
+          // 需要审核，清空表单但提示等待
+          document.getElementById('content').value = '';
+          document.getElementById('parentId').value = '0';
+          document.getElementById('cancelReply').style.display = 'none';
+        }
+      } else {
+        msgEl.innerHTML = data.message;
+      }
+    } catch (err) {
+      msgEl.innerHTML = '提交失败，请重试';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // 页面加载时加载评论
+  document.addEventListener('DOMContentLoaded', function() {
+    let articleId = window.location.pathname.split('/')[2];
+    if (articleId) {
+      loadComments(articleId);
+    }
+  });
+</script>
 </body>
 </html>
