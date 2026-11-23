@@ -435,13 +435,65 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // --- 7. 文章目录弹窗 (TOC) ---
+  // --- 7. 文章目录弹窗 (动态加载当前分类文章) ---
   if (openTocBtn) {
-    openTocBtn.addEventListener("click", () => {
+    openTocBtn.addEventListener("click", async () => {
+      // 1. 显示弹窗并清空旧列表
       tocModal.showModal();
       document.body.classList.add("modal-open");
+      
+      const tocListEl = document.getElementById("tocDynamicList");
+      tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">加载中...</div>';
+
+      // 2. 获取当前分类名
+      const titleText = openTocBtn.innerText.trim();
+      const categoryName = titleText.split('·')[0];
+
+      // 3. 请求分类页的 HTML
+      try {
+        const res = await fetch(`/category/${encodeURIComponent(categoryName)}`);
+        const htmlText = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        
+        // 4. 提取该页面的所有文章卡片
+        const articles = doc.querySelectorAll('.list-grid .list-item');
+        
+        if (articles.length === 0) {
+          tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">该分类下暂无文章</div>';
+          return;
+        }
+
+        // 5. 获取当前文章路径，用于高亮
+        const currentUrl = window.location.pathname;
+        
+        let html = '';
+        articles.forEach(article => {
+          const aTag = article.querySelector('a.list-content');
+          if (!aTag) return;
+          
+          const href = aTag.getAttribute('href');
+          const title = aTag.querySelector('.list-title').innerText.trim();
+          
+          // 👇 判断是不是当前文章，是就加 active 类
+          const isActive = currentUrl.includes(href) ? 'active' : '';
+
+          html += `
+            <a href="${href}" class="${isActive}">
+              <span>${title}</span>
+            </a>
+          `;
+        });
+
+        tocListEl.innerHTML = html;
+
+      } catch (err) {
+        tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">加载失败，请重试</div>';
+      }
     });
   }
+
+  // 关闭弹窗逻辑（保持你原来的）
   const closeTocModal = () => {
     tocModal.classList.add("closing");
     setTimeout(() => {
@@ -450,6 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.remove("modal-open");
     }, 300); 
   };
+  
   if (closeTocBtn) closeTocBtn.addEventListener("click", closeTocModal);
   if (tocModal) {
     tocModal.addEventListener("click", (e) => {
@@ -461,9 +514,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!isInDialog) closeTocModal();
     });
   }
-  document.querySelectorAll(".toc-item").forEach(item => {
-    item.addEventListener("click", closeTocModal);
-  });
 
 
   // --- 8. Markdown 表格包裹滚动容器 ---
@@ -529,33 +579,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // --- 11. 顶部导航：当前分类高亮 ---
-  
-  // 1. 如果我们在分类页，URL 会是 /category/分类名 或 /category/分类名/page/2
-  const pathSegments = window.location.pathname.split('/').filter(p => p);
-  
+  // --- 11. 顶部导航 & 侧边栏：当前栏目高亮 (双端版) ---
+  const currentPath = window.location.pathname;
+  const pathSegments = currentPath.split('/').filter(p => p);
   let currentCategory = null;
-  if (pathSegments[0] === 'category' && pathSegments[1]) {
-    currentCategory = decodeURIComponent(pathSegments[1]);
+  let isHomePage = false;
+
+  // 1. 判断是否是首页 (URL 是 / 或 /page/数字)
+  if (pathSegments.length === 0 || (pathSegments[0] === 'page' && pathSegments.length === 2)) {
+    isHomePage = true;
   }
 
-  // 2. 如果在文章页，因为文章页没有 /category/ 前缀，我们要去面包屑里找
-  if (pathSegments[0] === 'article') {
+  // 2. 获取当前分类名
+  if (pathSegments[0] === 'category' && pathSegments[1]) {
+    currentCategory = decodeURIComponent(pathSegments[1]);
+  } else if (pathSegments[0] === 'article') {
     const breadcrumbLinks = document.querySelectorAll('.breadcrumb-nav a');
     if (breadcrumbLinks.length >= 2) {
       currentCategory = breadcrumbLinks[1].innerText.trim();
     }
   }
 
-  // 3. 如果有确定的当前分类，就去菜单里匹配并高亮
-  if (currentCategory) {
-    document.querySelectorAll('.nav-main > li > a').forEach(link => {
-      const linkName = link.innerText.trim();
-      if (linkName === currentCategory) {
-        link.parentElement.classList.add('active');
-      }
-    });
-  }
+  // 3. 遍历 PC 端和移动端的所有菜单链接，进行高亮
+  document.querySelectorAll('.nav-main > li, .mobile-menu-inner > li').forEach(li => {
+    const a = li.querySelector('a');
+    if (!a) return;
+    const linkName = a.innerText.trim();
+    const linkHref = a.getAttribute('href') || "";
+
+    // 如果是首页，且菜单名字是"首页"（或者链接是 /）
+    if (isHomePage && (linkName === "首页" || linkHref === "/")) {
+      li.classList.add('active');
+    }
+    // 如果是分类页，且菜单名字等于分类名
+    else if (currentCategory && linkName === currentCategory) {
+      li.classList.add('active');
+    }
+  });
 
 
   // ==========================================

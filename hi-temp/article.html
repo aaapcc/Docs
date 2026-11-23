@@ -14,9 +14,9 @@
   <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5246718_66v2gs060gq.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/highlight.js/11.9.0/styles/atom-one.css">
   <link rel="stylesheet" href="https://gh.lib.aaqq.site/photoswipe/5.4.4/photoswipe.min.css" />
-  <link rel="stylesheet" href="https://d.722999.xyz/hi-temp/assests/css/style.css?v=20261122-1">
+  <link rel="stylesheet" href="https://d.722999.xyz/hi-temp/assests/css/style.css?v=20261123-1">
   <script src="https://gh.lib.aaqq.site/highlight.js/11.9.0/highlight.min.js" defer></script>
-  <script src="https://d.722999.xyz/hi-temp/assests/js/all.js?v=20261122-1" defer></script>
+  <script src="https://d.722999.xyz/hi-temp/assests/js/all.js?v=20261123-1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -91,7 +91,7 @@
           </div>
           <!-- 上一篇/下一篇 -->
           <div class="album-read-nav-wrap">
-            <div class="album-read-source" id="openTocBtn">文章·列表</div>
+            <div class="album-read-source" id="openTocBtn">{{#currentCategoryName}}{{currentCategoryName}}{{/currentCategoryName}}{{^currentCategoryName}}{{/currentCategoryName}}·文章列表</div>
             <section class="album-read-nav-cont">
               {{ #articleOlder }}
               <a href="{{ articleOlder.0.url }}" class="album-read-nav-cont-prev">
@@ -323,14 +323,11 @@
       <button class="toc-close" id="closeTocBtn">
         <i class="iconfont icon-updown-min"></i>
       </button>
-      <h3>文章·列表</h3>
-      <a href="#" class="toc-detail-link">详情</a>
+      <h3>{{#currentCategoryName}}{{currentCategoryName}}{{/currentCategoryName}}{{^currentCategoryName}}{{/currentCategoryName}}·文章列表</h3>
+      <a href="{{currentCategoryUrl}}" class="toc-detail-link">详情</a>
     </div>
-    
-    <div class="toc-list">
-      {{ #widgetRecentlyList }}
-      <a href="{{ &url }}"><span>{{ &title }}</span></a>
-      {{ /widgetRecentlyList }}
+    <div class="toc-list" id="tocDynamicList">
+      <div style="padding: 20px; text-align: center;">加载中...</div>
     </div>
   </dialog>
 
