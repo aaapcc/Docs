@@ -451,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 3. 请求分类页的 HTML
       try {
-        const res = await fetch(`/category/${encodeURIComponent(categoryName)}`);
+        const res = await fetch(`/category/${encodeURIComponent(categoryName)}?pageSize=1000`);
         const htmlText = await res.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText, 'text/html');
