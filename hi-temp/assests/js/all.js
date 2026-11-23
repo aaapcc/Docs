@@ -438,44 +438,32 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- 7. 文章目录弹窗 (动态加载当前分类文章) ---
   if (openTocBtn) {
     openTocBtn.addEventListener("click", async () => {
-      // 1. 显示弹窗并清空旧列表
       tocModal.showModal();
       document.body.classList.add("modal-open");
       
       const tocListEl = document.getElementById("tocDynamicList");
       tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">加载中...</div>';
 
-      // 2. 获取当前分类名
       const titleText = openTocBtn.innerText.trim();
       const categoryName = titleText.split('·')[0];
 
-      // 3. 请求分类页的 HTML
+      // 👇 直接请求我们刚刚写的 API
       try {
-        const res = await fetch(`/category/${encodeURIComponent(categoryName)}?pageSize=1000`);
-        const htmlText = await res.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, 'text/html');
-        
-        // 4. 提取该页面的所有文章卡片
-        const articles = doc.querySelectorAll('.list-grid .list-item');
+        const res = await fetch(`/api/category/${encodeURIComponent(categoryName)}`);
+        const articles = await res.json(); // 直接拿 JSON 数据！
         
         if (articles.length === 0) {
           tocListEl.innerHTML = '<div style="padding: 20px; text-align: center;">该分类下暂无文章</div>';
           return;
         }
 
-        // 5. 获取当前文章路径，用于高亮
         const currentUrl = window.location.pathname;
-        
         let html = '';
+        
+        // 遍历 JSON 数组渲染
         articles.forEach(article => {
-          const aTag = article.querySelector('a.list-content');
-          if (!aTag) return;
-          
-          const href = aTag.getAttribute('href');
-          const title = aTag.querySelector('.list-title').innerText.trim();
-          
-          // 👇 判断是不是当前文章，是就加 active 类
+          const href = `/article/${article.id}.html`;
+          const title = article.title;
           const isActive = currentUrl.includes(href) ? 'active' : '';
 
           html += `
