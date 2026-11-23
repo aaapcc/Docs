@@ -58,13 +58,13 @@
     <article class="layout article">
         <header class="article-header">
           <!-- 面包屑导航 -->
+          {{#breadcrumbs}}
           <nav class="breadcrumb-nav" aria-label="面包屑导航">
-            {{#breadcrumbs}}
               {{#url}}
                 <a href="{{url}}">{{name}}</a>
               {{/url}}
-            {{/breadcrumbs}}
           </nav>
+          {{/breadcrumbs}}
           <h1>{{ &articleSingle.title }}</h1>
           <div class="article-meta">
             <span>{{ &articleSingle.createDate10 }}</span>
